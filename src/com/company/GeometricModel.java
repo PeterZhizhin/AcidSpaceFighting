@@ -1,19 +1,23 @@
 package com.company;
 
 public class GeometricModel {
+    private static final float PI2= (float) (2*Math.PI);
+
 
     private Point center;
     private Point[] vertexes;
-    private Point[] sourceVertexes;
     private float angle;
+
 
     public void rotate(float angle) {
         this.angle+=angle;
-        for (int i=0; i<vertexes.length; i++) {
-            vertexes[i].set(sourceVertexes[i]);
-            vertexes[i].rotate(angle);
-            vertexes[i].move(center);
+        for (Point vertexe : vertexes) {
+            vertexe.move(-center.getX(), -center.getY());
+            vertexe.rotate(angle);
+            vertexe.move(center);
         }
+        if (this.angle>=PI2) this.angle-=PI2;
+        else if (this.angle<=0) this.angle+=PI2;
     }
 
     public void move (Point p) {
@@ -41,8 +45,14 @@ public class GeometricModel {
         return center;
     }
 
-    public GeometricModel() {
+    public GeometricModel(Point[] p) {
+        vertexes=p;
 
+        center=new Point(0, 0);
+        for (Point p2: p) {
+            center.move(p2);
+        }
+        center.set(center.getX() / p.length, center.getY() / p.length);
     }
 
 
