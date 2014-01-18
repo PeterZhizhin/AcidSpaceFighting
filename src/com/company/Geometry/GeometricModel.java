@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Geometry;
 
 public class GeometricModel {
     private static final float PI2= (float) (2*Math.PI);

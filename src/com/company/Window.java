@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.Geometry.GeometricModel;
+import com.company.Geometry.Point;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;

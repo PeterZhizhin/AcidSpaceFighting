@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Geometry;
 
 public class Point {
 
