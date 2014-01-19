@@ -10,18 +10,19 @@ public class GeometricModel {
     private Point[] vertexes;
     private float angle;
 
-
+    //Rotate model
     public void rotate(float angle) {
         this.angle += angle;
-        for (Point vertexe : vertexes) {
-            vertexe.move(-center.getX(), -center.getY());
-            vertexe.rotate(angle);
-            vertexe.move(center);
+        for (Point vertex : vertexes) {
+            vertex.move(-center.getX(), -center.getY());
+            vertex.rotate(angle);
+            vertex.move(center);
         }
         if (this.angle >= PI2) this.angle -= PI2;
         else if (this.angle <= 0) this.angle += PI2;
     }
 
+    //Move todel on p.x, p.y
     public void move(Point p) {
         center.move(p);
         for (Point vertex : vertexes) {
@@ -37,7 +38,7 @@ public class GeometricModel {
         return Math.abs(angle - Math.PI * 2) <= Point.epsilon;
     }
 
-
+    //Get intersection between 2 models. If it is not exists - return null
     public Point getIntersection(GeometricModel model) {
 
         for (int i=0; i<model.getPointCount(); i++)
@@ -59,6 +60,7 @@ public class GeometricModel {
         return null;
     }
 
+    //Return count of vertexes
     public int getPointCount() {
         return vertexes.length;
     }

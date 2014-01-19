@@ -1,9 +1,12 @@
-package com.company.util;
+package com.company;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glOrtho;
 
 
 /**Абстрактный класс главного окна. Считает FPS, рисует и обновляет экран методами наследника
@@ -79,7 +82,7 @@ public abstract class BasicWindow {
     {
         //Инициализация дисплея
         //Display initialization
-        this.title = title;
+        BasicWindow.title = title;
         try {
             Display.setDisplayMode(new DisplayMode(width, height));
             Display.create();
@@ -89,7 +92,11 @@ public abstract class BasicWindow {
         catch (LWJGLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        GLHelper.initGL(width, height);
+        glClearColor(0f, 0f, 0f, 1f);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glLineWidth(2f);
+        glOrtho(0, width, height, 0, 1, 0);
 
     }
 

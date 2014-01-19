@@ -14,7 +14,7 @@ import static org.lwjgl.opengl.GL11.glClear;
  * Пользовательский класс для отрисовки. С помощью него легко реализовать цикл update() draw() без лишнего мусора
  * Из фич: подсчет FPS и вывод в заголовок, возможность использования deltaTime (независимость выполнения логики от цикла обновления)
  */
-public class Window extends com.company.util.BasicWindow {
+public class Window extends BasicWindow {
 
     World world = new World();
     int updateTimer = 0;
