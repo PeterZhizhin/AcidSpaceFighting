@@ -3,7 +3,7 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-        Window.main(args);
+       // Window.main(args);
+        new Window(1000, 700, 30, "Acid Space Fighting");
     }
 }
