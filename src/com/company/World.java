@@ -32,8 +32,8 @@ public class World {
         models=new ArrayList<Model>();
 
         Random rnd=new Random();
-        for (int i=4; i<7; i++)
-            for (int j=4; j<7; j++) {
+        for (int i=0; i<17; i++)
+            for (int j=0; j<17; j++) {
         float width=rnd.nextInt(20)+3;
         GeometricModel g=new GeometricModel(new Point[]{
                 new Point(i*50, j*50),

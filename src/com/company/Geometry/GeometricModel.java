@@ -57,6 +57,11 @@ public class GeometricModel {
                 return model.getPoint(i);
             }
 
+        for (int i=0; i<getPointCount(); i++)
+            if (model.contains(getPoint(i))) {
+                return getPoint(i);
+            }
+
         return null;
     }
 
