@@ -1,8 +1,6 @@
 package com.company.Physic;
 
-import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
-import com.company.Graphic.GraphicModel;
 
 import java.util.ArrayList;
 
@@ -11,18 +9,18 @@ public class ComplexPhysicModel extends PhysicModel{
 
     private ArrayList<PhysicModel> bodies;
 
-    public void updateMotion() {
+    public void updateMotion(int deltaTime) {
         for (PhysicModel body: bodies)
-            body.body.move(speedVector);
+            body.body.move(Point.multyply(speedVector, (float)deltaTime));
     }
 
     private void useForce(Point posOfForce, Point force) {
         speedVector.set(speedVector.getX()+force.getX(), speedVector.getX()+force.getY());
     }
 
-    public void crossThem(ComplexPhysicModel m) {
+    public void crossThem(ComplexPhysicModel m, int deltaTime) {
         for (PhysicModel body: bodies)
-            crossWithGeometricModel(m, body.body);
+            crossWithGeometricModel(m, body.body, deltaTime);
     }
 
     public void add(PhysicModel g) {

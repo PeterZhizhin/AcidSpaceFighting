@@ -1,9 +1,7 @@
 package com.company;
 
 import com.company.Graphic.ComplexGraphicModel;
-import com.company.Graphic.GraphicModel;
 import com.company.Physic.ComplexPhysicModel;
-import com.company.Physic.PhysicModel;
 
 public class ComplexModel {
 
@@ -14,12 +12,12 @@ public class ComplexModel {
         graphic.draw();
     }
 
-    public void crossThem(ComplexModel p) {
-        physic.crossThem(p.physic);
+    public void crossThem(ComplexModel p, int deltaTime) {
+        physic.crossThem(p.physic, deltaTime);
     }
 
-    public void updateMotion() {
-        physic.updateMotion();
+    public void updateMotion(int deltaTime) {
+        physic.updateMotion(deltaTime);
     }
 
     public ComplexModel(ComplexGraphicModel g, ComplexPhysicModel p) {

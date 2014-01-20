@@ -5,6 +5,17 @@ public class Point {
     private float x, y;
     public static final float epsilon = 0.0001f;
 
+
+    /**
+     * @param vector  Вектор
+     * @param number  Число
+     * @return Скалярное произведение
+     */
+    public static Point multyply(Point vector, float number)
+    {
+        return new Point(vector.x * number, vector.y * number);
+    }
+
     //p2p1 and p2p3 - rays
     public static double getAngle(Point p1, Point p2, Point p3) {
         float x1 = p1.getX() - p2.getX();

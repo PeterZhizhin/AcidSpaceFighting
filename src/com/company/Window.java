@@ -22,13 +22,7 @@ public class Window extends BasicWindow {
      @Override
      protected void update(int deltaTime)
      {
-         delta+=deltaTime;
-         if (delta>10)
-         {
-             world.update();
-             delta = 0;
-         }
-
+             world.update(deltaTime);
      }
 
      @Override
