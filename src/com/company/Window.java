@@ -1,5 +1,9 @@
 package com.company;
 
+import com.company.Graphic.Background;
+import com.company.Graphic.Camera;
+import com.company.Graphic.GUI;
+
 /**
  * User class which helps allows you to make update() draw() cycle easily
  * It has FPS inside title, and you should also use deltaTime
@@ -9,24 +13,26 @@ package com.company;
  */
 public class Window extends BasicWindow {
 
-    private World world;
-
      public Window()
      {
          super(1000, 700, 10000, "Sample");
-         world= new World();
+         World.init();
+         Camera.init();
          startWorking();
      }
 
      @Override
      protected void update(int deltaTime)
      {
-             world.update(deltaTime/1000f);
+         World.update(deltaTime/1000f);
+         GUI.update();
      }
 
      @Override
      protected void draw()
      {
-         world.draw();
+         Background.draw();
+         World.draw();
+         GUI.draw();
      }
 }

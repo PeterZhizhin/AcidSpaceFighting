@@ -1,6 +1,7 @@
 package com.company.Graphic;
 
 import com.company.Geometry.GeometricModel;
+import com.company.Model;
 
 import java.util.Random;
 
@@ -13,9 +14,10 @@ public class GraphicModel {
 
     public void draw() {
         glColor3f(color[0], color[1], color[2]);
-          glBegin(GL_LINE_LOOP);
-           for (int i=0; i<shape.getPointCount(); i++)
-               glVertex2f(shape.getPoint(i).getX(), shape.getPoint(i).getY());
+        glBegin(GL_LINE_LOOP);
+           for (int i=0; i<shape.getPointCount(); i++) {
+               Camera.translatePoint(shape.getPoint(i).getX(), shape.getPoint(i).getY());
+           }
         glEnd();
     }
 

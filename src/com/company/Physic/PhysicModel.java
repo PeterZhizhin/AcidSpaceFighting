@@ -5,7 +5,7 @@ import com.company.Geometry.Point;
 
 public class PhysicModel {
 
-    private static final float G=1f;//G is the gravitational constant
+    private static final float G=0.1f;//G is the gravitational constant
 
     protected GeometricModel body;
     protected float mass;
