@@ -6,14 +6,7 @@ public class Point {
     public static final float epsilon = 0.0001f;
 
 
-    /**
-     * @param number  Число
-     * @return Скалярное произведение
-     */
-    public Point multyply(float number)
-    {
-        return new Point(x * number,y * number);
-    }
+
 
     public Point addVector(Point vector)
     {
@@ -27,6 +20,34 @@ public class Point {
         float y1 = p1.getY() - p2.getY();
         float y2 = p3.getY() - p2.getY();
         return (x1 * x2 + y1 * y2) / Math.sqrt((x1 * x1 + y1 * y1) * (x2 * x2 + y2 * y2));
+    }
+
+    /*public Point multiply(float scalar)
+    {
+        return new Point(x*scalar, y*scalar);
+    }*/
+
+    /**
+     * @param p1 Первая точка
+     * @param p2 Вторая точка
+     * @return Квадрат расстояния
+     */
+    public static float getLengthSquared(Point p1, Point p2)
+    {
+        //Вычисляем проекции расстояний
+        float dx = p1.x - p2.x;
+        float dy = p1.y - p2.y;
+        return dx*dx + dy*dy;
+    }
+
+    /**
+     * @param p1 Первая точка
+     * @param p2 Вторая точка
+     * @return Расстояние между точками
+     */
+    public static float getLength(Point p1, Point p2)
+    {
+        return (float)Math.sqrt(getLengthSquared(p1,p2));
     }
 
     //check lines p1p2 and line p3p4
@@ -62,6 +83,15 @@ public class Point {
         double newY=x*Math.sin(angle)+y*Math.cos(angle);
         x= (float) newX;
         y= (float) newY;
+    }
+
+    /**
+     * Умножает вектор на скаляр
+     * @param scalar Скаляр
+     */
+    public Point multiply(float scalar)
+    {
+        return new Point(x*scalar, y*scalar);
     }
 
     public void move(float dx, float dy) {

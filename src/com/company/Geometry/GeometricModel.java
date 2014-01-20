@@ -6,17 +6,20 @@ public class GeometricModel {
     private static final float PI2 = (float) (2 * Math.PI);
 
 
-    private Point center;
+    private Point centre;
     private Point[] vertexes;
     private float angle;
+
+    //Максимальное расстояние между центрами масс (оптимизация пересечения)
+    private float maxLength;
 
     //Rotate model
     public void rotate(float angle) {
         this.angle += angle;
         for (Point vertex : vertexes) {
-            vertex.move(-center.getX(), -center.getY());
+            vertex.move(-centre.getX(), -centre.getY());
             vertex.rotate(angle);
-            vertex.move(center);
+            vertex.move(centre);
         }
         if (this.angle >= PI2) this.angle -= PI2;
         else if (this.angle <= 0) this.angle += PI2;
@@ -24,7 +27,7 @@ public class GeometricModel {
 
     //Move todel on p.x, p.y
     public void move(Point p) {
-        center.move(p);
+        centre.move(p);
         for (Point vertex : vertexes) {
             vertex.move(p);
         }
@@ -41,6 +44,11 @@ public class GeometricModel {
     //Get intersection between 2 models. If it is not exists - return null
     public Point getIntersection(GeometricModel model) {
 
+        float maxLength = this.maxLength + model.maxLength;
+        maxLength*=maxLength;
+        if (Point.getLengthSquared(this.centre, model.centre) > maxLength)
+            return null;
+
         for (int i=0; i<model.getPointCount(); i++)
         {
             for (int j=0; j<getPointCount(); j++)
@@ -49,6 +57,7 @@ public class GeometricModel {
                 if (p!=null) {
                     return p;
                 }
+
             }
         }
 
@@ -75,18 +84,24 @@ public class GeometricModel {
         return vertexes[pointNum];
     }
 
-    public Point getCenter() {
-        return center;
+    public Point getCentre() {
+        return centre;
     }
 
     public GeometricModel(Point[] p) {
         vertexes = p;
 
-        center = new Point(0, 0);
+        centre = new Point(0, 0);
         for (Point p2 : p) {
-            center.move(p2);
+            centre.move(p2);
         }
-        center.set(center.getX() / p.length, center.getY() / p.length);
+        centre.set(centre.getX() / p.length, centre.getY() / p.length);
+
+        maxLength = 0;
+        for (Point point : p)
+        {
+            maxLength = Math.max(maxLength, Point.getLength(centre, point));
+        }
     }
 
 

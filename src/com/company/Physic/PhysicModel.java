@@ -5,7 +5,7 @@ import com.company.Geometry.Point;
 
 public class PhysicModel {
 
-    private static final float G=1000f;//G is the gravitational constant
+    private static final float G=1f;//G is the gravitational constant
 
     protected GeometricModel body;
     protected float mass;
@@ -13,28 +13,28 @@ public class PhysicModel {
     protected float damage; //if 1 - physicModel is noraml, if  0 - it is destroyed. Will used in model realisations.
 
     public void updateMotion(float deltaTime) {
-        body.move(speedVector.multyply(deltaTime));
+        body.move(speedVector.multiply(deltaTime));
     }
 
     private void useForce(Point posOfForce, Point force, float deltaTime) {
-        speedVector = speedVector.addVector(force.multyply(deltaTime));
+        speedVector.move(force.multiply(deltaTime));
     }
 
     protected void crossWithGeometricModel(PhysicModel m, GeometricModel body, float deltaTime) {
         {
             //gravitation
-            double lengthBetweenCenters= body.getCenter().getDistanceToPoint(m.body.getCenter());
+            double lengthBetweenCenters= body.getCentre().getDistanceToPoint(m.body.getCentre());
             double gravity=G*mass*m.mass/lengthBetweenCenters/lengthBetweenCenters;
 
-            double dx=body.getCenter().getX()-m.body.getCenter().getX();
-            double dy=body.getCenter().getY()-m.body.getCenter().getY();
+            double dx=body.getCentre().getX()-m.body.getCentre().getX();
+            double dy=body.getCentre().getY()-m.body.getCentre().getY();
 
             dx*=gravity;
             dy*=gravity;
             float x= (float) dx;
             float y= (float) dy;
-            useForce(body.getCenter(), new Point(-x, -y), deltaTime);
-            m.useForce(m.body.getCenter(), new Point(x, y), deltaTime);
+            useForce(body.getCentre(), new Point(-x, -y), deltaTime);
+            m.useForce(m.body.getCentre(), new Point(x, y), deltaTime);
         }
 
 
@@ -44,9 +44,9 @@ public class PhysicModel {
             //Поехавшая физика столкновений
             //Надо целиком перепилить
             //TODO: Перепилить физику столкновений
-            double lengthBetweenCenters= body.getCenter().getDistanceToPoint(m.body.getCenter());
-            double dx=body.getCenter().getX()-m.body.getCenter().getX();
-            double dy=body.getCenter().getY()-m.body.getCenter().getY();
+            double lengthBetweenCenters= body.getCentre().getDistanceToPoint(m.body.getCentre());
+            double dx=body.getCentre().getX()-m.body.getCentre().getX();
+            double dy=body.getCentre().getY()-m.body.getCentre().getY();
             dx/=lengthBetweenCenters;
             dy/=lengthBetweenCenters;
 
@@ -58,8 +58,8 @@ public class PhysicModel {
             dy*=summarSpeed;
             float x= (float) dx;
             float y= (float) dy;
-            useForce(body.getCenter(), new Point(x, y), deltaTime);
-            m.useForce(m.body.getCenter(), new Point(-x, -y), deltaTime);
+            useForce(body.getCentre(), new Point(x, y), deltaTime);
+            m.useForce(m.body.getCentre(), new Point(-x, -y), deltaTime);
         }
     }
 
@@ -69,7 +69,7 @@ public class PhysicModel {
 
     public PhysicModel(GeometricModel body) {
         this.body=body;
-        mass=1;
+        mass=30;
         speedVector=new Point(0, 0);
     }
 
