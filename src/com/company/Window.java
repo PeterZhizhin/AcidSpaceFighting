@@ -1,12 +1,5 @@
 package com.company;
 
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Mouse;
-
-import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.glClear;
-
 /**
  * User class which helps allows you to make update() draw() cycle easily
  * It has FPS inside title, and you should also use deltaTime
@@ -16,45 +9,24 @@ import static org.lwjgl.opengl.GL11.glClear;
  */
 public class Window extends BasicWindow {
 
-    World world = new World();
-    int updateTimer = 0;
+    private World world;
 
-     public Window(int width, int heigth, int frameRate, String title)
+     public Window()
      {
-         super.initDisplay(width, heigth, frameRate, title);
-         //Your initialization
-         //Ваша инициазизация
-         try {
-             Mouse.create();
-         } catch (LWJGLException e) {
-             e.printStackTrace();
-         }
-
-         goToUpdateDrawCycle(frameRate);
+         super(1000, 700, 50, "Sample");
+         world= new World();
+         startWorking();
      }
 
      @Override
      protected void update(int deltaTime)
      {
-        updateTimer+=deltaTime;
-        if (updateTimer > 10)
-        {
-            world.update();
-            updateTimer = 0;
-        }
+         world.update();
      }
 
      @Override
      protected void draw()
      {
-         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
          world.draw();
-     }
-
-     @Override
-     protected void destroy()
-     {
-         Mouse.destroy();
-         System.out.println("Exiting");
      }
 }
