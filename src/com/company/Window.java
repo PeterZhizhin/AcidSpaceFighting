@@ -10,10 +10,11 @@ package com.company;
 public class Window extends BasicWindow {
 
     private World world;
+    int delta = 0;
 
      public Window()
      {
-         super(1000, 700, 50, "Sample");
+         super(1000, 700, 10000, "Sample");
          world= new World();
          startWorking();
      }
@@ -21,7 +22,13 @@ public class Window extends BasicWindow {
      @Override
      protected void update(int deltaTime)
      {
-         world.update();
+         delta+=deltaTime;
+         if (delta>10)
+         {
+             world.update();
+             delta = 0;
+         }
+
      }
 
      @Override

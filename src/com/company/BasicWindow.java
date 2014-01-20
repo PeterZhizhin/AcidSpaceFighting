@@ -6,11 +6,13 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
+
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.glOrtho;
 
 
-/**Абстрактный класс главного окна. Считает FPS, рисует и обновляет экран методами наследника
+/**
+ * Абстрактный класс главного окна. Считает FPS, рисует и обновляет экран методами наследника
  * Abstract class of main window. It counts FPS. It can draw, update with methods of child class
  */
 public abstract class BasicWindow {
@@ -23,7 +25,7 @@ public abstract class BasicWindow {
 
     //Переменные для подсчёта FPS.
     //Variables for FPS counting
-    private long lastFPS;
+    private long lastFPS = getWorkTime();
     private int FPS = 0;
     private int frameRate;
 
@@ -105,6 +107,7 @@ public abstract class BasicWindow {
     }
 
     public void startWorking() {
+
         while (!Display.isCloseRequested() && isWorking)
         {
             update(getTimeSinceLastRedraw());
