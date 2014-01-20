@@ -9,9 +9,9 @@ public class ComplexPhysicModel extends PhysicModel{
 
     private ArrayList<PhysicModel> bodies;
 
-    public void updateMotion(int deltaTime) {
+    public void updateMotion(float deltaTime) {
         for (PhysicModel body: bodies)
-            body.body.move(Point.multyply(speedVector, (float)deltaTime));
+            body.body.move(speedVector.multyply(deltaTime));
     }
 
     private void useForce(Point posOfForce, Point force) {

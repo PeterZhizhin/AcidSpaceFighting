@@ -12,11 +12,11 @@ public class Model {
         graphic.draw();
     }
 
-    public void crossThem(Model p, int deltaTime) {
+    public void crossThem(Model p, float deltaTime) {
         physic.crossThem(p.physic, deltaTime);
     }
 
-    public void updateMotion(int deltaTime) {
+    public void updateMotion(float deltaTime) {
         physic.updateMotion(deltaTime);
     }
 

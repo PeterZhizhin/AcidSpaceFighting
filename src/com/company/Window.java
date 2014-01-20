@@ -10,7 +10,6 @@ package com.company;
 public class Window extends BasicWindow {
 
     private World world;
-    int delta = 0;
 
      public Window()
      {
@@ -22,7 +21,7 @@ public class Window extends BasicWindow {
      @Override
      protected void update(int deltaTime)
      {
-             world.update(deltaTime);
+             world.update(deltaTime/1000f);
      }
 
      @Override

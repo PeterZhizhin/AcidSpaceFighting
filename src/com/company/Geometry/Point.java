@@ -7,13 +7,17 @@ public class Point {
 
 
     /**
-     * @param vector  Вектор
      * @param number  Число
      * @return Скалярное произведение
      */
-    public static Point multyply(Point vector, float number)
+    public Point multyply(float number)
     {
-        return new Point(vector.x * number, vector.y * number);
+        return new Point(x * number,y * number);
+    }
+
+    public Point addVector(Point vector)
+    {
+        return new Point(x + vector.x, y + vector.y);
     }
 
     //p2p1 and p2p3 - rays

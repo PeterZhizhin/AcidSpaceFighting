@@ -18,7 +18,7 @@ public class World {
         }
     }
 
-    public void update(int deltaTime) {
+    public void update(float deltaTime) {
          for (int i=0; i<models.size()-1; i++)
              for (int j=i+1; j<models.size(); j++) {
                  models.get(i).crossThem(models.get(j), deltaTime);

@@ -12,15 +12,15 @@ public class PhysicModel {
     protected Point speedVector;
     protected float damage; //if 1 - physicModel is noraml, if  0 - it is destroyed. Will used in model realisations.
 
-    public void updateMotion(int deltaTime) {
-        body.move(Point.multyply(speedVector, (float)deltaTime));
+    public void updateMotion(float deltaTime) {
+        body.move(speedVector.multyply(deltaTime));
     }
 
-    private void useForce(Point posOfForce, Point force, int deltaTime) {
-        speedVector.set(speedVector.getX()+force.getX()*deltaTime, speedVector.getY()+force.getY()*deltaTime);
+    private void useForce(Point posOfForce, Point force, float deltaTime) {
+        speedVector = speedVector.addVector(force.multyply(deltaTime));
     }
 
-    protected void crossWithGeometricModel(PhysicModel m, GeometricModel body, int deltaTime) {
+    protected void crossWithGeometricModel(PhysicModel m, GeometricModel body, float deltaTime) {
         {
             //gravitation
             double lengthBetweenCenters= body.getCenter().getDistanceToPoint(m.body.getCenter());
@@ -63,7 +63,7 @@ public class PhysicModel {
         }
     }
 
-    public void crossThem(PhysicModel m, int deltaTime) {
+    public void crossThem(PhysicModel m, float deltaTime) {
         crossWithGeometricModel(m, body, deltaTime);
     }
 
