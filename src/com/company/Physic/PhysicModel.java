@@ -17,18 +17,18 @@ public class PhysicModel {
     }
 
     private void useForce(Point posOfForce, Point force) {
-        speedVector.set(speedVector.getX()+force.getX(), speedVector.getX()+force.getY());
+        speedVector.set(speedVector.getX()+force.getX(), speedVector.getY()+force.getY());
     }
 
     protected void crossWithGeometricModel(PhysicModel m, GeometricModel body) {
         {
             //gravitation
             double lengthBetweenCenters= body.getCenter().getDistanceToPoint(m.body.getCenter());
-            double gravity=G*mass*m.mass/Math.sqrt(lengthBetweenCenters);
+            double gravity=G*mass*m.mass/lengthBetweenCenters/lengthBetweenCenters;
+
             double dx=body.getCenter().getX()-m.body.getCenter().getX();
             double dy=body.getCenter().getY()-m.body.getCenter().getY();
-            dx/=lengthBetweenCenters;
-            dy/=lengthBetweenCenters;
+
             dx*=gravity;
             dy*=gravity;
             float x= (float) dx;
@@ -36,6 +36,7 @@ public class PhysicModel {
             useForce(body.getCenter(), new Point(-x, -y));
             m.useForce(m.body.getCenter(), new Point(x, y));
         }
+
 
         Point intersection=body.getIntersection(m.body);
         if (intersection!=null) {

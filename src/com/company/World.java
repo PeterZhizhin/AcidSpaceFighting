@@ -6,6 +6,7 @@ import com.company.Graphic.GraphicModel;
 import com.company.Physic.PhysicModel;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class World {
 
@@ -30,18 +31,18 @@ public class World {
     public World() {
         models=new ArrayList<Model>();
 
-        GeometricModel g=new GeometricModel(new Point[]{new Point(300f, 300f), new Point(300f, 350f), new Point(330f, 325f)});
+        Random rnd=new Random();
+        for (int i=4; i<7; i++)
+            for (int j=4; j<7; j++) {
+        float width=rnd.nextInt(20)+3;
+        GeometricModel g=new GeometricModel(new Point[]{
+                new Point(i*50, j*50),
+                new Point(i*50+width, j*50),
+                new Point(i*50+width, j*50+width),
+                new Point(i*50, j*50+width)});
         Model m=new Model(new GraphicModel(g), new PhysicModel(g));
         models.add(m);
-
-        GeometricModel g2=new GeometricModel(new Point[]{new Point(500f, 300f), new Point(500f, 350f), new Point(530f, 325f)});
-        Model m2=new Model(new GraphicModel(g2), new PhysicModel(g2));
-        models.add(m2);
-
-        GeometricModel g3=new GeometricModel(new Point[]{new Point(400f, 480f), new Point(400f, 530f), new Point(430f, 505f)});
-        Model m3=new Model(new GraphicModel(g3), new PhysicModel(g3));
-        models.add(m3);
-
+            }
     }
 
 }
