@@ -15,6 +15,14 @@ public class World {
 
     private static ArrayList<Model> models;
 
+    public static Model getModel(int num) {
+        return models.get(num);
+    }
+
+    public static String getMessage() {
+        return Camera.getMessage();
+    }
+
     public static void draw() {
         for (Model model : models) {
             model.draw();
@@ -38,12 +46,15 @@ public class World {
         for (int i=0; i<20; i++)
             for (int j=0; j<20; j++) {
         float width=rnd.nextInt(20)+3;
+        float distance=200f;
+
         GeometricModel g=new GeometricModel(new Point[]{
-                new Point(i*100, j*100),
-                new Point(i*100+width, j*100),
-                new Point(i*100+width, j*100+width),
-                new Point(i*100, j*100+width)});
-        Model m=new Model(new GraphicModel(g), new PhysicModel(g));
+                new Point(i*distance, j*distance),
+                new Point(i*distance+width, j*distance),
+                new Point(i*distance+width, j*distance+width),
+                new Point(i*distance, j*distance+width)});
+                PhysicModel p = new PhysicModel(g);
+        Model m=new Model(new GraphicModel(g, p), p);
         models.add(m);
             }
     }

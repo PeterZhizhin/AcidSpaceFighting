@@ -3,6 +3,7 @@ package com.company;
 import com.company.Graphic.Background;
 import com.company.Graphic.Camera;
 import com.company.Graphic.GUI;
+import org.lwjgl.opengl.Display;
 
 /**
  * User class which helps allows you to make update() draw() cycle easily
@@ -20,6 +21,10 @@ public class Window extends BasicWindow {
          Camera.init();
          startWorking();
      }
+
+    public void setTitle(String s) {
+        super.setTitle(s+" "+World.getMessage());
+    }
 
      @Override
      protected void update(int deltaTime)

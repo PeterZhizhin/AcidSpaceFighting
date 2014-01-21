@@ -1,5 +1,6 @@
 package com.company.Graphic;
 
+import com.company.Geometry.Point;
 import org.lwjgl.opengl.GL11;
 
 public class Camera {
@@ -23,8 +24,16 @@ public class Camera {
         if (reScale<0) scale*=1.3f;
     }
 
+    public static String getMessage() {
+        return "Coordinates: "+xPos+" ; "+yPos+" Scale: "+scale;
+    }
+
     public static void translatePoint(float x, float y) {
         GL11.glVertex2f((x-xPos)/scale, (y-yPos)/scale);
+    }
+
+    public static Point repairPoint(float x, float y) {
+        return new Point(x*scale+xPos, y*scale+yPos);
     }
 
 }

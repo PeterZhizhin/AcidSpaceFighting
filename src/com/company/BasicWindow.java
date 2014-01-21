@@ -57,6 +57,10 @@ public abstract class BasicWindow {
         return delta;
     }
 
+    public void setTitle(String s) {
+        Display.setTitle(s);
+    }
+
     /**
      * Метод для обновления информации о FPS
      * Method which updates information about FPS
@@ -67,7 +71,7 @@ public abstract class BasicWindow {
         //If time since last FPS updates more than 1 sec then we update FPS info to title
         if (getWorkTime() - lastFPS > 1000)
         {
-            Display.setTitle(title + ": " + FPS);
+            setTitle(title + ": " + FPS);
             lastFPS += 1000;
             FPS = 0;
         }

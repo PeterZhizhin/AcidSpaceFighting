@@ -20,7 +20,7 @@ public class ComplexGraphicModel extends GraphicModel{
     }
 
     public ComplexGraphicModel() {
-        super(null);
+        super(null, null);
         grModels=new ArrayList<GraphicModel>();
     }
 

@@ -12,6 +12,14 @@ public class PhysicModel {
     protected Point speedVector;
     protected float damage; //if 1 - physicModel is noraml, if  0 - it is destroyed. Will used in model realisations.
 
+    public float getSpeedX() {
+        return speedVector.getX();
+    }
+
+    public float getSpeedY() {
+        return speedVector.getY();
+    }
+
     public void updateMotion(float deltaTime) {
         body.move(speedVector.multiply(deltaTime));
     }

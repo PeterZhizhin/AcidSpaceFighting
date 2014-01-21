@@ -3,6 +3,8 @@ package com.company.Graphic;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
+import static org.lwjgl.opengl.GL11.*;
+
 public class GUI {
 
     private static boolean lastStateButtonIsPressed=false;
@@ -28,7 +30,46 @@ public class GUI {
     }
 
     public static void draw() {
+        glColor3f(1, 1, 1);
+        glBegin(GL_LINES);
+        Camera.translatePoint(-100, 0);
+        Camera.translatePoint(100, 0);
+        Camera.translatePoint(0, -100);
+        Camera.translatePoint(0, 100);
+        glEnd();
 
+
+        float centerX=Display.getWidth()/2f;
+        float centerY=Display.getHeight()/2f;
+
+        glBegin(GL_TRIANGLES);
+
+
+        glColor4f(0f, 0f, 0f, 0.6f);
+        glVertex2f(0, 0);
+        glVertex2f(Display.getWidth(), 0);
+        glColor4f(0f, 0f, 0f, 0f);
+        glVertex2f(centerX, centerY);
+
+
+        glColor4f(0f, 0f, 0f, 0.6f);
+        glVertex2f(0, Display.getHeight());
+        glVertex2f(Display.getWidth(), Display.getHeight());
+        glColor4f(0f, 0f, 0f, 0f);
+        glVertex2f(centerX, centerY);
+
+        glColor4f(0f, 0f, 0f, 0.6f);
+        glVertex2f(0, 0);
+        glVertex2f(0, Display.getHeight());
+        glColor4f(0f, 0f, 0f, 0f);
+        glVertex2f(centerX, centerY);
+
+        glColor4f(0f, 0f, 0f, 0.6f);
+        glVertex2f(Display.getWidth(), 0);
+        glVertex2f(Display.getWidth(), Display.getHeight());
+        glColor4f(0f, 0f, 0f, 0f);
+        glVertex2f(centerX, centerY);
+        glEnd();
     }
 
 
