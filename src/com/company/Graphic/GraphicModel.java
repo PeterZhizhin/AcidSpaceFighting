@@ -20,14 +20,14 @@ public class GraphicModel {
 
     public void draw() {
         glColor3f(color[0], color[1], color[2]);
-        glBegin(GL_LINE_LOOP);
+        glBegin(GL_QUADS);
            for (int i=0; i<shape.getPointCount(); i++) {
                Camera.translatePoint(shape.getPoint(i).getX(), shape.getPoint(i).getY());
            }
         glEnd();
 
-        float colorStep=0.4f/ trajectory.size();
-        float currentColor=0.4f;
+        float colorStep=0.1f/ trajectory.size();
+        float currentColor=0.1f;
 
         glBegin(GL_LINES);
         glColor4f(color[0], color[1], color[2], currentColor);
