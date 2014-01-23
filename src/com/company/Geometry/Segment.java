@@ -3,6 +3,7 @@ package com.company.Geometry;
 public class Segment {
 
     private Point start;
+    //end - конец отрезка
     private Point end;
 
     public void setStart(Point p) {

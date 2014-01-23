@@ -5,6 +5,16 @@ public class Point {
     private float x, y;
     public static final float epsilon = 0.0001f;
 
+    public static Point add(Point v1, Point v2)
+    {
+        return new Point(v1.x + v2.x, v1.y + v2.y);
+    }
+
+    public static Point negate(Point vector)
+    {
+        return new Point(-vector.x,-vector.y);
+    }
+
     public static Point getNormal(Point p1, Point p2) {
         float a1 = p2.getY() - p1.getY();
         float b1 = p1.getX() - p2.getX();
@@ -18,6 +28,25 @@ public class Point {
         float y1 = p1.getY() - p2.getY();
         float y2 = p3.getY() - p2.getY();
         return (x1 * x2 + y1 * y2) / Math.sqrt((x1 * x1 + y1 * y1) * (x2 * x2 + y2 * y2));
+    }
+
+    /**
+     * @param vector1 1 вектор
+     * @param vector2 2 вектор
+     * @return Скалярное произведение векторов
+     */
+    public static float getScalarMultiply(Point vector1, Point vector2)
+    {
+        return vector1.x * vector2.x + vector1.y * vector2.y;
+    }
+
+    /**
+     * @param vector Вектор (или точка)
+     * @return Длина вектора (или расстояние от центра координат)
+     */
+    public static float modulus(Point vector)
+    {
+        return (float)Math.sqrt(vector.x*vector.x + vector.y*vector.y);
     }
 
     /**

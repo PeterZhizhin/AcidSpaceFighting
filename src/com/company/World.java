@@ -43,8 +43,8 @@ public class World {
         models=new ArrayList<Model>();
 
         Random rnd=new Random();
-        for (int i=0; i<25; i++)
-            for (int j=0; j<25; j++) {
+        for (int i=0; i<5; i++)
+            for (int j=0; j<5; j++) {
         float width=rnd.nextInt(20)+3;
         float distance=200f;
 
@@ -53,7 +53,7 @@ public class World {
                 new Point(i*distance+width, j*distance),
                 new Point(i*distance+width, j*distance+width),
                 new Point(i*distance, j*distance+width)});
-                PhysicModel p = new PhysicModel(g);
+                PhysicModel p = new PhysicModel(g, 30,new Point(0,0));
         Model m=new Model(new GraphicModel(g, p), p);
         models.add(m);
             }
