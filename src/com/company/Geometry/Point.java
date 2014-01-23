@@ -5,12 +5,10 @@ public class Point {
     private float x, y;
     public static final float epsilon = 0.0001f;
 
-
-
-
-    public Point addVector(Point vector)
-    {
-        return new Point(x + vector.x, y + vector.y);
+    public static Point getNormal(Point p1, Point p2) {
+        float a1 = p2.getY() - p1.getY();
+        float b1 = p1.getX() - p2.getX();
+        return new Point(a1, b1);
     }
 
     //p2p1 and p2p3 - rays
@@ -21,11 +19,6 @@ public class Point {
         float y2 = p3.getY() - p2.getY();
         return (x1 * x2 + y1 * y2) / Math.sqrt((x1 * x1 + y1 * y1) * (x2 * x2 + y2 * y2));
     }
-
-    /*public Point multiply(float scalar)
-    {
-        return new Point(x*scalar, y*scalar);
-    }*/
 
     /**
      * @param p1 Первая точка

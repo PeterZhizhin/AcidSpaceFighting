@@ -2,10 +2,11 @@ package com.company.Physic;
 
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
+import com.company.Geometry.Segment;
 
 public class PhysicModel {
 
-    private static final float G=0.1f;//G is the gravitational constant
+    private static final float G=1f;//G is the gravitational constant
 
     protected GeometricModel body;
     protected float mass;
@@ -46,7 +47,7 @@ public class PhysicModel {
         }
 
 
-        Point intersection=body.getIntersection(m.body);
+        Segment intersection=body.getIntersection(m.body);
         if (intersection!=null) {
 
             //Поехавшая физика столкновений

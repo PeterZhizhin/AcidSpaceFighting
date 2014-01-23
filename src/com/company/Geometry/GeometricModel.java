@@ -42,7 +42,7 @@ public class GeometricModel {
     }
 
     //Get intersection between 2 models. If it is not exists - return null
-    public Point getIntersection(GeometricModel model) {
+    public Segment getIntersection(GeometricModel model) {
 
         float maxLength = this.maxLength + model.maxLength;
         maxLength*=maxLength;
@@ -55,12 +55,19 @@ public class GeometricModel {
             {
                 Point p = Point.getIntersection(getPoint(j), getPoint(j + 1), model.getPoint(i), model.getPoint(i + 1));
                 if (p!=null) {
-                    return p;
+
+                    double d1=p.getDistanceToPoint(model.getPoint(i))+ p.getDistanceToPoint(model.getPoint(i + 1));
+                    double d2=p.getDistanceToPoint(getPoint(j))+ p.getDistanceToPoint(getPoint(j + 1));
+                    if (d1<d2)
+                    return new Segment(p, Point.getNormal(model.getPoint(i), model.getPoint(i + 1)));
+                    else
+                    return new Segment(p, Point.getNormal(getPoint(j), getPoint(j + 1)));
                 }
 
             }
         }
 
+        /*
         for (int i=0; i<model.getPointCount(); i++)
             if (contains(model.getPoint(i))) {
                 return model.getPoint(i);
@@ -70,6 +77,7 @@ public class GeometricModel {
             if (model.contains(getPoint(i))) {
                 return getPoint(i);
             }
+        */
 
         return null;
     }
