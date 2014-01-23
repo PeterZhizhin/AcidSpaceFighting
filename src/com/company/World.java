@@ -43,8 +43,8 @@ public class World {
         models=new ArrayList<Model>();
 
         Random rnd=new Random();
-        for (int i=0; i<33; i++)
-            for (int j=0; j<33; j++) {
+        for (int i=0; i<4; i++)
+            for (int j=0; j<4; j++) {
         float width=rnd.nextInt(20)+3;
         float distance=500f;
 

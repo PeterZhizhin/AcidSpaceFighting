@@ -26,7 +26,7 @@ public class PhysicModel {
     }
 
     private void useForce(Point posOfForce, Point force, float deltaTime) {
-        speedVector.move(force.multiply(deltaTime));
+        speedVector.move(force.multiply(deltaTime/mass));
     }
 
     protected void crossWithGeometricModel(PhysicModel m, GeometricModel body, float deltaTime) {
@@ -49,34 +49,10 @@ public class PhysicModel {
 
         Segment intersection=body.getIntersection(m.body);
         if (intersection!=null) {
-            //Поехавшая физика столкновений
-            //Надо целиком перепилить
-            //TODO: Перепилить физику столкновений
-            /*double lengthBetweenCenters= body.getCentre().getDistanceToPoint(m.body.getCentre());
-            double dx=body.getCentre().getX()-m.body.getCentre().getX();
-            double dy=body.getCentre().getY()-m.body.getCentre().getY();
-            dx/=lengthBetweenCenters;
-            dy/=lengthBetweenCenters;
-
-            double summarSpeed=Math.sqrt(speedVector.getX()*speedVector.getX()+speedVector.getY()*speedVector.getY())
-                    +Math.sqrt(m.speedVector.getX()*m.speedVector.getX()+m.speedVector.getY()*m.speedVector.getY());
-            summarSpeed/=4;
-
-            dx*=summarSpeed;
-            dy*=summarSpeed;
-            float x= (float) dx;
-            float y= (float) dy;
-            useForce(body.getCentre(), new Point(x, y), deltaTime);
-            m.useForce(m.body.getCentre(), new Point(-x, -y), deltaTime);   **/
-
-            float dx=body.getCentre().getX()-m.body.getCentre().getX();
-            float dy=body.getCentre().getY()-m.body.getCentre().getY();
-
-            intersection.setEnd(new Point(dx,dy));
 
             //Физика столкновений на основе законов сохранения импульсов и энергии
 
-            //Продолжим. Формул нет нигде вывел сам.
+            //Продолжим. Формул нет нигде, вывел сам, хоть они и общеизвестные.
             //Пусть ось Ox - ось, вдоль которой действуют силы (нормаль к стороне в точке пересечения)
             //Oy - перпендикулярная ей ось.
             //Центр координат в точке пересечения
@@ -92,7 +68,7 @@ public class PhysicModel {
             //V11x = ((m1-m2)V10x + 2*m2*V20x)/(m1+m2)
             //V21x = (2*m1*V10x + (m2-m1)V20x)/(m1+m2)
 
-            //1: Ищем проекции скоростей на оси
+            //1: Ищем проекции скоростей на оси для этого поворачиваем вектора на -alpha
             //Оx совпадает с вектором нормали
 
             Point v1 = speedVector;
@@ -124,6 +100,7 @@ public class PhysicModel {
             //Возвращаемся назад
 
             //Получаем угол, под которым повернут вектор Ox
+            //Т.к angle=-angle то cos=cos (четность) sin=-sin (нечетность)
             sin = -sin;
 
             v1 = new Point(v1.getX()*cos-v1.getY()*sin, v1.getX()*sin + v1.getY()*cos);
@@ -131,11 +108,11 @@ public class PhysicModel {
 
             //Конечные скорости получены.
 
-            /*Point f1 = Point.add(speedVector, Point.negate(v1)).multiply(mass/deltaTime);
-            Point f2 = Point.add(m.speedVector, Point.negate(v2)).multiply(m.mass/deltaTime);
+            //Point f1 = Point.add(v1, Point.negate(speedVector)).multiply(mass/deltaTime);
+            //Point f2 = Point.add(v2, Point.negate(m.speedVector)).multiply(m.mass/deltaTime);
 
-            useForce(intersection.getStart(),f1,deltaTime);
-            useForce(intersection.getStart(),f2,deltaTime);*/
+            //useForce(intersection.getStart(),f1,deltaTime);
+            //m.useForce(intersection.getStart(),f2,deltaTime);
             speedVector = v1; m.speedVector = v2;
 
         }
