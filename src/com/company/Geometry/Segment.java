@@ -22,7 +22,7 @@ public class Segment {
         return end;
     }
 
-    public Segment(Point start, Point ends) {
+    public Segment(Point start, Point end) {
         this.start=start;
         this.end=end;
     }

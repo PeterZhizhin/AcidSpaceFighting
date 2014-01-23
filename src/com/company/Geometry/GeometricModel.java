@@ -58,10 +58,12 @@ public class GeometricModel {
 
                     double d1=p.getDistanceToPoint(model.getPoint(i))+ p.getDistanceToPoint(model.getPoint(i + 1));
                     double d2=p.getDistanceToPoint(getPoint(j))+ p.getDistanceToPoint(getPoint(j + 1));
-                    if (d1<d2)
-                    return new Segment(p, Point.getNormal(model.getPoint(i), model.getPoint(i + 1)));
-                    else
-                    return new Segment(p, Point.getNormal(getPoint(j), getPoint(j + 1)));
+                    if (d1<d2) {
+                        return new Segment(p, Point.getNormal(model.getPoint(i), model.getPoint(i + 1)));
+                    }
+                    else {
+                        return new Segment(p, Point.getNormal(getPoint(j), getPoint(j + 1)));
+                }
                 }
 
             }

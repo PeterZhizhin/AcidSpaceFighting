@@ -6,7 +6,7 @@ import com.company.Geometry.Segment;
 
 public class PhysicModel {
 
-    private static final double G=0.1f;//G is the gravitational constant
+    private static final double G=10f;//G is the gravitational constant
 
     protected GeometricModel body;
     protected float mass;
@@ -49,7 +49,6 @@ public class PhysicModel {
 
         Segment intersection=body.getIntersection(m.body);
         if (intersection!=null) {
-
             //Поехавшая физика столкновений
             //Надо целиком перепилить
             //TODO: Перепилить физику столкновений
