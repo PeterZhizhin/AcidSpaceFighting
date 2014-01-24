@@ -11,10 +11,10 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class GraphicModel {
 
-    private GeometricModel shape;
+    protected GeometricModel shape;
     private float[] color=new float[3];
     private PhysicModel ourPhysicModel;
-    private LinkedList<Point> trajectory;
+    protected LinkedList<Point> trajectory;
     private int step=0;
     private static final int stepLimit=10;
 

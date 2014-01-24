@@ -4,6 +4,8 @@ import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
 import com.company.Graphic.GraphicModel;
+import com.company.Models.Asteroid.AsteroidGeometricModel;
+import com.company.Models.Asteroid.AsteroidGraphicModel;
 import com.company.Physic.PhysicModel;
 
 import java.util.ArrayList;
@@ -43,18 +45,15 @@ public class World {
         models=new ArrayList<Model>();
 
         Random rnd=new Random();
-        for (int i=0; i<4; i++)
-            for (int j=0; j<4; j++) {
-        float width=rnd.nextInt(20)+3;
-        float distance=500f;
+        for (int i=0; i<2; i++)
+            for (int j=0; j<2; j++) {
+        float width=rnd.nextInt(200)+200;
+        float distance=1200f;
 
-        GeometricModel g=new GeometricModel(new Point[]{
-                new Point(i*distance, j*distance),
-                new Point(i*distance+width, j*distance),
-                new Point(i*distance+width, j*distance+width),
-                new Point(i*distance, j*distance+width)});
-                PhysicModel p = new PhysicModel(g, 30,new Point(0,0));
-        Model m=new Model(new GraphicModel(g, p), p);
+
+        GeometricModel g=new AsteroidGeometricModel(i*distance, j*distance, width);
+        PhysicModel p = new PhysicModel(g, width);
+        Model m=new Model(new AsteroidGraphicModel(g), p);
         models.add(m);
             }
     }

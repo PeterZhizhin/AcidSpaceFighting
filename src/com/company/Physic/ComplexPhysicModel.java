@@ -32,7 +32,7 @@ public class ComplexPhysicModel extends PhysicModel{
     }
 
     public ComplexPhysicModel() {
-        super(null, 0, new Point(0,0));
+        super(null, 0);
         bodies=new ArrayList<PhysicModel>();
         mass=1;
         speedVector=new Point(0, 0);

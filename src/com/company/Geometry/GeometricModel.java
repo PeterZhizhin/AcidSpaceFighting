@@ -98,6 +98,14 @@ public class GeometricModel {
         return centre;
     }
 
+    public GeometricModel(GeometricModel g) {
+        vertexes = new Point[g.getPointCount()];
+        for (int i=0; i<vertexes.length; i++)
+              vertexes[i]=new Point(g.getPoint(i));
+        centre = new Point(g.getCentre());
+        maxLength = g.maxLength;
+    }
+
     public GeometricModel(Point[] p) {
         vertexes = p;
 

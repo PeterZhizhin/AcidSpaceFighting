@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3996f00d-68f8-4b77-8b8f-c7042021212b" name="Default" comment="FPS counting is now working&#10;">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/company/с.java" afterPath="" />
-    </list>
-    <list id="b61b9df7-e80f-42f7-8a79-88f35776c6c1" name="Physics improved" comment="Теперь в физике появились новая фича: время.&#10;Это позволяет:&#10;1. Применять второй закон Ньютона в импульсной форме.&#10;2. Считать перемещения по фомуле dS = V * dT&#10;3. Аналогично считать изменения скоростей.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/ComplexModel.java" afterPath="$PROJECT_DIR$/src/com/company/ComplexModel.java" />
+    <list default="true" id="3996f00d-68f8-4b77-8b8f-c7042021212b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGeometricModel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGraphicModel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGraphicModel.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/lwjgl.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AcidSpaceFighting.iml" afterPath="$PROJECT_DIR$/AcidSpaceFighting.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Physic/ComplexPhysicModel.java" afterPath="$PROJECT_DIR$/src/com/company/Physic/ComplexPhysicModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Model.java" afterPath="$PROJECT_DIR$/src/com/company/Model.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java" afterPath="$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java" afterPath="$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java" afterPath="$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Geometry/Point.java" afterPath="$PROJECT_DIR$/src/com/company/Geometry/Point.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Window.java" afterPath="$PROJECT_DIR$/src/com/company/Window.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/World.java" afterPath="$PROJECT_DIR$/src/com/company/World.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
+    <list id="a178c093-fa69-4c32-9211-a15a5b4200f5" name="New changelist" comment="" />
     <ignored path="AcidSpaceFighting.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" ignored="false" />
-    <file path="$PROJECT_DIR$/src/com/company/Physic/ComplexPhysicModel.java" ignored="false" />
-    <file path="$PROJECT_DIR$/src/com/company/ComplexModel.java" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,39 +77,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ComplexModel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/ComplexModel.java">
+      <file leaf-file-name="GraphicModel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="11" selection-start="500" selection-end="500" vertical-scroll-proportion="-14.28" vertical-offset="39" max-vertical-offset="594">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Window.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Window.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="35" selection-start="738" selection-end="738" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="702">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="World.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/World.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="65" selection-start="606" selection-end="606" vertical-scroll-proportion="0.0" vertical-offset="113" max-vertical-offset="864">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Model.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Model.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="34" selection-start="388" selection-end="388" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
+            <state line="17" column="44" selection-start="456" selection-end="499" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1110">
               <folding />
             </state>
           </provider>
@@ -120,39 +89,56 @@
       <file leaf-file-name="PhysicModel.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="20" selection-start="322" selection-end="322" vertical-scroll-proportion="0.33275864" vertical-offset="5" max-vertical-offset="1458">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Point.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/Point.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="37" selection-start="230" selection-end="230" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1944">
+            <state line="118" column="32" selection-start="4406" selection-end="4406" vertical-scroll-proportion="0.45701358" vertical-offset="1568" max-vertical-offset="2055">
               <folding>
-                <element signature="e#2542#2543#0" expanded="true" />
-                <element signature="e#2566#2567#0" expanded="true" />
-                <element signature="e#2593#2594#0" expanded="true" />
-                <element signature="e#2617#2618#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GraphicModel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java">
+      <file leaf-file-name="ComplexPhysicModel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Physic/ComplexPhysicModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="13" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+            <state line="34" column="21" selection-start="869" selection-end="869" vertical-scroll-proportion="0.0" vertical-offset="58" max-vertical-offset="675">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ComplexGraphicModel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/ComplexGraphicModel.java">
+      <file leaf-file-name="AsteroidGraphicModel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGraphicModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="13" selection-start="72" selection-end="72" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
+            <state line="24" column="49" selection-start="794" selection-end="794" vertical-scroll-proportion="0.0" vertical-offset="248" max-vertical-offset="1005">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AsteroidGeometricModel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGeometricModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="82" selection-start="537" selection-end="537" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RocketBaseGraphicModel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGraphicModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="26" selection-start="80" selection-end="80" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="150">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ComplexModel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/ComplexModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="13" selection-start="130" selection-end="130" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="495">
               <folding />
             </state>
           </provider>
@@ -161,19 +147,26 @@
       <file leaf-file-name="GeometricModel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="28" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1620">
+            <state line="103" column="51" selection-start="3188" selection-end="3188" vertical-scroll-proportion="0.0" vertical-offset="1203" max-vertical-offset="1920">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ComplexPhysicModel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Physic/ComplexPhysicModel.java">
+      <file leaf-file-name="Point.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/Point.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="16" selection-start="773" selection-end="773" vertical-scroll-proportion="-9.24" vertical-offset="291" max-vertical-offset="846">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="74" column="36" selection-start="2005" selection-end="2005" vertical-scroll-proportion="0.0" vertical-offset="1110" max-vertical-offset="2460">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Segment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/Segment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="34" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="540">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -191,25 +184,31 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/company/WindowV2.java" />
-        <option value="$PROJECT_DIR$/src/com/company/util/GLHelper.java" />
-        <option value="$PROJECT_DIR$/src/com/company/util/BasicWindow.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Main.java" />
         <option value="$PROJECT_DIR$/src/com/company/BasicWindow.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Geometry/Point.java" />
         <option value="$PROJECT_DIR$/src/com/company/Window.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Graphic/Background.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Graphic/GUI.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Graphic/Camera.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Graphic/ComplexGraphicModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Geometry/Point.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Geometry/Segment.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGraphicModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidModel.java" />
         <option value="$PROJECT_DIR$/src/com/company/Model.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGraphicModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGeometricModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java" />
         <option value="$PROJECT_DIR$/src/com/company/World.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java" />
         <option value="$PROJECT_DIR$/src/com/company/Physic/ComplexPhysicModel.java" />
-        <option value="$PROJECT_DIR$/src/com/company/ComplexModel.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1920" />
-    <option name="height" value="1054" />
+    <option name="y" value="28" />
+    <option name="width" value="1366" />
+    <option name="height" value="740" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -237,6 +236,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -314,6 +314,58 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RocketBase" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AcidSpaceFighting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AcidSpaceFighting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="company" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Asteroid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AcidSpaceFighting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AcidSpaceFighting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="company" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Graphic" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -340,23 +392,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -368,151 +405,23 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LJGL/jar/lwjgl_util.jar!/" />
-    <property name="dynamic.classpath" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Libs/lwjgl-2.9.0/jar/lwjgl.jar!/" />
     <property name="FullScreen" value="false" />
+    <property name="dynamic.classpath" value="false" />
   </component>
-  <component name="RestoreUpdateTree">
-    <UpdateInfo date="Moments ago" ActionInfo="_Update">
-      <UpdatedFiles>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated from server" />
-          <option name="myStatusName" value="Changed on server" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CHANGED_ON_SERVER" />
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Updated" />
-            <option name="myStatusName" value="Changed" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="UPDATED" />
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/company/BasicWindow.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/company/Window.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/company/World.java</PATH>
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Created" />
-            <option name="myStatusName" value="Created" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="CREATED" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Deleted" />
-            <option name="myStatusName" value="Deleted" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="true" />
-            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Restored" />
-            <option name="myStatusName" value="Will be restored" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="RESTORED" />
-          </FILE-GROUP>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Modified" />
-          <option name="myStatusName" value="Modified" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MODIFIED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Skipped" />
-          <option name="myStatusName" value="Skipped" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SKIPPED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with conflicts" />
-          <option name="myStatusName" value="Will be merged with conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_CONFLICTS" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with tree conflicts" />
-          <option name="myStatusName" value="Merged with tree conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with property conflicts" />
-          <option name="myStatusName" value="Will be merged with property conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged" />
-          <option name="myStatusName" value="Will be merged" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Not in repository" />
-          <option name="myStatusName" value="Not in repository" />
-          <option name="mySupportsDeletion" value="true" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UNKNOWN" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally added" />
-          <option name="myStatusName" value="Locally added" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_ADDED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally removed" />
-          <option name="myStatusName" value="Locally removed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_REMOVED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Switched" />
-          <option name="myStatusName" value="Switched" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SWITCHED" />
-        </FILE-GROUP>
-      </UpdatedFiles>
-    </UpdateInfo>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.company.Models.Asteroid" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="com.company.Main" />
-      <option name="VM_PARAMETERS" value="-Djava.library.path=lib" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="AcidSpaceFighting" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Application.Game">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -562,12 +471,12 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
+      <option name="MAIN_CLASS_NAME" value="com.company.Main" />
+      <option name="VM_PARAMETERS" value="-Djava.library.path=&quot;lib/&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
@@ -614,14 +523,26 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
+    <configuration default="false" name="Game" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="com.company.Main" />
+      <option name="VM_PARAMETERS" value="-Djava.library.path=&quot;lib/&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="AcidSpaceFighting" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="0" class="java.lang.String" itemvalue="Application.Game" />
     </list>
-    <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
@@ -644,8 +565,7 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="3996f00d-68f8-4b77-8b8f-c7042021212b" name="Default" comment="" />
-      <changelist id="" name="Fixed bug" comment="FPS counting is now working" />
-      <changelist id="b61b9df7-e80f-42f7-8a79-88f35776c6c1" name="Physics improved" comment="Теперь в физике появились новая фича: время.&#10;Это позволяет:&#10;1. Применять второй закон Ньютона в импульсной форме.&#10;2. Считать перемещения по фомуле dS = V * dT&#10;3. Аналогично считать изменения скоростей." />
+      <changelist id="a178c093-fa69-4c32-9211-a15a5b4200f5" name="New changelist" comment="" />
       <created>1389981842635</created>
       <updated>1389981842635</updated>
     </task>
@@ -661,53 +581,86 @@
       <created>1389983116694</created>
       <updated>1389983116694</updated>
     </task>
-    <task id="LOCAL-00004" summary="Initial commit&#10;">
-      <created>1389983954755</created>
-      <updated>1389983954755</updated>
+    <task id="LOCAL-00004" summary="ГеомБаг">
+      <created>1390232839559</created>
+      <updated>1390232839559</updated>
     </task>
-    <task id="LOCAL-00005" summary="Main class changed to launch the program.">
-      <created>1390011202017</created>
-      <updated>1390011202017</updated>
+    <task id="LOCAL-00005" summary="Зум, перемещение с помощью мыши. Белый крест на начале координат.">
+      <created>1390242881299</created>
+      <updated>1390242881299</updated>
     </task>
-    <task id="LOCAL-00006" summary="1. Added FPS&#10;2. Added deltaTime usage.">
-      <created>1390109941261</created>
-      <updated>1390109941261</updated>
+    <task id="LOCAL-00006" summary="Рисовка траекторий движения объектов.">
+      <created>1390312807470</created>
+      <updated>1390312807470</updated>
     </task>
-    <task id="LOCAL-00007" summary="FPS counting is now working">
-      <created>1390226776128</created>
-      <updated>1390226776128</updated>
+    <task id="LOCAL-00007" summary="Segment desu.">
+      <created>1390493086899</created>
+      <updated>1390493086899</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Small graphic changes.">
+      <created>1390495300155</created>
+      <updated>1390495300155</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Сегментофикс.">
+      <created>1390503481800</created>
+      <updated>1390503481800</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1054" extended-state="6" />
+    <frame x="0" y="28" width="1366" height="740" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32942432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32732734" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32882884" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24920128" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3272921" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23313783" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26276276" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24921875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USERS">
@@ -723,11 +676,13 @@
     </option>
     <MESSAGE value="LWJGL native libs added" />
     <MESSAGE value="Initial commit&#10;" />
-    <MESSAGE value="Main class changed to launch the program." />
-    <MESSAGE value="1. Added FPS&#10;2. Added deltaTime usage." />
-    <MESSAGE value="FPS counting is now working" />
-    <MESSAGE value="Теперь в физике появились новая фича: время.&#10;Это позволяет:&#10;1. Применять второй закон Ньютона в импульсной форме.&#10;2. Считать перемещения по фомуле dS = V * dT&#10;3. Аналогично считать изменения скоростей." />
-    <option name="LAST_COMMIT_MESSAGE" value="Теперь в физике появились новая фича: время.&#10;Это позволяет:&#10;1. Применять второй закон Ньютона в импульсной форме.&#10;2. Считать перемещения по фомуле dS = V * dT&#10;3. Аналогично считать изменения скоростей." />
+    <MESSAGE value="ГеомБаг" />
+    <MESSAGE value="Зум, перемещение с помощью мыши. Белый крест на начале координат." />
+    <MESSAGE value="Рисовка траекторий движения объектов." />
+    <MESSAGE value="Segment desu." />
+    <MESSAGE value="Small graphic changes." />
+    <MESSAGE value="Сегментофикс." />
+    <option name="LAST_COMMIT_MESSAGE" value="Сегментофикс." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -737,296 +692,356 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/com/company/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="21" selection-start="323" selection-end="323" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="495">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="24" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1215">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AcidSpaceFighting.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/с.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="14" selection-start="77" selection-end="77" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="195">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="35" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="270">
+        <state line="2" column="13" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="225">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Window.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="133" selection-start="636" selection-end="636" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="1098">
+        <state line="13" column="27" selection-start="506" selection-end="506" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="570">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/BasicWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="3" selection-start="241" selection-end="241" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="3618">
+        <state line="62" column="32" selection-start="1906" selection-end="1906" vertical-scroll-proportion="0.0" vertical-offset="1621" max-vertical-offset="2295">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/World.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="954">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="122" selection-end="122" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="1440">
+        <state line="32" column="72" selection-start="783" selection-end="783" vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="810">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="20" selection-start="403" selection-end="403" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="1692">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/ComplexPhysicModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="13" selection-start="192" selection-end="192" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="882">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="35" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="270">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="133" selection-start="636" selection-end="636" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="1188">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/World.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="954">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="122" selection-end="122" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="1440">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="1620">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/ComplexPhysicModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="13" selection-start="192" selection-end="192" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="882">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="35" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="270">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="133" selection-start="636" selection-end="636" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="1188">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/World.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="954">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="122" selection-end="122" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="1440">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="1584">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/ComplexPhysicModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="13" selection-start="192" selection-end="192" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="882">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="35" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="133" selection-start="636" selection-end="636" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="1188">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/World.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="954">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="130" selection-start="145" selection-end="145" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="270">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="24" selection-start="137" selection-end="137" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="270">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="252">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="252">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="252">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-7-openjdk/jre/lib/rt.jar!/java/util/TimerTask.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="19" selection-start="540" selection-end="540" vertical-scroll-proportion="0.5767285" vertical-offset="0" max-vertical-offset="593" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="19" selection-start="136" selection-end="136" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/BasicWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0" vertical-offset="702" max-vertical-offset="2754">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="13" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/ComplexGraphicModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="72" selection-end="72" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="28" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1620">
+        <state line="44" column="52" selection-start="1251" selection-end="1251" vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="1425">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/Point.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="37" selection-start="230" selection-end="230" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1944">
-          <folding>
-            <element signature="e#2542#2543#0" expanded="true" />
-            <element signature="e#2566#2567#0" expanded="true" />
-            <element signature="e#2593#2594#0" expanded="true" />
-            <element signature="e#2617#2618#0" expanded="true" />
-          </folding>
+        <state line="42" column="36" selection-start="1336" selection-end="1336" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="1680">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="34" selection-start="388" selection-end="388" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
+        <state line="5" column="13" selection-start="116" selection-end="116" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="495">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/World.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="65" selection-start="606" selection-end="606" vertical-scroll-proportion="0.0" vertical-offset="113" max-vertical-offset="864">
+        <state line="54" column="67" selection-start="2228" selection-end="2228" vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1230">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AcidSpaceFighting.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/с.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="14" selection-start="77" selection-end="77" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="195">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="225">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Window.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="35" selection-start="738" selection-end="738" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="702">
+        <state line="14" column="27" selection-start="525" selection-end="525" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="585">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/ComplexPhysicModel.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/BasicWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="16" selection-start="773" selection-end="773" vertical-scroll-proportion="-9.24" vertical-offset="291" max-vertical-offset="846">
+        <state line="13" column="30" selection-start="268" selection-end="268" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="2175">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AcidSpaceFighting.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="13" selection-start="975" selection-end="975" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="1230">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ComplexModel.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/с.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="11" selection-start="500" selection-end="500" vertical-scroll-proportion="-14.28" vertical-offset="39" max-vertical-offset="594">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="5" column="14" selection-start="77" selection-end="77" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="195">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="225">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Window.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="27" selection-start="525" selection-end="525" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="20" selection-start="322" selection-end="322" vertical-scroll-proportion="0.33275864" vertical-offset="5" max-vertical-offset="1458">
+        <state line="5" column="13" selection-start="122" selection-end="122" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="1215">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/с.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="14" selection-start="77" selection-end="77" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="195">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Window.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="13" selection-start="485" selection-end="485" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="570">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/с.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="14" selection-start="77" selection-end="77" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="195">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="252">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Window.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="13" selection-start="262" selection-end="262" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1404">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/с.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="14" selection-start="77" selection-end="77" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="234">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AcidSpaceFighting.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="897" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ComplexModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="130" selection-end="130" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/BasicWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="10" selection-start="1867" selection-end="1867" vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="2235">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="36" selection-start="1793" selection-end="1793" vertical-scroll-proportion="0.0" vertical-offset="642" max-vertical-offset="1185" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Background.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="27" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="22" selection-start="684" selection-end="684" vertical-scroll-proportion="0.6183206" vertical-offset="222" max-vertical-offset="675" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Window.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="24" selection-start="972" selection-end="972" vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="735">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/ComplexGraphicModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="24" selection-start="455" selection-end="455" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/Point.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="36" selection-start="2005" selection-end="2005" vertical-scroll-proportion="0.0" vertical-offset="1110" max-vertical-offset="2460">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/Segment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="34" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/с.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="14" selection-start="77" selection-end="77" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="234">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGraphicModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="26" selection-start="80" selection-end="80" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="150">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="29" selection-start="331" selection-end="331" vertical-scroll-proportion="0.0" vertical-offset="38" max-vertical-offset="480">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="44" selection-start="456" selection-end="499" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1110">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGeometricModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="82" selection-start="537" selection-end="537" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="103" column="51" selection-start="3188" selection-end="3188" vertical-scroll-proportion="0.0" vertical-offset="1203" max-vertical-offset="1920">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/World.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="48" selection-start="1482" selection-end="1482" vertical-scroll-proportion="0.5588235" vertical-offset="398" max-vertical-offset="840">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGraphicModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="49" selection-start="794" selection-end="794" vertical-scroll-proportion="0.0" vertical-offset="248" max-vertical-offset="1005">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/ComplexPhysicModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="21" selection-start="869" selection-end="869" vertical-scroll-proportion="0.0" vertical-offset="58" max-vertical-offset="675">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="118" column="32" selection-start="4406" selection-end="4406" vertical-scroll-proportion="0.45701358" vertical-offset="1568" max-vertical-offset="2055">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1059,6 +1074,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
+          <last-edited>lib</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1087,6 +1103,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -1094,7 +1111,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>lwjgl</last-edited>
+          <last-edited>lwjgl_util</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -6,7 +6,7 @@ import com.company.Geometry.Segment;
 
 public class PhysicModel {
 
-    private static final double G=10f;//G is the gravitational constant
+    private static final double G=1000f;//G is the gravitational constant
 
     protected GeometricModel body;
     protected float mass;
@@ -46,7 +46,7 @@ public class PhysicModel {
             m.useForce(m.body.getCentre(), new Point(x, y), deltaTime);
         }
 
-
+        GeometricModel g=new GeometricModel(body);
         Segment intersection=body.getIntersection(m.body);
         if (intersection!=null) {
 
@@ -122,10 +122,10 @@ public class PhysicModel {
         crossWithGeometricModel(m, body, deltaTime);
     }
 
-    public PhysicModel(GeometricModel body, float mass, Point speedVector) {
+    public PhysicModel(GeometricModel body, float mass) {
         this.body=body;
         this.mass=mass;
-        this.speedVector=speedVector;
+        this.speedVector=new Point(0, 0);
     }
 
 }
