@@ -10,9 +10,9 @@ public class Point {
         return new Point(v1.x + v2.x, v1.y + v2.y);
     }
 
-    public static Point negate(Point vector)
+    public Point negate()
     {
-        return new Point(-vector.x,-vector.y);
+        return new Point(-x,-y);
     }
 
     public static Point getNormal(Point p1, Point p2) {

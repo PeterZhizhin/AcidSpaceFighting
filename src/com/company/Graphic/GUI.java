@@ -1,5 +1,7 @@
 package com.company.Graphic;
 
+import com.company.Graphic.Controls.Color;
+import com.company.Graphic.Controls.FontDrawer;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
@@ -10,6 +12,10 @@ public class GUI {
     private static boolean lastStateButtonIsPressed=false;
     private static int mouseDownX=0;
     private static int mouseDownY=0;
+
+    public static void init() {
+        FontDrawer.init();
+    }
 
     public static void update() {
 
@@ -30,6 +36,11 @@ public class GUI {
     }
 
     public static void draw() {
+
+        glEnable(GL_TEXTURE_2D);
+        FontDrawer.drawString(10, 10, "TEST OpenGL draw chars", new Color(1f, 1f, 1f), true);
+        glDisable(GL_TEXTURE_2D);
+
         glColor3f(1, 1, 1);
         glBegin(GL_LINES);
         Camera.translatePoint(-100, 0);

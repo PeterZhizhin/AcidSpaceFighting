@@ -103,10 +103,10 @@ public class PhysicModel {
 
             //Конечные скорости получены.
 
-            Point force = Point.add(v1, Point.negate(speedVector)).multiply(mass/deltaTime);
+            Point force = Point.add(v1, speedVector.negate()).multiply(mass/deltaTime);
 
             useForce(intersection.getStart(),force,deltaTime);
-            m.useForce(intersection.getStart(),Point.negate(force),deltaTime);
+            m.useForce(intersection.getStart(),force.negate(),deltaTime);
             //speedVector = v1; m.speedVector = v2;
 
             GeometricModel g11=new GeometricModel(body);
@@ -122,9 +122,9 @@ public class PhysicModel {
                 //System.out.println("FUCK! dV: " + Point.add(v1,Point.negate(speedVector)));
                 //Очень похоже, что нормаль направлена не в ту сторону.
                 //И силы приложились не в том направлении. Значит нужно приложить силы в противоположном направлении.
-                force = Point.negate(force).multiply(2);
+                force = force.negate().multiply(2);
                 useForce(intersection.getStart(), force, deltaTime);
-                m.useForce(intersection.getStart(), Point.negate(force), deltaTime);
+                m.useForce(intersection.getStart(), force.negate(), deltaTime);
             }
             else
             {

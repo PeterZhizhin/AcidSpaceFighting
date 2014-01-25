@@ -19,6 +19,7 @@ public class Window extends BasicWindow {
          super(1000, 700, 10000, "Sample");
          World.init();
          Camera.init();
+         GUI.init();
          startWorking();
      }
 
