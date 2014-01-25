@@ -20,7 +20,7 @@ public class ComplexPhysicModel extends PhysicModel{
 
     public void crossThem(ComplexPhysicModel m, int deltaTime) {
         for (PhysicModel body: bodies)
-            crossWithGeometricModel(m, body.body, deltaTime);
+            crossWithGeometricModel(m, deltaTime);
     }
 
     public void add(PhysicModel g) {
