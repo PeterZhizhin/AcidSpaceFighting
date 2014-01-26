@@ -112,7 +112,7 @@ public class TrueTypeFont {
         BufferedImage tempfontImage = new BufferedImage(1, 1,
                 BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = (Graphics2D) tempfontImage.getGraphics();
-        if (antiAlias == true) {
+        if (antiAlias) {
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
         }
@@ -133,7 +133,7 @@ public class TrueTypeFont {
         fontImage = new BufferedImage(charwidth, charheight,
                 BufferedImage.TYPE_INT_ARGB);
         Graphics2D gt = (Graphics2D) fontImage.getGraphics();
-        if (antiAlias == true) {
+        if (antiAlias) {
             gt.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
         }
@@ -210,7 +210,7 @@ public class TrueTypeFont {
                 if( i < 256 ) { // standard characters
                     charArray[i] = newIntObject;
                 } else { // custom characters
-                    customChars.put( new Character( ch ), newIntObject );
+                    customChars.put(ch, newIntObject );
                 }
 
                 fontImage = null;
@@ -258,7 +258,7 @@ public class TrueTypeFont {
             if (currentChar < 256) {
                 intObject = charArray[currentChar];
             } else {
-                intObject = (IntObject)customChars.get( new Character( (char) currentChar ) );
+                intObject = (IntObject)customChars.get((char) currentChar);
             }
 
             if( intObject != null )
@@ -296,7 +296,7 @@ public class TrueTypeFont {
                            int format
     ) {
 
-        IntObject intObject = null;
+        IntObject intObject;
         int charCurrent;
 
 
@@ -324,7 +324,7 @@ public class TrueTypeFont {
                     if (charCurrent < 256) {
                         intObject = charArray[charCurrent];
                     } else {
-                        intObject = (IntObject)customChars.get( new Character( (char) charCurrent ) );
+                        intObject = (IntObject)customChars.get((char) charCurrent);
                     }
                     totalwidth += intObject.width-correctL;
                 }
@@ -348,7 +348,7 @@ public class TrueTypeFont {
             if (charCurrent < 256) {
                 intObject = charArray[charCurrent];
             } else {
-                intObject = (IntObject)customChars.get( new Character( (char) charCurrent ) );
+                intObject = (IntObject)customChars.get((char) charCurrent);
             }
 
             if( intObject != null ) {
@@ -363,7 +363,7 @@ public class TrueTypeFont {
                             if (charCurrent < 256) {
                                 intObject = charArray[charCurrent];
                             } else {
-                                intObject = (IntObject)customChars.get( new Character( (char) charCurrent ) );
+                                intObject = (IntObject)customChars.get((char) charCurrent);
                             }
                             totalwidth += intObject.width-correctL;
                         }
@@ -421,7 +421,7 @@ public class TrueTypeFont {
 
             int internalFormat = GL11.GL_RGBA8,
                     format = GL11.GL_RGBA;
-            IntBuffer   textureId =  BufferUtils.createIntBuffer(1);;
+            IntBuffer   textureId =  BufferUtils.createIntBuffer(1);
             GL11.glGenTextures(textureId);
             GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId.get(0));
 

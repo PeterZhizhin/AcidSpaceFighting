@@ -10,8 +10,6 @@ public class Color {
         glColor4f(r, g, b, a);
     }
 
-    public static final Color transparent=new Color(1f, 1f, 1f, 0f);
-
     public Color(float r, float g, float b) {
         this.r=r;
         this.g=g;

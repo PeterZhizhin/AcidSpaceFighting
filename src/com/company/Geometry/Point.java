@@ -15,6 +15,12 @@ public class Point {
         return new Point(-x,-y);
     }
 
+    public void normalise() {
+        float length= (float) Math.sqrt(x*x+y*y);
+        x/=length;
+        y/=length;
+    }
+
     public static Point getNormal(Point p1, Point p2) {
         float a1 = p2.getY() - p1.getY();
         float b1 = p1.getX() - p2.getX();

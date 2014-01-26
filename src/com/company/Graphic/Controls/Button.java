@@ -1,5 +1,6 @@
 package com.company.Graphic.Controls;
 
+import static org.lwjgl.opengl.GL11.glColor3f;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 
 public class Button extends Control {
@@ -15,7 +16,7 @@ public class Button extends Control {
 
     public void drawBackground() {
         int isSelectedInverted= gradations - isSelected-1;
-        colorsAlphed[isSelectedInverted].bind();
+        colors[isSelectedInverted].bind();
         glVertex2f(x, y);
         glVertex2f(x, y2);
         glVertex2f(x2, y2);

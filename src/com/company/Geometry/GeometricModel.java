@@ -33,6 +33,10 @@ public class GeometricModel {
         }
     }
 
+    public float getMaxLength() {
+        return maxLength;
+    }
+
     private boolean contains(Point p) {
         double angle = 0;
         for (int i = 0; i < vertexes.length; i++) {
