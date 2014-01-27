@@ -16,6 +16,7 @@ public class PhysicModel {
     //Угловая скорость
     protected float w;
 
+
     protected float damage; //if 1 - physicModel is noraml, if  0 - it is destroyed. Will used in model realisations.
 
     public float getSpeedX() {
@@ -29,7 +30,6 @@ public class PhysicModel {
     public void updateMotion(float deltaTime) {
         body.move(speedVector.multiply(deltaTime));
         body.rotate(w * deltaTime);
-        w*=(1.0f-deltaTime);
     }
 
     private void useForce(Point posOfForce, Point force, float deltaTime) {
@@ -124,10 +124,16 @@ public class PhysicModel {
             v1 = new Point(v11x*cos-v10y*sin, v11x*sin + v10y*cos);
             //Конечные скорости получены.
 
-            Point force = Point.add(v1, speedVector.negate()).multiply(mass/deltaTime);
+            Point force = Point.add(v1, speedVector.negate()).multiply(mass*0.95f/deltaTime);
+            Point rotationForces = new Point(force).multiply(0.05f);
+            rotationForces = new Point(rotationForces.getY(), rotationForces.getX());
 
-            useForce(intersection.getStart(),force,deltaTime);
-            m.useForce(intersection.getStart(),force.negate(),deltaTime);
+            useForce(body.getCentre(), force, deltaTime);
+            m.useForce(m.body.getCentre(), force.negate(), deltaTime);
+
+            useForce(intersection.getStart(), rotationForces, deltaTime);
+            m.useForce(intersection.getStart(), rotationForces.negate(), deltaTime);
+
             //speedVector = v1; m.speedVector = v2;
 
             GeometricModel g11=new GeometricModel(body);
@@ -144,8 +150,8 @@ public class PhysicModel {
                 //Очень похоже, что нормаль направлена не в ту сторону.
                 //И силы приложились не в том направлении. Значит нужно приложить силы в противоположном направлении.
                 force = force.negate().multiply(2);
-                useForce(intersection.getStart(), force, deltaTime);
-                m.useForce(intersection.getStart(), force.negate(), deltaTime);
+                useForce(body.getCentre(), force, deltaTime);
+                m.useForce(m.body.getCentre(), force.negate(), deltaTime);
             }
             else
             {

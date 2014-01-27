@@ -40,6 +40,7 @@ public class World {
         while (wasIntersection & n<=5)
         {
             n++;
+            wasIntersection = false;
         for (int i=0; i<models.size()-1; i++)
             for (int j=i+1; j<models.size(); j++) {
                 if (wasIntersection)
