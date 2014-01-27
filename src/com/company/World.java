@@ -36,9 +36,21 @@ public class World {
     }
 
     public static void update(float deltaTime) {
+        boolean wasIntersection = true; byte n = 0;
+        while (wasIntersection & n<=5)
+        {
+            n++;
         for (int i=0; i<models.size()-1; i++)
             for (int j=i+1; j<models.size(); j++) {
-                models.get(i).crossThem(models.get(j), deltaTime);
+                if (wasIntersection)
+                    models.get(i).crossThem(models.get(j), deltaTime);
+                else
+                    wasIntersection = models.get(i).crossThem(models.get(j), deltaTime);
+            }
+        }
+        for (int i=0; i<models.size()-1; i++)
+            for (int j=i+1; j<models.size(); j++) {
+                    models.get(i).updateStaticForces(models.get(j), deltaTime);
             }
         for (Model model : models) {
             model.updateMotion(deltaTime);

@@ -10,7 +10,10 @@ public class Point {
         float a1 = точкаПрямой2.getY() - точкаПрямой1.getY();
         float b1 = точкаПрямой1.getX() - точкаПрямой2.getX();
         float c1 = точкаПрямой1.getY() * b1 + точкаПрямой1.getX() * a1;
-        return Math.abs(a1*точка.getX()+b1*точка.getY()+c1)/Math.sqrt(a1*a1+b1*b1);
+        double result = Math.abs(a1*точка.getX()+b1*точка.getY()+c1)/Math.sqrt(a1*a1+b1*b1);
+        if (result<=Point.epsilon)
+            return 0;
+        else return result;
     }
 
     /**
@@ -26,12 +29,7 @@ public class Point {
         float b1 = p1.getX() - p2.getX();
         float c1 = p1.getY() * b1 + p1.getX() * a1;
 
-        float result = a1*point.getX() + b1*point.getY() + c1;
-
-        if (result > 0)
-            return true;
-        else
-            return false;
+        return (a1*point.getX() + b1*point.getY() + c1)>0;
     }
 
     //p1p2p3-angle
@@ -101,6 +99,11 @@ public class Point {
     public static float getLength(Point p1, Point p2)
     {
         return (float)Math.sqrt(getLengthSquared(p1,p2));
+    }
+
+    public float getLength()
+    {
+        return getLength(this, new Point(0,0));
     }
 
     //check lines p1p2 and line p3p4

@@ -8,7 +8,6 @@ public class PhysicModel {
 
     private static final double G=100f;//G is the gravitational constant
 
-    private boolean wasIntersection = false;
 
     protected GeometricModel body;
     protected float mass;
@@ -29,30 +28,38 @@ public class PhysicModel {
 
     public void updateMotion(float deltaTime) {
         body.move(speedVector.multiply(deltaTime));
-        body.rotate(w*deltaTime);
+        body.rotate(w * deltaTime);
+        w*=(1.0f-deltaTime);
     }
 
     private void useForce(Point posOfForce, Point force, float deltaTime) {
         speedVector.move(force.multiply(deltaTime/mass));
 
-        double deltaW = force.getDistanceToPoint(new Point(0,0))*deltaTime/mass*Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
+        if (body.getCentre().getDistanceToPoint(posOfForce)>=Point.epsilon)
+        {
+        double deltaW = force.getLength()*deltaTime/mass*Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
                 (body.getCentre(), posOfForce, Point.add(posOfForce, force));
         //Получаем знак
         //Если конец вектора лежит в правой полуплоскости относительно прямой, проходящей через центр масс и точку приложения силы
         //То вращается вправо (знак минус), иначе влево
-        if (Point.getDirection(Point.add(posOfForce, force), body.getCentre(), posOfForce))
-                deltaW = -deltaW;
+        if (Point.getDirection(Point.add(posOfForce, force), body.getCentre(), posOfForce)) {
+            deltaW = -deltaW;
+        }
+       // System.out.println("DeltaW: " + deltaW);
         w+=deltaW;
+        }
     }
 
-    private void applyIntersection(PhysicModel m, float deltaTime)
+    private boolean applyIntersection(PhysicModel m, float deltaTime)
     {
-        wasIntersection = false;
+        boolean wasIntersection = false;
         GeometricModel g1=new GeometricModel(body);
         GeometricModel g2=new GeometricModel(m.body);
 
         g1.move(speedVector.multiply(deltaTime));
+        g1.rotate(w*deltaTime);
         g2.move(m.speedVector.multiply(deltaTime));
+        g2.rotate(m.w*deltaTime);
 
         Segment intersection=g1.getIntersection(g2);
         Segment tempIntersection = null;
@@ -65,6 +72,7 @@ public class PhysicModel {
         }
 
         if (intersection!=null && tempIntersection == null) {
+            wasIntersection = true;
 
             //Физика столкновений на основе законов сохранения импульсов и энергии
 
@@ -97,15 +105,15 @@ public class PhysicModel {
 
             double v10x,v10y;
             v10x = v1.getX()*cos-v1.getY()*sin; v10y = v1.getX()*sin + v1.getY()*cos;
-            double v20x,v20y;
-            v20x = v2.getX()*cos-v2.getY()*sin; v20y = v2.getX()*sin + v2.getY()*cos;
+            double v20x;
+            v20x = v2.getX()*cos-v2.getY()*sin;
 
             //Проекция на ось Oy не меняется, а Ox вычисляется по формуле выше
             float m1 = mass;
             float m2 = m.mass;
 
             double v11x = ((m1-m2)*v10x + 2*m2*v20x)/(m1+m2);
-            double v21x = (2*m1*v10x + (m2-m1)*v20x)/(m1+m2);
+            //double v21x = (2*m1*v10x + (m2-m1)*v20x)/(m1+m2);
 
             //Возвращаемся назад
 
@@ -114,8 +122,6 @@ public class PhysicModel {
             sin = -sin;
 
             v1 = new Point(v11x*cos-v10y*sin, v11x*sin + v10y*cos);
-            v2 = new Point(v21x*cos-v20y*sin, v21x*sin + v20y*cos);
-
             //Конечные скорости получены.
 
             Point force = Point.add(v1, speedVector.negate()).multiply(mass/deltaTime);
@@ -146,13 +152,18 @@ public class PhysicModel {
                // System.out.println("dV: " + Point.add(v1,Point.negate(speedVector)));
             }
         }
+        return wasIntersection;
     }
 
-    protected void crossWithGeometricModel(PhysicModel m, float deltaTime) {
+    protected boolean crossWithGeometricModel(PhysicModel m, float deltaTime) {
 
         //Проверяем, пересекаются ли тела
-        applyIntersection(m, deltaTime);
+        return applyIntersection(m, deltaTime);
 
+    }
+
+    public void applyStaticForces(PhysicModel m, float deltaTime)
+    {
         //gravitation
         double lengthBetweenCenters= body.getCentre().getDistanceToPoint(m.body.getCentre());
         double gravity=G*mass*m.mass/lengthBetweenCenters/lengthBetweenCenters;
@@ -168,8 +179,8 @@ public class PhysicModel {
         m.useForce(m.body.getCentre(), new Point(x, y), deltaTime);
     }
 
-    public void crossThem(PhysicModel m, float deltaTime) {
-        crossWithGeometricModel(m, deltaTime);
+    public boolean crossThem(PhysicModel m, float deltaTime) {
+        return crossWithGeometricModel(m, deltaTime);
     }
 
     public PhysicModel(GeometricModel body, float mass) {
