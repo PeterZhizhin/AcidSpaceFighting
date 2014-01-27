@@ -6,11 +6,8 @@ import com.company.Graphic.Camera;
 import com.company.Graphic.GraphicModel;
 import com.company.Models.Asteroid.AsteroidGeometricModel;
 import com.company.Models.Asteroid.AsteroidGraphicModel;
-import com.company.Models.RocketBase.RocketBaseGeometricModel;
-import com.company.Models.RocketBase.RocketBaseGraphicModel;
 import com.company.Physic.PhysicModel;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,7 +26,6 @@ public class World {
     }
 
     public static void draw() {
-        Camera.setPosition(rocket.getCentre().getX(), rocket.getCentre().getY());
         for (Model model : models) {
             model.draw();
         }
@@ -45,16 +41,14 @@ public class World {
         }
     }
 
-    private static GeometricModel rocket;
-
     public static void init() {
         models=new ArrayList<Model>();
 
         Random rnd=new Random();
         for (int i=0; i<2; i++)
             for (int j=0; j<2; j++) {
-        float width=rnd.nextInt(600)+600;
-        float distance=4000f;
+        float width=rnd.nextInt(200)+200;
+        float distance=2000f;
 
 
         GeometricModel g=new AsteroidGeometricModel(i*distance, j*distance, width);
@@ -62,12 +56,6 @@ public class World {
         Model m=new Model(new AsteroidGraphicModel(g), p);
         models.add(m);
             }
-
-        GeometricModel g=new RocketBaseGeometricModel(500, 500, 250f);
-        rocket=g;
-        PhysicModel e=new PhysicModel(g, 15f);
-        Model m=new Model(new RocketBaseGraphicModel(g), e);
-        models.add(m);
     }
 
 }
