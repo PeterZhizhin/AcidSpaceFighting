@@ -1,20 +1,17 @@
 package com.company;
 
 import com.company.Geometry.GeometricModel;
-import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
-import com.company.Graphic.GraphicModel;
 import com.company.Models.Asteroid.AsteroidGeometricModel;
 import com.company.Models.Asteroid.AsteroidGraphicModel;
-import com.company.Models.RocketBase.RocketBaseGeometricModel;
-import com.company.Models.RocketBase.RocketBaseGraphicModel;
+import com.company.Models.RocketEngine.RocketEngineGeometricModel;
+import com.company.Models.RocketEngine.RocketEngineGraphicModel;
+import com.company.Models.RocketEngine.RocketEnginePhysicModel;
 import com.company.Physic.PhysicModel;
+import org.lwjgl.input.Keyboard;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
-
-import static org.lwjgl.opengl.GL11.*;
 
 public class World {
 
@@ -36,6 +33,19 @@ public class World {
     }
 
     public static void update(float deltaTime) {
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+            rocketPhys.doSpecialActionA(deltaTime);
+        }
+        else
+        if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+            rocketPhys.doSpecialActionB(deltaTime);
+        }
+        else
+        if (Keyboard.isKeyDown(Keyboard.KEY_X)) {
+            rocketPhys.doSpecialActionC(deltaTime);
+        }
+
         boolean wasIntersection = true; byte n = 0;
         while (wasIntersection & n<=5)
         {
@@ -59,6 +69,7 @@ public class World {
     }
 
     private static GeometricModel rocket;
+    private static PhysicModel rocketPhys;
 
     public static void init() {
         models=new ArrayList<Model>();
@@ -76,10 +87,11 @@ public class World {
                 models.add(m);
             }
 
-        GeometricModel g=new RocketBaseGeometricModel(500, 500, 250f);
+        GeometricModel g=new RocketEngineGeometricModel(-500, -500, 250f);
         rocket=g;
-        PhysicModel e=new PhysicModel(g, 15f);
-        Model m=new Model(new RocketBaseGraphicModel(g), e);
+        PhysicModel e=new RocketEnginePhysicModel(g, 15f);
+        rocketPhys=e;
+        Model m=new Model(new RocketEngineGraphicModel(g), e);
         models.add(m);
     }
 

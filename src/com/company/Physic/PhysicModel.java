@@ -27,12 +27,21 @@ public class PhysicModel {
         return speedVector.getY();
     }
 
+    public void doSpecialActionA(float deltaTime) {
+    }
+
+    public void doSpecialActionB(float deltaTime) {
+    }
+
+    public void doSpecialActionC(float deltaTime) {
+    }
+
     public void updateMotion(float deltaTime) {
         body.move(speedVector.multiply(deltaTime));
         body.rotate(w * deltaTime);
     }
 
-    private void useForce(Point posOfForce, Point force, float deltaTime) {
+    protected void useForce(Point posOfForce, Point force, float deltaTime) {
         speedVector.move(force.multiply(deltaTime/mass));
 
         if (body.getCentre().getDistanceToPoint(posOfForce)>=Point.epsilon)

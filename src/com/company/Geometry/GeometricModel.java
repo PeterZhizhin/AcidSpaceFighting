@@ -1,7 +1,5 @@
 package com.company.Geometry;
 
-import static com.company.Geometry.Point.getAngle;
-
 public class GeometricModel {
     private static final float PI2 = (float) (2 * Math.PI);
 
@@ -13,16 +11,21 @@ public class GeometricModel {
     //Максимальное расстояние между центрами масс (оптимизация пересечения)
     private float maxLength;
 
+    public float getAngle() {
+        return angle;
+    }
+
     //Rotate model
     public void rotate(float angle) {
         this.angle += angle;
+
         for (Point vertex : vertexes) {
             vertex.move(-centre.getX(), -centre.getY());
             vertex.rotate(angle);
             vertex.move(centre);
         }
-        if (this.angle >= PI2) this.angle -= PI2;
-        else if (this.angle <= 0) this.angle += PI2;
+        while (this.angle >= PI2) this.angle -= PI2;
+        while (this.angle <= 0) this.angle += PI2;
     }
 
     //Move todel on p.x, p.y
@@ -40,7 +43,7 @@ public class GeometricModel {
     private boolean contains(Point p) {
         double angle = 0;
         for (int i = 0; i < vertexes.length; i++) {
-            angle += getAngle(getPoint(i), p, getPoint(i+1));
+            angle += Point.getAngle(getPoint(i), p, getPoint(i + 1));
         }
         return Math.abs(angle - Math.PI * 2) <= Point.epsilon;
     }
@@ -111,6 +114,7 @@ public class GeometricModel {
     }
 
     public GeometricModel(Point[] p) {
+
         vertexes = p;
 
         centre = new Point(0, 0);
