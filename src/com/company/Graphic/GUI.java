@@ -1,7 +1,13 @@
 package com.company.Graphic;
 
+import com.company.Graphic.Controls.Button;
+import com.company.Graphic.Controls.Control;
+import com.company.Graphic.Controls.FontDrawer;
+import com.company.Graphic.Controls.Label;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
+
+import java.util.ArrayList;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -10,8 +16,24 @@ public class GUI {
     private static boolean lastStateButtonIsPressed=false;
     private static int mouseDownX=0;
     private static int mouseDownY=0;
+    private static ArrayList<Control> controls;
+
+    public static void init() {
+        FontDrawer.init();
+        controls=new ArrayList<Control>();
+        controls.add(new Label(20, 20, "It is text label which is control, read it.", true));
+        controls.add(new Label(20, 50, "It is small text label which is control, read it.", false));
+    }
 
     public static void update() {
+
+        int x = Mouse.getX();
+        int y=Display.getHeight()-Mouse.getY();
+        boolean buttonIsPressed=Mouse.isButtonDown(0);
+
+        for (Control control : controls) {
+            control.update(x, y, buttonIsPressed);
+        }
 
         boolean isPressed= Mouse.isButtonDown(0);
         if (isPressed) {
@@ -30,46 +52,19 @@ public class GUI {
     }
 
     public static void draw() {
-        glColor3f(1, 1, 1);
-        glBegin(GL_LINES);
-        Camera.translatePoint(-100, 0);
-        Camera.translatePoint(100, 0);
-        Camera.translatePoint(0, -100);
-        Camera.translatePoint(0, 100);
+
+        glBegin(GL_QUADS);
+        for (Control control : controls) {
+            control.drawBackground();
+        }
         glEnd();
 
+        glEnable(GL_TEXTURE_2D);
+        for (Control control : controls) {
+            control.drawTitle();
+        }
+        glDisable(GL_TEXTURE_2D);
 
-        float centerX=Display.getWidth()/2f;
-        float centerY=Display.getHeight()/2f;
-
-        glBegin(GL_TRIANGLES);
-
-
-        glColor4f(0f, 0f, 0f, 0.6f);
-        glVertex2f(0, 0);
-        glVertex2f(Display.getWidth(), 0);
-        glColor4f(0f, 0f, 0f, 0f);
-        glVertex2f(centerX, centerY);
-
-
-        glColor4f(0f, 0f, 0f, 0.6f);
-        glVertex2f(0, Display.getHeight());
-        glVertex2f(Display.getWidth(), Display.getHeight());
-        glColor4f(0f, 0f, 0f, 0f);
-        glVertex2f(centerX, centerY);
-
-        glColor4f(0f, 0f, 0f, 0.6f);
-        glVertex2f(0, 0);
-        glVertex2f(0, Display.getHeight());
-        glColor4f(0f, 0f, 0f, 0f);
-        glVertex2f(centerX, centerY);
-
-        glColor4f(0f, 0f, 0f, 0.6f);
-        glVertex2f(Display.getWidth(), 0);
-        glVertex2f(Display.getWidth(), Display.getHeight());
-        glColor4f(0f, 0f, 0f, 0f);
-        glVertex2f(centerX, centerY);
-        glEnd();
     }
 
 
