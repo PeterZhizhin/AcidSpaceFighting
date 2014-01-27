@@ -78,6 +78,12 @@ public class RocketEngineGraphicModel extends GraphicModel{
             Camera.translatePoint(shape.getPoint(i).getX(), shape.getPoint(i).getY());
         glEnd();
 
+        glBegin(GL_LINES);
+            Camera.translatePoint(shape.getCentre().getX(), shape.getCentre().getY());
+        Camera.translatePoint((float)(shape.getCentre().getX()+50*Math.cos(shape.getAngle())),
+                (float)(shape.getCentre().getY()+50*Math.sin(shape.getAngle())));
+        glEnd();
+
     }
 
     public RocketEngineGraphicModel(GeometricModel body) {

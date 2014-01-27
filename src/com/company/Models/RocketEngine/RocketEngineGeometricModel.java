@@ -11,11 +11,13 @@ public class RocketEngineGeometricModel extends GeometricModel {
 
     private static Point[] getVertexes(float x, float y, float w) {
         Point[] p=new Point[5];
-        p[0]=new Point(x, y+w/2);
+
+        p[0]=new Point(x, y);
         p[1]=new Point(x+w/2, y);
         p[2]=new Point(x+w, y+w/2);
-        p[3]=new Point(x+w, y+w);
+        p[3]=new Point(x+w/2, y+w);
         p[4]=new Point(x, y+w);
+
         return p;
     }
 
