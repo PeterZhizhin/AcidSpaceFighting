@@ -13,6 +13,27 @@ public class Point {
         return Math.abs(a1*точка.getX()+b1*точка.getY()+c1)/Math.sqrt(a1*a1+b1*b1);
     }
 
+    /**
+     * Получаем полуплоскость, в которой лежит точка относительно прямой
+     * @param point Исследуемая точка
+     * @param p1  Первая точка
+     * @param p2  Вторая точка
+     * @return
+     */
+    public static boolean getDirection(Point point, Point p1, Point p2)
+    {
+        float a1 = p2.getY() - p1.getY();
+        float b1 = p1.getX() - p2.getX();
+        float c1 = p1.getY() * b1 + p1.getX() * a1;
+
+        float result = a1*point.getX() + b1*point.getY() + c1;
+
+        if (result > 0)
+            return true;
+        else
+            return false;
+    }
+
     //p1p2p3-angle
     public static Point getBisection(Point p1, Point p2, Point p3) {
           return new Point((p3.x+p1.x)/2-p2.x, (p3.y+p1.y)/2-p2.y);

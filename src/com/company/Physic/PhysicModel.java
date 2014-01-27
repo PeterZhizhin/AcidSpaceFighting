@@ -6,13 +6,17 @@ import com.company.Geometry.Segment;
 
 public class PhysicModel {
 
-    private static final double G=10000f;//G is the gravitational constant
+    private static final double G=100f;//G is the gravitational constant
 
-    private boolean isIntersects2 = false;
+    private boolean wasIntersection = false;
 
     protected GeometricModel body;
     protected float mass;
     protected Point speedVector;
+
+    //Угловая скорость
+    protected float w;
+
     protected float damage; //if 1 - physicModel is noraml, if  0 - it is destroyed. Will used in model realisations.
 
     public float getSpeedX() {
@@ -25,14 +29,25 @@ public class PhysicModel {
 
     public void updateMotion(float deltaTime) {
         body.move(speedVector.multiply(deltaTime));
+        body.rotate(w*deltaTime);
     }
 
     private void useForce(Point posOfForce, Point force, float deltaTime) {
         speedVector.move(force.multiply(deltaTime/mass));
+
+        double deltaW = force.getDistanceToPoint(new Point(0,0))*deltaTime/mass*Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
+                (body.getCentre(), posOfForce, Point.add(posOfForce, force));
+        //Получаем знак
+        //Если конец вектора лежит в правой полуплоскости относительно прямой, проходящей через центр масс и точку приложения силы
+        //То вращается вправо (знак минус), иначе влево
+        if (Point.getDirection(Point.add(posOfForce, force), body.getCentre(), posOfForce))
+                deltaW = -deltaW;
+        w+=deltaW;
     }
 
     private void applyIntersection(PhysicModel m, float deltaTime)
     {
+        wasIntersection = false;
         GeometricModel g1=new GeometricModel(body);
         GeometricModel g2=new GeometricModel(m.body);
 
@@ -161,6 +176,7 @@ public class PhysicModel {
         this.body=body;
         this.mass=mass;
         this.speedVector=new Point(0, 0);
+        this.w = 0;
     }
 
 }
