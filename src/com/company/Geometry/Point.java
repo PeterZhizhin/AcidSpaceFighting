@@ -5,6 +5,14 @@ public class Point {
     private float x, y;
     public static final float epsilon = 0.0001f;
 
+    public static double получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
+            (Point точка, Point точкаПрямой1, Point точкаПрямой2) {
+        float a1 = точкаПрямой2.getY() - точкаПрямой1.getY();
+        float b1 = точкаПрямой1.getX() - точкаПрямой2.getX();
+        float c1 = точкаПрямой1.getY() * b1 + точкаПрямой1.getX() * a1;
+        return Math.abs(a1*точка.getX()+b1*точка.getY()+c1)/Math.sqrt(a1*a1+b1*b1);
+    }
+
     //p1p2p3-angle
     public static Point getBisection(Point p1, Point p2, Point p3) {
           return new Point((p3.x+p1.x)/2-p2.x, (p3.y+p1.y)/2-p2.y);
