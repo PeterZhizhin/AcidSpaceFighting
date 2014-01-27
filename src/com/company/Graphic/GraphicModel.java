@@ -66,7 +66,7 @@ public class GraphicModel {
 
 
         trajectory =new LinkedList<Point>();
-        for (int i=0; i<25; i++)
+        for (int i=0; i<50; i++)
             trajectory.add(new Point(shape.getCentre()));
     }
 

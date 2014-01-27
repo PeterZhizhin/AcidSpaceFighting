@@ -6,7 +6,7 @@ import com.company.Geometry.Segment;
 
 public class PhysicModel {
 
-    private static final double G=1000f;//G is the gravitational constant
+    private static final double G=10000f;//G is the gravitational constant
 
     private boolean isIntersects2 = false;
 

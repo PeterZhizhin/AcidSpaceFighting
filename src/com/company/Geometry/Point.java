@@ -5,6 +5,11 @@ public class Point {
     private float x, y;
     public static final float epsilon = 0.0001f;
 
+    //p1p2p3-angle
+    public static Point getBisection(Point p1, Point p2, Point p3) {
+          return new Point((p3.x+p1.x)/2-p2.x, (p3.y+p1.y)/2-p2.y);
+    }
+
     public static Point add(Point v1, Point v2)
     {
         return new Point(v1.x + v2.x, v1.y + v2.y);
@@ -44,15 +49,6 @@ public class Point {
     public static float getScalarMultiply(Point vector1, Point vector2)
     {
         return vector1.x * vector2.x + vector1.y * vector2.y;
-    }
-
-    /**
-     * @param vector Вектор (или точка)
-     * @return Длина вектора (или расстояние от центра координат)
-     */
-    public static float modulus(Point vector)
-    {
-        return (float)Math.sqrt(vector.x*vector.x + vector.y*vector.y);
     }
 
     /**
@@ -106,6 +102,7 @@ public class Point {
         dx*=dx; dy*=dy;
         return Math.sqrt(dx+dy);
     }
+
     public void rotate(float angle) {
         double newX=x*Math.cos(angle)-y*Math.sin(angle);
         double newY=x*Math.sin(angle)+y*Math.cos(angle);

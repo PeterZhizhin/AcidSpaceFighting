@@ -1,6 +1,7 @@
 package com.company.Graphic;
 
 import com.company.Geometry.Point;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
 public class Camera {
@@ -16,6 +17,13 @@ public class Camera {
     public static void move(int dX, int dY) {
          xPos+=dX*scale;
         yPos+=dY*scale;
+    }
+
+    public static void setPosition(float x, float y) {
+         float xWidth= Display.getWidth()*scale/2;
+         float xHeight= Display.getHeight()*scale/2;
+         xPos=x-xWidth;
+         yPos=y-xHeight;
     }
 
     public static void reScale(int reScale) {

@@ -11,12 +11,12 @@ import static org.lwjgl.opengl.GL11.glEnd;
 public class AsteroidGraphicModel extends GraphicModel {
 
     private int step=0;
-    private static final int stepLimit=5;
+    private static final int stepLimit=8;
 
         public void draw() {
             //tail
-            float colorStep=0.5f/ trajectory.size();
-            float currentColor=0.5f;
+            float colorStep=0.8f/ trajectory.size();
+            float currentColor=0.8f;
 
             glBegin(GL_LINE_LOOP);
 

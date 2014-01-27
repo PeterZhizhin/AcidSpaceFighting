@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3996f00d-68f8-4b77-8b8f-c7042021212b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGeometricModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGraphicModel.java" afterPath="$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGraphicModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Graphic/Controls/Button.java" afterPath="$PROJECT_DIR$/src/com/company/Graphic/Controls/Button.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Graphic/Camera.java" afterPath="$PROJECT_DIR$/src/com/company/Graphic/Camera.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Graphic/Controls/Color.java" afterPath="$PROJECT_DIR$/src/com/company/Graphic/Controls/Color.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Graphic/Controls/Control.java" afterPath="$PROJECT_DIR$/src/com/company/Graphic/Controls/Control.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Graphic/GUI.java" afterPath="$PROJECT_DIR$/src/com/company/Graphic/GUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java" afterPath="$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java" afterPath="$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java" afterPath="$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Geometry/Point.java" afterPath="$PROJECT_DIR$/src/com/company/Geometry/Point.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Graphic/Controls/TrueTypeFont.java" afterPath="$PROJECT_DIR$/src/com/company/Graphic/Controls/TrueTypeFont.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGraphicModel.java" afterPath="$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGraphicModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/World.java" afterPath="$PROJECT_DIR$/src/com/company/World.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -80,8 +78,19 @@
       <file leaf-file-name="World.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/World.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="29" selection-start="1268" selection-end="1268" vertical-scroll-proportion="0.0" vertical-offset="353" max-vertical-offset="840">
+            <state line="59" column="35" selection-start="1653" selection-end="1653" vertical-scroll-proportion="0.0" vertical-offset="443" max-vertical-offset="975">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RocketBaseGraphicModel.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGraphicModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="76" column="49" selection-start="2874" selection-end="2874" vertical-scroll-proportion="0.47511312" vertical-offset="930" max-vertical-offset="1425">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -90,19 +99,24 @@
         <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Controls/Button.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="18" column="42" selection-start="514" selection-end="514" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="720">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#779#780#0" expanded="true" />
-                <element signature="e#804#805#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AsteroidGraphicModel.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AsteroidGraphicModel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGraphicModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="36" selection-start="2250" selection-end="2250" vertical-scroll-proportion="0.33936653" vertical-offset="540" max-vertical-offset="1215">
+            <state line="19" column="23" selection-start="540" selection-end="540" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1215">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RocketBaseGeometricModel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGeometricModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="39" selection-start="223" selection-end="223" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405">
               <folding />
             </state>
           </provider>
@@ -111,7 +125,7 @@
       <file leaf-file-name="Camera.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Camera.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="56" selection-start="831" selection-end="831" vertical-scroll-proportion="0.0" vertical-offset="218" max-vertical-offset="720">
+            <state line="25" column="23" selection-start="593" selection-end="593" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="825">
               <folding />
             </state>
           </provider>
@@ -129,25 +143,7 @@
       <file leaf-file-name="Control.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Controls/Control.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="81" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.0" vertical-offset="138" max-vertical-offset="885">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Color.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Controls/Color.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="0" selection-start="201" selection-end="201" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FontDrawer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Controls/FontDrawer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="27" selection-start="1103" selection-end="1103" vertical-scroll-proportion="0.0" vertical-offset="183" max-vertical-offset="675">
+            <state line="39" column="81" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="945">
               <folding />
             </state>
           </provider>
@@ -156,7 +152,7 @@
       <file leaf-file-name="TrueTypeFont.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Controls/TrueTypeFont.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="423" column="68" selection-start="14322" selection-end="14322" vertical-scroll-proportion="0.0" vertical-offset="6503" max-vertical-offset="6945">
+            <state line="423" column="68" selection-start="14322" selection-end="14322" vertical-scroll-proportion="0.0" vertical-offset="6345" max-vertical-offset="7275">
               <folding />
             </state>
           </provider>
@@ -165,7 +161,7 @@
       <file leaf-file-name="Background.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Background.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="27" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+            <state line="9" column="20" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="495">
               <folding />
             </state>
           </provider>
@@ -184,18 +180,14 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/company/Graphic/Background.java" />
         <option value="$PROJECT_DIR$/src/com/company/Graphic/ComplexGraphicModel.java" />
         <option value="$PROJECT_DIR$/src/com/company/Geometry/Segment.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGraphicModel.java" />
         <option value="$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidModel.java" />
         <option value="$PROJECT_DIR$/src/com/company/Model.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java" />
         <option value="$PROJECT_DIR$/src/com/company/Physic/ComplexPhysicModel.java" />
         <option value="$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGeometricModel.java" />
         <option value="$PROJECT_DIR$/src/com/company/Graphic/Controls/Font.java" />
         <option value="$PROJECT_DIR$/src/com/company/BasicWindow.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java" />
         <option value="$PROJECT_DIR$/src/com/company/Window.java" />
         <option value="$PROJECT_DIR$/src/com/company/Graphic/Controls/FontDrawer.java" />
         <option value="$PROJECT_DIR$/src/com/company/Graphic/Controls/Color.java" />
@@ -203,11 +195,18 @@
         <option value="$PROJECT_DIR$/src/com/company/Graphic/Controls/Control.java" />
         <option value="$PROJECT_DIR$/src/com/company/Graphic/Controls/Button.java" />
         <option value="$PROJECT_DIR$/src/com/company/Graphic/GUI.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Geometry/Point.java" />
         <option value="$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Graphic/Background.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGraphicModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Models/RocketBase/КщслуеИфыуGeometricModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Models/Asteroid/RocketBaseGeometricModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGeometricModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Geometry/Point.java" />
         <option value="$PROJECT_DIR$/src/com/company/Graphic/Camera.java" />
         <option value="$PROJECT_DIR$/src/com/company/World.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGraphicModel.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGraphicModel.java" />
       </list>
     </option>
   </component>
@@ -278,146 +277,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="company" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Physic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="company" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="company" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Asteroid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="company" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Graphic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="company" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Graphic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controls" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcidSpaceFighting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="company" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Geometry" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -447,6 +306,7 @@
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.company.Models.Asteroid" />
+      <recent name="com.company.Models.RocketBase" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/com/company/Graphic" />
@@ -655,7 +515,11 @@
       <created>1390678526904</created>
       <updated>1390678526904</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Хвосты. ХВОСТЫ!">
+      <created>1390725227282</created>
+      <updated>1390725227282</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -683,8 +547,8 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32882884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -703,13 +567,13 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24921875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -734,7 +598,8 @@
     <MESSAGE value="Сегментофикс." />
     <MESSAGE value="Твоя физика - говно. Вооот. А теперь правь её." />
     <MESSAGE value="Начал приделывать шрифты. В точке метод negate теперь не статичен. Рисовка шрифтов откуда угодно (метод статичен)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Начал приделывать шрифты. В точке метод negate теперь не статичен. Рисовка шрифтов откуда угодно (метод статичен)." />
+    <MESSAGE value="Хвосты. ХВОСТЫ!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Хвосты. ХВОСТЫ!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -744,13 +609,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/company/World.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="9" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="1005">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/ComplexModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="13" selection-start="130" selection-end="130" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="495">
@@ -926,11 +784,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGraphicModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="80" selection-end="80" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="150" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Physic/ComplexPhysicModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="21" selection-start="824" selection-end="824" vertical-scroll-proportion="0.0" vertical-offset="495" max-vertical-offset="705" />
@@ -951,13 +804,6 @@
     <entry file="file://$PROJECT_DIR$/src/com/company/BasicWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="121" column="34" selection-start="3923" selection-end="3923" vertical-scroll-proportion="0.67873305" vertical-offset="1395" max-vertical-offset="2235">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGeometricModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="4" selection-start="575" selection-end="575" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
           <folding />
         </state>
       </provider>
@@ -990,23 +836,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Background.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="27" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Controls/Control.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="39" column="81" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.0" vertical-offset="138" max-vertical-offset="885">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="16" selection-start="208" selection-end="208" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
           <folding />
         </state>
       </provider>
@@ -1021,17 +853,6 @@
     <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Controls/Button.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="42" selection-start="514" selection-end="514" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="720">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#779#780#0" expanded="true" />
-            <element signature="e#804#805#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/Point.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="25" selection-start="328" selection-end="337" vertical-scroll-proportion="0.5769231" vertical-offset="0" max-vertical-offset="2580">
           <folding />
         </state>
       </provider>
@@ -1045,20 +866,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1110">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="59" selection-start="3837" selection-end="3837" vertical-scroll-proportion="0.0" vertical-offset="938" max-vertical-offset="2550">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/GeometricModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="25" selection-start="962" selection-end="962" vertical-scroll-proportion="-12.592592" vertical-offset="200" max-vertical-offset="1980">
@@ -1069,24 +876,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Camera.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Background.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="56" selection-start="831" selection-end="831" vertical-scroll-proportion="0.0" vertical-offset="218" max-vertical-offset="720">
+        <state line="9" column="20" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/World.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/Physic/PhysicModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="29" selection-start="1268" selection-end="1268" vertical-scroll-proportion="0.0" vertical-offset="353" max-vertical-offset="840">
+        <state line="8" column="39" selection-start="213" selection-end="213" vertical-scroll-proportion="0.20361991" vertical-offset="0" max-vertical-offset="2550">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGeometricModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="4" selection-start="575" selection-end="575" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="16" selection-start="208" selection-end="208" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGeometricModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="39" selection-start="223" selection-end="223" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Models/Asteroid/AsteroidGraphicModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="36" selection-start="2250" selection-end="2250" vertical-scroll-proportion="0.33936653" vertical-offset="540" max-vertical-offset="1215">
+        <state line="19" column="23" selection-start="540" selection-end="540" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1215">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Geometry/Point.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="34" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2535">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/GraphicModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="13" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1110">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Graphic/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="23" selection-start="593" selection-end="593" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="825">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/World.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="35" selection-start="1653" selection-end="1653" vertical-scroll-proportion="0.0" vertical-offset="443" max-vertical-offset="975">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Models/RocketBase/RocketBaseGraphicModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="49" selection-start="2874" selection-end="2874" vertical-scroll-proportion="0.47511312" vertical-offset="930" max-vertical-offset="1425">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
