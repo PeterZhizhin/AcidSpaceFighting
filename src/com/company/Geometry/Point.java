@@ -1,5 +1,8 @@
 package com.company.Geometry;
 
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
+
 public class Point {
 
     private float x, y;
@@ -21,7 +24,7 @@ public class Point {
      * @param point Исследуемая точка
      * @param p1  Первая точка
      * @param p2  Вторая точка
-     * @return
+     * @return Какую-то из полуплоскостей (какую - фиг поймешь)
      */
     public static boolean getDirection(Point point, Point p1, Point p2)
     {
@@ -183,6 +186,21 @@ public class Point {
         this.x = (float)x;
         this.y = (float)y;
     }
+
+    /**
+     * Получаем Vector2f из точки
+     * @return Vector2f из точки
+     */
+    public Vector2f getVector2f()
+    {
+        return new Vector2f(x,y);
+    }
+
+    public Vector3f getVector3f()
+    {
+        return new Vector3f(x,y,1.0f);
+    }
+
 
     public Point(float x, float y) {
         this.x=x;

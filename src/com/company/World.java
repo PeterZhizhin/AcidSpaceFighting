@@ -26,7 +26,7 @@ public class World {
     }
 
     public static void draw() {
-        Camera.setPosition(rocket.getCentre().getX(), rocket.getCentre().getY());
+       // Camera.setPosition(rocket.getCentre().getX(), rocket.getCentre().getY());
         for (Model model : models) {
             model.draw();
         }

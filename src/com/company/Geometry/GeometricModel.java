@@ -1,6 +1,29 @@
 package com.company.Geometry;
 
+import org.lwjgl.util.vector.Matrix3f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
+
 public class GeometricModel {
+    private int numberOfCalculations = 0;
+    private static final int maxNumberOfCalculations = 10000;
+    private void incCalculations()
+    {
+        numberOfCalculations++;
+        if (numberOfCalculations > maxNumberOfCalculations)
+            backupVertexes();
+    }
+
+    private Matrix3f rotationMatrix = new Matrix3f(); //Матрица поворота
+    private Matrix3f scaleMatrix = new Matrix3f();    //Матрица масштаба
+    private Matrix3f translateMatrix = new Matrix3f(); //Матрица переноса
+
+    private Matrix3f resultMatrix = (Matrix3f)new Matrix3f().setIdentity(); //Результирующая матрица, умножив на неё радиус вектор точки - мы получим результирующую точку
+
+    private Point[] rawVertexes; //"сырые" (не преобразованные точки)
+                                 //Точки должны задаваться в системе координат, связанной с центром масс тела
+
+
     private static final float PI2 = (float) (2 * Math.PI);
 
 
@@ -19,6 +42,7 @@ public class GeometricModel {
     public void rotate(float angle) {
         this.angle += angle;
 
+        //Совместимость
         for (Point vertex : vertexes) {
             vertex.move(-centre.getX(), -centre.getY());
             vertex.rotate(angle);
@@ -26,14 +50,24 @@ public class GeometricModel {
         }
         while (this.angle >= PI2) this.angle -= PI2;
         while (this.angle <= 0) this.angle += PI2;
+
+        //Создаем матрицу для поворота на этот угол
+        Matrix3fGeometry.createRotationMatrix(this.angle, rotationMatrix);
+        incCalculations();
     }
 
     //Move todel on p.x, p.y
     public void move(Point p) {
         centre.move(p);
+
+        //Совместимость
         for (Point vertex : vertexes) {
             vertex.move(p);
         }
+
+        //Создаем матрицу для сдвига
+        Matrix3fGeometry.createTranslateMatrix(centre.getVector2f(), translateMatrix);
+        incCalculations();
     }
 
     public float getMaxLength() {
@@ -51,10 +85,13 @@ public class GeometricModel {
     //Get intersection between 2 models. If it is not exists - return null
     public Segment getIntersection(GeometricModel model) {
 
+
         float maxLength = this.maxLength + model.maxLength;
         maxLength*=maxLength;
         if (Point.getLengthSquared(this.centre, model.centre) > maxLength)
             return null;
+
+
 
         for (int i=0; i<model.getPointCount(); i++)
         {
@@ -91,6 +128,30 @@ public class GeometricModel {
         return null;
     }
 
+    /**
+     * Получаем результирующую матрицу (композицию всех преобразований)
+     */
+    private void createResultMatrix()
+    {
+        Matrix3f.setIdentity(resultMatrix);
+        Matrix3f.mul(resultMatrix, translateMatrix, resultMatrix);
+        Matrix3f.mul(resultMatrix, rotationMatrix, resultMatrix);
+        Matrix3f.mul(resultMatrix, scaleMatrix, resultMatrix);
+    }
+
+    public void backupVertexes()
+    {
+        //Пусть тут пока не будет ничего.
+        createResultMatrix();
+        vertexes = new Point[rawVertexes.length];
+        for (int i=0; i<vertexes.length; i++)
+        {
+            Vector3f result = new Vector3f();
+            Matrix3f.transform(resultMatrix, rawVertexes[i].getVector3f(), result);
+            vertexes[i] = new Point(result.getX(), result.getY());
+        }
+    }
+
     //Return count of vertexes
     public int getPointCount() {
         return vertexes.length;
@@ -111,23 +172,58 @@ public class GeometricModel {
               vertexes[i]=new Point(g.getPoint(i));
         centre = new Point(g.getCentre());
         maxLength = g.maxLength;
+
+        rawVertexes = new Point[g.rawVertexes.length];
+        for (int i=0; i<rawVertexes.length; i++)
+            rawVertexes[i] = new Point(g.rawVertexes[i]);
+
+        Matrix3f.load(g.rotationMatrix, rotationMatrix);
+        Matrix3f.load(g.translateMatrix, translateMatrix);
+        Matrix3f.load(g.scaleMatrix, scaleMatrix);
+        Matrix3f.load(g.resultMatrix, resultMatrix);
     }
 
-    public GeometricModel(Point[] p) {
+    /**
+     * Создание модели
+     * @param vertexes Точки тела
+     */
+    public GeometricModel(Point[] vertexes)
+    {
+        //Кусок для совместимости
+        this.vertexes = vertexes;
 
-        vertexes = p;
+        centre = new Point(0,0);
 
-        centre = new Point(0, 0);
-        for (Point p2 : p) {
-            centre.move(p2);
-        }
-        centre.set(centre.getX() / p.length, centre.getY() / p.length);
-
-        maxLength = 0;
-        for (Point point : p)
+        for (Point vertex: vertexes)
         {
-            maxLength = Math.max(maxLength, Point.getLength(centre, point));
+            centre.move(vertex);
         }
+        centre.set(centre.getX() / vertexes.length, centre.getY() / vertexes.length);
+
+        //Получаем радиус окружности для отсечения
+        maxLength = 0;
+        for (Point vertex : vertexes)
+        {
+            maxLength = Math.max(maxLength, Point.getLength(centre, vertex));
+        }
+
+        rawVertexes = new Point[vertexes.length];
+        for (int i=0; i<vertexes.length; i++)
+        {
+            rawVertexes[i] = new Point(vertexes[i]);
+            rawVertexes[i].move(centre.negate());
+        }
+
+
+        //Создаем начальную матрицу переноса
+        Matrix3fGeometry.createTranslateMatrix(centre.getVector2f(), translateMatrix);
+
+        //Создаем начальную матрицу поворота
+        angle = 0.0f;
+        Matrix3fGeometry.createRotationMatrix(0.0f, rotationMatrix);
+
+        //Создаем начальную матрицу масштаба
+        Matrix3fGeometry.createScaleMatrix(new Vector2f(1.0f,1.0f), scaleMatrix);
     }
 
 
