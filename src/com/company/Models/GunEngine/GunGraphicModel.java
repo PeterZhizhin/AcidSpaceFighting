@@ -19,8 +19,8 @@ public class GunGraphicModel extends GraphicModel{
         Point nearest= World.getNearestPhysicModel(shape.getCentre());
         glBegin(GL_LINES);
         for (int i=0; i<10; i++) {
-             glVertex2f(nearest.getX()+10f-rnd.nextFloat()*20, nearest.getY()+10f-rnd.nextFloat()*20);
-            glVertex2f(shape.getCentre().getX()+10f-rnd.nextFloat()*20, shape.getCentre().getY()+10f-rnd.nextFloat()*20);
+             Camera.translatePoint(nearest.getX()+10f-rnd.nextFloat()*20, nearest.getY()+10f-rnd.nextFloat()*20);
+            Camera.translatePoint(shape.getCentre().getX()+10f-rnd.nextFloat()*20, shape.getCentre().getY()+10f-rnd.nextFloat()*20);
         }
         glEnd();
     }

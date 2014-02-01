@@ -85,8 +85,9 @@ public class World {
         double tempMax;
         for (int i=0; i<models.size(); i++)   {
             if ((tempMax=models.get(i).getCenter().getLengthSquared(p))<squadedMaxLength) {
+                if (tempMax!=0) {
                 maxNum=i;
-                squadedMaxLength=tempMax;
+                squadedMaxLength=tempMax;  }
             }
         }
             return models.get(maxNum).getCenter();
