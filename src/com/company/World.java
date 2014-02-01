@@ -5,6 +5,9 @@ import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
 import com.company.Models.Asteroid.AsteroidGeometricModel;
 import com.company.Models.Asteroid.AsteroidGraphicModel;
+import com.company.Models.GunEngine.GunGeometricModel;
+import com.company.Models.GunEngine.GunGraphicModel;
+import com.company.Models.GunEngine.GunPhysicModel;
 import com.company.Models.RocketEngine.RocketEngineGeometricModel;
 import com.company.Models.RocketEngine.RocketEngineGraphicModel;
 import com.company.Models.RocketEngine.RocketEnginePhysicModel;
@@ -89,7 +92,7 @@ public class World {
             return models.get(maxNum).getCenter();
     }
 
-    public void addModel(Model m) {
+    public static void addModel(Model m) {
         addModelBuffer.add(m);
     }
 
@@ -114,11 +117,11 @@ public class World {
                 models.add(m);
             }
 
-        GeometricModel g=new RocketEngineGeometricModel(-10000, 10000, 250f);
+        GeometricModel g=new GunGeometricModel(-10000, 10000, 250f);
         rocket=g;
-        PhysicModel e=new RocketEnginePhysicModel(g, 15f);
+        PhysicModel e=new GunPhysicModel(g, 15f);
         rocketPhys=e;
-        Model m=new Model(new RocketEngineGraphicModel(g), e);
+        Model m=new Model(new GunGraphicModel(g), e);
         models.add(m);
     }
 

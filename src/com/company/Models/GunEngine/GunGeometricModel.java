@@ -11,12 +11,19 @@ public class GunGeometricModel extends GeometricModel {
 
     private static Point[] getVertexes(float x, float y, float w) {
         Point[] p=new Point[5];
+        float wPer8=w/8;
+        float wPer4=w/4;
+        float wPer2=w/2;
 
-        p[0]=new Point(x, y);
-        p[1]=new Point(x+w/2, y);
-        p[2]=new Point(x+w, y+w/2);
-        p[3]=new Point(x+w/2, y+w);
-        p[4]=new Point(x, y+w);
+        p[0]=new Point(x, y+w);
+
+        p[1]=new Point(x+wPer8, y+w-wPer4);
+
+        p[2]=new Point(x+wPer2, y+wPer2);
+
+        p[3]=new Point(x+w-wPer8, y+w-wPer4);
+
+        p[4]=new Point(x+w, y+w);
 
         return p;
     }
