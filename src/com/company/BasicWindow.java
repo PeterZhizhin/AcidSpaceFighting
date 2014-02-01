@@ -100,6 +100,8 @@ public abstract class BasicWindow {
             Mouse.create();
             glClearColor(0f, 0f, 0f, 1f);
             glEnable(GL_BLEND);
+            glEnable(GL_POINT_SMOOTH);
+            glEnable(GL_LINE_SMOOTH);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glLineWidth(2f);
             glOrtho(0, width, height, 0, 1, 0);
