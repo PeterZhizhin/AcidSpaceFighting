@@ -25,6 +25,15 @@ public class PhysicModel {
     protected float J;
 
 
+    private ForceInterface forceInterface = null;
+    private boolean useInterface;
+    protected void setForceInterface(ForceInterface forceInterface)
+    {
+        this.forceInterface = forceInterface;
+        useInterface = forceInterface != null;
+    }
+
+
     protected float damage; //if 1 - physicModel is normal, if  0 - it is destroyed. Will used in model realisations.
 
     public float getSpeedX() {
@@ -46,7 +55,7 @@ public class PhysicModel {
 
     public void updateMotion(float deltaTime) {
         body.move(getMoveVector(deltaTime));
-        body.rotate(getRotationAngle(deltaTime));
+        body.rotate(body.getCentre(), getRotationAngle(deltaTime));
         updateKinematic(deltaTime);
     }
 
@@ -56,7 +65,7 @@ public class PhysicModel {
      * @param deltaTime Время которое  перемещались
      * @return  Вектор перемещения
      */
-    private Point getMoveVector(float deltaTime)
+    protected Point getMoveVector(float deltaTime)
     {
         return Point.add(speedVector.multiply(deltaTime), acceleration.multiply(deltaTime*deltaTime/2.0f));
     }
@@ -66,7 +75,7 @@ public class PhysicModel {
      * @param deltaTime Время которое перемещались
      * @return Угол поворота
      */
-    private float getRotationAngle(float deltaTime)
+    protected float getRotationAngle(float deltaTime)
     {
         return w*deltaTime + beta * deltaTime * deltaTime / 2.0f;
     }
@@ -76,7 +85,7 @@ public class PhysicModel {
      * Скорости меняем, ускорения обнуляем
      * @param deltaTime Время действия
      */
-    private void updateKinematic(float deltaTime)
+    protected void updateKinematic(float deltaTime)
     {
         speedVector.move(acceleration.multiply(deltaTime));
         acceleration = new Point(0,0);
@@ -113,10 +122,10 @@ public class PhysicModel {
         GeometricModel g1=new GeometricModel(body);
         GeometricModel g2=new GeometricModel(m.body);
 
+        g1.rotate(body.getCentre(),getRotationAngle(deltaTime));
+        g2.rotate(m.body.getCentre(), m.getRotationAngle(deltaTime));
         g1.move(getMoveVector(deltaTime));
-        g1.rotate(getRotationAngle(deltaTime));
         g2.move(m.getMoveVector(deltaTime));
-        g2.rotate(m.getRotationAngle(deltaTime));
 
         Segment intersection=g1.getIntersection(g2);
         Segment tempIntersection = null;
@@ -198,10 +207,10 @@ public class PhysicModel {
             GeometricModel g11=new GeometricModel(body);
             GeometricModel g21=new GeometricModel(m.body);
 
-            g11.move(getMoveVector(deltaTime));
+            /*g11.move(getMoveVector(deltaTime));
             g11.rotate(getRotationAngle(deltaTime));
             g21.move(m.getMoveVector(deltaTime));
-            g21.rotate(m.getRotationAngle(deltaTime));
+            g21.rotate(m.getRotationAngle(deltaTime));*/
 
 
             //Segment intersection1=g11.getIntersection(g21);
@@ -244,10 +253,10 @@ public class PhysicModel {
         GeometricModel g1 = new GeometricModel(body);
         GeometricModel g2 = new GeometricModel(m.body);
 
+        g1.rotate(body.getCentre(), getRotationAngle(deltaTime));
+        g2.rotate(m.body.getCentre(), m.getRotationAngle(deltaTime));
         g1.move(Point.add(getMoveVector(deltaTime), force.multiply(deltaTime*deltaTime/mass/2.0f)));
         g2.move(Point.add(m.getMoveVector(deltaTime), force.multiply(-deltaTime * deltaTime / mass / 2.0f)));
-        g1.rotate(getRotationAngle(deltaTime));
-        g2.rotate(m.getRotationAngle(deltaTime));
         if (g1.getIntersection(g2)==null)
         {
             useForce(body.getCentre(), force);

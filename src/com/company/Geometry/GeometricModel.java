@@ -40,20 +40,29 @@ public class GeometricModel {
     }
 
     //Rotate model
-    public void rotate(float angle) {
+    public void rotate(float angle)
+    {
+        rotate(centre, angle);
+    }
+
+    public void rotate(Point posOfRotation, float angle) {
         this.angle += angle;
 
         //Совместимость
         for (Point vertex : vertexes) {
-            vertex.move(-centre.getX(), -centre.getY());
+            vertex.move(posOfRotation.negate());
             vertex.rotate(angle);
-            vertex.move(centre);
+            vertex.move(posOfRotation);
         }
+        centre.move(posOfRotation.negate());
+        centre.rotate(angle);
+        centre.move(posOfRotation);
         while (this.angle >= PI2) this.angle -= PI2;
         while (this.angle <= 0) this.angle += PI2;
 
         //Создаем матрицу для поворота на этот угол
         Matrix3fGeometry.createRotationMatrix(this.angle, rotationMatrix);
+        Matrix3fGeometry.createTranslateMatrix(centre.getVector2f(), translateMatrix);
         incCalculations();
     }
 
