@@ -81,32 +81,23 @@ public class Point {
         return vector1.x * vector2.x + vector1.y * vector2.y;
     }
 
-    /**
-     * @param p1 Первая точка
-     * @param p2 Вторая точка
-     * @return Квадрат расстояния
-     */
-    public static float getLengthSquared(Point p1, Point p2)
+    public float getLengthSquared(Point p2)
     {
-        //Вычисляем проекции расстояний
-        float dx = p1.x - p2.x;
-        float dy = p1.y - p2.y;
+        float dx = x - p2.x;
+        float dy = y - p2.y;
         return dx*dx + dy*dy;
     }
 
-    /**
-     * @param p1 Первая точка
-     * @param p2 Вторая точка
-     * @return Расстояние между точками
-     */
-    public static float getLength(Point p1, Point p2)
-    {
-        return (float)Math.sqrt(getLengthSquared(p1,p2));
+    public double getDistanceToPoint(Point p) {
+        float dx=x-p.x;
+        float dy=y-p.y;
+        dx*=dx; dy*=dy;
+        return Math.sqrt(dx+dy);
     }
 
-    public float getLength()
+    public double getLength()
     {
-        return getLength(this, new Point(0,0));
+        return getDistanceToPoint(new Point(0, 0));
     }
 
     //check lines p1p2 and line p3p4
@@ -129,13 +120,6 @@ public class Point {
         boolean inY34 = Math.min(p3.getY(), p4.getY()) <= y && y <= Math.max(p3.getY(), p4.getY());
         if (inX12 && inX34 && inY12 && inY34) return new Point(x, y);
         return null;
-    }
-
-    public double getDistanceToPoint(Point p) {
-        float dx=x-p.x;
-        float dy=y-p.y;
-        dx*=dx; dy*=dy;
-        return Math.sqrt(dx+dy);
     }
 
     public void rotate(float angle) {

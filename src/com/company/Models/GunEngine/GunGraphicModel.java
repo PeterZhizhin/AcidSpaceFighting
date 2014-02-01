@@ -1,4 +1,4 @@
-package com.company.Models.RocketBase;
+package com.company.Models.GunEngine;
 
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
@@ -9,13 +9,14 @@ import java.util.Random;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class RocketBaseGraphicModel extends GraphicModel{
+public class GunGraphicModel extends GraphicModel{
 
     private int step=0;
     private static final int stepLimit=8;
     private Random rnd=new Random();
 
     public void drawBackgroundLayer() {
+
 
         //tail
         float colorStep=1f/ trajectory.size();
@@ -48,7 +49,7 @@ public class RocketBaseGraphicModel extends GraphicModel{
             normal.normalise();
             currentColor-=colorStep;
             normal=normal.multiply(currentColor * shape.getMaxLength());
-            glColor4f(1f, 0.68359375f * currentColor + 0.10546875f * (1 - currentColor), 0.01953125f, 1f);
+            glColor4f(1f, 0.01953125f, 0.3f, 0.68359375f * currentColor + 0.10546875f * (1 - currentColor));
 
             Camera.translatePoint(trajectory.get(i+1).getX()-normal.getX(), trajectory.get(i+1).getY()-normal.getY());
             Camera.translatePoint(trajectory.get(i+1).getX()+normal.getX(), trajectory.get(i+1).getY()+normal.getY());
@@ -66,7 +67,6 @@ public class RocketBaseGraphicModel extends GraphicModel{
 
     public void drawTopLayer() {
 
-
         //body
         glColor3f(0.7f, 0.7f, 0.7f);
         glBegin(GL_POLYGON);
@@ -81,9 +81,15 @@ public class RocketBaseGraphicModel extends GraphicModel{
             Camera.translatePoint(shape.getPoint(i).getX(), shape.getPoint(i).getY());
         glEnd();
 
+        glBegin(GL_LINES);
+            Camera.translatePoint(shape.getCentre().getX(), shape.getCentre().getY());
+        Camera.translatePoint((float)(shape.getCentre().getX()+50*Math.cos(shape.getAngle())),
+                (float)(shape.getCentre().getY()+50*Math.sin(shape.getAngle())));
+        glEnd();
+
     }
 
-    public RocketBaseGraphicModel(GeometricModel body) {
+    public GunGraphicModel(GeometricModel body) {
         super(body, null);
         for (int i=0; i<30; i++)
             trajectory.remove(0);

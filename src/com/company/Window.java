@@ -6,10 +6,10 @@ import com.company.Graphic.GUI;
 import org.lwjgl.opengl.Display;
 
 /**
- * User class which helps allows you to make update() draw() cycle easily
+ * User class which helps allows you to make update() drawTopLayer() cycle easily
  * It has FPS inside title, and you should also use deltaTime
  *
- * Пользовательский класс для отрисовки. С помощью него легко реализовать цикл update() draw() без лишнего мусора
+ * Пользовательский класс для отрисовки. С помощью него легко реализовать цикл update() drawTopLayer() без лишнего мусора
  * Из фич: подсчет FPS и вывод в заголовок, возможность использования deltaTime (независимость выполнения логики от цикла обновления)
  */
 public class Window extends BasicWindow {

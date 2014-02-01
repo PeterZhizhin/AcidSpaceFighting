@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.Geometry.GeometricModel;
+import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
 import com.company.Models.Asteroid.AsteroidGeometricModel;
 import com.company.Models.Asteroid.AsteroidGraphicModel;
@@ -11,6 +12,7 @@ import com.company.Physic.PhysicModel;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class World {
@@ -26,9 +28,12 @@ public class World {
     }
 
     public static void draw() {
-       // Camera.setPosition(rocket.getCentre().getX(), rocket.getCentre().getY());
+        Camera.setPosition(rocket.getCentre().getX(), rocket.getCentre().getY());
         for (Model model : models) {
-            model.draw();
+            model.drawBackgroundLayer();
+        }
+        for (Model model : models) {
+            model.drawTopLayer();
         }
     }
 
@@ -66,13 +71,35 @@ public class World {
         for (Model model : models) {
             model.updateMotion(deltaTime);
         }
+
+        models.addAll(addModelBuffer);
+        addModelBuffer.clear();
     }
 
+    public static Point getNearestPhysicModel(Point p) {
+        int maxNum=0;
+        double squadedMaxLength=p.getLengthSquared(models.get(0).getCenter());
+        double tempMax;
+        for (int i=0; i<models.size(); i++)   {
+            if ((tempMax=models.get(i).getCenter().getLengthSquared(p))<squadedMaxLength) {
+                maxNum=i;
+                squadedMaxLength=tempMax;
+            }
+        }
+            return models.get(maxNum).getCenter();
+    }
+
+    public void addModel(Model m) {
+        addModelBuffer.add(m);
+    }
+
+    private static LinkedList<Model> addModelBuffer;
     private static GeometricModel rocket;
     private static PhysicModel rocketPhys;
 
     public static void init() {
         models=new ArrayList<Model>();
+        addModelBuffer=new LinkedList<Model>();
 
         Random rnd=new Random();
         for (int i=0; i<2; i++)
@@ -82,7 +109,7 @@ public class World {
 
 
                 GeometricModel g=new AsteroidGeometricModel(i*distance, j*distance, width);
-                PhysicModel p = new PhysicModel(g, width);
+                PhysicModel p = new PhysicModel(g, width*100);
                 Model m=new Model(new AsteroidGraphicModel(g), p);
                 models.add(m);
             }

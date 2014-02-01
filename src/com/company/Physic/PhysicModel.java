@@ -233,7 +233,7 @@ public class PhysicModel {
     public void applyStaticForces(PhysicModel m, float deltaTime)
     {
         //gravitation
-        double lengthBetweenCenters = Point.getLengthSquared(body.getCentre(), m.body.getCentre());
+        double lengthBetweenCenters = body.getCentre().getLengthSquared(m.body.getCentre());
         double gravity=G*mass*m.mass/lengthBetweenCenters;
 
         //lengthBetweenCenters = Math.sqrt(lengthBetweenCenters);
@@ -257,6 +257,10 @@ public class PhysicModel {
 
     public boolean crossThem(PhysicModel m, float deltaTime) {
         return crossWithGeometricModel(m, deltaTime);
+    }
+
+    public Point getCenter() {
+        return body.getCentre();
     }
 
     public PhysicModel(GeometricModel body, float mass) {

@@ -6,9 +6,9 @@ public class ComplexGraphicModel extends GraphicModel{
 
     private ArrayList<GraphicModel> grModels;
 
-    public void draw() {
+    public void drawTopLayer() {
         for (GraphicModel g: grModels)
-            g.draw();
+            g.drawTopLayer();
     }
 
     public void add(GraphicModel g) {

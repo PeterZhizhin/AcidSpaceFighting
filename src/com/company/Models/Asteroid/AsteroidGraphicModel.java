@@ -13,7 +13,7 @@ public class AsteroidGraphicModel extends GraphicModel {
     private int step=0;
     private static final int stepLimit=8;
 
-        public void draw() {
+        public void drawBackgroundLayer() {
             //tail
             float colorStep=0.8f/ trajectory.size();
             float currentColor=0.8f;
@@ -57,6 +57,9 @@ public class AsteroidGraphicModel extends GraphicModel {
                 step=0;
             }
             else step++;
+        }
+
+        public void drawTopLayer() {
 
             //body
             glColor3f(1f, 1f, 0.6f);

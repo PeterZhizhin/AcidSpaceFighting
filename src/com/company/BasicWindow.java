@@ -13,7 +13,7 @@ import static org.lwjgl.opengl.GL11.glOrtho;
 
 /**
  * Абстрактный класс главного окна. Считает FPS, рисует и обновляет экран методами наследника
- * Abstract class of main window. It counts FPS. It can draw, update with methods of child class
+ * Abstract class of main window. It counts FPS. It can drawTopLayer, update with methods of child class
  */
 public abstract class BasicWindow {
     //Заголовок. Не содержит в себе упоминание о FPS
@@ -83,7 +83,7 @@ public abstract class BasicWindow {
     /**
      *
      * Инициализация дисплея и уход в бесконечный цикл обновления
-     * Display initialization and going to forever update() draw() cycle.
+     * Display initialization and going to forever update() drawTopLayer() cycle.
      * @param width Ширина окна. Window Width.
      * @param height Высота окна. Window Height.
      * @param frameRate Блокировка фреймрейта (почему-то не работает). Lock frame rate (I don't know why but it does not work)
@@ -103,6 +103,8 @@ public abstract class BasicWindow {
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glLineWidth(2f);
             glOrtho(0, width, height, 0, 1, 0);
+            glEnable(GL_POINT_SMOOTH);
+            glEnable(GL_LINE_SMOOTH);
         }
         catch (LWJGLException e) {
             System.err.println("Failed to setup display");

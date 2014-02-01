@@ -15,7 +15,7 @@ public class RocketEngineGraphicModel extends GraphicModel{
     private static final int stepLimit=8;
     private Random rnd=new Random();
 
-    public void draw() {
+    public void drawBackgroundLayer() {
 
 
         //tail
@@ -63,6 +63,9 @@ public class RocketEngineGraphicModel extends GraphicModel{
             step=0;
         }
         else step++;
+    }
+
+    public void drawTopLayer() {
 
         //body
         glColor3f(0.7f, 0.7f, 0.7f);

@@ -1,4 +1,4 @@
-package com.company.Models.RocketBase;
+package com.company.Models.RocketEngine.RocketBase;
 
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
@@ -15,7 +15,8 @@ public class RocketBaseGraphicModel extends GraphicModel{
     private static final int stepLimit=8;
     private Random rnd=new Random();
 
-    public void drawBackgroundLayer() {
+    public void drawTopLayer() {
+
 
         //tail
         float colorStep=1f/ trajectory.size();
@@ -62,10 +63,6 @@ public class RocketBaseGraphicModel extends GraphicModel{
             step=0;
         }
         else step++;
-    }
-
-    public void drawTopLayer() {
-
 
         //body
         glColor3f(0.7f, 0.7f, 0.7f);

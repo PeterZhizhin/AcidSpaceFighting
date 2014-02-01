@@ -88,7 +88,7 @@ public class GeometricModel {
 
         float maxLength = this.maxLength + model.maxLength;
         maxLength*=maxLength;
-        if (Point.getLengthSquared(this.centre, model.centre) > maxLength)
+        if (centre.getLengthSquared(model.centre) > maxLength)
             return null;
 
 
@@ -202,10 +202,12 @@ public class GeometricModel {
 
         //Получаем радиус окружности для отсечения
         maxLength = 0;
+        double max=0;
         for (Point vertex : vertexes)
         {
-            maxLength = Math.max(maxLength, Point.getLength(centre, vertex));
+            max = Math.max(max, centre.getDistanceToPoint(vertex));
         }
+        maxLength=(float)max;
 
         rawVertexes = new Point[vertexes.length];
         for (int i=0; i<vertexes.length; i++)

@@ -18,14 +18,7 @@ public class GraphicModel {
     private int step=0;
     private static final int stepLimit=10;
 
-    public void draw() {
-        glColor3f(color[0], color[1], color[2]);
-        glBegin(GL_QUADS);
-           for (int i=0; i<shape.getPointCount(); i++) {
-               Camera.translatePoint(shape.getPoint(i).getX(), shape.getPoint(i).getY());
-           }
-        glEnd();
-
+    public void drawBackgroundLayer() {
         float colorStep=0.1f/ trajectory.size();
         float currentColor=0.1f;
 
@@ -46,11 +39,20 @@ public class GraphicModel {
         glEnd();
 
         if (step==stepLimit) {
-        trajectory.remove(trajectory.size()-1);
-        trajectory.add(0, new Point(shape.getCentre()));
+            trajectory.remove(trajectory.size()-1);
+            trajectory.add(0, new Point(shape.getCentre()));
             step=0;
         }
         else step++;
+    }
+
+    public void drawTopLayer() {
+        glColor3f(color[0], color[1], color[2]);
+        glBegin(GL_QUADS);
+           for (int i=0; i<shape.getPointCount(); i++) {
+               Camera.translatePoint(shape.getPoint(i).getX(), shape.getPoint(i).getY());
+           }
+        glEnd();
 
     }
 

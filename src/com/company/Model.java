@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.Geometry.Point;
 import com.company.Graphic.GraphicModel;
 import com.company.Physic.PhysicModel;
 
@@ -8,8 +9,12 @@ public class Model {
     private GraphicModel graphic;
     private PhysicModel physic;
 
-    public void draw() {
-        graphic.draw();
+    public void drawTopLayer() {
+        graphic.drawTopLayer();
+    }
+
+    public void drawBackgroundLayer() {
+        graphic.drawBackgroundLayer();
     }
 
     public boolean crossThem(Model p, float deltaTime) {
@@ -23,6 +28,10 @@ public class Model {
     public void updateStaticForces(Model p, float deltaTime)
     {
         physic.applyStaticForces(p.physic, deltaTime);
+    }
+
+    public Point getCenter() {
+        return physic.getCenter();
     }
 
     public Model(GraphicModel g, PhysicModel p) {

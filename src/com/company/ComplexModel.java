@@ -9,7 +9,7 @@ public class ComplexModel {
     private ComplexPhysicModel physic;
 
     public void draw() {
-        graphic.draw();
+        graphic.drawTopLayer();
     }
 
     public void crossThem(ComplexModel p, int deltaTime) {
