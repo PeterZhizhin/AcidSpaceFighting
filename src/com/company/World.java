@@ -46,7 +46,7 @@ public class World {
             rocketPhys.doSpecialActionC(deltaTime);
         }
 
-        boolean wasIntersection = true; byte n = 0;
+        boolean  wasIntersection = true; byte n = 0;
         while (wasIntersection & n<=5)
         {
             n++;

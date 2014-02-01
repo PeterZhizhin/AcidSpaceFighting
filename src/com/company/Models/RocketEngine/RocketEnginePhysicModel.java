@@ -19,7 +19,7 @@ public class RocketEnginePhysicModel extends PhysicModel{
         //System.out.println(new Point(Math.cos(body.getAngle()), Math.sin(body.getAngle())).multiply(power).negate()+" "+speedVector.getLength());
     }
 
-    public void doSpecialActionC(float deltaTime) {
+    public void doSpecialActionC(float  deltaTime) {
         w=0;
         speedVector.set(0, 0);
     }

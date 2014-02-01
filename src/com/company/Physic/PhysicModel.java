@@ -53,7 +53,7 @@ public class PhysicModel {
     /**
      * Считаем что ускорение на данном участке постоянно и считаем перемещение по формуле
      * S = V0*dT + A*dT^2/2
-     * @param deltaTime Время которое перемещались
+     * @param deltaTime Время которое  перемещались
      * @return  Вектор перемещения
      */
     private Point getMoveVector(float deltaTime)

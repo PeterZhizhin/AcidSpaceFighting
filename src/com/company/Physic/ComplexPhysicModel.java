@@ -27,7 +27,7 @@ public class ComplexPhysicModel extends PhysicModel{
         bodies.add(g);
     }
 
-    public void remove(int num) {
+    public void remove(int  num) {
         bodies.remove(num);
     }
 
