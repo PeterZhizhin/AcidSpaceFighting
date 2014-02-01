@@ -6,18 +6,26 @@ import com.company.Geometry.Segment;
 
 public class PhysicModel {
 
-    private static final double G=100f;//G is the gravitational constant
+    private static final double G=10f;//G is the gravitational constant
 
 
     protected GeometricModel body;
     protected float mass;
     protected Point speedVector;
+    protected Point acceleration;
 
+    //Да, по-идее, все эти величины нужно делать трехмерными векторами.
+    //Но у нас же плоскопараллельное движение вдоль плоскости xOy
     //Угловая скорость
     protected float w;
+    //Угловое ускорение
+    protected float beta;
+    //Момент инерции
+    //TODO: Посчитать момент инерции треугольника. More: http://dxdy.ru/topic31945.html
+    protected float J;
 
 
-    protected float damage; //if 1 - physicModel is noraml, if  0 - it is destroyed. Will used in model realisations.
+    protected float damage; //if 1 - physicModel is normal, if  0 - it is destroyed. Will used in model realisations.
 
     public float getSpeedX() {
         return speedVector.getX();
@@ -37,25 +45,65 @@ public class PhysicModel {
     }
 
     public void updateMotion(float deltaTime) {
-        body.move(speedVector.multiply(deltaTime));
-        body.rotate(w * deltaTime);
+        body.move(getMoveVector(deltaTime));
+        body.rotate(getRotationAngle(deltaTime));
+        updateKinematic(deltaTime);
     }
 
-    protected void useForce(Point posOfForce, Point force, float deltaTime) {
-        speedVector.move(force.multiply(deltaTime/mass));
+    /**
+     * Считаем что ускорение на данном участке постоянно и считаем перемещение по формуле
+     * S = V0*dT + A*dT^2/2
+     * @param deltaTime Время которое перемещались
+     * @return  Вектор перемещения
+     */
+    private Point getMoveVector(float deltaTime)
+    {
+        return Point.add(speedVector.multiply(deltaTime), acceleration.multiply(deltaTime*deltaTime/2.0f));
+    }
+
+    /**
+     * Получаем угол поворота по формуле для равноускоренного движения
+     * @param deltaTime Время которое перемещались
+     * @return Угол поворота
+     */
+    private float getRotationAngle(float deltaTime)
+    {
+        return w*deltaTime + beta * deltaTime * deltaTime / 2.0f;
+    }
+
+    /**
+     * Обновляем кинематические переменные (скорости и ускорения)
+     * Скорости меняем, ускорения обнуляем
+     * @param deltaTime Время действия
+     */
+    private void updateKinematic(float deltaTime)
+    {
+        speedVector.move(acceleration.multiply(deltaTime));
+        acceleration = new Point(0,0);
+        w += beta * deltaTime;
+        beta = 0;
+    }
+
+    /**
+     * Применяем силу к телу для изменения ускорений (угловых и линейных)
+     * @param posOfForce  Точка приложения силы TODO: переделать на Segment
+     * @param force    Сама сила
+     */
+    protected void useForce(Point posOfForce, Point force) {
+        acceleration.move(force.multiply(1.0f/mass));
+        //speedVector.move(force.multiply(deltaTime/mass));
 
         if (body.getCentre().getDistanceToPoint(posOfForce)>=Point.epsilon)
         {
-        double deltaW = force.getLength()*deltaTime/mass*Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
+        double deltaBeta = force.getLength()/J*Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
                 (body.getCentre(), posOfForce, Point.add(posOfForce, force));
         //Получаем знак
         //Если конец вектора лежит в правой полуплоскости относительно прямой, проходящей через центр масс и точку приложения силы
         //То вращается вправо (знак минус), иначе влево
         if (Point.getDirection(Point.add(posOfForce, force), body.getCentre(), posOfForce)) {
-            deltaW = -deltaW;
+            deltaBeta = -deltaBeta;
         }
-       // System.out.println("DeltaW: " + deltaW);
-        w+=deltaW;
+        beta += deltaBeta;
         }
     }
 
@@ -65,19 +113,21 @@ public class PhysicModel {
         GeometricModel g1=new GeometricModel(body);
         GeometricModel g2=new GeometricModel(m.body);
 
-        g1.move(speedVector.multiply(deltaTime));
-        g1.rotate(w*deltaTime);
-        g2.move(m.speedVector.multiply(deltaTime));
-        g2.rotate(m.w*deltaTime);
+        g1.move(getMoveVector(deltaTime));
+        g1.rotate(getRotationAngle(deltaTime));
+        g2.move(m.getMoveVector(deltaTime));
+        g2.rotate(m.getRotationAngle(deltaTime));
 
         Segment intersection=g1.getIntersection(g2);
         Segment tempIntersection = null;
+
+        //Далее идет куча закомментированного кода, это все для отладочного вывода
         if (intersection!=null)
         {
-          //  System.out.println("1");
+            //System.out.println("1");
             tempIntersection = body.getIntersection(m.body);
-           // if (tempIntersection!=null)
-               // System.out.println("2");
+            //if (tempIntersection!=null)
+            //    System.out.println("2");
         }
 
         if (intersection!=null && tempIntersection == null) {
@@ -137,35 +187,38 @@ public class PhysicModel {
             Point rotationForces = new Point(force).multiply(0.05f);
             rotationForces = new Point(rotationForces.getY(), rotationForces.getX());
 
-            useForce(body.getCentre(), force, deltaTime);
-            m.useForce(m.body.getCentre(), force.negate(), deltaTime);
+            useForce(body.getCentre(), force);
+            m.useForce(m.body.getCentre(), force.negate());
 
-            useForce(intersection.getStart(), rotationForces, deltaTime);
-            m.useForce(intersection.getStart(), rotationForces.negate(), deltaTime);
+            useForce(intersection.getStart(), rotationForces);
+            m.useForce(intersection.getStart(), rotationForces.negate());
 
             //speedVector = v1; m.speedVector = v2;
 
             GeometricModel g11=new GeometricModel(body);
             GeometricModel g21=new GeometricModel(m.body);
 
-            g11.move(speedVector.multiply(deltaTime));
-            g21.move(m.speedVector.multiply(deltaTime));
+            g11.move(getMoveVector(deltaTime));
+            g11.rotate(getRotationAngle(deltaTime));
+            g21.move(m.getMoveVector(deltaTime));
+            g21.rotate(m.getRotationAngle(deltaTime));
 
-            Segment intersection1=g11.getIntersection(g21);
 
-            if (intersection1!=null)
+            //Segment intersection1=g11.getIntersection(g21);
+
+            /*if (intersection1!=null)
             {
-                //System.out.println("FUCK! dV: " + Point.add(v1,Point.negate(speedVector)));
+                System.out.println("FUCK! dV: " + Point.add(v1,speedVector.negate()));
                 //Очень похоже, что нормаль направлена не в ту сторону.
                 //И силы приложились не в том направлении. Значит нужно приложить силы в противоположном направлении.
                 force = force.negate().multiply(2);
-                useForce(body.getCentre(), force, deltaTime);
-                m.useForce(m.body.getCentre(), force.negate(), deltaTime);
+                useForce(body.getCentre(), force);
+                m.useForce(m.body.getCentre(), force.negate());
             }
             else
             {
                // System.out.println("dV: " + Point.add(v1,Point.negate(speedVector)));
-            }
+            }*/
         }
         return wasIntersection;
     }
@@ -180,18 +233,26 @@ public class PhysicModel {
     public void applyStaticForces(PhysicModel m, float deltaTime)
     {
         //gravitation
-        double lengthBetweenCenters= body.getCentre().getDistanceToPoint(m.body.getCentre());
-        double gravity=G*mass*m.mass/lengthBetweenCenters/lengthBetweenCenters;
+        double lengthBetweenCenters = Point.getLengthSquared(body.getCentre(), m.body.getCentre());
+        double gravity=G*mass*m.mass/lengthBetweenCenters;
 
-        double dx=body.getCentre().getX()-m.body.getCentre().getX();
-        double dy=body.getCentre().getY()-m.body.getCentre().getY();
+        //lengthBetweenCenters = Math.sqrt(lengthBetweenCenters);
+        double dx=(-body.getCentre().getX()+m.body.getCentre().getX())*gravity;
+        double dy=(-body.getCentre().getY()+m.body.getCentre().getY())*gravity;
 
-        dx*=gravity;
-        dy*=gravity;
-        float x= (float) dx;
-        float y= (float) dy;
-        useForce(body.getCentre(), new Point(-x, -y), deltaTime);
-        m.useForce(m.body.getCentre(), new Point(x, y), deltaTime);
+        Point force = new Point(dx,dy);
+        GeometricModel g1 = new GeometricModel(body);
+        GeometricModel g2 = new GeometricModel(m.body);
+
+        g1.move(Point.add(getMoveVector(deltaTime), force.multiply(deltaTime*deltaTime/mass/2.0f)));
+        g2.move(Point.add(m.getMoveVector(deltaTime), force.multiply(-deltaTime * deltaTime / mass / 2.0f)));
+        g1.rotate(getRotationAngle(deltaTime));
+        g2.rotate(m.getRotationAngle(deltaTime));
+        if (g1.getIntersection(g2)==null)
+        {
+            useForce(body.getCentre(), force);
+            m.useForce(m.body.getCentre(), force.negate());
+        }
     }
 
     public boolean crossThem(PhysicModel m, float deltaTime) {
@@ -201,8 +262,12 @@ public class PhysicModel {
     public PhysicModel(GeometricModel body, float mass) {
         this.body=body;
         this.mass=mass;
+        //Пока не сделали нормально определение момента инерции - пользуемся формулой для шара с радиусом, численно равному массе
+        this.J = mass * mass * mass / 2.0f;
         this.speedVector=new Point(0, 0);
+        this.acceleration=new Point(0,0);
         this.w = 0;
+        this.beta = 0;
     }
 
 }

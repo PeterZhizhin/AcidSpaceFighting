@@ -87,7 +87,7 @@ public class World {
                 models.add(m);
             }
 
-        GeometricModel g=new RocketEngineGeometricModel(-500, -500, 250f);
+        GeometricModel g=new RocketEngineGeometricModel(-10000, 10000, 250f);
         rocket=g;
         PhysicModel e=new RocketEnginePhysicModel(g, 15f);
         rocketPhys=e;

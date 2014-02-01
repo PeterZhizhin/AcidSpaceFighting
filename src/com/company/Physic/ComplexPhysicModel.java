@@ -14,11 +14,11 @@ public class ComplexPhysicModel extends PhysicModel{
             body.body.move(speedVector.multiply(deltaTime));
     }
 
-    private void useForce(Point posOfForce, Point force) {
-        speedVector.set(speedVector.getX()+force.getX(), speedVector.getX()+force.getY());
+    protected void useForce(Point posOfForce, Point force) {
+        speedVector.move(force);
     }
 
-    public void crossThem(ComplexPhysicModel m, int deltaTime) {
+    public void crossThem(ComplexPhysicModel m, float deltaTime) {
         for (PhysicModel body: bodies)
             crossWithGeometricModel(m, deltaTime);
     }

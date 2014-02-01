@@ -10,12 +10,12 @@ public class RocketEnginePhysicModel extends PhysicModel{
     private static final float power=10000f;
 
     public void doSpecialActionA(float deltaTime) {
-        useForce(body.getCentre(), new Point(Math.cos(body.getAngle()), Math.sin(body.getAngle())).multiply(power), deltaTime);
+        useForce(body.getCentre(), new Point(Math.cos(body.getAngle()), Math.sin(body.getAngle())).multiply(power));
         //System.out.println(new Point(Math.cos(body.getAngle()), Math.sin(body.getAngle())).multiply(power)+" "+speedVector.getLength());
     }
 
     public void doSpecialActionB(float deltaTime) {
-        useForce(body.getCentre(), new Point(Math.cos(body.getAngle()), Math.sin(body.getAngle())).negate().multiply(power), deltaTime);
+        useForce(body.getCentre(), new Point(Math.cos(body.getAngle()), Math.sin(body.getAngle())).negate().multiply(power));
         //System.out.println(new Point(Math.cos(body.getAngle()), Math.sin(body.getAngle())).multiply(power).negate()+" "+speedVector.getLength());
     }
 
