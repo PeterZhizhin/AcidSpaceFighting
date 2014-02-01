@@ -27,7 +27,7 @@ public class World {
     }
 
     public static String getMessage() {
-        return Camera.getMessage();
+        return Camera.getMessage()+" Models: "+models.size();
     }
 
     public static void draw() {

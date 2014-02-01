@@ -7,6 +7,7 @@ import org.lwjgl.util.vector.Vector3f;
 public class GeometricModel {
     private int numberOfCalculations = 0;
     private static final int maxNumberOfCalculations = 10000;
+
     private void incCalculations()
     {
         numberOfCalculations++;
@@ -85,12 +86,15 @@ public class GeometricModel {
     //Get intersection between 2 models. If it is not exists - return null
     public Segment getIntersection(GeometricModel model) {
 
-
-        float maxLength = this.maxLength + model.maxLength;
-        maxLength*=maxLength;
-        if (centre.getLengthSquared(model.centre) > maxLength)
+        if (centre.getBrutalLength(model.centre) > this.maxLength + model.maxLength)
             return null;
 
+        /*float maxLength = this.maxLength + model.maxLength;
+        maxLength*=maxLength;
+
+        if (centre.getLengthSquared(model.centre) > maxLength)
+            return null;
+         */
 
 
         for (int i=0; i<model.getPointCount(); i++)

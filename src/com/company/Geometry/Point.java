@@ -81,6 +81,11 @@ public class Point {
         return vector1.x * vector2.x + vector1.y * vector2.y;
     }
 
+    public float getBrutalLength(Point p2)
+    {
+        return Math.abs(x - p2.x) + Math.abs(y - p2.y);
+    }
+
     public float getLengthSquared(Point p2)
     {
         float dx = x - p2.x;
