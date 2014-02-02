@@ -122,8 +122,8 @@ public class ComplexPhysicModel extends PhysicModel{
         super(null, 0);
         this.bodies = bodies;
         this.adjacencyMatrix = adjacencyMatrix;
-        if (bodies.size() != adjacencyMatrix.length | getComponents().size()!=1)
-            throw new IllegalArgumentException("Adjacency matrix should have only one connected component. And number of bodies and points in graph should be the same");
+        //if (bodies.size() != adjacencyMatrix.length | getComponents().size()!=1)
+        //    throw new IllegalArgumentException("Adjacency matrix should have only one connected component. And number of bodies and points in graph should be the same");
         mass = 0;
         massCentre = new Point(0,0);
         speedVector = new Point(0,0);

@@ -6,8 +6,8 @@ import com.company.Physic.PhysicModel;
 
 public class Model {
 
-    private GraphicModel graphic;
-    private PhysicModel physic;
+    protected GraphicModel graphic;
+    protected PhysicModel physic;
 
     public void drawTopLayer() {
         graphic.drawTopLayer();

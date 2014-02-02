@@ -58,18 +58,20 @@ public class GraphicModel {
 
     public GraphicModel(GeometricModel body, PhysicModel our) {
 
-
-        ourPhysicModel=our;
-           shape=body;
         Random rnd=new Random();
         color[0]=rnd.nextFloat()/2+0.5f;
         color[1]=rnd.nextFloat()/2+0.5f;
         color[2]=rnd.nextFloat()/2+0.5f;
-
-
         trajectory =new LinkedList<Point>();
+
+        if (body!=null) {
+        ourPhysicModel=our;
+           shape=body;
+
+
         for (int i=0; i<50; i++)
-            trajectory.add(new Point(shape.getCentre()));
+            trajectory.add(new Point(shape.getCentre()));   }
+
     }
 
 

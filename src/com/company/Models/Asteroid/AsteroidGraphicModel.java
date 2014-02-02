@@ -20,7 +20,9 @@ public class AsteroidGraphicModel extends GraphicModel {
 
             glBegin(GL_LINE_LOOP);
 
-            Point normal=Point.getNormal(shape.getCentre(), trajectory.get(0));
+            Point normal=Point.getNormal(
+                    shape.getCentre(),
+                    trajectory.get(0));
             normal.normalise();
             currentColor-=colorStep;
             normal=normal.multiply(currentColor * shape.getMaxLength());

@@ -1,9 +1,9 @@
-package com.company.Models.RocketEngine;
+package com.company.Models.Engine;
 
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 
-public class RocketEngineGeometricModel extends GeometricModel {
+public class EngineGeometricModel extends GeometricModel {
 
     public void rotate(float f) {
         super.rotate(f);
@@ -21,7 +21,7 @@ public class RocketEngineGeometricModel extends GeometricModel {
         return p;
     }
 
-    public RocketEngineGeometricModel(float x, float y, float r) {
+    public EngineGeometricModel(float x, float y, float r) {
         super(getVertexes(x, y, r));
     }
 

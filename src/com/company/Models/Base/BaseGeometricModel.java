@@ -1,9 +1,9 @@
-package com.company.Models.GunEngine.RocketEngine.RocketBase;
+package com.company.Models.Base;
 
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 
-public class RocketBaseGeometricModel extends GeometricModel {
+public class BaseGeometricModel extends GeometricModel {
 
     private static Point[] getVertexes(float x, float y, float w) {
         Point[] p=new Point[4];
@@ -14,7 +14,7 @@ public class RocketBaseGeometricModel extends GeometricModel {
         return p;
     }
 
-    public RocketBaseGeometricModel(float x, float y, float r) {
+    public BaseGeometricModel(float x, float y, float r) {
         super(getVertexes(x, y, r));
     }
 

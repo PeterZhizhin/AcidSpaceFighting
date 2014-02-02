@@ -19,9 +19,9 @@ public class ComplexGraphicModel extends GraphicModel{
         grModels.remove(num);
     }
 
-    public ComplexGraphicModel() {
+    public ComplexGraphicModel(ArrayList<GraphicModel> g) {
         super(null, null);
-        grModels=new ArrayList<GraphicModel>();
+        grModels=g;
     }
 
 

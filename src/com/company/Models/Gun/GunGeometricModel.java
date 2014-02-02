@@ -1,4 +1,4 @@
-package com.company.Models.GunEngine;
+package com.company.Models.Gun;
 
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;

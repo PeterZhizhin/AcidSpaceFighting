@@ -1,11 +1,10 @@
-package com.company.Models.RocketEngine;
+package com.company.Models.Engine;
 
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
-import com.company.Geometry.Segment;
 import com.company.Physic.PhysicModel;
 
-public class RocketEnginePhysicModel extends PhysicModel{
+public class EnginePhysicModel extends PhysicModel{
 
     private static final float power=10000f;
 
@@ -24,7 +23,7 @@ public class RocketEnginePhysicModel extends PhysicModel{
         speedVector.set(0, 0);
     }
 
-    public RocketEnginePhysicModel(GeometricModel body, float mass) {
+    public EnginePhysicModel(GeometricModel body, float mass) {
         super(body, mass);
     }
 
