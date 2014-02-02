@@ -56,7 +56,7 @@ public class ComplexPhysicModel extends PhysicModel{
             body.speedVector = speedVector;
             body.w = this.w;
             body.acceleration = new Point(0,0);
-            body.centreOfRotation = new Point(massCentre);
+            body.centreOfRotation = new  Point(massCentre);
             body.beta = 0.0f;
         }
     }

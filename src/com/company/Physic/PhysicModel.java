@@ -277,7 +277,7 @@ public class PhysicModel {
 
     public PhysicModel(GeometricModel body, float mass) {
         this.body=body;
-        this.mass=mass;
+        this.mass =mass;
         //Пока не сделали нормально определение момента инерции - пользуемся формулой для шара с радиусом, численно равному массе
         this.J = mass * mass * mass / 2.0f;
         this.speedVector=new Point(0, 0);

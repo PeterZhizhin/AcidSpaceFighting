@@ -83,7 +83,7 @@ public class World {
         }
     }
 
-    public static Point getNearestPhysicModel(Point p) {
+    public static Point getNearestPhysicModel(Point  p) {
         int maxNum=0;
         double squadedMaxLength=p.getLengthSquared(models.get(0).getCenter());
         double tempMax;
