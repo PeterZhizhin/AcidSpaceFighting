@@ -107,6 +107,7 @@ public abstract class BasicWindow {
             glOrtho(0, width, height, 0, 1, 0);
             glEnable(GL_POINT_SMOOTH);
             glEnable(GL_LINE_SMOOTH);
+            glEnable(GL_POLYGON_SMOOTH);
         }
         catch (LWJGLException e) {
             System.err.println("Failed to setup display");

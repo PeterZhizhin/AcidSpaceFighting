@@ -40,9 +40,9 @@ public class Point {
           return new Point((p3.x+p1.x)/2-p2.x, (p3.y+p1.y)/2-p2.y);
     }
 
-    public static Point add(Point v1, Point v2)
+    public Point add(Point v2)
     {
-        return new Point(v1.x + v2.x, v1.y + v2.y);
+        return new Point(x + v2.x, y + v2.y);
     }
 
     public Point negate()

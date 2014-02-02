@@ -13,6 +13,8 @@ public class PhysicModel {
     protected float mass;
     protected Point speedVector;
     protected Point acceleration;
+    protected ComplexPhysicModel parent;
+
 
     //Да, по-идее, все эти величины нужно делать трехмерными векторами.
     //Но у нас же плоскопараллельное движение вдоль плоскости xOy
@@ -23,15 +25,6 @@ public class PhysicModel {
     //Момент инерции
     //TODO: Посчитать момент инерции треугольника. More: http://dxdy.ru/topic31945.html
     protected float J;
-
-
-    private ForceInterface forceInterface = null;
-    private boolean useInterface;
-    protected void setForceInterface(ForceInterface forceInterface)
-    {
-        this.forceInterface = forceInterface;
-        useInterface = forceInterface != null;
-    }
 
 
     protected float damage; //if 1 - physicModel is normal, if  0 - it is destroyed. Will used in model realisations.
@@ -55,7 +48,7 @@ public class PhysicModel {
 
     public void updateMotion(float deltaTime) {
         body.move(getMoveVector(deltaTime));
-        body.rotate(body.getCentre(), getRotationAngle(deltaTime));
+        body.rotate(getRotationAngle(deltaTime));
         updateKinematic(deltaTime);
     }
 
@@ -65,9 +58,9 @@ public class PhysicModel {
      * @param deltaTime Время которое  перемещались
      * @return  Вектор перемещения
      */
-    protected Point getMoveVector(float deltaTime)
+    public Point getMoveVector(float deltaTime)
     {
-        return Point.add(speedVector.multiply(deltaTime), acceleration.multiply(deltaTime*deltaTime/2.0f));
+        return speedVector.multiply(deltaTime).add(acceleration.multiply(deltaTime * deltaTime / 2.0f));
     }
 
     /**
@@ -75,7 +68,7 @@ public class PhysicModel {
      * @param deltaTime Время которое перемещались
      * @return Угол поворота
      */
-    protected float getRotationAngle(float deltaTime)
+    public float getRotationAngle(float deltaTime)
     {
         return w*deltaTime + beta * deltaTime * deltaTime / 2.0f;
     }
@@ -99,21 +92,25 @@ public class PhysicModel {
      * @param force    Сама сила
      */
     protected void useForce(Point posOfForce, Point force) {
+        if (parent==null) {
         acceleration.move(force.multiply(1.0f/mass));
         //speedVector.move(force.multiply(deltaTime/mass));
 
         if (body.getCentre().getDistanceToPoint(posOfForce)>=Point.epsilon)
         {
         double deltaBeta = force.getLength()/J*Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
-                (body.getCentre(), posOfForce, Point.add(posOfForce, force));
+                (body.getCentre(), posOfForce, posOfForce.add(force));
         //Получаем знак
         //Если конец вектора лежит в правой полуплоскости относительно прямой, проходящей через центр масс и точку приложения силы
         //То вращается вправо (знак минус), иначе влево
-        if (Point.getDirection(Point.add(posOfForce, force), body.getCentre(), posOfForce)) {
+        if (Point.getDirection(posOfForce.add(force), body.getCentre(), posOfForce)) {
             deltaBeta = -deltaBeta;
         }
         beta += deltaBeta;
         }
+        }
+        else
+            parent.addForce(new Segment(posOfForce, force));
     }
 
     private boolean applyIntersection(PhysicModel m, float deltaTime)
@@ -122,10 +119,10 @@ public class PhysicModel {
         GeometricModel g1=new GeometricModel(body);
         GeometricModel g2=new GeometricModel(m.body);
 
-        g1.rotate(body.getCentre(),getRotationAngle(deltaTime));
-        g2.rotate(m.body.getCentre(), m.getRotationAngle(deltaTime));
         g1.move(getMoveVector(deltaTime));
+        g1.rotate(getRotationAngle(deltaTime));
         g2.move(m.getMoveVector(deltaTime));
+        g2.rotate(m.getRotationAngle(deltaTime));
 
         Segment intersection=g1.getIntersection(g2);
         Segment tempIntersection = null;
@@ -192,7 +189,7 @@ public class PhysicModel {
             v1 = new Point(v11x*cos-v10y*sin, v11x*sin + v10y*cos);
             //Конечные скорости получены.
 
-            Point force = Point.add(v1, speedVector.negate()).multiply(mass*0.95f/deltaTime);
+            Point force = v1.add(speedVector.negate()).multiply(mass*0.95f/deltaTime);
             Point rotationForces = new Point(force).multiply(0.05f);
             rotationForces = new Point(rotationForces.getY(), rotationForces.getX());
 
@@ -207,10 +204,10 @@ public class PhysicModel {
             GeometricModel g11=new GeometricModel(body);
             GeometricModel g21=new GeometricModel(m.body);
 
-            /*g11.move(getMoveVector(deltaTime));
+            g11.move(getMoveVector(deltaTime));
             g11.rotate(getRotationAngle(deltaTime));
             g21.move(m.getMoveVector(deltaTime));
-            g21.rotate(m.getRotationAngle(deltaTime));*/
+            g21.rotate(m.getRotationAngle(deltaTime));
 
 
             //Segment intersection1=g11.getIntersection(g21);
@@ -253,10 +250,10 @@ public class PhysicModel {
         GeometricModel g1 = new GeometricModel(body);
         GeometricModel g2 = new GeometricModel(m.body);
 
-        g1.rotate(body.getCentre(), getRotationAngle(deltaTime));
-        g2.rotate(m.body.getCentre(), m.getRotationAngle(deltaTime));
-        g1.move(Point.add(getMoveVector(deltaTime), force.multiply(deltaTime*deltaTime/mass/2.0f)));
-        g2.move(Point.add(m.getMoveVector(deltaTime), force.multiply(-deltaTime * deltaTime / mass / 2.0f)));
+        g1.move(getMoveVector(deltaTime).add(force.multiply(deltaTime * deltaTime / mass / 2.0f)));
+        g2.move(m.getMoveVector(deltaTime).add(force.multiply(-deltaTime * deltaTime / mass / 2.0f)));
+        g1.rotate(getRotationAngle(deltaTime));
+        g2.rotate(m.getRotationAngle(deltaTime));
         if (g1.getIntersection(g2)==null)
         {
             useForce(body.getCentre(), force);
@@ -270,6 +267,10 @@ public class PhysicModel {
 
     public Point getCentre() {
         return body.getCentre();
+    }
+
+    public void setParent(ComplexPhysicModel c) {
+        parent=c;
     }
 
     public PhysicModel(GeometricModel body, float mass) {

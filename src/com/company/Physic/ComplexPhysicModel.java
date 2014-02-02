@@ -1,6 +1,7 @@
 package com.company.Physic;
 
 import com.company.Geometry.Point;
+import com.company.Geometry.Segment;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -22,27 +23,6 @@ public class ComplexPhysicModel extends PhysicModel{
     {
         return massCentre;
     }
-    //Интерфейс, вызываемый когда какое-то тело приложило силу
-    private ForceInterface forceInterface = new ForceInterface() {
-        @Override
-        public void applyForce(Point posOfForce, Point force) {
-            acceleration.move(force.multiply(1.0f/mass));
-            //speedVector.move(force.multiply(deltaTime/mass));
-
-            if (massCentre.getDistanceToPoint(posOfForce)>=Point.epsilon)
-            {
-                double deltaBeta = force.getLength()/J*Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
-                        (massCentre, posOfForce, Point.add(posOfForce, force));
-                //Получаем знак
-                //Если конец вектора лежит в правой полуплоскости относительно прямой, проходящей через центр масс и точку приложения силы
-                //То вращается вправо (знак минус), иначе влево
-                if (Point.getDirection(Point.add(posOfForce, force), massCentre, posOfForce)) {
-                    deltaBeta = -deltaBeta;
-                }
-                beta += deltaBeta;
-            }
-        }
-    };
 
     //Статические силы теперь тоже применяются ко всей системе
     @Override
@@ -128,6 +108,11 @@ public class ComplexPhysicModel extends PhysicModel{
                 fillAllConnected(i, wasVisited, adjacencyMatrix);
     }
 
+    private ArrayList<Segment> forceBuffer;
+    public void addForce(Segment s) {
+        forceBuffer.add(s);
+    }
+
     /**
      * Создание комплексной физической модели.
      * @param bodies  Тела, входящие в систему
@@ -145,7 +130,6 @@ public class ComplexPhysicModel extends PhysicModel{
         J = 0;
         for (PhysicModel body : this.bodies)
         {
-            body.setForceInterface(forceInterface);
             mass+=body.mass;
             massCentre.move(body.getCentre().multiply(body.mass));
             speedVector.move(body.speedVector.multiply(body.mass));
