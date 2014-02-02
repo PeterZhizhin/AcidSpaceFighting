@@ -164,4 +164,13 @@ public class ComplexPhysicModel extends PhysicModel{
         acceleration = new Point(0,0);
     }
 
+    public void add(PhysicModel p) {
+        //TODO: РЕАЛИЗОВАТЬ, БЛЕА
+    }
+
+    public ComplexPhysicModel() {
+        super(null, 0);
+        //TODO: РЕАЛИЗОВАТЬ, БЛЕА
+    }
+
 }
