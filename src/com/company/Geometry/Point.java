@@ -127,11 +127,14 @@ public class Point {
         return null;
     }
 
-    public void rotate(float angle) {
-        double newX=x*Math.cos(angle)-y*Math.sin(angle);
-        double newY=x*Math.sin(angle)+y*Math.cos(angle);
-        x= (float) newX;
-        y= (float) newY;
+    public void rotate(float angle, Point center) {
+        float ax=x-center.x;
+        float ay=y-center.y;
+
+        double newX=ax*Math.cos(angle)-ay*Math.sin(angle);
+        double newY=ax*Math.sin(angle)+ay*Math.cos(angle);
+        x= (float) newX+center.x;
+        y= (float) newY+center.y;
     }
 
     /**
