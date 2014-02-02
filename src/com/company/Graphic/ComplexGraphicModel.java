@@ -6,9 +6,17 @@ public class ComplexGraphicModel extends GraphicModel{
 
     private ArrayList<GraphicModel> grModels;
 
+    @Override
     public void drawTopLayer() {
         for (GraphicModel g: grModels)
             g.drawTopLayer();
+    }
+
+    @Override
+    public void drawBackgroundLayer()
+    {
+        for (GraphicModel g : grModels)
+            g.drawBackgroundLayer();
     }
 
     public void add(GraphicModel g) {

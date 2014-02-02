@@ -1,9 +1,15 @@
 package com.company;
 
+import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
+import com.company.Graphic.ComplexGraphicModel;
+import com.company.Graphic.GraphicModel;
+import com.company.Models.Asteroid.AsteroidGeometricModel;
+import com.company.Models.Asteroid.AsteroidGraphicModel;
 import com.company.Models.Asteroid.AsteroidModel;
 import com.company.Models.Gun.GunModel;
+import com.company.Physic.ComplexPhysicModel;
 import com.company.Physic.PhysicModel;
 import org.lwjgl.input.Keyboard;
 
@@ -24,7 +30,7 @@ public class World {
     }
 
     public static void draw() {
-       Camera.setPosition(rocketPhys.getCentre().getX(), rocketPhys.getCentre().getY());
+        //Camera.setPosition(rocketPhys.getCentre().getX(), rocketPhys.getCentre().getY());
         for (Model model : models) {
             model.drawBackgroundLayer();
         }
@@ -102,7 +108,7 @@ public class World {
         models=new ArrayList<Model>();
         addModelBuffer=new LinkedList<Model>();
 
-        Random rnd=new Random();
+        /*
         float distance=4000f;
         for (int i=0; i<2; i++)
             for (int j=0; j<2; j++) {
@@ -110,13 +116,14 @@ public class World {
             }
 
         Model m=new GunModel(-10000, 10000, 250f);
-        rocketPhys=m.physic;
+        rocketPhys=m.physic;*/
 
-        /*
+        Random rnd=new Random();
         ArrayList<PhysicModel> bodies = new ArrayList<PhysicModel>();
         ArrayList<GraphicModel> graphicModels = new ArrayList<GraphicModel>();
         for (int i=0; i<2; i++)
             for (int j=0; j<2; j++) {
+                float distance = 4000f;
                 float width=rnd.nextInt(600)+600;
 
                 GeometricModel g2=new AsteroidGeometricModel(i*distance, j*distance, width);
@@ -128,7 +135,7 @@ public class World {
         matrix[1] = new boolean[]{true, true};
 
         ComplexModel m2 = new ComplexModel(new ComplexGraphicModel(graphicModels), new ComplexPhysicModel(bodies, matrix));
-        World.addModel(m2);   */
+        World.addModel(m2);
     }
 
 }

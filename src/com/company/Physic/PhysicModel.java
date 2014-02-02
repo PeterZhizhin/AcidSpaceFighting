@@ -22,6 +22,7 @@ public class PhysicModel {
     protected float w;
     //Угловое ускорение
     protected float beta;
+    protected Point centreOfRotation;
     //Момент инерции
     //TODO: Посчитать момент инерции треугольника. More: http://dxdy.ru/topic31945.html
     protected float J;
@@ -108,9 +109,10 @@ public class PhysicModel {
         }
         beta += deltaBeta;
         }
+
         }
         else
-            parent.addForce(new Segment(posOfForce, force));
+            parent.useForce(posOfForce,force);
     }
 
     private boolean applyIntersection(PhysicModel m, float deltaTime)
@@ -130,7 +132,7 @@ public class PhysicModel {
         //Далее идет куча закомментированного кода, это все для отладочного вывода
         if (intersection!=null)
         {
-            System.out.println("1");
+            //System.out.println("1");
             tempIntersection = body.getIntersection(m.body);
             //if (tempIntersection!=null)
             //    System.out.println("2");

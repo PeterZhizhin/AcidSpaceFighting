@@ -56,7 +56,7 @@ public class ComplexPhysicModel extends PhysicModel{
             body.speedVector = speedVector;
             body.w = this.w;
             body.acceleration = new Point(0,0);
-            //body.centreOfRotation = new Point(massCentre);
+            body.centreOfRotation = new Point(massCentre);
             body.beta = 0.0f;
         }
     }
@@ -108,9 +108,28 @@ public class ComplexPhysicModel extends PhysicModel{
                 fillAllConnected(i, wasVisited, adjacencyMatrix);
     }
 
-    private ArrayList<Segment> forceBuffer;
+    /*private ArrayList<Segment> forceBuffer;
     public void addForce(Segment s) {
         forceBuffer.add(s);
+    }*/
+    @Override
+    public void useForce(Point posOfForce, Point force)
+    {
+        acceleration.move(force.multiply(1.0f/mass));
+        //speedVector.move(force.multiply(deltaTime/mass));
+
+        if (massCentre.getDistanceToPoint(posOfForce)>=Point.epsilon)
+        {
+            double deltaBeta = force.getLength()/J*Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
+                    (massCentre, posOfForce, posOfForce.add(force));
+            //Получаем знак
+            //Если конец вектора лежит в правой полуплоскости относительно прямой, проходящей через центр масс и точку приложения силы
+            //То вращается вправо (знак минус), иначе влево
+            if (Point.getDirection(posOfForce.add(force), massCentre, posOfForce)) {
+                deltaBeta = -deltaBeta;
+            }
+            beta += deltaBeta;
+        }
     }
 
     /**
@@ -123,7 +142,8 @@ public class ComplexPhysicModel extends PhysicModel{
         this.bodies = bodies;
         this.adjacencyMatrix = adjacencyMatrix;
         //if (bodies.size() != adjacencyMatrix.length | getComponents().size()!=1)
-        //    throw new IllegalArgumentException("Adjacency matrix should have only one connected component. And number of bodies and points in graph should be the same");
+        //    throw new IllegalArgumentException("Adjacency matrix should have only one connected component.
+        // And number of bodies and points in graph should be the same");
         mass = 0;
         massCentre = new Point(0,0);
         speedVector = new Point(0,0);
@@ -139,6 +159,7 @@ public class ComplexPhysicModel extends PhysicModel{
         for (PhysicModel body : this.bodies)
         {
             J+=body.J; J+=body.mass*body.getCentre().getLengthSquared(this.massCentre);
+            body.setParent(this);
         }
         acceleration = new Point(0,0);
     }
