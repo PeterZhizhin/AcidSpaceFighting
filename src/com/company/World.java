@@ -8,6 +8,7 @@ import com.company.Graphic.GraphicModel;
 import com.company.Models.Asteroid.AsteroidGeometricModel;
 import com.company.Models.Asteroid.AsteroidGraphicModel;
 import com.company.Models.Asteroid.AsteroidModel;
+import com.company.Models.Engine.EngineModel;
 import com.company.Models.Gun.GunModel;
 import com.company.Physic.ComplexPhysicModel;
 import com.company.Physic.PhysicModel;
@@ -44,13 +45,9 @@ public class World {
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
             rocketPhys.doSpecialActionA(deltaTime);
         }
-        else
-        if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-            rocketPhys.doSpecialActionB(deltaTime);
-        }
-        else
-        if (Keyboard.isKeyDown(Keyboard.KEY_X)) {
-            rocketPhys.doSpecialActionC(deltaTime);
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
+            rocketPhys2.doSpecialActionA(deltaTime);
         }
 
         boolean  wasIntersection = true; byte n = 0;
@@ -103,39 +100,23 @@ public class World {
 
     private static LinkedList<Model> addModelBuffer;
     private static PhysicModel rocketPhys;
+    private static PhysicModel rocketPhys2;
 
     public static void init() {
         models=new ArrayList<Model>();
         addModelBuffer=new LinkedList<Model>();
 
-        /*
-        float distance=4000f;
-        for (int i=0; i<2; i++)
-            for (int j=0; j<2; j++) {
-                models.add(new AsteroidModel(i*distance, j*distance, rnd.nextInt(600)+600));
-            }
+        Model m=new EngineModel(-10000, 10000, 250f);
+        rocketPhys=m.physic;
 
-        Model m=new GunModel(-10000, 10000, 250f);
-        rocketPhys=m.physic;*/
+        Model m2=new EngineModel(-9000, 10000, 250f);
+        rocketPhys2=m.physic;
 
-        Random rnd=new Random();
-        ArrayList<PhysicModel> bodies = new ArrayList<PhysicModel>();
-        ArrayList<GraphicModel> graphicModels = new ArrayList<GraphicModel>();
-        for (int i=0; i<2; i++)
-            for (int j=0; j<2; j++) {
-                float distance = 4000f;
-                float width=rnd.nextInt(600)+600;
+        ComplexModel m3 = new ComplexModel();
+        m3.add(m);
+        m3.add(m2);
 
-                GeometricModel g2=new AsteroidGeometricModel(i*distance, j*distance, width);
-                bodies.add(new PhysicModel(g2, width));
-                graphicModels.add(new AsteroidGraphicModel(g2));
-            }
-        boolean[][] matrix = new boolean[2][2];
-        matrix[0] = new boolean[]{true, true};
-        matrix[1] = new boolean[]{true, true};
-
-        ComplexModel m2 = new ComplexModel(new ComplexGraphicModel(graphicModels), new ComplexPhysicModel(bodies, matrix));
-        World.addModel(m2);
+        World.addModel(m3);
     }
 
 }
