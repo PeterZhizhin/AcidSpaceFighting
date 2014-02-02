@@ -41,7 +41,7 @@ public class GeometricModel {
 
     //Rotate model
     public void rotate(float angle) {
-        this.angle += angle;
+        /*this.angle += angle;
 
         //Совместимость
         for (Point vertex : vertexes) {
@@ -52,6 +52,25 @@ public class GeometricModel {
 
         //Создаем матрицу для поворота на этот угол
         Matrix3fGeometry.createRotationMatrix(this.angle, rotationMatrix);
+        incCalculations();*/
+        rotate(centre, angle);
+    }
+
+    public void rotate(Point centreOfRotation, float angle)
+    {
+        for (Point vertex : vertexes)
+        {
+            vertex.rotate(angle, centreOfRotation);
+        }
+
+        this.angle += angle;
+        while (this.angle >= PI2) this.angle -= PI2;
+        while (this.angle <= 0) this.angle += PI2;
+
+        centre.rotate(angle, centreOfRotation);
+
+        Matrix3fGeometry.createRotationMatrix(this.angle, rotationMatrix);
+        Matrix3fGeometry.createTranslateMatrix(centre.getVector2f(), translateMatrix);
         incCalculations();
     }
 
@@ -84,15 +103,15 @@ public class GeometricModel {
     //Get intersection between 2 models. If it is not exists - return null
     public Segment getIntersection(GeometricModel model) {
 
-        if (centre.getBrutalLength(model.centre) > this.maxLength + model.maxLength)
-            return null;
+        /*if (centre.getBrutalLength(model.centre) > this.maxLength + model.maxLength)
+            return null;*/
 
-        /*float maxLength = this.maxLength + model.maxLength;
+        float maxLength = this.maxLength + model.maxLength;
         maxLength*=maxLength;
 
         if (centre.getLengthSquared(model.centre) > maxLength)
             return null;
-         */
+
 
 
         for (int i=0; i<model.getPointCount(); i++)

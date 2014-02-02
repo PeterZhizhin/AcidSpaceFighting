@@ -3,6 +3,8 @@ package com.company;
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
+import com.company.Graphic.ComplexGraphicModel;
+import com.company.Graphic.GraphicModel;
 import com.company.Models.Asteroid.AsteroidGeometricModel;
 import com.company.Models.Asteroid.AsteroidGraphicModel;
 import com.company.Models.GunEngine.GunGeometricModel;
@@ -11,6 +13,7 @@ import com.company.Models.GunEngine.GunPhysicModel;
 import com.company.Models.RocketEngine.RocketEngineGeometricModel;
 import com.company.Models.RocketEngine.RocketEngineGraphicModel;
 import com.company.Models.RocketEngine.RocketEnginePhysicModel;
+import com.company.Physic.ComplexPhysicModel;
 import com.company.Physic.PhysicModel;
 import org.lwjgl.input.Keyboard;
 
@@ -31,7 +34,7 @@ public class World {
     }
 
     public static void draw() {
-        Camera.setPosition(rocket.getCentre().getX(), rocket.getCentre().getY());
+       // Camera.setPosition(rocket.getCentre().getX(), rocket.getCentre().getY());
         for (Model model : models) {
             model.drawBackgroundLayer();
         }
@@ -105,7 +108,7 @@ public class World {
         models=new ArrayList<Model>();
         addModelBuffer=new LinkedList<Model>();
 
-        Random rnd=new Random();
+        /*Random rnd=new Random();
         for (int i=0; i<2; i++)
             for (int j=0; j<2; j++) {
                 float width=rnd.nextInt(600)+600;
@@ -113,7 +116,7 @@ public class World {
 
 
                 GeometricModel g=new AsteroidGeometricModel(i*distance, j*distance, width);
-                PhysicModel p = new PhysicModel(g, width*100);
+                PhysicModel p = new PhysicModel(g, width);
                 Model m=new Model(new AsteroidGraphicModel(g), p);
                 models.add(m);
             }
@@ -123,7 +126,26 @@ public class World {
         PhysicModel e=new GunPhysicModel(g, 15f);
         rocketPhys=e;
         Model m=new Model(new GunGraphicModel(g), e);
-        models.add(m);
+        models.add(m);*/
+
+        Random rnd=new Random();
+        ArrayList<PhysicModel> bodies = new ArrayList<PhysicModel>();
+        ArrayList<GraphicModel> graphicModels = new ArrayList<GraphicModel>();
+        for (int i=0; i<2; i++)
+            for (int j=0; j<2; j++) {
+                float width=rnd.nextInt(600)+600;
+                float distance=4000f;
+
+
+                GeometricModel g=new AsteroidGeometricModel(i*distance, j*distance, width);
+                bodies.add(new PhysicModel(g, width));
+                graphicModels.add(new AsteroidGraphicModel(g));
+            }
+        boolean[][] matrix = new boolean[2][2];
+        matrix[0] = new boolean[]{true, true};
+        matrix[1] = new boolean[]{true, true};
+
+        Model m = new Model(new ComplexGraphicModel(graphicModels), new ComplexPhysicModel(bodies, matrix));
     }
 
 }

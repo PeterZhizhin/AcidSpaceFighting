@@ -11,7 +11,7 @@ import com.company.World;
 public class GunPhysicModel extends PhysicModel{
 
     public void doSpecialActionA(float deltaTime) {
-        GeometricModel g=new AsteroidGeometricModel(getCenter().getX(), getCenter().getY(), 100f);
+        GeometricModel g=new AsteroidGeometricModel(getCentre().getX(), getCentre().getY(), 100f);
         PhysicModel p = new PhysicModel(g, 1000f);
         Model m=new Model(new AsteroidGraphicModel(g), p);
         g.move(new Point(300f, 300f));

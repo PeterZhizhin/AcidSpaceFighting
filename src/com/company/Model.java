@@ -31,7 +31,7 @@ public class Model {
     }
 
     public Point getCenter() {
-        return physic.getCenter();
+        return physic.getCentre();
     }
 
     public Model(GraphicModel g, PhysicModel p) {

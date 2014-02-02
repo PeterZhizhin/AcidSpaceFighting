@@ -133,7 +133,7 @@ public class PhysicModel {
         //Далее идет куча закомментированного кода, это все для отладочного вывода
         if (intersection!=null)
         {
-            //System.out.println("1");
+            System.out.println("1");
             tempIntersection = body.getIntersection(m.body);
             //if (tempIntersection!=null)
             //    System.out.println("2");
@@ -268,7 +268,7 @@ public class PhysicModel {
         return crossWithGeometricModel(m, deltaTime);
     }
 
-    public Point getCenter() {
+    public Point getCentre() {
         return body.getCentre();
     }
 
