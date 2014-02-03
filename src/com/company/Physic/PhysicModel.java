@@ -4,6 +4,7 @@ import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Geometry.Segment;
 
+
 public class PhysicModel {
 
     private static final double G=10f;//G is the gravitational constant
@@ -14,6 +15,27 @@ public class PhysicModel {
     protected Point speedVector;
     protected Point acceleration;
     protected ComplexPhysicModel parent;
+
+    private Point[] connectionPoints;
+    private boolean[] isConnectionFree;
+    public int getConnectionPointsCount()
+    {
+        return connectionPoints.length;
+    }
+    public Point getConnectionPoint(int index)
+    {
+        return connectionPoints[index];
+    }
+    public boolean getIsConnectionPointFree(int index)
+    {
+        return isConnectionFree[index];
+    }
+
+
+    public boolean getIsComplex()
+    {
+        return false;
+    }
 
 
     //Да, по-идее, все эти величины нужно делать трехмерными векторами.
@@ -47,9 +69,23 @@ public class PhysicModel {
     public void doSpecialActionC(float deltaTime) {
     }
 
+    protected void rotate(Point centre,float angle)
+    {
+        body.rotate(centre,angle);
+        for (Point connectionPoint : connectionPoints)
+            connectionPoint.rotate(angle, centre);
+    }
+    protected void move(Point dS)
+    {
+        body.move(dS);
+        for (Point connectionPoint : connectionPoints)
+            connectionPoint.move(dS);
+    }
+
     public void updateMotion(float deltaTime) {
-        body.move(getMoveVector(deltaTime));
         body.rotate(getRotationAngle(deltaTime));
+        body.move(getMoveVector(deltaTime));
+        centreOfRotation.move(getMoveVector(deltaTime));
         updateKinematic(deltaTime);
     }
 
@@ -121,10 +157,10 @@ public class PhysicModel {
         GeometricModel g1=new GeometricModel(body);
         GeometricModel g2=new GeometricModel(m.body);
 
+        g1.rotate(centreOfRotation, getRotationAngle(deltaTime));
+        g2.rotate(centreOfRotation, m.getRotationAngle(deltaTime));
         g1.move(getMoveVector(deltaTime));
-        g1.rotate(getRotationAngle(deltaTime));
         g2.move(m.getMoveVector(deltaTime));
-        g2.rotate(m.getRotationAngle(deltaTime));
 
         Segment intersection=g1.getIntersection(g2);
         Segment tempIntersection = null;
@@ -203,13 +239,8 @@ public class PhysicModel {
 
             //speedVector = v1; m.speedVector = v2;
 
-            GeometricModel g11=new GeometricModel(body);
-            GeometricModel g21=new GeometricModel(m.body);
-
-            g11.move(getMoveVector(deltaTime));
-            g11.rotate(getRotationAngle(deltaTime));
-            g21.move(m.getMoveVector(deltaTime));
-            g21.rotate(m.getRotationAngle(deltaTime));
+            //GeometricModel g11=new GeometricModel(body);
+            //GeometricModel g21=new GeometricModel(m.body);
 
 
             //Segment intersection1=g11.getIntersection(g21);
@@ -240,31 +271,41 @@ public class PhysicModel {
 
     public void applyStaticForces(PhysicModel m, float deltaTime)
     {
-        //gravitation
-        double lengthBetweenCenters = body.getCentre().getLengthSquared(m.body.getCentre());
-        double gravity=G*mass*m.mass/lengthBetweenCenters;
-
-        //lengthBetweenCenters = Math.sqrt(lengthBetweenCenters);
-        double dx=(-body.getCentre().getX()+m.body.getCentre().getX())*gravity;
-        double dy=(-body.getCentre().getY()+m.body.getCentre().getY())*gravity;
-
-        Point force = new Point(dx,dy);
-        GeometricModel g1 = new GeometricModel(body);
-        GeometricModel g2 = new GeometricModel(m.body);
-
-        g1.move(getMoveVector(deltaTime).add(force.multiply(deltaTime * deltaTime / mass / 2.0f)));
-        g2.move(m.getMoveVector(deltaTime).add(force.multiply(-deltaTime * deltaTime / mass / 2.0f)));
-        g1.rotate(getRotationAngle(deltaTime));
-        g2.rotate(m.getRotationAngle(deltaTime));
-        if (g1.getIntersection(g2)==null)
+        if (!m.getIsComplex())
         {
-            useForce(body.getCentre(), force);
-            m.useForce(m.body.getCentre(), force.negate());
+            //gravitation
+            double lengthBetweenCenters = body.getCentre().getLengthSquared(m.body.getCentre());
+            double gravity=G*mass*m.mass/lengthBetweenCenters;
+
+            //lengthBetweenCenters = Math.sqrt(lengthBetweenCenters);
+            double dx=(-body.getCentre().getX()+m.body.getCentre().getX())*gravity;
+            double dy=(-body.getCentre().getY()+m.body.getCentre().getY())*gravity;
+
+            Point force = new Point(dx,dy);
+            GeometricModel g1 = new GeometricModel(body);
+            GeometricModel g2 = new GeometricModel(m.body);
+
+            g1.rotate(centreOfRotation, getRotationAngle(deltaTime));
+            g2.rotate(centreOfRotation, m.getRotationAngle(deltaTime));
+            g1.move(getMoveVector(deltaTime).add(force.multiply(deltaTime * deltaTime / mass / 2.0f)));
+            g2.move(m.getMoveVector(deltaTime).add(force.multiply(-deltaTime * deltaTime / mass / 2.0f)));
+            if (g1.getIntersection(g2)==null)
+            {
+                useForce(body.getCentre(), force);
+                m.useForce(m.body.getCentre(), force.negate());
+            }
+        }
+        else
+        {
+            m.applyStaticForces(this, deltaTime);
         }
     }
 
     public boolean crossThem(PhysicModel m, float deltaTime) {
-        return crossWithGeometricModel(m, deltaTime);
+        if (!m.getIsComplex())
+            return crossWithGeometricModel(m, deltaTime);
+        else
+            return m.crossWithGeometricModel(this, deltaTime);
     }
 
     public Point getCentre() {
@@ -284,6 +325,16 @@ public class PhysicModel {
         this.acceleration=new Point(0,0);
         this.w = 0;
         this.beta = 0;
+        this.centreOfRotation = body.getCentre();
+    }
+
+    public PhysicModel(GeometricModel body, Point[] connectionPoints,  float mass)
+    {
+        this(body, mass);
+        this.connectionPoints = connectionPoints;
+        this.isConnectionFree = new boolean[connectionPoints.length];
+        for (int i=0; i< isConnectionFree.length; i++)
+            isConnectionFree[i] = true;
     }
 
 }

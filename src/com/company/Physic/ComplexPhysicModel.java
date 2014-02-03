@@ -24,13 +24,59 @@ public class ComplexPhysicModel extends PhysicModel{
         return massCentre;
     }
 
+    @Override
+    public int getConnectionPointsCount()
+    {
+        int result = 0;
+        for (PhysicModel body : bodies)
+            result+=body.getConnectionPointsCount();
+        return result;
+    }
+    @Override
+    public Point getConnectionPoint(int index)
+    {
+        int bodyNo = 0;
+        while (index >= 0)
+        {
+            index-=bodies.get(bodyNo).getConnectionPointsCount();
+            bodyNo++;
+        }
+        bodyNo--;
+        index+=bodies.get(bodyNo).getConnectionPointsCount();
+        return bodies.get(bodyNo).getConnectionPoint(index);
+    }
+    @Override
+    public boolean getIsConnectionPointFree(int index)
+    {
+        int bodyNo = 0;
+        while (index >= 0)
+        {
+            index-=bodies.get(bodyNo).getConnectionPointsCount();
+            bodyNo++;
+        }
+        bodyNo--;
+        index+=bodies.get(bodyNo).getConnectionPointsCount();
+        return bodies.get(bodyNo).getIsConnectionPointFree(index);
+    }
+    private int getBodyByIndex(int index)
+    {
+        int bodyNo = 0;
+        while (index >= 0)
+        {
+            index-=bodies.get(bodyNo).getConnectionPointsCount();
+            bodyNo++;
+        }
+        bodyNo--;
+        return bodyNo;
+    }
+
     //Статические силы теперь тоже применяются ко всей системе
     @Override
     public void applyStaticForces(PhysicModel m, float deltaTime)
     {
         for (PhysicModel body : bodies)
             body.applyStaticForces(m, deltaTime);
-    };
+    }
 
     //Здесь нужно передать изменения всей системе тел
     @Override
@@ -70,6 +116,10 @@ public class ComplexPhysicModel extends PhysicModel{
      */
     @Override
     public boolean crossThem(PhysicModel m, float deltaTime)
+    {
+        return false;
+    }
+    public boolean crossThem(ComplexPhysicModel m, float deltaTime)
     {
         return false;
     }
@@ -164,13 +214,37 @@ public class ComplexPhysicModel extends PhysicModel{
         acceleration = new Point(0,0);
     }
 
-    public void add(PhysicModel p) {
-        //TODO: РЕАЛИЗОВАТЬ, БЛЕА
+    public void add(PhysicModel p, int addPointIndex)
+    {
+        if (bodies.size()>0)
+        {
+            int bodyIndex = getBodyByIndex(addPointIndex);
+            bodies.add(p);
+            boolean[][] tempAdjacency = new boolean[adjacencyMatrix.length][adjacencyMatrix[0].length];
+            for (int i=0; i<tempAdjacency.length; i++)
+                for (int j=0; j<tempAdjacency[i].length; j++)
+                    tempAdjacency[i][j] = adjacencyMatrix[i][j];
+            adjacencyMatrix = new boolean[adjacencyMatrix.length+1][adjacencyMatrix[1].length+1];
+            for (int i=0; i<tempAdjacency.length; i++)
+                for (int j=0; j<tempAdjacency[i].length; j++)
+                    adjacencyMatrix[i][j] = tempAdjacency[i][j];
+            int newBodyIndex = adjacencyMatrix.length-1;
+            adjacencyMatrix[newBodyIndex][newBodyIndex] = true;
+            adjacencyMatrix[bodyIndex][newBodyIndex] = true;
+            adjacencyMatrix[newBodyIndex][bodyIndex] = true;
+        }
+        else
+        {
+            bodies.add(p);
+            adjacencyMatrix = new boolean[1][1];
+            adjacencyMatrix[0][0] = true;
+        }
     }
 
     public ComplexPhysicModel() {
         super(null, 0);
-        //TODO: РЕАЛИЗОВАТЬ, БЛЕА
+        bodies = new ArrayList<PhysicModel>();
+        adjacencyMatrix = new boolean[0][0];
     }
 
 }
