@@ -21,15 +21,15 @@ public class Rectangle {
     }
 
     public boolean contains(float xPos, float yPos) {
-        return (xPos>x && xPos<x2 && yPos>y && yPos<y2);
+        return (xPos > x && xPos < x2 && yPos > y && yPos < y2);
     }
 
     public Rectangle(float x, float y, float w, float h) {
-        this.x=x;
-        this.y=y;
-        this.w=w;
-        this.h=h;
-        x2=x+w;
-        y2=y+h;
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        x2 = x + w;
+        y2 = y + h;
     }
 }

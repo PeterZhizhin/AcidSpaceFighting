@@ -13,47 +13,45 @@ public class Point {
         float a1 = точкаПрямой2.getY() - точкаПрямой1.getY();
         float b1 = точкаПрямой1.getX() - точкаПрямой2.getX();
         float c1 = точкаПрямой1.getY() * b1 + точкаПрямой1.getX() * a1;
-        double result = Math.abs(a1*точка.getX()+b1*точка.getY()+c1)/Math.sqrt(a1*a1+b1*b1);
-        if (result<=Point.epsilon)
+        double result = Math.abs(a1 * точка.getX() + b1 * точка.getY() + c1) / Math.sqrt(a1 * a1 + b1 * b1);
+        if (result <= Point.epsilon)
             return 0;
         else return result;
     }
 
     /**
      * Получаем полуплоскость, в которой лежит точка относительно прямой
+     *
      * @param point Исследуемая точка
-     * @param p1  Первая точка
-     * @param p2  Вторая точка
+     * @param p1    Первая точка
+     * @param p2    Вторая точка
      * @return Какую-то из полуплоскостей (какую - фиг поймешь)
      */
-    public static boolean getDirection(Point point, Point p1, Point p2)
-    {
+    public static boolean getDirection(Point point, Point p1, Point p2) {
         float a1 = p2.getY() - p1.getY();
         float b1 = p1.getX() - p2.getX();
         float c1 = p1.getY() * b1 + p1.getX() * a1;
 
-        return (a1*point.getX() + b1*point.getY() + c1)>0;
+        return (a1 * point.getX() + b1 * point.getY() + c1) > 0;
     }
 
     //p1p2p3-angle
     public static Point getBisection(Point p1, Point p2, Point p3) {
-          return new Point((p3.x+p1.x)/2-p2.x, (p3.y+p1.y)/2-p2.y);
+        return new Point((p3.x + p1.x) / 2 - p2.x, (p3.y + p1.y) / 2 - p2.y);
     }
 
-    public Point add(Point v2)
-    {
+    public Point add(Point v2) {
         return new Point(x + v2.x, y + v2.y);
     }
 
-    public Point negate()
-    {
-        return new Point(-x,-y);
+    public Point negate() {
+        return new Point(-x, -y);
     }
 
     public void normalise() {
-        float length= (float) Math.sqrt(x*x+y*y);
-        x/=length;
-        y/=length;
+        float length = (float) Math.sqrt(x * x + y * y);
+        x /= length;
+        y /= length;
     }
 
     public static Point getNormal(Point p1, Point p2) {
@@ -76,32 +74,29 @@ public class Point {
      * @param vector2 2 вектор
      * @return Скалярное произведение векторов
      */
-    public static float getScalarMultiply(Point vector1, Point vector2)
-    {
+    public static float getScalarMultiply(Point vector1, Point vector2) {
         return vector1.x * vector2.x + vector1.y * vector2.y;
     }
 
-    public float getBrutalLength(Point p2)
-    {
+    public float getBrutalLength(Point p2) {
         return Math.abs(x - p2.x) + Math.abs(y - p2.y);
     }
 
-    public float getLengthSquared(Point p2)
-    {
+    public float getLengthSquared(Point p2) {
         float dx = x - p2.x;
         float dy = y - p2.y;
-        return dx*dx + dy*dy;
+        return dx * dx + dy * dy;
     }
 
     public double getDistanceToPoint(Point p) {
-        float dx=x-p.x;
-        float dy=y-p.y;
-        dx*=dx; dy*=dy;
-        return Math.sqrt(dx+dy);
+        float dx = x - p.x;
+        float dy = y - p.y;
+        dx *= dx;
+        dy *= dy;
+        return Math.sqrt(dx + dy);
     }
 
-    public double getLength()
-    {
+    public double getLength() {
         return getDistanceToPoint(new Point(0, 0));
     }
 
@@ -128,37 +123,37 @@ public class Point {
     }
 
     public void rotate(float angle, Point center) {
-        float ax=x-center.x;
-        float ay=y-center.y;
+        float ax = x - center.x;
+        float ay = y - center.y;
 
-        double newX=ax*Math.cos(angle)-ay*Math.sin(angle);
-        double newY=ax*Math.sin(angle)+ay*Math.cos(angle);
-        x= (float) newX+center.x;
-        y= (float) newY+center.y;
+        double newX = ax * Math.cos(angle) - ay * Math.sin(angle);
+        double newY = ax * Math.sin(angle) + ay * Math.cos(angle);
+        x = (float) newX + center.x;
+        y = (float) newY + center.y;
     }
 
     /**
      * Умножает вектор на скаляр
+     *
      * @param scalar Скаляр
      */
-    public Point multiply(float scalar)
-    {
-        return new Point(x*scalar, y*scalar);
+    public Point multiply(float scalar) {
+        return new Point(x * scalar, y * scalar);
     }
 
     public void move(float dx, float dy) {
-        x+=dx;
-        y+=dy;
+        x += dx;
+        y += dy;
     }
 
     public void move(Point p) {
-        x+=p.x;
-        y+=p.y;
+        x += p.x;
+        y += p.y;
     }
 
     public void set(float x, float y) {
-        this.x=x;
-        this.y=y;
+        this.x = x;
+        this.y = y;
     }
 
     public void set(Point p) {
@@ -173,30 +168,28 @@ public class Point {
         return y;
     }
 
-    public Point(double x, double y)
-    {
-        this.x = (float)x;
-        this.y = (float)y;
+    public Point(double x, double y) {
+        this.x = (float) x;
+        this.y = (float) y;
     }
 
     /**
      * Получаем Vector2f из точки
+     *
      * @return Vector2f из точки
      */
-    public Vector2f getVector2f()
-    {
-        return new Vector2f(x,y);
+    public Vector2f getVector2f() {
+        return new Vector2f(x, y);
     }
 
-    public Vector3f getVector3f()
-    {
-        return new Vector3f(x,y,1.0f);
+    public Vector3f getVector3f() {
+        return new Vector3f(x, y, 1.0f);
     }
 
 
     public Point(float x, float y) {
-        this.x=x;
-        this.y=y;
+        this.x = x;
+        this.y = y;
     }
 
     public Point(Point p) {
@@ -205,6 +198,6 @@ public class Point {
 
 
     public String toString() {
-        return x+" "+y;
+        return x + " " + y;
     }
 }

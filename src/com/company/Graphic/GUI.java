@@ -13,14 +13,14 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class GUI {
 
-    private static boolean lastStateButtonIsPressed=false;
-    private static int mouseDownX=0;
-    private static int mouseDownY=0;
+    private static boolean lastStateButtonIsPressed = false;
+    private static int mouseDownX = 0;
+    private static int mouseDownY = 0;
     private static ArrayList<Control> controls;
 
     public static void init() {
         FontDrawer.init();
-        controls=new ArrayList<Control>();
+        controls = new ArrayList<Control>();
         controls.add(new Label(20, 20, "It is text label which is control, read it.", true));
         controls.add(new Label(20, 50, "It is small text label which is control, read it.", false));
     }
@@ -28,25 +28,25 @@ public class GUI {
     public static void update() {
 
         int x = Mouse.getX();
-        int y=Display.getHeight()-Mouse.getY();
-        boolean buttonIsPressed=Mouse.isButtonDown(0);
+        int y = Display.getHeight() - Mouse.getY();
+        boolean buttonIsPressed = Mouse.isButtonDown(0);
 
         for (Control control : controls) {
             control.update(x, y, buttonIsPressed);
         }
 
-        boolean isPressed= Mouse.isButtonDown(0);
+        boolean isPressed = Mouse.isButtonDown(0);
         if (isPressed) {
-            int nowX=Mouse.getX();
-            int nowY=Display.getHeight()-Mouse.getY();
-              if (lastStateButtonIsPressed) {
+            int nowX = Mouse.getX();
+            int nowY = Display.getHeight() - Mouse.getY();
+            if (lastStateButtonIsPressed) {
 
-                 Camera.move(mouseDownX-nowX, mouseDownY-nowY);
-              }
-                  mouseDownX=nowX;
-                  mouseDownY=nowY;
+                Camera.move(mouseDownX - nowX, mouseDownY - nowY);
+            }
+            mouseDownX = nowX;
+            mouseDownY = nowY;
         }
-        lastStateButtonIsPressed=isPressed;
+        lastStateButtonIsPressed = isPressed;
         Camera.reScale(Mouse.getDWheel());
 
     }

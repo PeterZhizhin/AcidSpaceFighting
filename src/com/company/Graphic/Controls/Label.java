@@ -6,8 +6,8 @@ public class Label extends Control {
 
     public Label(int x, int y, String s, boolean isBig) {
         super(x, y, 0, 0);
-        text=s;
-        this.isBig=isBig;
+        text = s;
+        this.isBig = isBig;
     }
 
     public void update(int x, int y, boolean isDown) {

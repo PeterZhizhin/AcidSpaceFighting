@@ -25,8 +25,7 @@ public class Model {
         physic.updateMotion(deltaTime);
     }
 
-    public void updateStaticForces(Model p, float deltaTime)
-    {
+    public void updateStaticForces(Model p, float deltaTime) {
         physic.applyStaticForces(p.physic, deltaTime);
     }
 
@@ -35,7 +34,7 @@ public class Model {
     }
 
     public Model(GraphicModel g, PhysicModel p) {
-        graphic=g;
-        physic=p;
+        graphic = g;
+        physic = p;
     }
 }

@@ -7,11 +7,11 @@ public class Segment {
     private Point end;
 
     public void setStart(Point p) {
-        start=p;
+        start = p;
     }
 
     public void setEnd(Point p) {
-        end=p;
+        end = p;
     }
 
     public Point getStart() {
@@ -23,8 +23,8 @@ public class Segment {
     }
 
     public Segment(Point start, Point end) {
-        this.start=start;
-        this.end=end;
+        this.start = start;
+        this.end = end;
     }
 
 }

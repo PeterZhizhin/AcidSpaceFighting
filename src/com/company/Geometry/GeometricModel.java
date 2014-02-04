@@ -8,8 +8,7 @@ public class GeometricModel {
     private int numberOfCalculations = 0;
     private static final int maxNumberOfCalculations = 10000;
 
-    private void incCalculations()
-    {
+    private void incCalculations() {
         numberOfCalculations++;
         if (numberOfCalculations > maxNumberOfCalculations)
             backupVertexes();
@@ -19,10 +18,10 @@ public class GeometricModel {
     private Matrix3f scaleMatrix = new Matrix3f();    //Матрица масштаба
     private Matrix3f translateMatrix = new Matrix3f(); //Матрица переноса
 
-    private Matrix3f resultMatrix = (Matrix3f)new Matrix3f().setIdentity(); //Результирующая матрица, умножив на неё радиус вектор точки - мы получим результирующую точку
+    private Matrix3f resultMatrix = (Matrix3f) new Matrix3f().setIdentity(); //Результирующая матрица, умножив на неё радиус вектор точки - мы получим результирующую точку
 
     private Point[] rawVertexes; //"сырые" (не преобразованные точки)
-                                 //Точки должны задаваться в системе координат, связанной с центром масс тела
+    //Точки должны задаваться в системе координат, связанной с центром масс тела
 
 
     private static final float PI2 = (float) (2 * Math.PI);
@@ -56,10 +55,8 @@ public class GeometricModel {
         rotate(centre, angle);
     }
 
-    public void rotate(Point centreOfRotation, float angle)
-    {
-        for (Point vertex : vertexes)
-        {
+    public void rotate(Point centreOfRotation, float angle) {
+        for (Point vertex : vertexes) {
             vertex.rotate(angle, centreOfRotation);
         }
 
@@ -107,28 +104,24 @@ public class GeometricModel {
             return null;*/
 
         float maxLength = this.maxLength + model.maxLength;
-        maxLength*=maxLength;
+        maxLength *= maxLength;
 
         if (centre.getLengthSquared(model.centre) > maxLength)
             return null;
 
 
-
-        for (int i=0; i<model.getPointCount(); i++)
-        {
-            for (int j=0; j<getPointCount(); j++)
-            {
+        for (int i = 0; i < model.getPointCount(); i++) {
+            for (int j = 0; j < getPointCount(); j++) {
                 Point p = Point.getIntersection(getPoint(j), getPoint(j + 1), model.getPoint(i), model.getPoint(i + 1));
-                if (p!=null) {
+                if (p != null) {
 
-                    double d1=p.getDistanceToPoint(model.getPoint(i))+ p.getDistanceToPoint(model.getPoint(i + 1));
-                    double d2=p.getDistanceToPoint(getPoint(j))+ p.getDistanceToPoint(getPoint(j + 1));
-                    if (d1<d2) {
+                    double d1 = p.getDistanceToPoint(model.getPoint(i)) + p.getDistanceToPoint(model.getPoint(i + 1));
+                    double d2 = p.getDistanceToPoint(getPoint(j)) + p.getDistanceToPoint(getPoint(j + 1));
+                    if (d1 < d2) {
                         return new Segment(p, Point.getNormal(model.getPoint(i), model.getPoint(i + 1)));
-                    }
-                    else {
+                    } else {
                         return new Segment(p, Point.getNormal(getPoint(j), getPoint(j + 1)));
-                }
+                    }
                 }
 
             }
@@ -152,21 +145,18 @@ public class GeometricModel {
     /**
      * Получаем результирующую матрицу (композицию всех преобразований)
      */
-    private void createResultMatrix()
-    {
+    private void createResultMatrix() {
         Matrix3f.setIdentity(resultMatrix);
         Matrix3f.mul(resultMatrix, translateMatrix, resultMatrix);
         Matrix3f.mul(resultMatrix, rotationMatrix, resultMatrix);
         Matrix3f.mul(resultMatrix, scaleMatrix, resultMatrix);
     }
 
-    public void backupVertexes()
-    {
+    public void backupVertexes() {
         //Пусть тут пока не будет ничего.
         createResultMatrix();
         vertexes = new Point[rawVertexes.length];
-        for (int i=0; i<vertexes.length; i++)
-        {
+        for (int i = 0; i < vertexes.length; i++) {
             Vector3f result = new Vector3f();
             Matrix3f.transform(resultMatrix, rawVertexes[i].getVector3f(), result);
             vertexes[i] = new Point(result.getX(), result.getY());
@@ -179,7 +169,7 @@ public class GeometricModel {
     }
 
     public Point getPoint(int pointNum) {
-        if (pointNum>=vertexes.length) pointNum-=vertexes.length;
+        if (pointNum >= vertexes.length) pointNum -= vertexes.length;
         return vertexes[pointNum];
     }
 
@@ -189,13 +179,13 @@ public class GeometricModel {
 
     public GeometricModel(GeometricModel g) {
         vertexes = new Point[g.getPointCount()];
-        for (int i=0; i<vertexes.length; i++)
-              vertexes[i]=new Point(g.getPoint(i));
+        for (int i = 0; i < vertexes.length; i++)
+            vertexes[i] = new Point(g.getPoint(i));
         centre = new Point(g.getCentre());
         maxLength = g.maxLength;
 
         rawVertexes = new Point[g.rawVertexes.length];
-        for (int i=0; i<rawVertexes.length; i++)
+        for (int i = 0; i < rawVertexes.length; i++)
             rawVertexes[i] = new Point(g.rawVertexes[i]);
 
         Matrix3f.load(g.rotationMatrix, rotationMatrix);
@@ -206,33 +196,30 @@ public class GeometricModel {
 
     /**
      * Создание модели
+     *
      * @param vertexes Точки тела
      */
-    public GeometricModel(Point[] vertexes)
-    {
+    public GeometricModel(Point[] vertexes) {
         //Кусок для совместимости
         this.vertexes = vertexes;
 
-        centre = new Point(0,0);
+        centre = new Point(0, 0);
 
-        for (Point vertex: vertexes)
-        {
+        for (Point vertex : vertexes) {
             centre.move(vertex);
         }
         centre.set(centre.getX() / vertexes.length, centre.getY() / vertexes.length);
 
         //Получаем радиус окружности для отсечения
         maxLength = 0;
-        double max=0;
-        for (Point vertex : vertexes)
-        {
+        double max = 0;
+        for (Point vertex : vertexes) {
             max = Math.max(max, centre.getDistanceToPoint(vertex));
         }
-        maxLength=(float)max;
+        maxLength = (float) max;
 
         rawVertexes = new Point[vertexes.length];
-        for (int i=0; i<vertexes.length; i++)
-        {
+        for (int i = 0; i < vertexes.length; i++) {
             rawVertexes[i] = new Point(vertexes[i]);
             rawVertexes[i].move(centre.negate());
         }
@@ -246,7 +233,7 @@ public class GeometricModel {
         Matrix3fGeometry.createRotationMatrix(0.0f, rotationMatrix);
 
         //Создаем начальную матрицу масштаба
-        Matrix3fGeometry.createScaleMatrix(new Vector2f(1.0f,1.0f), scaleMatrix);
+        Matrix3fGeometry.createScaleMatrix(new Vector2f(1.0f, 1.0f), scaleMatrix);
     }
 
 

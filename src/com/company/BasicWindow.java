@@ -21,7 +21,7 @@ public abstract class BasicWindow {
     private String title;
 
     //Позволяет убить окно откуда угодно
-    public boolean isWorking=true;
+    public boolean isWorking = true;
 
     //Переменные для подсчёта FPS.
     //Variables for FPS counting
@@ -34,24 +34,24 @@ public abstract class BasicWindow {
     private long lastFrame = getWorkTime();
 
     /**
-     *Метод, позволяющий легко получить текущее время работы программы
-     *Method which helps you to get system time easily
+     * Метод, позволяющий легко получить текущее время работы программы
+     * Method which helps you to get system time easily
+     *
      * @return Время работы программы.
-     *         Current system time.
+     * Current system time.
      */
-    private long getWorkTime()
-    {
+    private long getWorkTime() {
         return (Sys.getTime() * 1000) / Sys.getTimerResolution();
     }
 
     /**
      * Метод для получения изменения времени между кадрами (потом будет передан в update(int deltaTime))
+     *
      * @return deltaTime between last frame and current time (it will be deltaTime in update(int deltaTime))
      */
-    private int getTimeSinceLastRedraw()
-    {
+    private int getTimeSinceLastRedraw() {
         long time = getWorkTime();
-        int delta = (int)(time - lastFrame);
+        int delta = (int) (time - lastFrame);
         lastFrame = time;
 
         return delta;
@@ -65,12 +65,10 @@ public abstract class BasicWindow {
      * Метод для обновления информации о FPS
      * Method which updates information about FPS
      */
-    private void updateFPS()
-    {
+    private void updateFPS() {
         //Если с момента последнего обновления FPS прошло больше 1 секунды, то надо обновить в заголовок этот FPS
         //If time since last FPS updates more than 1 sec then we update FPS info to title
-        if (getWorkTime() - lastFPS > 1000)
-        {
+        if (getWorkTime() - lastFPS > 1000) {
             setTitle(title + ": " + FPS);
             lastFPS += 1000;
             FPS = 0;
@@ -81,18 +79,18 @@ public abstract class BasicWindow {
     }
 
     /**
-     *
      * Инициализация дисплея и уход в бесконечный цикл обновления
      * Display initialization and going to forever update() drawTopLayer() cycle.
-     * @param width Ширина окна. Window Width.
-     * @param height Высота окна. Window Height.
+     *
+     * @param width     Ширина окна. Window Width.
+     * @param height    Высота окна. Window Height.
      * @param frameRate Блокировка фреймрейта (почему-то не работает). Lock frame rate (I don't know why but it does not work)
-     * @param title Заголовок окна. Window title.
+     * @param title     Заголовок окна. Window title.
      */
     public BasicWindow(int width, int height, int frameRate, String title) {
         try {
             this.title = title;
-            this.frameRate=frameRate;
+            this.frameRate = frameRate;
             Display.setDisplayMode(new DisplayMode(width, height));
             Display.create();
             Display.setVSyncEnabled(false);
@@ -108,8 +106,7 @@ public abstract class BasicWindow {
             glEnable(GL_POINT_SMOOTH);
             glEnable(GL_LINE_SMOOTH);
             glEnable(GL_POLYGON_SMOOTH);
-        }
-        catch (LWJGLException e) {
+        } catch (LWJGLException e) {
             System.err.println("Failed to setup display");
             exit();
         }
@@ -117,8 +114,7 @@ public abstract class BasicWindow {
 
     public void startWorking() {
 
-        while (!Display.isCloseRequested() && isWorking)
-        {
+        while (!Display.isCloseRequested() && isWorking) {
             update(getTimeSinceLastRedraw());
             updateFPS();
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -131,6 +127,7 @@ public abstract class BasicWindow {
     /**
      * Обновление
      * Update
+     *
      * @param deltaTime Время с предыдущего обновления. Time since last update.
      */
     protected void update(int deltaTime) {

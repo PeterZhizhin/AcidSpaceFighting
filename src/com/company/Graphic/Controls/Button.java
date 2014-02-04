@@ -15,7 +15,7 @@ public class Button extends Control {
     }
 
     public void drawBackground() {
-        int isSelectedInverted= gradations - isSelected-1;
+        int isSelectedInverted = gradations - isSelected - 1;
         colors[isSelectedInverted].bind();
         glVertex2f(x, y);
         glVertex2f(x, y2);
@@ -35,7 +35,7 @@ public class Button extends Control {
         if (contains(xPos, yPos)) {
             if (isDown && !oldIsDown)
                 event.run();
-            if (isSelected < gradations-1) isSelected++;
+            if (isSelected < gradations - 1) isSelected++;
         } else if (isSelected > 0) isSelected--;
         oldIsDown = isDown;
     }

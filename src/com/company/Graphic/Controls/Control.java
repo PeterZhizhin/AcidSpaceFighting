@@ -17,7 +17,7 @@ public class Control extends Rectangle {
         glVertex2f(x, y2);
         glVertex2f(x2, y2);
         glVertex2f(x2, y);
-        System.out.println(x+" "+y+" "+x2+" "+y2);
+        System.out.println(x + " " + y + " " + x2 + " " + y2);
     }
 
     public void drawTitle() {
@@ -25,7 +25,7 @@ public class Control extends Rectangle {
     }
 
     public void setText(String s) {
-         text=s;
+        text = s;
     }
 
     public String getText() {
@@ -37,18 +37,18 @@ public class Control extends Rectangle {
 
     public Control(int x, int y, int w, int h) {
         super(x, y, w, h);
-        text="";
+        text = "";
         if (!isInitialised) {
             colors = new Color[gradations];
 
-            for (int i = 1; i < gradations-1; i++) {
+            for (int i = 1; i < gradations - 1; i++) {
                 colors[i] = new Color(
                         (Control.niceGray.r * i + Control.niceWhite.r * (gradations - i)) / gradations,
                         (Control.niceGray.g * i + Control.niceWhite.g * (gradations - i)) / gradations,
                         (Control.niceGray.b * i + Control.niceWhite.b * (gradations - i)) / gradations);
             }
-            colors[0]= Control.niceWhite;
-            colors[gradations-1]= Control.niceGray;
+            colors[0] = Control.niceWhite;
+            colors[gradations - 1] = Control.niceGray;
 
             isInitialised = true;
         }
