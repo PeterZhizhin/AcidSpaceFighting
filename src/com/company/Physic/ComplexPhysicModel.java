@@ -191,6 +191,7 @@ public class ComplexPhysicModel extends PhysicModel {
             body.setParent(this);
         }
         acceleration = new Point(0, 0);
+        this.beta = 0;
     }
 
     public void setBase(PhysicModel p) {
@@ -210,7 +211,7 @@ public class ComplexPhysicModel extends PhysicModel {
         for (int i = 0; i < tempAdjacency.length; i++)
             for (int j = 0; j < tempAdjacency[i].length; j++)
                 tempAdjacency[i][j] = adjacencyMatrix[i][j];
-        adjacencyMatrix = new boolean[adjacencyMatrix.length + 1][adjacencyMatrix[1].length + 1];
+        adjacencyMatrix = new boolean[adjacencyMatrix.length + 1][adjacencyMatrix[0].length + 1];
 
         for (int i = 0; i < tempAdjacency.length; i++)
             for (int j = 0; j < tempAdjacency[i].length; j++)
