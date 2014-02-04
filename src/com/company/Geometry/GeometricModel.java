@@ -4,6 +4,8 @@ import org.lwjgl.util.vector.Matrix3f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
+import static com.company.Geometry.Point.getTriangleSquare;
+
 public class GeometricModel {
     private int numberOfCalculations = 0;
     private static final int maxNumberOfCalculations = 10000;
@@ -53,6 +55,18 @@ public class GeometricModel {
         Matrix3fGeometry.createRotationMatrix(this.angle, rotationMatrix);
         incCalculations();*/
         rotate(centre, angle);
+    }
+
+
+
+    public double getVolumePerDeep() {
+        double sumAggreagtor=0;
+
+        for (int i=2; i<rawVertexes.length; i++) {
+             sumAggreagtor+=getTriangleSquare(vertexes[0], vertexes[i-1], vertexes[i]);
+        }
+
+        return sumAggreagtor;
     }
 
     public void rotate(Point centreOfRotation, float angle) {
