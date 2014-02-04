@@ -42,8 +42,7 @@ public class World {
         }
 
         boolean wasIntersection = true;
-        byte n = 0;
-        while (wasIntersection & n <= 5) {
+        for (int n=0; wasIntersection & n <= 5; n++) {
             n++;
             wasIntersection = false;
             for (int i = 0; i < models.size() - 1; i++)
@@ -54,20 +53,19 @@ public class World {
                         wasIntersection = models.get(i).crossThem(models.get(j), deltaTime);
                 }
         }
+
         for (int i = 0; i < models.size() - 1; i++)
             for (int j = i + 1; j < models.size(); j++) {
                 models.get(i).updateStaticForces(models.get(j), deltaTime);
             }
+
         for (Model model : models) {
             model.updateMotion(deltaTime);
         }
 
-        models.addAll(addModelBuffer);
         if (addModelBuffer.size() > 0) {
+            models.addAll(addModelBuffer);
             addModelBuffer.clear();
-            for (int i = 0; i < models.size(); i++)
-                System.out.println(i + " : " + models.get(i).getCenter() + " " + models.get(i).physic.getCentre());
-            System.out.println("FUCK");
         }
     }
 

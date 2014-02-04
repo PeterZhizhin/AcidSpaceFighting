@@ -144,8 +144,8 @@ public abstract class BasicWindow {
      * Отчищаем память
      * Clear your memory
      */
-    protected void exit() {
-        System.out.println("Exiting");
+    public static void exit() {
+        System.out.println("[BasicWindow] Exiting");
         Display.destroy();
         Mouse.destroy();
         System.exit(0);

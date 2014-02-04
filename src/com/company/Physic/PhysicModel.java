@@ -1,5 +1,6 @@
 package com.company.Physic;
 
+import com.company.BasicWindow;
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Geometry.Segment;
@@ -318,7 +319,10 @@ public class PhysicModel {
         if (body != null) {
             centreOfRotation = body.getCentre();
         } else
-            System.out.println("[PhysicModel] Needs refactoring in constructor");
+        if (!this.getIsComplex()) {
+            System.err.println("[PhysicModel] Пустая тушка в конструкторе на входе");
+            BasicWindow.exit();
+        }
     }
 
     public PhysicModel(GeometricModel body, Point[] connectionPoints, float mass) {

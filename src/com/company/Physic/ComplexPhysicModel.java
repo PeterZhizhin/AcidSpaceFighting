@@ -1,13 +1,15 @@
 package com.company.Physic;
 
 import com.company.Geometry.Point;
-import com.company.Geometry.Segment;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ComplexPhysicModel extends PhysicModel {
 
+    public boolean getIsComplex() {
+        return true;
+    }
 
     //Массив тел в модели
     private ArrayList<PhysicModel> bodies;
@@ -171,22 +173,10 @@ public class ComplexPhysicModel extends PhysicModel {
         }
     }
 
-    /**
-     * Создание комплексной физической модели.
-     *
-     * @param bodies          Тела, входящие в систему
-     * @param adjacencyMatrix Матрица смежности. Длина матрицы должна совпадать с количеством тел в системе! Компонента у графа должна быть одна!
-     */
-    public ComplexPhysicModel(ArrayList<PhysicModel> bodies, boolean[][] adjacencyMatrix) {
-        super(null, 0);
-        this.bodies = bodies;
-        this.adjacencyMatrix = adjacencyMatrix;
-        //if (bodies.size() != adjacencyMatrix.length | getComponents().size()!=1)
-        //    throw new IllegalArgumentException("Adjacency matrix should have only one connected component.
-        // And number of bodies and points in graph should be the same");
-        mass = 0;
+    public void пересчитатьВсякиеТамЦентрыМассИПрочуюХрень () {
         massCentre = new Point(0, 0);
         speedVector = new Point(0, 0);
+        mass = 0;
         J = 0;
         for (PhysicModel body : this.bodies) {
             mass += body.mass;
@@ -208,6 +198,8 @@ public class ComplexPhysicModel extends PhysicModel {
         bodies.add(p);
         adjacencyMatrix = new boolean[1][1];
         adjacencyMatrix[0][0] = true;
+
+        пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
     }
 
     public void add(PhysicModel p, int addPointIndex) {
@@ -228,6 +220,8 @@ public class ComplexPhysicModel extends PhysicModel {
         adjacencyMatrix[newBodyIndex][newBodyIndex] = true;
         adjacencyMatrix[bodyIndex][newBodyIndex] = true;
         adjacencyMatrix[newBodyIndex][bodyIndex] = true;
+
+        пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
     }
 
     public ComplexPhysicModel() {
