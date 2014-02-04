@@ -10,7 +10,6 @@ public class EnginePhysicModel extends PhysicModel {
 
     public void doSpecialActionA(float deltaTime) {
         useForce(body.getCentre(), new Point(Math.cos(body.getAngle()), Math.sin(body.getAngle())).multiply(power));
-        System.out.println(getCentre());
     }
 
     public void doSpecialActionB(float deltaTime) {

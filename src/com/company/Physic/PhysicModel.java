@@ -132,14 +132,8 @@ public class PhysicModel {
             //speedVector.move(force.multiply(deltaTime/mass));
 
             if (body.getCentre().getDistanceToPoint(posOfForce) >= Point.epsilon) {
-                double deltaBeta = force.getLength() / J * Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
-                        (body.getCentre(), posOfForce, posOfForce.add(force));
-                //Получаем знак
-                //Если конец вектора лежит в правой полуплоскости относительно прямой, проходящей через центр масс и точку приложения силы
-                //То вращается вправо (знак минус), иначе влево
-                if (Point.getDirection(posOfForce.add(force), body.getCentre(), posOfForce)) {
-                    deltaBeta = -deltaBeta;
-                }
+                double deltaBeta = force.getLength() * Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
+                        (body.getCentre(), posOfForce, posOfForce.add(force)) / J;
                 beta += deltaBeta;
             }
 

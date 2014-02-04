@@ -100,7 +100,7 @@ public class World {
         rocketPhys = m.physic;
 
         Model m2 = new EngineModel(0, 1000, 250f);
-        rocketPhys2 = m.physic;
+        rocketPhys2 = m2.physic;
 
         ComplexModel m3 = new ComplexModel();
         m3.setBase(m);
