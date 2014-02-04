@@ -22,7 +22,7 @@ public class World {
     }
 
     public static void draw() {
-        //Camera.setPosition(rocketPhys.getCentre().getX(), rocketPhys.getCentre().getY());
+        Camera.setPosition(rocketPhys.getCentre().getX(), rocketPhys.getCentre().getY());
         for (Model model : models) {
             model.drawBackgroundLayer();
         }
@@ -99,7 +99,7 @@ public class World {
         Model m = new EngineModel(-10000, 10000, 250f);
         rocketPhys = m.physic;
 
-        Model m2 = new EngineModel(-9000, 10000, 250f);
+        Model m2 = new EngineModel(-10000, 9000, 250f);
         rocketPhys2 = m.physic;
 
         ComplexModel m3 = new ComplexModel();
