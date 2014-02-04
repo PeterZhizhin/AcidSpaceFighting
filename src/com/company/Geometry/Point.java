@@ -8,6 +8,18 @@ public class Point {
     private float x, y;
     public static final float epsilon = 0.0001f;
 
+    public static double getTriangleSquare(Point p1, Point p2, Point analRape) {
+
+        double l1=p1.getDistanceToPoint(p2);
+        double l2=p1.getDistanceToPoint(analRape);
+        double l3=p2.getDistanceToPoint(analRape);
+
+        double halfPerimeter=l1+l2+l3;
+        halfPerimeter/=2;
+
+        return Math.sqrt(halfPerimeter*(halfPerimeter-l1)*(halfPerimeter-l2)*(halfPerimeter-l3));
+    }
+
     public static double получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
             (Point точка, Point точкаПрямой1, Point точкаПрямой2) {
         //float a1 = точкаПрямой2.getY() - точкаПрямой1.getY();
