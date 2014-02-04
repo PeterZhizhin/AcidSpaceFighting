@@ -6,7 +6,7 @@ import com.company.Physic.PhysicModel;
 
 public class EnginePhysicModel extends PhysicModel {
 
-    private static final float power = 10000f;
+    private static final float power = 1000000f;
 
     public void doSpecialActionA(float deltaTime) {
         useForce(body.getCentre(), new Point(Math.cos(body.getAngle()), Math.sin(body.getAngle())).multiply(power));

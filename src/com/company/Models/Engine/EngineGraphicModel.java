@@ -12,7 +12,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class EngineGraphicModel extends GraphicModel {
 
     private int step = 0;
-    private static final int stepLimit = 8;
+    private static final int stepLimit = 2;
     private Random rnd = new Random();
 
     public void drawBackgroundLayer() {

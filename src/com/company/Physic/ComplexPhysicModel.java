@@ -80,6 +80,7 @@ public class ComplexPhysicModel extends PhysicModel {
     @Override
     public void updateMotion(float deltaTime) {
         Point dS = getMoveVector(deltaTime);
+        massCentre.move(dS);
         float angle = getRotationAngle(deltaTime);
         for (PhysicModel body : bodies) {
             body.body.rotate(massCentre, angle);
@@ -99,6 +100,7 @@ public class ComplexPhysicModel extends PhysicModel {
             body.centreOfRotation = new Point(massCentre);
             body.beta = 0.0f;
         }
+
     }
 
     //TODO: Припилить столкновение для: ComplexPhysicModel & ComplexPhysicModel; ComplexPhysicModel & PhysicModel

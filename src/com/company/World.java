@@ -35,10 +35,18 @@ public class World {
 
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
             rocketPhys.doSpecialActionA(deltaTime);
-            rocketPhys2.doSpecialActionA(deltaTime);
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
+            rocketPhys2.doSpecialActionA(deltaTime);
+        }
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+            rocketPhys.doSpecialActionB(deltaTime);
+        }
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
+            rocketPhys2.doSpecialActionB(deltaTime);
         }
 
         boolean wasIntersection = true;
@@ -103,8 +111,8 @@ public class World {
         rocketPhys2 = m2.physic;
 
         ComplexModel m3 = new ComplexModel();
-        m3.setBase(m);
-        m3.add(m2, 0);
+        m3.setBase(m2);
+        m3.add(m, 0);
 
         World.addModel(m3);
     }
