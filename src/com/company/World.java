@@ -35,10 +35,10 @@ public class World {
 
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
             rocketPhys.doSpecialActionA(deltaTime);
+            rocketPhys2.doSpecialActionA(deltaTime);
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
-            rocketPhys2.doSpecialActionA(deltaTime);
         }
 
         boolean wasIntersection = true;
@@ -96,10 +96,10 @@ public class World {
         models = new ArrayList<Model>();
         addModelBuffer = new LinkedList<Model>();
 
-        Model m = new EngineModel(-10000, 10000, 250f);
+        Model m = new EngineModel(0, 0, 250f);
         rocketPhys = m.physic;
 
-        Model m2 = new EngineModel(-10000, 9000, 250f);
+        Model m2 = new EngineModel(0, 1000, 250f);
         rocketPhys2 = m.physic;
 
         ComplexModel m3 = new ComplexModel();

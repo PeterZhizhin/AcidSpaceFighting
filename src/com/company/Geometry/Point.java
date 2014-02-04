@@ -10,11 +10,14 @@ public class Point {
 
     public static double получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
             (Point точка, Point точкаПрямой1, Point точкаПрямой2) {
-        float a1 = точкаПрямой2.getY() - точкаПрямой1.getY();
-        float b1 = точкаПрямой1.getX() - точкаПрямой2.getX();
-        float c1 = точкаПрямой1.getY() * b1 + точкаПрямой1.getX() * a1;
-        double result = Math.abs(a1 * точка.getX() + b1 * точка.getY() + c1) / Math.sqrt(a1 * a1 + b1 * b1);
-        if (result <= Point.epsilon)
+        //float a1 = точкаПрямой2.getY() - точкаПрямой1.getY();
+        //float b1 = точкаПрямой1.getX() - точкаПрямой2.getX();
+        //float c1 = точкаПрямой1.getY() * b1 + точкаПрямой1.getX() * a1;
+        float a = точкаПрямой1.y - точкаПрямой2.y;
+        float b = точкаПрямой2.x - точкаПрямой1.x;
+        float c = точкаПрямой1.x * точкаПрямой2.y - точкаПрямой2.x * точкаПрямой1.y;
+        double result = (a * точка.getX() + b * точка.getY() + c) / Math.sqrt(a * a + b * b);
+        if (Math.abs(result) <= Point.epsilon)
             return 0;
         else return result;
     }
@@ -28,11 +31,15 @@ public class Point {
      * @return Какую-то из полуплоскостей (какую - фиг поймешь)
      */
     public static boolean getDirection(Point point, Point p1, Point p2) {
-        float a1 = p2.getY() - p1.getY();
-        float b1 = p1.getX() - p2.getX();
-        float c1 = p1.getY() * b1 + p1.getX() * a1;
+        //float a1 = p2.getY() - p1.getY();
+        //float b1 = p1.getX() - p2.getX();
+        //float c1 = p1.getY() * b1 + p1.getX() * a1;
+        float a = p1.y - p2.y;
+        float b = p2.x - p1.x;
+        float c = p1.x * p2.y - p2.x * p1.y;
 
-        return (a1 * point.getX() + b1 * point.getY() + c1) > 0;
+        //return (a1 * point.getX() + b1 * point.getY() + c1) > 0;
+        return  (a*point.x + b*point.y + c) > 0;
     }
 
     //p1p2p3-angle
@@ -184,6 +191,9 @@ public class Point {
 
     public Vector3f getVector3f() {
         return new Vector3f(x, y, 1.0f);
+    }
+    public Vector3f getRealVector3f() {
+        return new Vector3f(x,y,0.0f);
     }
 
 

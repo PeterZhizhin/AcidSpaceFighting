@@ -1,6 +1,7 @@
 package com.company.Physic;
 
 import com.company.Geometry.Point;
+import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -161,14 +162,19 @@ public class ComplexPhysicModel extends PhysicModel {
         //speedVector.move(force.multiply(deltaTime/mass));
 
         if (massCentre.getDistanceToPoint(posOfForce) >= Point.epsilon) {
-            double deltaBeta = force.getLength() / J * Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
-                    (massCentre, posOfForce, posOfForce.add(force));
+            double length = Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации(massCentre, posOfForce, posOfForce.add(force));
+            double deltaBeta = force.getLength() * length / J;
             //Получаем знак
             //Если конец вектора лежит в правой полуплоскости относительно прямой, проходящей через центр масс и точку приложения силы
             //То вращается вправо (знак минус), иначе влево
             if (Point.getDirection(posOfForce.add(force), massCentre, posOfForce)) {
                 deltaBeta = -deltaBeta;
             }
+            Vector3f n = new Vector3f();
+            Vector3f.cross(posOfForce.add(massCentre.negate()).getRealVector3f(), force.getRealVector3f(), n);
+            n.scale(1.0f/J);
+
+            //System.out.println(n.toString() + " " + new Float(deltaBeta).toString());
             beta += deltaBeta;
         }
     }

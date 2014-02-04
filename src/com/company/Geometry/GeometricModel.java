@@ -10,8 +10,8 @@ public class GeometricModel {
 
     private void incCalculations() {
         numberOfCalculations++;
-        if (numberOfCalculations > maxNumberOfCalculations)
-            backupVertexes();
+        //if (numberOfCalculations > maxNumberOfCalculations)
+        //    backupVertexes();
     }
 
     private Matrix3f rotationMatrix = new Matrix3f(); //Матрица поворота
