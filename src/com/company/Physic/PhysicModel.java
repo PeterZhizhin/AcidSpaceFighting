@@ -79,6 +79,10 @@ public class PhysicModel {
             connectionPoint.move(dS);
     }
 
+    public void rotate(float s) {
+        body.rotate(s);
+    }
+
     public void updateMotion(float deltaTime) {
         body.rotate(getRotationAngle(deltaTime));
         body.move(getMoveVector(deltaTime));

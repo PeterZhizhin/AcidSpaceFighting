@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
+import com.company.Models.Base.BaseModel;
 import com.company.Models.Engine.EngineModel;
 import com.company.Physic.PhysicModel;
 import org.lwjgl.input.Keyboard;
@@ -33,20 +34,16 @@ public class World {
 
     public static void update(float deltaTime) {
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+        if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
             rocketPhys.doSpecialActionA(deltaTime);
         }
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
+        if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
             rocketPhys2.doSpecialActionA(deltaTime);
         }
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-            rocketPhys.doSpecialActionB(deltaTime);
-        }
-
-        if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-            rocketPhys2.doSpecialActionB(deltaTime);
+        if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
+            rocketPhys3.doSpecialActionA(deltaTime);
         }
 
         boolean wasIntersection = true;
@@ -99,6 +96,7 @@ public class World {
     private static LinkedList<Model> addModelBuffer;
     private static PhysicModel rocketPhys;
     private static PhysicModel rocketPhys2;
+    private static PhysicModel rocketPhys3;
 
     public static void init() {
         models = new ArrayList<Model>();
@@ -107,12 +105,22 @@ public class World {
         Model m = new EngineModel(0, 0, 250f);
         rocketPhys = m.physic;
 
-        Model m2 = new EngineModel(0, 1000, 250f);
+        Model m2 = new EngineModel(0, 500, 250f);
         rocketPhys2 = m2.physic;
 
+        Model m5 = new EngineModel(0, 1000, 250f);
+        rocketPhys3 = m5.physic;
+
+        Model m4 = new BaseModel(500, 0, 1250f);
+
         ComplexModel m3 = new ComplexModel();
-        m3.setBase(m2);
+        m3.setBase(m4);
         m3.add(m, 0);
+        m3.add(m2, 0);
+        m3.add(m5, 0);
+
+        m.rotate(1.57f);
+        m5.rotate(-1.57f);
 
         World.addModel(m3);
     }
