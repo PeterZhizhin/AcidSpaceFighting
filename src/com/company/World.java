@@ -52,6 +52,10 @@ public class World {
             rocketPhys3.doSpecialActionA(deltaTime);
         }
 
+        if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+            rocketPhys5.doSpecialActionA(deltaTime);
+        }
+
         boolean wasIntersection = true;
         for (int n=0; wasIntersection & n <= 5; n++) {
             n++;
@@ -105,6 +109,7 @@ public class World {
     private static PhysicModel rocketPhys2;
     private static PhysicModel rocketPhys3;
     private static PhysicModel rocketPhys4;
+    private static PhysicModel rocketPhys5;
     private static ComplexPhysicModel totalModel;
 
     public static void init() {
@@ -127,7 +132,8 @@ public class World {
 
         Model m7 = new BaseModel(2500, 0, 1250f);
 
-        Model m8 = new EngineModel(4000, 0, (float) Math.PI);
+        Model m8 = new EngineModel(4000, 0, 1250f, (float) Math.PI);
+        rocketPhys5=m8.physic;
 
         ComplexModel m3 = new ComplexModel();
         m3.setBase(m4);
