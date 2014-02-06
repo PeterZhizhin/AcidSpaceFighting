@@ -16,12 +16,9 @@ public class EngineGraphicModel extends GraphicModel {
     private Tale t;
     private float activity=0f;
 
-    public void setActivity(float a) {
-        activity=a;
-    }
-
     public void drawBackgroundLayer() {
-         t.addPoint(shape.getCentre(),//.add(new Point(Math.cos(shape.getAngle()), Math.sin(shape.getAngle())).multiply(shape.getMaxLength()*activity).negate()),
+        activity=body.getActivity();
+         t.addPoint(shape.getCentre().add(new Point(Math.cos(shape.getAngle()), Math.sin(shape.getAngle())).multiply(shape.getMaxLength()*activity*2).negate()),
                  shape.getMaxLength()*activity/2);
         t.draw();
     }

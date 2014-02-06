@@ -8,9 +8,7 @@ public class EnginePhysicModel extends PhysicModel {
 
     private static final float power = 1000000f;
     private static final float deltaActivity = 1f;
-    private float activity = 0f;
     private boolean isPressed = false;
-    private EngineModel engMod;
 
     public void update(float deltaTime) {
         if (isPressed) {
@@ -21,7 +19,6 @@ public class EnginePhysicModel extends PhysicModel {
                 activity -= deltaActivity * deltaTime;
         }
         activity = Math.min(1f, Math.max(0f, activity));
-        engMod.setActivity(activity);
         isPressed = false;
         if (activity>0)
         useForce(body.getCentre(), new Point(Math.cos(body.getAngle()), Math.sin(body.getAngle())).multiply(power*activity));
@@ -41,9 +38,8 @@ public class EnginePhysicModel extends PhysicModel {
         speedVector.set(0, 0);
     }
 
-    public EnginePhysicModel(EngineModel e, GeometricModel body, Point[] conetionPoints, float mass) {
-        super(body, conetionPoints, mass);
-        engMod=e;
+    public EnginePhysicModel(GeometricModel body, Point[] connetionPoints, float mass) {
+        super(body, connetionPoints, mass);
     }
 
 }

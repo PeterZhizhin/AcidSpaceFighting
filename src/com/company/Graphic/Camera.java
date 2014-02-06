@@ -39,6 +39,10 @@ public class Camera {
         GL11.glVertex2f((x - xPos) / scale, (y - yPos) / scale);
     }
 
+    public static Point getTranslatedPoint(Point p) {
+        return new Point((p.getX() - xPos) / scale, (p.getY() - yPos) / scale);
+    }
+
     public static void translatePoint(Point p) {
         GL11.glVertex2f((p.getX() - xPos) / scale, (p.getY() - yPos) / scale);
     }

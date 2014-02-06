@@ -12,6 +12,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class GraphicModel {
 
     protected GeometricModel shape;
+    protected PhysicModel body;
     private float[] color = new float[3];
 
     public void drawBackgroundLayer() {
@@ -25,6 +26,10 @@ public class GraphicModel {
         }
         glEnd();
 
+    }
+
+    public void setPhysicModel(PhysicModel p) {
+        body=p;
     }
 
     public GraphicModel(GeometricModel body) {

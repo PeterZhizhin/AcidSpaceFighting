@@ -18,5 +18,6 @@ public class BaseModel extends Model {
         }, radius);
         graphic = new BaseGraphicModel(g);
         physic = p;
+        graphic.setPhysicModel(p);
     }
 }

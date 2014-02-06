@@ -13,5 +13,6 @@ public class AsteroidModel extends Model {
         PhysicModel p = new PhysicModel(g, new Point[]{}, radius);
         graphic = new AsteroidGraphicModel(g);
         physic = p;
+        graphic.setPhysicModel(p);
     }
 }

@@ -13,5 +13,6 @@ public class GunModel extends Model {
         PhysicModel p = new GunPhysicModel(g, new Point[]{new Point(x + radius / 2, y + radius / 2)}, radius);
         graphic = new GunGraphicModel(g);
         physic = p;
+        graphic.setPhysicModel(p);
     }
 }

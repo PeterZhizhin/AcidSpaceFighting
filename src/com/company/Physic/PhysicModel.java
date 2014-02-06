@@ -4,6 +4,7 @@ import com.company.BasicWindow;
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Geometry.Segment;
+import com.company.Model;
 
 
 public class PhysicModel {
@@ -12,6 +13,7 @@ public class PhysicModel {
 
 
     protected GeometricModel body;
+    protected float activity = 0f;
     protected float mass;
     protected Point speedVector;
     protected Point acceleration;
@@ -19,6 +21,10 @@ public class PhysicModel {
 
     private Point[] connectionPoints;
     private boolean[] isConnectionFree;
+
+    public float getActivity() {
+        return activity;
+    }
 
     public int getConnectionPointsCount() {
         return connectionPoints.length;

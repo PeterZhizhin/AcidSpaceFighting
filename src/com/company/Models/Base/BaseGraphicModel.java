@@ -3,10 +3,13 @@ package com.company.Models.Base;
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
+import com.company.Graphic.Controls.Color;
+import com.company.Graphic.Controls.FontDrawer;
 import com.company.Graphic.GraphicModel;
 
 import java.util.Random;
 
+import static com.company.Graphic.Camera.getTranslatedPoint;
 import static org.lwjgl.opengl.GL11.*;
 
 public class BaseGraphicModel extends GraphicModel {

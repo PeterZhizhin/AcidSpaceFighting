@@ -9,12 +9,6 @@ import com.company.Physic.PhysicModel;
 
 public class EngineModel extends Model {
 
-    EngineGraphicModel gr;
-
-    public void setActivity(float f) {
-        gr.setActivity(f);
-    }
-
     public EngineModel(float x, float y, float radius) {
         this(x, y, radius, 0);
     }
@@ -23,11 +17,11 @@ public class EngineModel extends Model {
         super(null, null);
         GeometricModel g = new EngineGeometricModel(x, y, radius);
         g.rotate(angle);
-        PhysicModel p = new EnginePhysicModel(this, g, new Point[]{
+        PhysicModel p = new EnginePhysicModel(g, new Point[]{
                 new Point(x + radius / 2, y + radius / 2)
         }, radius);
-        gr = new EngineGraphicModel(g);
-        graphic=gr;
+        graphic=new EngineGraphicModel(g);
         physic = p;
+        graphic.setPhysicModel(p);
     }
 }
