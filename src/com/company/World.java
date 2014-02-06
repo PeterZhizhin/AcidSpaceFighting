@@ -125,12 +125,18 @@ public class World {
 
         Model m4 = new BaseModel(500, 0, 1250f);
 
+        Model m7 = new BaseModel(2500, 0, 1250f);
+
+        Model m8 = new EngineModel(4000, 0, (float) Math.PI);
+
         ComplexModel m3 = new ComplexModel();
         m3.setBase(m4);
         m3.add(m, 0);
         m3.add(m2, 0);
         m3.add(m5, 0);
         m3.add(m6, 0);
+        m3.add(m7, 0);
+        m3.add(m8, 10);
         totalModel = m3.phyModel;
 
         World.addModel(m3);
