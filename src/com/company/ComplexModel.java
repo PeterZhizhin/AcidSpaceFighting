@@ -28,8 +28,8 @@ public class ComplexModel extends Model {
 
     public ComplexModel() {
         super(null, null);
-        graModel = new ComplexGraphicModel();
         phyModel = new ComplexPhysicModel(this);
+        graModel = new ComplexGraphicModel(phyModel);
         graphic = graModel;
         physic = phyModel;
     }
