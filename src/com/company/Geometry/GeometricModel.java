@@ -190,7 +190,7 @@ public class GeometricModel {
 
     public void backupVertexes() {
         //Пусть тут пока не будет ничего.
-        Matrix3fGeometry.createTranslateMatrix(centre.getVector2f(), translateMatrix);
+        Matrix3fGeometry.createTranslateMatrix(centre, translateMatrix);
         Matrix3fGeometry.createRotationMatrix(this.angle, rotationMatrix);
         createResultMatrix();
         vertexes = new Point[rawVertexes.length];
@@ -264,7 +264,7 @@ public class GeometricModel {
 
 
         //Создаем начальную матрицу переноса
-        Matrix3fGeometry.createTranslateMatrix(centre.getVector2f(), translateMatrix);
+        Matrix3fGeometry.createTranslateMatrix(centre, translateMatrix);
 
         //Создаем начальную матрицу поворота
         angle = 0.0f;

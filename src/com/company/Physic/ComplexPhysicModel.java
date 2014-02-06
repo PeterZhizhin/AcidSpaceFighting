@@ -1,7 +1,6 @@
 package com.company.Physic;
 
 import com.company.Geometry.Point;
-import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -74,6 +73,11 @@ public class ComplexPhysicModel extends PhysicModel {
     public void applyStaticForces(PhysicModel m, float deltaTime) {
         for (PhysicModel body : bodies)
             body.applyStaticForces(m, deltaTime);
+    }
+
+    public void update(float deltaTime) {
+        for (PhysicModel body : bodies)
+            body.update(deltaTime);
     }
 
     //Здесь нужно передать изменения всей системе тел
@@ -164,8 +168,8 @@ public class ComplexPhysicModel extends PhysicModel {
         //speedVector.move(force.multiply(deltaTime/mass));
 
         if (massCentre.getDistanceToPoint(posOfForce) >= Point.epsilon) {
-            double length = Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации(massCentre, posOfForce, posOfForce.add(force));
-            double deltaBeta = force.getLength() * length / J;
+            double length = Point.getLengthToLine(massCentre, posOfForce, posOfForce.add(force));
+            double deltaBeta = force.length() * length / J;
             //Получаем знак
             //Если конец вектора лежит в правой полуплоскости относительно прямой, проходящей через центр масс и точку приложения силы
             //То вращается вправо (знак минус), иначе влево

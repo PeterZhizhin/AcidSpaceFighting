@@ -9,8 +9,8 @@ public class Model {
     protected GraphicModel graphic;
     protected PhysicModel physic;
 
-    public void rotate(float s) {
-        physic.rotate(s);
+    public void update(float time) {
+        physic.update(time);
     }
 
     public void drawTopLayer() {

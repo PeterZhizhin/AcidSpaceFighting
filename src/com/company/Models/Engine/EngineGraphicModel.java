@@ -14,6 +14,11 @@ public class EngineGraphicModel extends GraphicModel {
     private int step = 0;
     private static final int stepLimit = 2;
     private Random rnd = new Random();
+    private float activity=0f;
+
+    public void setActivity(float a) {
+        activity=a;
+    }
 
     public void drawBackgroundLayer() {
 
@@ -25,7 +30,7 @@ public class EngineGraphicModel extends GraphicModel {
         glBegin(GL_QUADS);
 
         Point normal = Point.getBisection(trajectory.get(0), trajectory.get(1), trajectory.get(2));
-        normal.normalise();
+        normal.setLength(1);
         currentColor -= colorStep;
         normal = normal.multiply(currentColor * shape.getMaxLength());
         glColor4f(1f, 0.68359375f * currentColor + 0.10546875f * (1 - currentColor), 0.01953125f, 1f);
@@ -46,7 +51,7 @@ public class EngineGraphicModel extends GraphicModel {
             Camera.translatePoint(trajectory.get(i).getX() - normal.getX(), trajectory.get(i).getY() - normal.getY());
 
             normal = Point.getBisection(trajectory.get(i + 1), trajectory.get(i + 2), trajectory.get(i + 3));
-            normal.normalise();
+            normal.setLength(1);
             currentColor -= colorStep;
             normal = normal.multiply(currentColor * shape.getMaxLength());
             glColor4f(1f, 0.01953125f, 0.3f, 0.68359375f * currentColor + 0.10546875f * (1 - currentColor));
@@ -67,7 +72,7 @@ public class EngineGraphicModel extends GraphicModel {
     public void drawTopLayer() {
 
         //body
-        glColor3f(0.7f, 0.7f, 0.7f);
+        glColor3f(0.3f+activity*2/3, 0.3f, 0.3f);
         glBegin(GL_POLYGON);
         for (int i = 0; i < shape.getPointCount(); i++)
             Camera.translatePoint(shape.getPoint(i).getX(), shape.getPoint(i).getY());

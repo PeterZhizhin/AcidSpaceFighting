@@ -8,6 +8,10 @@ public class ComplexModel extends Model {
     public ComplexGraphicModel graModel;
     public ComplexPhysicModel phyModel;
 
+    public void update(float time) {
+        phyModel.update(time);
+    }
+
     public void add(Model m, int num) {
         graModel.add(m.graphic);
         phyModel.add(m.physic, num);

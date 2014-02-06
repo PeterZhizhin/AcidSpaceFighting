@@ -24,7 +24,7 @@ public class BaseGraphicModel extends GraphicModel {
         glBegin(GL_QUADS);
 
         Point normal = Point.getBisection(trajectory.get(0), trajectory.get(1), trajectory.get(2));
-        normal.normalise();
+        normal.setLength(1);
         currentColor -= colorStep;
         normal = normal.multiply(currentColor * shape.getMaxLength());
         glColor4f(1f, 0.68359375f * currentColor + 0.10546875f * (1 - currentColor), 0.01953125f, 1f);
@@ -45,7 +45,7 @@ public class BaseGraphicModel extends GraphicModel {
             Camera.translatePoint(trajectory.get(i).getX() - normal.getX(), trajectory.get(i).getY() - normal.getY());
 
             normal = Point.getBisection(trajectory.get(i + 1), trajectory.get(i + 2), trajectory.get(i + 3));
-            normal.normalise();
+            normal.setLength(1);
             currentColor -= colorStep;
             normal = normal.multiply(currentColor * shape.getMaxLength());
             glColor4f(1f, 0.68359375f * currentColor + 0.10546875f * (1 - currentColor), 0.01953125f, 1f);

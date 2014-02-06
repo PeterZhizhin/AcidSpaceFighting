@@ -3,9 +3,8 @@ package com.company.Geometry;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-public class Point {
+public class Point extends Vector2f {
 
-    private float x, y;
     public static final float epsilon = 0.0001f;
 
     public static double getTriangleSquare(Point p1, Point p2, Point analRape) {
@@ -20,16 +19,12 @@ public class Point {
         return Math.sqrt(halfPerimeter*(halfPerimeter-l1)*(halfPerimeter-l2)*(halfPerimeter-l3));
     }
 
-    public static double получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
-            (Point точка, Point точкаПрямой1, Point точкаПрямой2) {
-        //float a1 = точкаПрямой2.getY() - точкаПрямой1.getY();
-        //float b1 = точкаПрямой1.getX() - точкаПрямой2.getX();
-        //float c1 = точкаПрямой1.getY() * b1 + точкаПрямой1.getX() * a1;
-        float a = точкаПрямой1.y - точкаПрямой2.y;
-        float b = точкаПрямой2.x - точкаПрямой1.x;
-        float c = точкаПрямой1.x * точкаПрямой2.y - точкаПрямой2.x * точкаПрямой1.y;
-        //double result = (a1 * точка.getX() + b1 * точка.getY() + c1) / Math.sqrt(a1 * a1 + b1 * b1);
-        double result = (a * точка.getX() + b * точка.getY() + c) / Math.sqrt(a * a + b * b);
+    public static double getLengthToLine
+            (Point from, Point ptOnLine1, Point ptOnLine2) {
+        float a = ptOnLine1.y - ptOnLine2.y;
+        float b = ptOnLine2.x - ptOnLine1.x;
+        float c = ptOnLine1.x * ptOnLine2.y - ptOnLine2.x * ptOnLine1.y;
+        double result = (a * from.getX() + b * from.getY() + c) / Math.sqrt(a * a + b * b);
         if (Math.abs(result) <= Point.epsilon)
             return 0;
         else return result;
@@ -48,10 +43,10 @@ public class Point {
         return new Point(-x, -y);
     }
 
-    public void normalise() {
-        float length = (float) Math.sqrt(x * x + y * y);
-        x /= length;
-        y /= length;
+    public Vector2f setLength(float length) {
+        float l=super.length();
+        if (l<=epsilon) return this;
+        return this.multiply(length/l);
     }
 
     public static Point getNormal(Point p1, Point p2) {
@@ -62,24 +57,14 @@ public class Point {
 
     //p2p1 and p2p3 - rays
     public static double getAngle(Point p1, Point p2, Point p3) {
+        /*
         float x1 = p1.getX() - p2.getX();
         float x2 = p3.getX() - p2.getX();
         float y1 = p1.getY() - p2.getY();
         float y2 = p3.getY() - p2.getY();
         return (x1 * x2 + y1 * y2) / Math.sqrt((x1 * x1 + y1 * y1) * (x2 * x2 + y2 * y2));
-    }
-
-    /**
-     * @param vector1 1 вектор
-     * @param vector2 2 вектор
-     * @return Скалярное произведение векторов
-     */
-    public static float getScalarMultiply(Point vector1, Point vector2) {
-        return vector1.x * vector2.x + vector1.y * vector2.y;
-    }
-
-    public float getBrutalLength(Point p2) {
-        return Math.abs(x - p2.x) + Math.abs(y - p2.y);
+        */
+        return Vector2f.angle(new Vector2f(p2.x-p1.x, p2.y-p1.y), new Vector2f(p2.x-p3.x, p2.y-p3.y));
     }
 
     public float getLengthSquared(Point p2) {
@@ -94,10 +79,6 @@ public class Point {
         dx *= dx;
         dy *= dy;
         return Math.sqrt(dx + dy);
-    }
-
-    public double getLength() {
-        return getDistanceToPoint(new Point(0, 0));
     }
 
     //check lines p1p2 and line p3p4
@@ -123,6 +104,7 @@ public class Point {
     }
 
     public void rotate(float angle, Point center) {
+
         float ax = x - center.x;
         float ay = y - center.y;
 
@@ -142,44 +124,15 @@ public class Point {
     }
 
     public void move(float dx, float dy) {
-        x += dx;
-        y += dy;
+        super.translate(dx,dy);
     }
 
     public void move(Point p) {
-        x += p.x;
-        y += p.y;
-    }
-
-    public void set(float x, float y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public void set(Point p) {
-        set(p.x, p.y);
-    }
-
-    public float getX() {
-        return x;
-    }
-
-    public float getY() {
-        return y;
+        move(p.x, p.y);
     }
 
     public Point(double x, double y) {
-        this.x = (float) x;
-        this.y = (float) y;
-    }
-
-    /**
-     * Получаем Vector2f из точки
-     *
-     * @return Vector2f из точки
-     */
-    public Vector2f getVector2f() {
-        return new Vector2f(x, y);
+        super((float)x, (float)y);
     }
 
     public Vector3f getVector3f() {
@@ -191,8 +144,7 @@ public class Point {
 
 
     public Point(float x, float y) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
     }
 
     public Point(Point p) {

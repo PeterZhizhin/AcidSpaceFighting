@@ -41,6 +41,7 @@ public class World {
 
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
             rocketPhys2.doSpecialActionA(deltaTime);
+            rocketPhys4.doSpecialActionA(deltaTime);
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
@@ -67,6 +68,7 @@ public class World {
 
         for (Model model : models) {
             model.updateMotion(deltaTime);
+            model.update(deltaTime);
         }
 
         if (addModelBuffer.size() > 0) {
@@ -98,19 +100,23 @@ public class World {
     private static PhysicModel rocketPhys;
     private static PhysicModel rocketPhys2;
     private static PhysicModel rocketPhys3;
+    private static PhysicModel rocketPhys4;
     private static ComplexPhysicModel totalModel;
 
     public static void init() {
         models = new ArrayList<Model>();
         addModelBuffer = new LinkedList<Model>();
 
-        Model m = new EngineModel(0, 0, 250f);
+        Model m = new EngineModel(0, 0, 250f, 1.57f);
         rocketPhys = m.physic;
 
-        Model m2 = new EngineModel(0, 500, 250f);
+        Model m2 = new EngineModel(0, 300, 250f);
         rocketPhys2 = m2.physic;
 
-        Model m5 = new EngineModel(0, 1000, 250f);
+        Model m6 = new EngineModel(0, 700, 250f);
+        rocketPhys4 = m6.physic;
+
+        Model m5 = new EngineModel(0, 1000, 250f, -1.57f);
         rocketPhys3 = m5.physic;
 
         Model m4 = new BaseModel(500, 0, 1250f);
@@ -120,10 +126,8 @@ public class World {
         m3.add(m, 0);
         m3.add(m2, 0);
         m3.add(m5, 0);
+        m3.add(m6, 0);
         totalModel = m3.phyModel;
-
-        m.rotate(1.57f);
-        m5.rotate(-1.57f);
 
         World.addModel(m3);
     }

@@ -89,6 +89,10 @@ public class PhysicModel {
         updateKinematic(deltaTime);
     }
 
+    //for their own timers
+    public void update(float deltaTime) {
+    }
+
     /**
      * Считаем что ускорение на данном участке постоянно и считаем перемещение по формуле
      * S = V0*dT + A*dT^2/2
@@ -135,7 +139,7 @@ public class PhysicModel {
             //speedVector.move(force.multiply(deltaTime/mass));
 
             if (body.getCentre().getDistanceToPoint(posOfForce) >= Point.epsilon) {
-                double deltaBeta = force.getLength() * Point.получитьРасстояниеОтТочкиДоПрямойБесплатноБезСМСБезРегистрации
+                double deltaBeta = force.length() * Point.getLengthToLine
                         (body.getCentre(), posOfForce, posOfForce.add(force)) / J;
                 beta += deltaBeta;
             }

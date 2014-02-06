@@ -37,12 +37,8 @@ public class PTS {
         }
 
         public void print() {
-            if (t!=type.Bug)
                 System.out.println("╟ Author: "+format(a.name(), 16)+" │  State: "+format(s.name(), 13)
                                  +" │  Type: "+format(t.name(), 10)+" │  Action: "+format(action, 50)+" ╢");
-            else
-                System.err.println("╟ Author: "+format(a.name(), 16)+" │  State: "+format(s.name(), 13)
-                        +" │  Type: "+format(t.name(), 10)+" │  Action: "+format(action, 50)+" ╢");
         }
 
         public static void printTopLine() {
@@ -74,10 +70,10 @@ public class PTS {
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая деталь-энергоблок"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Распределение энергии"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Присоединение деталей на ходу"));
-        tasks.add(new Task(state.Planned, author.None, type.Change, "Адекватная анимация шлейфа"));
-        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Мощность двигателя и индикация"));
+        tasks.add(new Task(state.Planned, author.None, type.Bug, "Адекватная анимация шлейфа (бисекция кривая)"));
+        tasks.add(new Task(state.Done, author.ShirinkinArseny, type.NewFeature, "Мощность двигателя и индикация"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "GUI с параментрами движения корабля (скорость, угловая скорость, текущая сила на двигателях)"));
-
+        tasks.add(new Task(state.Done, author.ShirinkinArseny, type.Change, "Перевести Point на Vector2f"));
 
         printTopLine();
         for (Task s: tasks) {
