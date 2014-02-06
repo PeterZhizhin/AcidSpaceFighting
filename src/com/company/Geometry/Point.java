@@ -6,6 +6,8 @@ import org.lwjgl.util.vector.Vector3f;
 public class Point extends Vector2f {
 
     public static final float epsilon = 0.0001f;
+    public static final Point empty=new Point(0, 0);
+
 
     public static double getTriangleSquare(Point p1, Point p2, Point analRape) {
 
@@ -32,7 +34,15 @@ public class Point extends Vector2f {
 
     //p1p2p3-angle
     public static Point getBisection(Point p1, Point p2, Point p3) {
-        return new Point((p3.x + p1.x) / 2 - p2.x, (p3.y + p1.y) / 2 - p2.y);
+        Point pl1=new Point(p2.x-p1.x, p2.y-p1.y);
+        Point pl2=new Point(p2.x-p3.x, p2.y-p3.y);
+        pl1.setLength(1);
+        pl2.setLength(1);
+        if (pl1.x+pl2.x+pl1.y+pl2.y <=epsilon*4) {
+            return pl1.getNormal().setLength(1);
+        }
+        return new Point((pl1.x+pl2.x)/2, (pl1.y+pl2.y)/2).setLength(1);
+
     }
 
     public Point add(Point v2) {
@@ -43,10 +53,16 @@ public class Point extends Vector2f {
         return new Point(-x, -y);
     }
 
-    public Vector2f setLength(float length) {
+    public Point setLength(float length) {
         float l=super.length();
         if (l<=epsilon) return this;
         return this.multiply(length/l);
+    }
+
+    public Point getNormal() {
+        float a1 = getY();
+        float b1 = - getX();
+        return new Point(a1, b1);
     }
 
     public static Point getNormal(Point p1, Point p2) {

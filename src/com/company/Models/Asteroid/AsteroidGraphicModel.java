@@ -3,61 +3,20 @@ package com.company.Models.Asteroid;
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
+import com.company.Graphic.Controls.Color;
 import com.company.Graphic.GraphicModel;
+import com.company.Graphic.Tale;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.glEnd;
 
 public class AsteroidGraphicModel extends GraphicModel {
 
-    private int step = 0;
-    private static final int stepLimit = 8;
+    private Tale t;
 
     public void drawBackgroundLayer() {
-        //tail
-        float colorStep = 0.8f / trajectory.size();
-        float currentColor = 0.8f;
-
-        glBegin(GL_LINE_LOOP);
-
-        Point normal = Point.getNormal(
-                shape.getCentre(),
-                trajectory.get(0));
-        normal.normalise();
-        currentColor -= colorStep;
-        normal = normal.multiply(currentColor * shape.getMaxLength());
-        glColor4f(0.5f, 0.5f, 0f, currentColor);
-
-        Camera.translatePoint(shape.getCentre().getX() + normal.getX(), shape.getCentre().getY() + normal.getY());
-        Camera.translatePoint(shape.getCentre().getX() - normal.getX(), shape.getCentre().getY() - normal.getY());
-        Camera.translatePoint(trajectory.get(0).getX() - normal.getX(), trajectory.get(0).getY() - normal.getY());
-        Camera.translatePoint(trajectory.get(0).getX() + normal.getX(), trajectory.get(0).getY() + normal.getY());
-        glEnd();
-
-
-        for (int i = 0; i < trajectory.size() - 1; i++) {
-
-            glBegin(GL_LINE_LOOP);
-
-            normal = Point.getNormal(trajectory.get(i), trajectory.get(i + 1));
-            normal.normalise();
-            currentColor -= colorStep;
-            normal = normal.multiply(currentColor * shape.getMaxLength());
-            glColor4f(0.5f, 0.5f, 0f, currentColor);
-
-            Camera.translatePoint(trajectory.get(i).getX() + normal.getX(), trajectory.get(i).getY() + normal.getY());
-            Camera.translatePoint(trajectory.get(i).getX() - normal.getX(), trajectory.get(i).getY() - normal.getY());
-            Camera.translatePoint(trajectory.get(i + 1).getX() - normal.getX(), trajectory.get(i + 1).getY() - normal.getY());
-            Camera.translatePoint(trajectory.get(i + 1).getX() + normal.getX(), trajectory.get(i + 1).getY() + normal.getY());
-            glEnd();
-        }
-
-
-        if (step >= stepLimit) {
-            trajectory.remove(trajectory.size() - 1);
-            trajectory.add(0, new Point(shape.getCentre()));
-            step = 0;
-        } else step++;
+        t.addPoint(shape.getCentre(), shape.getMaxLength()/2);
+        t.draw();
     }
 
     public void drawTopLayer() {
@@ -79,7 +38,8 @@ public class AsteroidGraphicModel extends GraphicModel {
     }
 
     public AsteroidGraphicModel(GeometricModel body) {
-        super(body, null);
+        super(body);
+        t=new Tale(new Color(1f, 1f, 0.6f), new Color(1f, 1f, 0.6f, 0f), 0, 20, 3);
     }
 
 }

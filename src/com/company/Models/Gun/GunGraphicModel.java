@@ -50,8 +50,7 @@ public class GunGraphicModel extends GraphicModel {
     }
 
     public GunGraphicModel(GeometricModel body) {
-        super(body, null);
-        trajectory = null;//ТраекторииНеНужны
+        super(body);
     }
 
 }

@@ -32,7 +32,7 @@ public class ComplexGraphicModel extends GraphicModel {
     }
 
     public ComplexGraphicModel() {
-        super(null, null);
+        super(null);
         grModels = new ArrayList<GraphicModel>();
     }
 
