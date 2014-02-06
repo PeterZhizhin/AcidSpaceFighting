@@ -4,6 +4,7 @@ import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
 import com.company.Models.Base.BaseModel;
 import com.company.Models.Engine.EngineModel;
+import com.company.Physic.ComplexPhysicModel;
 import com.company.Physic.PhysicModel;
 import org.lwjgl.input.Keyboard;
 
@@ -23,7 +24,7 @@ public class World {
     }
 
     public static void draw() {
-        Camera.setPosition(rocketPhys.getCentre().getX(), rocketPhys.getCentre().getY());
+        Camera.setPosition(totalModel.getCentre().getX(), totalModel.getCentre().getY());
         for (Model model : models) {
             model.drawBackgroundLayer();
         }
@@ -97,6 +98,7 @@ public class World {
     private static PhysicModel rocketPhys;
     private static PhysicModel rocketPhys2;
     private static PhysicModel rocketPhys3;
+    private static ComplexPhysicModel totalModel;
 
     public static void init() {
         models = new ArrayList<Model>();
@@ -118,6 +120,7 @@ public class World {
         m3.add(m, 0);
         m3.add(m2, 0);
         m3.add(m5, 0);
+        totalModel = m3.phyModel;
 
         m.rotate(1.57f);
         m5.rotate(-1.57f);

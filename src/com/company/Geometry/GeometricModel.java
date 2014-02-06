@@ -33,6 +33,32 @@ public class GeometricModel {
     private Point[] vertexes;
     private float angle;
 
+    /**
+     * Считаем момент инерции многоугольника относительно центра масс
+     * @return Геометрический момент инерции
+     */
+    public float calculateJ()
+    {
+        float J = 0;
+        Vector3f[] vertexies = new Vector3f[vertexes.length];
+        Point centreNegated = getCentre().negate();
+        for (int i=0; i<vertexies.length; i++)
+            vertexies[i] = vertexes[i].add(centreNegated).getRealVector3f();
+        float chislitel = 0.0f; float znamenatel = 0.0f;
+        Vector3f dest = new Vector3f();
+        float tempCross;
+        for (int i=0; i<vertexies.length-1; i++)
+        {
+            Vector3f.cross(vertexies[i+1], vertexies[i], dest);
+            tempCross = dest.length();
+            chislitel += tempCross * (vertexies[i+1].lengthSquared() +
+                    Vector3f.dot(vertexies[i+1], vertexies[i]) + vertexies[i].lengthSquared());
+            znamenatel += tempCross;
+        }
+        J = chislitel / znamenatel / 6.0f;
+        return J;
+    }
+
     //Максимальное расстояние между центрами масс (оптимизация пересечения)
     private float maxLength;
 
@@ -79,9 +105,6 @@ public class GeometricModel {
         while (this.angle <= 0) this.angle += PI2;
 
         centre.rotate(angle, centreOfRotation);
-
-        Matrix3fGeometry.createRotationMatrix(this.angle, rotationMatrix);
-        Matrix3fGeometry.createTranslateMatrix(centre.getVector2f(), translateMatrix);
         incCalculations();
     }
 
@@ -95,7 +118,6 @@ public class GeometricModel {
         }
 
         //Создаем матрицу для сдвига
-        Matrix3fGeometry.createTranslateMatrix(centre.getVector2f(), translateMatrix);
         incCalculations();
     }
 
@@ -168,6 +190,8 @@ public class GeometricModel {
 
     public void backupVertexes() {
         //Пусть тут пока не будет ничего.
+        Matrix3fGeometry.createTranslateMatrix(centre.getVector2f(), translateMatrix);
+        Matrix3fGeometry.createRotationMatrix(this.angle, rotationMatrix);
         createResultMatrix();
         vertexes = new Point[rawVertexes.length];
         for (int i = 0; i < vertexes.length; i++) {

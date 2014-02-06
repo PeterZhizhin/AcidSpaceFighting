@@ -44,7 +44,6 @@ public class PhysicModel {
     protected float beta;
     protected Point centreOfRotation;
     //Момент инерции
-    //TODO: Посчитать момент инерции треугольника. More: http://dxdy.ru/topic31945.html
     protected float J;
 
 
@@ -308,14 +307,13 @@ public class PhysicModel {
     protected PhysicModel(GeometricModel body, float mass) {
         this.body = body;
         this.mass = mass;
-        //Пока не сделали нормально определение момента инерции - пользуемся формулой для шара с радиусом, численно равному массе
-        J = mass * mass * mass / 2.0f;
         speedVector = new Point(0, 0);
         acceleration = new Point(0, 0);
         w = 0;
         beta = 0;
         if (body != null) {
             centreOfRotation = body.getCentre();
+            J = mass * this.body.calculateJ();
         } else
         if (!this.getIsComplex()) {
             System.err.println("[PhysicModel] Пустая тушка в конструкторе на входе");

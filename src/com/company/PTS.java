@@ -32,6 +32,7 @@ public class PTS {
         tasks.add("[PLANNED]      [Shirinkin Arseny]     [NEW FEATURE] [5feb14]    [NONE]   [NONE]   Присоединение деталей на ходу");
         tasks.add("[PLANNED]      [Shirinkin Arseny]     [CHANGE]      [5feb14]    [NONE]   [NONE]   Адекватная анимация шлейфа");
         tasks.add("[PLANNED]      [Shirinkin Arseny]     [NEW FEATURE] [5feb14]    [NONE]   [NONE]   Мощность двигателя и индикация");
+        tasks.add("[PLANNED]      [Peter Zhizhin]     [NEW FEATURE] [6feb14]    [NONE]   [NONE]   GUI с параментрами движения корабля (скорость, угловая скорость, текущая сила на двигателях)");
 
         System.out.println("Tasks:");
         for (String s: tasks) {
