@@ -1,6 +1,7 @@
 package com.company.Physic;
 
 import com.company.Geometry.Point;
+import com.company.World;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -21,6 +22,7 @@ public class ComplexPhysicModel extends PhysicModel {
 
     //Центр теперь определяется не центром геометрической модели, а центром масс системы
     //Кстати говоря: ускорения, скорости теперь тоже определяются центром масс системы
+
     @Override
     public Point getCentre() {
         return massCentre;
@@ -71,13 +73,44 @@ public class ComplexPhysicModel extends PhysicModel {
     //Статические силы теперь тоже применяются ко всей системе
     @Override
     public void applyStaticForces(PhysicModel m, float deltaTime) {
+
         for (PhysicModel body : bodies)
             body.applyStaticForces(m, deltaTime);
     }
 
+    private void removeFromAdjecency(int index)
+    {
+        for (int i=index; i<adjacencyMatrix.length-1; i++)
+            for (int j=0; j<adjacencyMatrix.length; j++)
+                adjacencyMatrix[i][j] = adjacencyMatrix[i+1][j];
+        for (int i=0; i<adjacencyMatrix.length; i++)
+            for (int j=index; j<adjacencyMatrix.length-1; j++)
+                adjacencyMatrix[i][j] = adjacencyMatrix[i][j+1];
+        boolean[][] newMatrix = new boolean[adjacencyMatrix.length-1][adjacencyMatrix.length-1];
+        for (int i=0; i<newMatrix.length; i++)
+            for (int j=0; j<newMatrix.length; j++)
+                newMatrix[i][j] = adjacencyMatrix[i][j];
+        adjacencyMatrix = newMatrix;
+    }
+
+    /**
+     * Здесь мы будем удалять те тела, что с отрицательным здоровьем.
+     * @param deltaTime
+     */
+    @Override
     public void update(float deltaTime) {
         for (PhysicModel body : bodies)
             body.update(deltaTime);
+        int i = 0;
+        while (i<bodies.size())
+            if (bodies.get(i).getHealth()<0)
+            {
+                //TODO: вот здесь удалить графическую модель
+                bodies.remove(i);
+                removeFromAdjecency(i);
+            }
+            else
+                i++;
     }
 
     //Здесь нужно передать изменения всей системе тел

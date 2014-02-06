@@ -22,7 +22,7 @@ public class PhysicModel {
     private boolean[] isConnectionFree;
 
     public float getDamage(float force) {
-        return 0;
+        return force/1000000000f;
     }
 
     public float getActivity() {
@@ -283,17 +283,12 @@ public class PhysicModel {
     public void applyStaticForces(PhysicModel m, float deltaTime) {
         if (!m.getIsComplex()) {
             //gravitation
-            double lengthBetweenCenters = body.getCentre().getLengthSquared(m.body.getCentre());
+            double lengthBetweenCenters = getCentre().getLengthSquared(m.getCentre());
             double gravity = G * mass * m.mass / lengthBetweenCenters;
 
-            //lengthBetweenCenters = Math.sqrt(lengthBetweenCenters);
-            double dx = (-body.getCentre().getX() + m.body.getCentre().getX()) * gravity;
-            double dy = (-body.getCentre().getY() + m.body.getCentre().getY()) * gravity;
-
-            Point force = new Point(dx, dy);
+            Point force = new Point(getCentre()).add(m.getCentre()).multiply((float)gravity);
             GeometricModel g1 = new GeometricModel(body);
             GeometricModel g2 = new GeometricModel(m.body);
-
             g1.rotate(centreOfRotation, getRotationAngle(deltaTime));
             g2.rotate(centreOfRotation, m.getRotationAngle(deltaTime));
             g1.move(getMoveVector(deltaTime).add(force.multiply(deltaTime * deltaTime / mass / 2.0f)));

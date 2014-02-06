@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
+import com.company.Models.Asteroid.AsteroidModel;
 import com.company.Models.Base.BaseModel;
 import com.company.Models.Engine.EngineModel;
 import com.company.Physic.ComplexPhysicModel;
@@ -133,6 +134,9 @@ public class World {
         totalModel = m3.phyModel;
 
         World.addModel(m3);
+
+        AsteroidModel asteroidModel = new AsteroidModel(-50000,-50000,10000f, 50000f);
+        World.addModel(asteroidModel);
     }
 
 }

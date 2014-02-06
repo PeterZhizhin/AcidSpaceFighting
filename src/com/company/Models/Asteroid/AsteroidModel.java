@@ -7,10 +7,10 @@ import com.company.Physic.PhysicModel;
 
 public class AsteroidModel extends Model {
 
-    public AsteroidModel(float x, float y, float radius) {
+    public AsteroidModel(float x, float y, float radius, float mass) {
         super(null, null);
         GeometricModel g = new AsteroidGeometricModel(x, y, radius);
-        PhysicModel p = new PhysicModel(g, new Point[]{}, radius);
+        PhysicModel p = new PhysicModel(g, new Point[]{}, mass);
         graphic = new AsteroidGraphicModel(g);
         physic = p;
         graphic.setPhysicModel(p);

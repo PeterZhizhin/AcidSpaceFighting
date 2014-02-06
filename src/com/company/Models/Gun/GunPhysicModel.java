@@ -12,7 +12,7 @@ import com.company.World;
 public class GunPhysicModel extends PhysicModel {
 
     public void doSpecialActionA(float deltaTime) {
-        World.addModel(new AsteroidModel(getCentre().getX() + 300f, getCentre().getY() + 300f, 100f));
+        World.addModel(new AsteroidModel(getCentre().getX() + 300f, getCentre().getY() + 300f, 100f, 100f));
     }
 
     public GunPhysicModel(GeometricModel body, Point[] conns, float mass) {
