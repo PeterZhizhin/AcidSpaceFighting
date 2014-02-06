@@ -2,7 +2,6 @@ package com.company.Physic;
 
 import com.company.ComplexModel;
 import com.company.Geometry.Point;
-import com.company.World;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -81,7 +80,7 @@ public class ComplexPhysicModel extends PhysicModel {
             body.applyStaticForces(m, deltaTime);
     }
 
-    private void removeFromAdjecency(int index)
+    private void removeFromAdjacency(int index)
     {
         for (int i=index; i<adjacencyMatrix.length-1; i++)
             for (int j=0; j<adjacencyMatrix.length; j++)
@@ -105,16 +104,28 @@ public class ComplexPhysicModel extends PhysicModel {
         for (PhysicModel body : bodies)
             body.update(deltaTime);
         int i = 0;
+        boolean wasDeleted = false;
         while (i<bodies.size())
             if (bodies.get(i).getHealth()<0)
             {
-                //TODO: вот здесь удалить графическую модель
                 bodies.remove(i);
                 cm.removeGraphicModel(i);
-                removeFromAdjecency(i);
+                removeFromAdjacency(i);
+                wasDeleted = true;
             }
             else
                 i++;
+        if (wasDeleted)
+        {
+            if (bodies.size()>0)
+            {
+                //Пересчитаем компоненты связности
+                //LinkedList<PhysicModel> models = getComponents();
+                //Если число компонент теперь не равно 1, то нужно создать ещё одну комплексную физическую модель
+                //if (models.size()==1)
+                пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
+            }
+        }
     }
 
     //Здесь нужно передать изменения всей системе тел
@@ -124,8 +135,8 @@ public class ComplexPhysicModel extends PhysicModel {
         massCentre.move(dS);
         float angle = getRotationAngle(deltaTime);
         for (PhysicModel body : bodies) {
-            body.body.rotate(massCentre, angle);
-            body.body.move(dS);
+            body.rotate(massCentre, angle);
+            body.move(dS);
         }
         updateKinematic(deltaTime);
     }
