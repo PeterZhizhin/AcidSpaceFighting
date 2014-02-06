@@ -4,7 +4,6 @@ import com.company.BasicWindow;
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Geometry.Segment;
-import com.company.Model;
 
 
 public class PhysicModel {
@@ -21,6 +20,10 @@ public class PhysicModel {
 
     private Point[] connectionPoints;
     private boolean[] isConnectionFree;
+
+    public float getDamage(float force) {
+        return 0;
+    }
 
     public float getActivity() {
         return activity;
@@ -53,7 +56,11 @@ public class PhysicModel {
     protected float J;
 
 
-    protected float damage; //if 1 - physicModel is normal, if  0 - it is destroyed. Will used in model realisations.
+    protected float health =1; //if 1 - physicModel is normal, if  0 - it is destroyed. Will used in model realisations.
+
+    public float getHealth() {
+        return health;
+    }
 
     public float getSpeedX() {
         return speedVector.getX();
@@ -152,6 +159,7 @@ public class PhysicModel {
 
         } else
             parent.useForce(posOfForce, force);
+        health-=getDamage(force.length());
     }
 
     private boolean applyIntersection(PhysicModel m, float deltaTime) {

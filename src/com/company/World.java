@@ -31,6 +31,9 @@ public class World {
         for (Model model : models) {
             model.drawTopLayer();
         }
+        for (Model model : models) {
+            model.drawHealthLine();
+        }
     }
 
     public static void update(float deltaTime) {

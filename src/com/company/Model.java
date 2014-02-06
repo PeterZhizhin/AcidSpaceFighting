@@ -21,6 +21,10 @@ public class Model {
         graphic.drawBackgroundLayer();
     }
 
+    public void drawHealthLine() {
+        graphic.drawHealthLine();
+    }
+
     public boolean crossThem(Model p, float deltaTime) {
         return physic.crossThem(p.physic, deltaTime);
     }
