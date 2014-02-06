@@ -2,46 +2,90 @@ package com.company;
 
 import java.util.ArrayList;
 
+import static com.company.PTS.Task.printBottomLine;
+import static com.company.PTS.Task.printTopLine;
+
 public class PTS {
 
-    public static void print() {
-        System.out.println("PTS (Poehavshaya Sistema Taskov) started.");
-        System.out.println("Samaya poehavshaya iz vseh. Srsly.");
-        System.out.println("===============================");
+    private static enum author {ShirinkinArseny, ZhizhinPeter, None}
+    private static enum state {Planned, InDevelopment, InTesting, Done}
+    private static enum type {Bug, NewFeature, Change}
 
-        ArrayList<String> tasks=new ArrayList<String>();
+    static class Task {
 
-        /*
-        Syntax:
-              [$state] [$autor] [$type] [$add date] [$developer] [$last update] $Text
-              $state: PLANNED, IN DEVELOP, IN TESTING, DONE
-              $type: BUG, NEW FEATURE, CHANGE,
-              $autor: who invented this feature
-              $developer: who develop this feature
-         */
+        private author a;
+        private state s;
+        private type t;
+        private String action;
 
-        tasks.add("[PLANNED]      [Shirinkin Arseny]     [CHANGE]      [5feb14]    [NONE]   [NONE]   Отрисовка целостности детали");
-        tasks.add("[PLANNED]      [Shirinkin Arseny]     [CHANGE]      [5feb14]    [NONE]   [NONE]   Выстрелы в сторону");
-        tasks.add("[PLANNED]      [Shirinkin Arseny]     [CHANGE]      [5feb14]    [NONE]   [NONE]   Отдача от выстрелов");
-        tasks.add("[PLANNED]      [Shirinkin Arseny]     [NEW FEATURE] [5feb14]    [NONE]   [NONE]   Потеря массы пули");
-        tasks.add("[PLANNED]      [Shirinkin Arseny]     [NEW FEATURE] [5feb14]    [NONE]   [NONE]   Разрушения");
-        tasks.add("[PLANNED]      [Shirinkin Arseny]     [NEW FEATURE] [5feb14]    [NONE]   [NONE]   Новая деталь-локатор");
-        tasks.add("[PLANNED]      [Shirinkin Arseny]     [NEW FEATURE] [5feb14]    [NONE]   [NONE]   Новая деталь-броня");
-        tasks.add("[PLANNED]      [Shirinkin Arseny]     [NEW FEATURE] [5feb14]    [NONE]   [NONE]   Новая деталь-энергоблок");
-        tasks.add("[PLANNED]      [Shirinkin Arseny]     [NEW FEATURE] [5feb14]    [NONE]   [NONE]   Распределение энергии");
-        tasks.add("[PLANNED]      [Shirinkin Arseny]     [NEW FEATURE] [5feb14]    [NONE]   [NONE]   Присоединение деталей на ходу");
-        tasks.add("[PLANNED]      [Shirinkin Arseny]     [CHANGE]      [5feb14]    [NONE]   [NONE]   Адекватная анимация шлейфа");
-        tasks.add("[PLANNED]      [Shirinkin Arseny]     [NEW FEATURE] [5feb14]    [NONE]   [NONE]   Мощность двигателя и индикация");
-        tasks.add("[PLANNED]      [Peter Zhizhin]     [NEW FEATURE] [6feb14]    [NONE]   [NONE]   GUI с параментрами движения корабля (скорость, угловая скорость, текущая сила на двигателях)");
-
-        System.out.println("Tasks:");
-        for (String s: tasks) {
-            if (!s.startsWith("[DONE]"))
-                System.out.println(s);
+        public Task (state s2, author a2, type t2, String a3){
+            a=a2;
+            s=s2;
+            t=t2;
+            action=a3;
         }
 
+        private String format(String s, int length) {
+            if (s.length()<length) s+=' ';
+            else if (s.length()>length)
+            {
+                s=s.substring(0, length-3)+">>>";
+            }
+            while (s.length()<length)
+                s+='∙';
+            return s;
+        }
 
-        System.out.println("===============================");
+        public void print() {
+            if (t!=type.Bug)
+                System.out.println("╟ Author: "+format(a.name(), 16)+" │  State: "+format(s.name(), 13)
+                                 +" │  Type: "+format(t.name(), 10)+" │  Action: "+format(action, 50)+" ╢");
+            else
+                System.err.println("╟ Author: "+format(a.name(), 16)+" │  State: "+format(s.name(), 13)
+                        +" │  Type: "+format(t.name(), 10)+" │  Action: "+format(action, 50)+" ╢");
+        }
+
+        public static void printTopLine() {
+            System.out.println("╔══════════════════════════╤═══════════════════════╤═══════════════════╤═════════════════════════════════════════════════════════════╗");
+        }
+
+        public static void printBottomLine() {
+            System.out.println("╚══════════════════════════╧═══════════════════════╧═══════════════════╧═════════════════════════════════════════════════════════════╝");
+        }
+
+        public void printIfNotDone() {
+            if (s!=state.Done)
+                print();
+        }
+    }
+
+    public static void print() {
+        System.out.println("PTS (Poehavshaya Sistema Taskov) started.\n");
+
+        ArrayList<Task> tasks=new ArrayList<Task>();
+
+        tasks.add(new Task(state.Planned, author.None, type.Change, "Отрисовка целостности детали"));
+        tasks.add(new Task(state.Planned, author.None, type.Change, "Выстрелы в сторону"));
+        tasks.add(new Task(state.Planned, author.None, type.Change, "Отдача от выстрелов"));
+        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Потеря массы пули"));
+        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Разрушения"));
+        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая деталь-локатор"));
+        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая деталь-броня"));
+        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая деталь-энергоблок"));
+        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Распределение энергии"));
+        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Присоединение деталей на ходу"));
+        tasks.add(new Task(state.Planned, author.None, type.Change, "Адекватная анимация шлейфа"));
+        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Мощность двигателя и индикация"));
+        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "GUI с параментрами движения корабля (скорость, угловая скорость, текущая сила на двигателях)"));
+
+
+        printTopLine();
+        for (Task s: tasks) {
+            s.printIfNotDone();
+        }
+        printBottomLine();
+
+        System.out.println("\n");
     }
 
 }
