@@ -1,11 +1,7 @@
 package com.company.Graphic;
 
-import com.company.Geometry.Point;
 
 import java.util.ArrayList;
-
-import static com.company.Graphic.Camera.getTranslatedPoint;
-import static org.lwjgl.opengl.GL11.*;
 
 public class ComplexGraphicModel extends GraphicModel {
 

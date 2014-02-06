@@ -12,6 +12,10 @@ public class ComplexModel extends Model {
         phyModel.update(time);
     }
 
+    public void removeGraphicModel(int num) {
+         graModel.remove(num);
+    }
+
     public void add(Model m, int num) {
         graModel.add(m.graphic);
         phyModel.add(m.physic, num);
@@ -25,7 +29,7 @@ public class ComplexModel extends Model {
     public ComplexModel() {
         super(null, null);
         graModel = new ComplexGraphicModel();
-        phyModel = new ComplexPhysicModel();
+        phyModel = new ComplexPhysicModel(this);
         graphic = graModel;
         physic = phyModel;
     }

@@ -1,5 +1,6 @@
 package com.company.Physic;
 
+import com.company.ComplexModel;
 import com.company.Geometry.Point;
 import com.company.World;
 
@@ -19,6 +20,8 @@ public class ComplexPhysicModel extends PhysicModel {
 
     //Центр масс системы
     private Point massCentre;
+
+    private ComplexModel cm;
 
     //Центр теперь определяется не центром геометрической модели, а центром масс системы
     //Кстати говоря: ускорения, скорости теперь тоже определяются центром масс системы
@@ -107,6 +110,7 @@ public class ComplexPhysicModel extends PhysicModel {
             {
                 //TODO: вот здесь удалить графическую модель
                 bodies.remove(i);
+                cm.removeGraphicModel(i);
                 removeFromAdjecency(i);
             }
             else
@@ -264,8 +268,9 @@ public class ComplexPhysicModel extends PhysicModel {
         пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
     }
 
-    public ComplexPhysicModel() {
+    public ComplexPhysicModel(ComplexModel c) {
         super(null, 0);
+        cm=c;
         bodies = new ArrayList<PhysicModel>();
         adjacencyMatrix = new boolean[0][0];
     }
