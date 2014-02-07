@@ -5,6 +5,7 @@ import com.company.Graphic.Camera;
 import com.company.Models.Asteroid.AsteroidModel;
 import com.company.Models.Base.BaseModel;
 import com.company.Models.Engine.EngineModel;
+import com.company.Models.Gun.GunModel;
 import com.company.Physic.ComplexPhysicModel;
 import com.company.Physic.PhysicModel;
 import org.lwjgl.input.Keyboard;
@@ -132,7 +133,7 @@ public class World {
 
         Model m7 = new BaseModel(2500, 0, 1250f);
 
-        Model m8 = new EngineModel(4000, 0, 1250f, (float) Math.PI);
+        Model m8 = new GunModel(4000, 0, 1250f);
         rocketPhys5=m8.physic;
 
         ComplexModel m3 = new ComplexModel();

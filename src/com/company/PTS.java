@@ -64,16 +64,17 @@ public class PTS {
         tasks.add(new Task(state.Planned, author.None, type.Change, "Выстрелы в сторону"));
         tasks.add(new Task(state.Planned, author.None, type.Change, "Отдача от выстрелов"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Потеря массы пули"));
-        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Разрушения"));
+        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая модель - пуля"));
+        tasks.add(new Task(state.InDevelopment, author.ZhizhinPeter, type.NewFeature, "Разрушения"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая деталь-локатор"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая деталь-броня"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая деталь-энергоблок"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Распределение энергии"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Присоединение деталей на ходу"));
-        tasks.add(new Task(state.Done, author.ShirinkinArseny, type.Bug, "Адекватная анимация шлейфа (бисекция кривая)"));
-        tasks.add(new Task(state.Done, author.ShirinkinArseny, type.NewFeature, "Мощность двигателя и индикация"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "GUI с параментрами движения корабля (скорость, угловая скорость, текущая сила на двигателях)"));
         tasks.add(new Task(state.Done, author.ShirinkinArseny, type.Change, "Перевести Point на Vector2f"));
+        tasks.add(new Task(state.Done, author.ShirinkinArseny, type.Bug, "Адекватная анимация шлейфа (бисекция кривая)"));
+        tasks.add(new Task(state.Done, author.ShirinkinArseny, type.NewFeature, "Мощность двигателя и индикация"));
 
         printTopLine();
         for (Task s: tasks) {

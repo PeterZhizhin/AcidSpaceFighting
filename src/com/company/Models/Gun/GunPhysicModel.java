@@ -11,8 +11,18 @@ import com.company.World;
 
 public class GunPhysicModel extends PhysicModel {
 
+    private static final float timeLimit=1f;
+
     public void doSpecialActionA(float deltaTime) {
+        if (activity<=0) {
         World.addModel(new AsteroidModel(getCentre().getX() + 300f, getCentre().getY() + 300f, 100f, 100f));
+            activity=timeLimit;
+        }
+    }
+
+    public void update(float time) {
+        if (activity>0)
+            activity-=time;
     }
 
     public GunPhysicModel(GeometricModel body, Point[] conns, float mass) {

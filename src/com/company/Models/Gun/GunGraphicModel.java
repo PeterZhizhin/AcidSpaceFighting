@@ -28,7 +28,7 @@ public class GunGraphicModel extends GraphicModel {
     public void drawTopLayer() {
 
         //body
-        glColor3f(0.7f, 0.7f, 0.7f);
+        glColor3f(0.5f+body.getActivity()/2, 0.5f, 0.5f);
         glBegin(GL_POLYGON);
         for (int i = 0; i < shape.getPointCount(); i++)
             Camera.translatePoint(shape.getPoint(i).getX(), shape.getPoint(i).getY());
