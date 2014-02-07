@@ -65,6 +65,8 @@ public class PTS {
         tasks.add(new Task(state.Planned, author.None, type.Change, "Отдача от выстрелов"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Потеря массы пули"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая модель - пуля"));
+        tasks.add(new Task(state.Planned, author.None, type.Bug, "getNearestModel  в мире не должен влзвращать центр комплексной модели, к которой принадлежит вызывающая метод деталь"));
+        tasks.add(new Task(state.Planned, author.None, type.Bug, "Метеориты рисуются не там, где они расположены"));
         tasks.add(new Task(state.InDevelopment, author.ZhizhinPeter, type.NewFeature, "Разрушения"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая деталь-локатор"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая деталь-броня"));

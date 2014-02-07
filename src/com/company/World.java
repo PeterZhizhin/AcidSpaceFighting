@@ -131,9 +131,9 @@ public class World {
 
         Model m4 = new BaseModel(500, 0, 1250f);
 
-        Model m7 = new BaseModel(2500, 0, 1250f);
+        Model m7 = new BaseModel(1800, 0, 1250f);
 
-        Model m8 = new GunModel(4000, 0, 1250f);
+        Model m8 = new GunModel(2700, -370, 1250f, (float) (Math.PI/2));
         rocketPhys5=m8.physic;
 
         ComplexModel m3 = new ComplexModel();

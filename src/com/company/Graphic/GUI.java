@@ -1,6 +1,5 @@
 package com.company.Graphic;
 
-import com.company.Graphic.Controls.Button;
 import com.company.Graphic.Controls.Control;
 import com.company.Graphic.Controls.FontDrawer;
 import com.company.Graphic.Controls.Label;
@@ -21,8 +20,8 @@ public class GUI {
     public static void init() {
         FontDrawer.init();
         controls = new ArrayList<Control>();
-        controls.add(new Label(20, 20, "It is text label which is control, read it.", true));
-        controls.add(new Label(20, 50, "It is small text label which is control, read it.", false));
+        //controls.add(new Label(20, 20, "It is text label which is control, read it.", true));
+        //controls.add(new Label(20, 50, "It is small text label which is control, read it.", false));
     }
 
     public static void update() {

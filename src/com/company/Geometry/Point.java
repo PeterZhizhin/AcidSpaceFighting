@@ -173,6 +173,6 @@ public class Point extends Vector2f {
 
 
     public String toString() {
-        return x + " " + y;
+        return Math.ceil(x) + " " +  Math.ceil(y);
     }
 }
