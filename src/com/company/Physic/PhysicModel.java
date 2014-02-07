@@ -146,7 +146,7 @@ public class PhysicModel {
      * @param posOfForce Точка приложения силы TODO: переделать на Segment
      * @param force      Сама сила
      */
-    protected void useForce(Point posOfForce, Point force) {
+    public void useForce(Point posOfForce, Point force) {
         if (parent == null) {
             acceleration.move(force.multiply(1.0f / mass));
             //speedVector.move(force.multiply(deltaTime/mass));

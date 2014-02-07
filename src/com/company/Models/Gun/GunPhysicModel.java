@@ -15,7 +15,13 @@ public class GunPhysicModel extends PhysicModel {
 
     public void doSpecialActionA(float deltaTime) {
         if (activity<=0) {
-        World.addModel(new AsteroidModel(getCentre().getX() + 300f, getCentre().getY() + 300f, 100f, 100f));
+
+            Point force=body.getPoint(2).add(getCentre().negate()).setLength(body.getMaxLength());
+            Model m=new AsteroidModel(getCentre().getX()+force.x, getCentre().getY() + force.y, 100f, 100f);
+            force=force.setLength(100000000);
+            m.useForce(m.getCenter(), force);
+            World.addModel(m);
+            useForce(getCentre(), force.multiply(-1));
             activity=timeLimit;
         }
     }

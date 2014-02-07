@@ -9,6 +9,10 @@ public class Model {
     protected GraphicModel graphic;
     protected PhysicModel physic;
 
+    public void useForce(Point where, Point toWhere) {
+        physic.useForce(where, toWhere);
+    }
+
     public void update(float time) {
         physic.update(time);
     }
