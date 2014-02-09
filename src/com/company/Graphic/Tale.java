@@ -20,6 +20,7 @@ public class Tale {
     private int size;
     private int interval;
     private int timer;
+    private boolean useSmoke;
 
     public void draw() {
 
@@ -65,7 +66,7 @@ public class Tale {
         }
     }
 
-    public Tale(Color start, Color end, float deltaPos, int size, int interv) {
+    public Tale(Color start, Color end, float deltaPos, int size, int interv, boolean useSmoke) {
         interval=interv;
         this.size=size;
         coordinates=new LinkedList<Point>();
@@ -77,6 +78,7 @@ public class Tale {
             widths.add(0f);
         }
         deltaPosition=deltaPos;
+        this.useSmoke=useSmoke;
     }
 
 
