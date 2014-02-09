@@ -5,6 +5,7 @@ import com.company.Graphic.Camera;
 import com.company.Graphic.Posteffect;
 import com.company.Models.Asteroid.AsteroidModel;
 import com.company.Models.Base.BaseModel;
+import com.company.Models.Dynamite.DynamiteModel;
 import com.company.Models.Engine.EngineModel;
 import com.company.Models.Gun.GunModel;
 import com.company.Physic.ComplexPhysicModel;
@@ -64,6 +65,10 @@ public class World {
 
         if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
             rocketPhys5.doSpecialActionA(deltaTime);
+        }
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_X)) {
+            boom.doSpecialActionA(deltaTime);
         }
 
         boolean wasIntersection = true;
@@ -126,6 +131,7 @@ public class World {
     private static PhysicModel rocketPhys3;
     private static PhysicModel rocketPhys4;
     private static PhysicModel rocketPhys5;
+    private static PhysicModel boom;
     private static ComplexPhysicModel totalModel;
 
     public static void init() {
@@ -147,7 +153,8 @@ public class World {
 
         Model m4 = new BaseModel(500, 0, 1250f);
 
-        Model m7 = new BaseModel(1800, 0, 1250f);
+        Model m7 = new DynamiteModel(1800, 0, 1250f);
+        boom=m7.physic;
 
         Model m8 = new GunModel(2700, -370, 1250f, (float) (Math.PI/2));
         rocketPhys5=m8.physic;

@@ -62,7 +62,7 @@ public class EngineGraphicModel extends GraphicModel {
 
     public EngineGraphicModel(GeometricModel body) {
         super(body);
-        t=new Tale(new Color(1f, 1f, 0f), new Color(1f, 0f, 0f), 20, 10, 5, true);
+        t=new Tale(new Color(1f, 1f, 0f), new Color(1f, 0f, 0f), 20, 20, 5, true);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.company.Graphic.Effects;
 
+import com.company.Geometry.Point;
 import com.company.Geometry.Segment;
 import com.company.Graphic.Controls.Color;
 import com.company.Graphic.Posteffect;
@@ -27,6 +28,10 @@ public class Explosion implements Posteffect {
         }
         currentRadius=power/1000f;
         radius=power;
+    }
+
+    public Explosion(Point p, float power) {
+        this(p.x, p.y, power);
     }
 
     @Override
