@@ -36,7 +36,7 @@ public class BodiesList implements Iterable<PhysicModel> {
      */
     private void deleteFromIterator(int bodyIndex)
     {
-        remove(bodyIndexesInIndexes[bodyIndex]);
+        remove(bodyIndex);
     }
 
     /**
@@ -46,42 +46,63 @@ public class BodiesList implements Iterable<PhysicModel> {
     public Iterator<PhysicModel> iterator()
     {
         return new Iterator<PhysicModel>() {
-            private int currentBodyIndex = -1;
-
-            /**
-             * Получаем следующее тело в массиве
-             * @return Номер следующего тела. -1, если его не нашлось
-             */
-            private int getNext()
-            {
-                int next = currentBodyIndex+1;
-                while ((next < length) && (bodies[next]==null))
-                    next++;
-                if (next >= length)
-                    return -1;
-                else
-                    return next;
-            }
+            private int index = 0;
 
             @Override
             public boolean hasNext() {
-                return getNext()!=-1;
+                return index<length;
             }
 
             @Override
             public PhysicModel next() {
-                currentBodyIndex = getNext();
-                if (currentBodyIndex==-1)
-                    return null;
-                else
-                    return bodies[currentBodyIndex];
+                PhysicModel result = bodies[indexes[index]];
+                index++;
+                return result;
             }
 
             @Override
             public void remove() {
-                deleteFromIterator(currentBodyIndex);
+                deleteFromIterator(index-1);
             }
         };
+    }
+
+    public PhysicModel get(int index)
+    {
+        return bodies[indexes[index]];
+    }
+
+    /**
+     * Пересчитываем матрицу (заполняем компоненты связности)
+     */
+    public void recalculateMatrix()
+    {
+        boolean[] wasVisited = new boolean[length];
+        for (int i = 0; i< wasVisited.length; i++)
+            wasVisited[i] = false;
+        int componentNumber = 1;
+        fillMatrix(wasVisited, baseIndex, componentNumber);
+        componentNumber++;
+        for (int i = 0; i<wasVisited.length; i++)
+            if (!wasVisited[i])
+            {
+                fillMatrix(wasVisited, i, componentNumber);
+                componentNumber++;
+            }
+    }
+
+    private void fillMatrix(boolean[] wasVisited, int index, int component)
+    {
+        wasVisited[index] = true;
+        int realIndex = indexes[index];
+        adjacencyMatrix[realIndex][realIndex] = component;
+        for (int i=0; i<wasVisited.length; i++)
+            if (!wasVisited[i] && adjacencyMatrix[indexes[i]][realIndex]!=0)
+            {
+                adjacencyMatrix[i][realIndex] = component;
+                adjacencyMatrix[realIndex][i] = component;
+                fillMatrix(wasVisited, i, component);
+            }
     }
 
     /**

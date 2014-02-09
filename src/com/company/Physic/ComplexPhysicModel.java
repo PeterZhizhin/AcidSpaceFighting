@@ -49,9 +49,8 @@ public class ComplexPhysicModel extends PhysicModel {
     //Статические силы теперь тоже применяются ко всей системе
     @Override
     public void applyStaticForces(PhysicModel m, float deltaTime) {
-        Iterator<PhysicModel> iterator = bodies.iterator();
-        while (iterator.hasNext())
-            iterator.next().applyStaticForces(m, deltaTime);
+        for(PhysicModel body : bodies)
+            body.applyStaticForces(m,deltaTime);
     }
 
     /**
@@ -65,19 +64,18 @@ public class ComplexPhysicModel extends PhysicModel {
             iterator.next().update(deltaTime);
 
         boolean wasDeleted = false;
-        iterator = bodies.iterator();
-        while (iterator.hasNext())
-        {
-            PhysicModel body = iterator.next();
-            if (body.getHealth()<0)
+        for (int i=0; i<bodies.getSize(); i++)
+            if (bodies.get(i).getHealth()<0)
             {
-                System.out.println("HEALTH: " + Float.toString(body.getHealth()));
-                iterator.remove();
+                bodies.remove(i);
+                cm.graModel.remove(i);
                 wasDeleted = true;
             }
-        }
         if (wasDeleted)
-                пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
+        {
+            bodies.recalculateMatrix();
+            пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
+        }
     }
 
     //Здесь нужно передать изменения всей системе тел
@@ -86,11 +84,10 @@ public class ComplexPhysicModel extends PhysicModel {
         Point dS = getMoveVector(deltaTime);
         massCentre.move(dS);
         float angle = getRotationAngle(deltaTime);
-        Iterator<PhysicModel> iterator = bodies.iterator();
-        while (iterator.hasNext()) {
-            PhysicModel body = iterator.next();
-            body.rotate(massCentre, angle);
-            body.move(dS);
+        for (int i = 0; i<bodies.getSize(); i++)
+        {
+            bodies.get(i).rotate(massCentre, angle);
+            bodies.get(i).move(dS);
         }
         updateKinematic(deltaTime);
     }
@@ -99,9 +96,8 @@ public class ComplexPhysicModel extends PhysicModel {
     @Override
     protected void updateKinematic(float deltaTime) {
         super.updateKinematic(deltaTime);
-        Iterator<PhysicModel> iterator = bodies.iterator();
-        while (iterator.hasNext()) {
-            PhysicModel body = iterator.next();
+        for (PhysicModel body : bodies)
+        {
             body.speedVector = speedVector;
             body.w = this.w;
             body.acceleration = new Point(0, 0);
@@ -151,18 +147,16 @@ public class ComplexPhysicModel extends PhysicModel {
         speedVector = new Point(0, 0);
         mass = 0;
         J = 0;
-        Iterator<PhysicModel> iterator = bodies.iterator();
-        while (iterator.hasNext()) {
-            PhysicModel body = iterator.next();
+        for (PhysicModel body : bodies)
+        {
             mass += body.mass;
             massCentre.move(body.getCentre().multiply(body.mass));
             speedVector.move(body.speedVector.multiply(body.mass));
         }
         massCentre = massCentre.multiply(1.0f / mass);
         speedVector = speedVector.multiply(1.0f / mass);
-        iterator = bodies.iterator();
-        while (iterator.hasNext()) {
-            PhysicModel body = iterator.next();
+        for (PhysicModel body : bodies)
+        {
             J += body.J;
             J += body.mass * body.getCentre().getLengthSquared(this.massCentre);
             body.setParent(this);
