@@ -103,17 +103,29 @@ public class ComplexPhysicModel extends PhysicModel {
     public void update(float deltaTime) {
         for (PhysicModel body : bodies)
             body.update(deltaTime);
-        for (int i=0; i<bodies.size(); i++)
+        int i = 0;
+        boolean wasDeleted = false;
+        while (i<bodies.size())
             if (bodies.get(i).getHealth()<0)
             {
                 bodies.remove(i);
-                removeFromAdjacency(i);
                 cm.removeGraphicModel(i);
-                if (bodies.size()>0)
-                {
-                    пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
-                }
+                removeFromAdjacency(i);
+                wasDeleted = true;
             }
+            else
+                i++;
+        if (wasDeleted)
+        {
+            if (bodies.size()>0)
+            {
+                //Пересчитаем компоненты связности
+                //LinkedList<PhysicModel> models = getComponents();
+                //Если число компонент теперь не равно 1, то нужно создать ещё одну комплексную физическую модель
+                //if (models.size()==1)
+                пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
+            }
+        }
     }
 
     //Здесь нужно передать изменения всей системе тел
