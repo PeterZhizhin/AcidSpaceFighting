@@ -13,7 +13,7 @@ public class Explosion implements Posteffect {
     private float currentRadius;
     private Tale[] tales;
     private Segment [] centers;
-    private int size=500;
+    private int size=200;
     private static final Random rnd=new Random();
 
     public Explosion(float x, float y, float power) {
@@ -23,7 +23,7 @@ public class Explosion implements Posteffect {
             double angle=rnd.nextFloat()*Math.PI*2;
             float length=rnd.nextFloat()*rnd.nextFloat()*rnd.nextFloat();
             centers[i]=new Segment(x, y, (float)Math.cos(angle)*length*power, (float)Math.sin(angle)*length*power);
-            tales[i]=new Tale(new Color(1f, 1f, 0f), new Color(1f, 0f, 0f), 10, 10, 0);
+            tales[i]=new Tale(new Color(1f, 1f, 0f), new Color(1f, 0f, 0f), 10, 10, 5);
         }
         currentRadius=power/1000f;
         radius=power;
