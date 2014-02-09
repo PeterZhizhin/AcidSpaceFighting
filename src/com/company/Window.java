@@ -23,7 +23,7 @@ public class Window extends BasicWindow {
     }
 
     public void setTitle(String s) {
-        super.setTitle(s + " " + World.getMessage());
+        super.setTitle(s + " " +  World.getMessage());
     }
 
     @Override
