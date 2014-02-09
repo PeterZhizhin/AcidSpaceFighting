@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
+import com.company.Graphic.Posteffect;
 import com.company.Models.Asteroid.AsteroidModel;
 import com.company.Models.Base.BaseModel;
 import com.company.Models.Engine.EngineModel;
@@ -16,9 +17,14 @@ import java.util.LinkedList;
 public class World {
 
     private static ArrayList<Model> models;
+    private static ArrayList<Posteffect> effects;
 
     public static Model getModel(int num) {
         return models.get(num);
+    }
+
+    public static void addEffect(Posteffect p) {
+        effects.add(p);
     }
 
     public static String getMessage() {
@@ -35,6 +41,9 @@ public class World {
         }
         for (Model model : models) {
             model.drawHealthLine();
+        }
+        for (Posteffect effect : effects) {
+            effect.draw();
         }
     }
 
@@ -84,6 +93,12 @@ public class World {
             models.addAll(addModelBuffer);
             addModelBuffer.clear();
         }
+
+        for (int i=0; i<effects.size(); i++) {
+            effects.get(i).update(deltaTime);
+            if (effects.get(i).noNeedMore())
+                effects.remove(i);
+        }
     }
 
     public static Point getNearestPhysicModel(Point p) {
@@ -114,6 +129,7 @@ public class World {
     private static ComplexPhysicModel totalModel;
 
     public static void init() {
+        effects=new ArrayList<Posteffect>();
         models = new ArrayList<Model>();
         addModelBuffer = new LinkedList<Model>();
 

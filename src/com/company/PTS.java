@@ -8,7 +8,7 @@ import static com.company.PTS.Task.printTopLine;
 public class PTS {
 
     private static enum author {ShirinkinArseny, ZhizhinPeter, None}
-    private static enum state {Planned, InDevelopment, InTesting, Done}
+    private static enum state {Planned, InDevelopment, Done}
     private static enum type {Bug, NewFeature, Change}
 
     static class Task {

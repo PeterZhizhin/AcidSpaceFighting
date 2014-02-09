@@ -2,6 +2,8 @@ package com.company.Graphic;
 
 import com.company.Geometry.Point;
 import com.company.Graphic.Controls.Color;
+import com.company.Graphic.Effects.Smoke;
+import com.company.World;
 
 import java.util.LinkedList;
 import java.util.Random;
@@ -54,6 +56,8 @@ public class Tale {
             widths.remove(0);
         }
             timer=0;
+            Smoke s=new Smoke(coordinate.x, coordinate.y, width*8);
+            World.addEffect(s);
         }
         else {
             coordinates.set(size-1, coordinate.add(new Point((rnd.nextFloat()-0.5f), (rnd.nextFloat()-0.5f)).multiply(deltaPosition)));

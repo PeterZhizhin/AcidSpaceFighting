@@ -27,4 +27,9 @@ public class Segment {
         this.end = end;
     }
 
+    public Segment(float x1, float y1, float x2, float y2) {
+        start = new Point(x1, y1);
+        end = new Point(x2, y2);
+    }
+
 }
