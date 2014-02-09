@@ -14,11 +14,11 @@ public class Explosion implements Posteffect {
     private Tale[] tales;
     private Segment [] centers;
     private int size=500;
+    private static final Random rnd=new Random();
 
     public Explosion(float x, float y, float power) {
         tales=new Tale[size];
         centers=new Segment[size];
-        Random rnd=new Random();
         for (int i=0; i<size; i++) {
             double angle=rnd.nextFloat()*Math.PI*2;
             float length=rnd.nextFloat()*rnd.nextFloat()*rnd.nextFloat();
@@ -39,7 +39,7 @@ public class Explosion implements Posteffect {
         float width=(radius-currentRadius)*2;
         for (int i=0; i<size; i++) {
             centers[i].getStart().move(centers[i].getEnd());
-            centers[i].getEnd().set(centers[i].getEnd().multiply(0.965f));
+            if (rnd.nextBoolean()) centers[i].getEnd().set(centers[i].getEnd().multiply(0.965f));
             tales[i].addPoint(centers[i].getStart(), width);
         }
         float delta=(currentRadius*3+radius)/4-currentRadius;
