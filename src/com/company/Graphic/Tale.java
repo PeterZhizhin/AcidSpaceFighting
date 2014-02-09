@@ -57,8 +57,9 @@ public class Tale {
             widths.remove(0);
         }
             timer=0;
+            if (useSmoke) {
             Smoke s=new Smoke(coordinate.x, coordinate.y, width*8);
-            World.addEffect(s);
+            World.addEffect(s);     }
         }
         else {
             coordinates.set(size-1, coordinate.add(new Point((rnd.nextFloat()-0.5f), (rnd.nextFloat()-0.5f)).multiply(deltaPosition)));
