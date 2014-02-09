@@ -96,7 +96,7 @@ public class ComplexPhysicModel extends PhysicModel {
     @Override
     protected void updateKinematic(float deltaTime) {
         super.updateKinematic(deltaTime);
-        for (PhysicModel body : bodies)
+        for (PhysicModel  body : bodies)
         {
             body.speedVector = speedVector;
             body.w = this.w;
