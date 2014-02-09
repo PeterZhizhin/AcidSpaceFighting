@@ -12,7 +12,7 @@ public class BodiesList implements Iterable<PhysicModel> {
     //Индекс базы в массиве. Если её удалить - тело не должно существовать (по идее)
     private int baseIndex;
     //Жива ли база
-    private boolean  isAlive_;
+    private boolean isAlive_;
     public boolean isAlive()
     {
         return isAlive_;

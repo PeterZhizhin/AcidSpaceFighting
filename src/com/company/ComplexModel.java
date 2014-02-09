@@ -29,7 +29,7 @@ public class ComplexModel extends Model {
     public ComplexModel(Model firstModel) {
         super(null, null);
         phyModel = new ComplexPhysicModel(this, firstModel.physic);
-        graModel =  new ComplexGraphicModel(phyModel);
+        graModel = new ComplexGraphicModel(phyModel);
         graModel.setBase(firstModel.graphic);
         graphic = graModel;
         physic = phyModel;
