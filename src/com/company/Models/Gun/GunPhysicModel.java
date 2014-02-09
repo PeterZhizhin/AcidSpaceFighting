@@ -2,6 +2,7 @@ package com.company.Models.Gun;
 
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
+import com.company.Graphic.Effects.Explosion;
 import com.company.Model;
 import com.company.Models.Asteroid.AsteroidGeometricModel;
 import com.company.Models.Asteroid.AsteroidGraphicModel;
@@ -23,6 +24,9 @@ public class GunPhysicModel extends PhysicModel {
             World.addModel(m);
             useForce(getCentre(), force.multiply(-1));
             activity=timeLimit;
+
+            Explosion e=new Explosion(getCentre().x, getCentre().y, 100);
+            World.addEffect(e);
         }
     }
 
