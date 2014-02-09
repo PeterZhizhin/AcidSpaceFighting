@@ -8,7 +8,7 @@ import java.util.Iterator;
  * Массив тел. Имеет доступ к себе в качестве иттератора.
  * Всё как со списком. Можно добавлять, удалять элементы
  */
-public class BodiesList {
+public class BodiesList implements Iterable<PhysicModel> {
     //Индекс базы в массиве. Если её удалить - тело не должно существовать (по идее)
     private int baseIndex;
     //Жива ли база
@@ -40,13 +40,13 @@ public class BodiesList {
     }
 
     /**
-     * Получаем иттератор
+     * Получаем иттератор (порядок обхода не важен)
      * @return Иттератор
      */
     public Iterator<PhysicModel> iterator()
     {
         return new Iterator<PhysicModel>() {
-            int currentBodyIndex = 0;
+            private int currentBodyIndex = -1;
 
             /**
              * Получаем следующее тело в массиве
@@ -54,10 +54,10 @@ public class BodiesList {
              */
             private int getNext()
             {
-                int next = currentBodyIndex;
-                while (next < length & bodies[next]==null)
+                int next = currentBodyIndex+1;
+                while ((next < length) && (bodies[next]==null))
                     next++;
-                if (next == length)
+                if (next >= length)
                     return -1;
                 else
                     return next;
@@ -223,15 +223,18 @@ public class BodiesList {
         bodyIndexesInIndexes[realBodyIndex] = -1;
         //Теперь нужно сместить массив индексов вверх
         for (int i=bodyIndex; i<length-1; i++)
+        {
             indexes[i] = indexes[i+1];
+            bodyIndexesInIndexes[indexes[i]] = i;
+        }
+        //indexes[length-1] = -1;
         //Очистка матрицы смежности и массива индексов
         //(Должно работать и без этого)
-        indexes[length-1] = -1;
-        for (int i = 0; i<length; i++)
+        /*for (int i = 0; i<length; i++)
         {
             adjacencyMatrix[realBodyIndex][i] = 0;
             adjacencyMatrix[i][realBodyIndex] = 0;
-        }
+        } */
         length--;
     }
 

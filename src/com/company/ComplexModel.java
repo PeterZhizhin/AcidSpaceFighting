@@ -26,10 +26,11 @@ public class ComplexModel extends Model {
         phyModel.setBase(m.physic);
     }
 
-    public ComplexModel() {
+    public ComplexModel(Model firstModel) {
         super(null, null);
-        phyModel = new ComplexPhysicModel(this);
+        phyModel = new ComplexPhysicModel(this, firstModel.physic);
         graModel = new ComplexGraphicModel(phyModel);
+        graModel.setBase(firstModel.graphic);
         graphic = graModel;
         physic = phyModel;
     }

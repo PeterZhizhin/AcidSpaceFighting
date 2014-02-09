@@ -136,8 +136,7 @@ public class World {
         Model m8 = new GunModel(2700, -370, 1250f, (float) (Math.PI/2));
         rocketPhys5=m8.physic;
 
-        ComplexModel m3 = new ComplexModel();
-        m3.setBase(m4);
+        ComplexModel m3 = new ComplexModel(m4);
         m3.add(m, 0);
         m3.add(m2, 0);
         m3.add(m5, 0);

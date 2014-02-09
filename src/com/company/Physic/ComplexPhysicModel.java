@@ -4,6 +4,7 @@ import com.company.ComplexModel;
 import com.company.Geometry.Point;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class ComplexPhysicModel extends PhysicModel {
@@ -13,9 +14,9 @@ public class ComplexPhysicModel extends PhysicModel {
     }
 
     //Массив тел в модели
-    private ArrayList<PhysicModel> bodies;
-    //Матрица смежности тел, входящих в систему (жесткие связи между телами в система)
-    private boolean[][] adjacencyMatrix;
+    private BodiesList bodies;
+    //Максимальное их число
+    private static final int maxBodiesSize = 10;
 
     //Центр масс системы
     private Point massCentre;
@@ -32,67 +33,25 @@ public class ComplexPhysicModel extends PhysicModel {
 
     @Override
     public int getConnectionPointsCount() {
-        int result = 0;
-        for (PhysicModel body : bodies)
-            result += body.getConnectionPointsCount();
-        return result;
+        return bodies.getConnectionPointsCount();
     }
 
     @Override
     public Point getConnectionPoint(int index) {
-        int bodyNo = 0;
-        while (index >= 0) {
-            index -= bodies.get(bodyNo).getConnectionPointsCount();
-            bodyNo++;
-        }
-        bodyNo--;
-        index += bodies.get(bodyNo).getConnectionPointsCount();
-        return bodies.get(bodyNo).getConnectionPoint(index);
+        return bodies.getConnectionPoint(index);
     }
 
     @Override
     public boolean getIsConnectionPointFree(int index) {
-        int bodyNo = 0;
-        while (index >= 0) {
-            index -= bodies.get(bodyNo).getConnectionPointsCount();
-            bodyNo++;
-        }
-        bodyNo--;
-        index += bodies.get(bodyNo).getConnectionPointsCount();
-        return bodies.get(bodyNo).getIsConnectionPointFree(index);
-    }
-
-    private int getBodyByIndex(int index) {
-        int bodyNo = 0;
-        while (index >= 0) {
-            index -= bodies.get(bodyNo).getConnectionPointsCount();
-            bodyNo++;
-        }
-        bodyNo--;
-        return bodyNo;
+        return bodies.getIsConnectionPointFree(index);
     }
 
     //Статические силы теперь тоже применяются ко всей системе
     @Override
     public void applyStaticForces(PhysicModel m, float deltaTime) {
-
-        for (PhysicModel body : bodies)
-            body.applyStaticForces(m, deltaTime);
-    }
-
-    private void removeFromAdjacency(int index)
-    {
-        for (int i=index; i<adjacencyMatrix.length-1; i++)
-            for (int j=0; j<adjacencyMatrix.length; j++)
-                adjacencyMatrix[i][j] = adjacencyMatrix[i+1][j];
-        for (int i=0; i<adjacencyMatrix.length; i++)
-            for (int j=index; j<adjacencyMatrix.length-1; j++)
-                adjacencyMatrix[i][j] = adjacencyMatrix[i][j+1];
-        boolean[][] newMatrix = new boolean[adjacencyMatrix.length-1][adjacencyMatrix.length-1];
-        for (int i=0; i<newMatrix.length; i++)
-            for (int j=0; j<newMatrix.length; j++)
-                newMatrix[i][j] = adjacencyMatrix[i][j];
-        adjacencyMatrix = newMatrix;
+        Iterator<PhysicModel> iterator = bodies.iterator();
+        while (iterator.hasNext())
+            iterator.next().applyStaticForces(m, deltaTime);
     }
 
     /**
@@ -101,31 +60,24 @@ public class ComplexPhysicModel extends PhysicModel {
      */
     @Override
     public void update(float deltaTime) {
-        for (PhysicModel body : bodies)
-            body.update(deltaTime);
-        int i = 0;
+        Iterator<PhysicModel> iterator = bodies.iterator();
+        while (iterator.hasNext())
+            iterator.next().update(deltaTime);
+
         boolean wasDeleted = false;
-        while (i<bodies.size())
-            if (bodies.get(i).getHealth()<0)
+        iterator = bodies.iterator();
+        while (iterator.hasNext())
+        {
+            PhysicModel body = iterator.next();
+            if (body.getHealth()<0)
             {
-                bodies.remove(i);
-                cm.removeGraphicModel(i);
-                removeFromAdjacency(i);
+                System.out.println("HEALTH: " + Float.toString(body.getHealth()));
+                iterator.remove();
                 wasDeleted = true;
             }
-            else
-                i++;
-        if (wasDeleted)
-        {
-            if (bodies.size()>0)
-            {
-                //Пересчитаем компоненты связности
-                //LinkedList<PhysicModel> models = getComponents();
-                //Если число компонент теперь не равно 1, то нужно создать ещё одну комплексную физическую модель
-                //if (models.size()==1)
-                пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
-            }
         }
+        if (wasDeleted)
+                пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
     }
 
     //Здесь нужно передать изменения всей системе тел
@@ -134,7 +86,9 @@ public class ComplexPhysicModel extends PhysicModel {
         Point dS = getMoveVector(deltaTime);
         massCentre.move(dS);
         float angle = getRotationAngle(deltaTime);
-        for (PhysicModel body : bodies) {
+        Iterator<PhysicModel> iterator = bodies.iterator();
+        while (iterator.hasNext()) {
+            PhysicModel body = iterator.next();
             body.rotate(massCentre, angle);
             body.move(dS);
         }
@@ -145,14 +99,15 @@ public class ComplexPhysicModel extends PhysicModel {
     @Override
     protected void updateKinematic(float deltaTime) {
         super.updateKinematic(deltaTime);
-        for (PhysicModel body : bodies) {
+        Iterator<PhysicModel> iterator = bodies.iterator();
+        while (iterator.hasNext()) {
+            PhysicModel body = iterator.next();
             body.speedVector = speedVector;
             body.w = this.w;
             body.acceleration = new Point(0, 0);
             body.centreOfRotation = new Point(massCentre);
             body.beta = 0.0f;
         }
-
     }
 
     //TODO: Припилить столкновение для: ComplexPhysicModel & ComplexPhysicModel; ComplexPhysicModel & PhysicModel
@@ -173,43 +128,7 @@ public class ComplexPhysicModel extends PhysicModel {
         return false;
     }
 
-    /**
-     * Получем число компонент связностей в графе связности
-     * Будет использоваться при выделении тел в две комплексные физические модели при отделении тел
-     *
-     * @return Список тел из разных компонент связностей
-     */
-    private LinkedList<PhysicModel> getComponents() {
-        LinkedList<PhysicModel> result = new LinkedList<PhysicModel>();
-        boolean[] visits = new boolean[adjacencyMatrix.length];
-        for (int i = 0; i < visits.length; i++)
-            visits[i] = false;
-        for (int i = 0; i < visits.length; i++)
-            if (!visits[i]) {
-                result.add(bodies.get(i));
-                fillAllConnected(i, visits, adjacencyMatrix);
-            }
-        return result;
-    }
 
-    /**
-     * Рекурсивный обход в ширину для матрицы связности
-     *
-     * @param index           Индекс начала обхода
-     * @param wasVisited      Массив посещенных вершин
-     * @param adjacencyMatrix Матрица связности
-     */
-    private void fillAllConnected(int index, boolean[] wasVisited, boolean[][] adjacencyMatrix) {
-        wasVisited[index] = true;
-        for (int i = 0; i < wasVisited.length; i++)
-            if (!adjacencyMatrix[index][i])
-                fillAllConnected(i, wasVisited, adjacencyMatrix);
-    }
-
-    /*private ArrayList<Segment> forceBuffer;
-    public void addForce(Segment s) {
-        forceBuffer.add(s);
-    }*/
     @Override
     public void useForce(Point posOfForce, Point force) {
         acceleration.move(force.multiply(1.0f / mass));
@@ -232,14 +151,18 @@ public class ComplexPhysicModel extends PhysicModel {
         speedVector = new Point(0, 0);
         mass = 0;
         J = 0;
-        for (PhysicModel body : this.bodies) {
+        Iterator<PhysicModel> iterator = bodies.iterator();
+        while (iterator.hasNext()) {
+            PhysicModel body = iterator.next();
             mass += body.mass;
             massCentre.move(body.getCentre().multiply(body.mass));
             speedVector.move(body.speedVector.multiply(body.mass));
         }
         massCentre = massCentre.multiply(1.0f / mass);
         speedVector = speedVector.multiply(1.0f / mass);
-        for (PhysicModel body : this.bodies) {
+        iterator = bodies.iterator();
+        while (iterator.hasNext()) {
+            PhysicModel body = iterator.next();
             J += body.J;
             J += body.mass * body.getCentre().getLengthSquared(this.massCentre);
             body.setParent(this);
@@ -249,41 +172,18 @@ public class ComplexPhysicModel extends PhysicModel {
     }
 
     public void setBase(PhysicModel p) {
-        bodies.clear();
-        bodies.add(p);
-        adjacencyMatrix = new boolean[1][1];
-        adjacencyMatrix[0][0] = true;
-
-        пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
+        bodies = new BodiesList(maxBodiesSize, p);
     }
 
     public void add(PhysicModel p, int addPointIndex) {
-        int bodyIndex = getBodyByIndex(addPointIndex);
-        bodies.add(p);
-        boolean[][] tempAdjacency = new boolean[adjacencyMatrix.length][adjacencyMatrix[0].length];
-
-        for (int i = 0; i < tempAdjacency.length; i++)
-            for (int j = 0; j < tempAdjacency[i].length; j++)
-                tempAdjacency[i][j] = adjacencyMatrix[i][j];
-        adjacencyMatrix = new boolean[adjacencyMatrix.length + 1][adjacencyMatrix[0].length + 1];
-
-        for (int i = 0; i < tempAdjacency.length; i++)
-            for (int j = 0; j < tempAdjacency[i].length; j++)
-                adjacencyMatrix[i][j] = tempAdjacency[i][j];
-
-        int newBodyIndex = adjacencyMatrix.length - 1;
-        adjacencyMatrix[newBodyIndex][newBodyIndex] = true;
-        adjacencyMatrix[bodyIndex][newBodyIndex] = true;
-        adjacencyMatrix[newBodyIndex][bodyIndex] = true;
-
+        bodies.add(p, addPointIndex);
         пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
     }
 
-    public ComplexPhysicModel(ComplexModel c) {
+    public ComplexPhysicModel(ComplexModel c, PhysicModel firstModel) {
         super(null, 0);
+        bodies = new BodiesList(maxBodiesSize, firstModel);
         cm=c;
-        bodies = new ArrayList<PhysicModel>();
-        adjacencyMatrix = new boolean[0][0];
     }
 
 }

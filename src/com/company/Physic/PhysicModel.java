@@ -104,6 +104,11 @@ public class PhysicModel {
 
     //for their own timers
     public void update(float deltaTime) {
+        if(health<0)
+        {
+            System.out.print("Health: ");
+            System.out.println(getHealth());
+        }
     }
 
     /**
