@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
+import com.company.Graphic.Effects.EmptyEffect;
 import com.company.Graphic.Posteffect;
 import com.company.Models.Asteroid.AsteroidModel;
 import com.company.Models.Base.BaseModel;
@@ -18,14 +19,37 @@ import java.util.LinkedList;
 public class World {
 
     private static ArrayList<Model> models;
-    private static ArrayList<Posteffect> effects;
+    private static Posteffect[] effects;
+    private static int effectsCount;
 
     public static Model getModel(int num) {
         return models.get(num);
     }
 
+    private static int updates=0;
     public static void addEffect(Posteffect p) {
-        effects.add(p);
+        for (int i=0; i<effects.length; i++) {
+            if (effects[i]==null)
+            {
+                effects[i]=p;
+                break;
+            }
+        }
+        if (updates>=0) {
+            updates--;
+            effectsCount=Math.min(effectsCount+1, effects.length);
+        }
+        else {
+
+        effectsCount=0;
+        for (int i=effects.length-1; i>0; i--) {
+            if (effects[i]!=null) {
+                effectsCount=i+1;
+                break;
+            }
+        }
+            updates=1000;
+        }
     }
 
     public static String getMessage() {
@@ -43,8 +67,9 @@ public class World {
         for (Model model : models) {
             model.drawHealthLine();
         }
-        for (Posteffect effect : effects) {
-            effect.draw();
+        for (int i=0; i<effectsCount; i++) {
+            if (effects[i]!=null)
+                effects[i].draw();
         }
     }
 
@@ -99,10 +124,12 @@ public class World {
             addModelBuffer.clear();
         }
 
-        for (int i=0; i<effects.size(); i++) {
-            effects.get(i).update(deltaTime);
-            if (effects.get(i).noNeedMore())
-                effects.remove(i);
+        for (int i=0; i<effectsCount; i++) {
+            if (effects[i]!=null) {
+            effects[i].update(deltaTime);
+            if (effects[i].noNeedMore())
+                effects[i]=null;
+            }
         }
     }
 
@@ -135,7 +162,9 @@ public class World {
     private static ComplexPhysicModel totalModel;
 
     public static void init() {
-        effects=new ArrayList<Posteffect>();
+        effects=new Posteffect[5000];
+        effectsCount=0;
+
         models = new ArrayList<Model>();
         addModelBuffer = new LinkedList<Model>();
 
