@@ -2,7 +2,10 @@ package com.company.Physic;
 
 import com.company.Geometry.Point;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Objects;
 
 /**
  * Массив тел. Имеет доступ к себе в качестве иттератора.
@@ -31,8 +34,11 @@ public class BodiesList implements Iterable<PhysicModel> {
     //Количество тел
     private int length;
 
+    //Количество компонент меняется при вызове recalculateMatrix()
+    private int components;
+
     /**
-     *  Вроппер для иттератора (внезапно он имеет собственный remove())
+     *  Вроппер для иттератора (внезапно, он имеет собственный remove())
      */
     private void deleteFromIterator(int bodyIndex)
     {
@@ -62,34 +68,124 @@ public class BodiesList implements Iterable<PhysicModel> {
 
             @Override
             public void remove() {
-                deleteFromIterator(index-1);
+                deleteFromIterator(index - 1);
             }
         };
     }
 
+    /**
+     * Получаем элемент по индексу
+     * @param index Индекс
+     * @return Элемент
+     */
     public PhysicModel get(int index)
     {
         return bodies[indexes[index]];
     }
 
     /**
-     * Пересчитываем матрицу (заполняем компоненты связности)
+     * Получаем индекс модели в массиве
+     * @param model  Модель для поиска
+     * @return       Индекс
      */
-    public void recalculateMatrix()
+    public int indexOf(PhysicModel model)
+    {
+        int index = 0;
+        while (index<length & !bodies[indexes[index]].equals(model))
+            index++;
+        if (index>=length)
+            return -1;
+        else
+            return index;
+    }
+
+    /**
+     * Пересчитываем матрицу (заполняем компоненты связности)
+     * @return Количество компонент связности
+     */
+    public int recalculateMatrix()
     {
         boolean[] wasVisited = new boolean[length];
         for (int i = 0; i< wasVisited.length; i++)
             wasVisited[i] = false;
         int componentNumber = 1;
         fillMatrix(wasVisited, baseIndex, componentNumber);
-        componentNumber++;
         for (int i = 0; i<wasVisited.length; i++)
             if (!wasVisited[i])
             {
-                fillMatrix(wasVisited, i, componentNumber);
                 componentNumber++;
+                fillMatrix(wasVisited, i, componentNumber);
+            }
+        components = componentNumber;
+        return componentNumber;
+    }
+
+    /**
+     * Получаем компоненты после их перерасчета в recalculateMatrix()
+     * @return
+     */
+    public BodiesList[] getComponents()
+    {
+        BodiesList[] result = new BodiesList[components];
+        //Нужно получить все тела каждой компоненты по очереди
+        //Для каждой компоненты создать BodiesList
+        //В который добавлять по очереди все присоедененные к нему тела
+        boolean[] wasAdded = new boolean[length];
+        for (int i = 0; i<length; i++)
+            wasAdded[i] = false;
+        int realBaseIndex = indexes[baseIndex];
+        int baseComponentNo = adjacencyMatrix[realBaseIndex][realBaseIndex];
+        result[baseComponentNo-1] = new BodiesList(bodies.length, bodies[realBaseIndex]);
+        addBodies(wasAdded, baseIndex, result[baseComponentNo-1]);
+        for (int i = 0; i<length; i++)
+            if (!wasAdded[i])
+            {
+                int realIndex = indexes[i];
+                int componentNo = adjacencyMatrix[realIndex][realIndex];
+                result[componentNo-1] = new BodiesList(bodies.length, bodies[realIndex]);
+                addBodies(wasAdded, i, result[componentNo-1]);
+            }
+        return result;
+    }
+
+    private void addBodies(boolean[] wasVisited, int index, BodiesList listToAdd)
+    {
+        wasVisited[index] = true;
+        int realIndex = indexes[index];
+        for (int i=0; i<wasVisited.length; i++)
+            if (!wasVisited[i] && adjacencyMatrix[indexes[i]][realIndex]!=0)
+            {
+                listToAdd.add(bodies[indexes[i]], bodies[realIndex]);
+                addBodies(wasVisited, i, listToAdd);
             }
     }
+
+    private void add(PhysicModel modelToAdd, PhysicModel modelToConnect)
+    {
+        addBody(modelToAdd, indexOf(modelToConnect));
+    }
+
+    /**
+     * Добавляем тело в список, связывая его с уже существующим добавленным
+     * @param bodyIndex Локальный
+     */
+    private void addBody(PhysicModel model, int bodyIndex)
+    {
+        //Получаем место для соединения
+        int index = getFirstFree();
+        indexes[length] = index;
+        bodyIndexesInIndexes[index] = length;
+        bodies[index] = model;
+
+        int componentNo = getComponentNumber(bodyIndex);
+        bodyIndex = indexes[bodyIndex];
+        adjacencyMatrix[index][index] = componentNo;
+        adjacencyMatrix[bodyIndex][index] = componentNo;
+        adjacencyMatrix[index][bodyIndex] = componentNo;
+
+        length++;
+    }
+
 
     private void fillMatrix(boolean[] wasVisited, int index, int component)
     {
@@ -189,6 +285,7 @@ public class BodiesList implements Iterable<PhysicModel> {
         adjacencyMatrix[0][0] = 1;
         baseIndex = 0;
         isAlive_ = true;
+        components = 1;
     }
 
     private int getComponentNumber(int bodyIndex)
@@ -214,21 +311,7 @@ public class BodiesList implements Iterable<PhysicModel> {
     public void add(PhysicModel model, int connectionPointIndex)
     {
         //Получаем номер тела по точке соединения
-        int bodyIndex = getBodyByPointIndex(connectionPointIndex);
-
-        //Получаем место для соединения
-        int index = getFirstFree();
-        indexes[length] = index;
-        bodyIndexesInIndexes[index] = length;
-        bodies[index] = model;
-
-        int componentNo = getComponentNumber(bodyIndex);
-        bodyIndex = indexes[bodyIndex];
-        adjacencyMatrix[index][index] = componentNo;
-        adjacencyMatrix[bodyIndex][index] = componentNo;
-        adjacencyMatrix[index][bodyIndex] = componentNo;
-
-        length++;
+        addBody(model, getBodyByPointIndex(connectionPointIndex));
     }
 
     /**

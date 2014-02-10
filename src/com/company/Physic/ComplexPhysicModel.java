@@ -2,6 +2,7 @@ package com.company.Physic;
 
 import com.company.ComplexModel;
 import com.company.Geometry.Point;
+import com.company.World;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,7 +17,8 @@ public class ComplexPhysicModel extends PhysicModel {
     //Массив тел в модели
     private BodiesList bodies;
     //Максимальное их число
-    private static final int maxBodiesSize = 10;
+    //private static final int maxBodiesSize = 10;   //Для отладки
+    private static final int maxBodiesSize = 1024;   //Реальное
 
     //Центр масс системы
     private Point massCentre;
@@ -73,7 +75,12 @@ public class ComplexPhysicModel extends PhysicModel {
             }
         if (wasDeleted)
         {
-            bodies.recalculateMatrix();
+            boolean needRecalculation = bodies.recalculateMatrix()!=1;
+            if (needRecalculation)
+            {
+                BodiesList[] bodiesLists = bodies.getComponents();
+                this.bodies = bodiesLists[0];
+            }
             пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
         }
     }
@@ -171,6 +178,13 @@ public class ComplexPhysicModel extends PhysicModel {
 
     public void add(PhysicModel p, int addPointIndex) {
         bodies.add(p, addPointIndex);
+        пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
+    }
+
+    private ComplexPhysicModel(BodiesList list)
+    {
+        super(null, 0);
+        bodies = list;
         пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
     }
 
