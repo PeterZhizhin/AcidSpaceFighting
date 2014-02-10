@@ -25,14 +25,14 @@ public class AsteroidGraphicModel extends GraphicModel {
         glColor3f(1f, 1f, 0.6f);
         glBegin(GL_POLYGON);
         for (int i = 0; i < shape.getPointCount(); i++)
-            Camera.translatePoint(shape.getPoint(i).getX(), shape.getPoint(i).getY());
+            Camera.translatePoint(shape.getPoint(i));
         glEnd();
 
         //frame
         glColor3f(0.5f, 0.5f, 0f);
         glBegin(GL_LINE_LOOP);
         for (int i = 0; i < shape.getPointCount(); i++)
-            Camera.translatePoint(shape.getPoint(i).getX(), shape.getPoint(i).getY());
+            Camera.translatePoint(shape.getPoint(i));
         glEnd();
 
     }

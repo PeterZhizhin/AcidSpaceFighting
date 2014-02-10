@@ -22,7 +22,7 @@ public class PhysicModel {
     private boolean[] isConnectionFree;
 
     public float getDamage(float force) {
-        return force/1000000000f;
+        return force/4000000000f;
     }
 
     public float getActivity() {
