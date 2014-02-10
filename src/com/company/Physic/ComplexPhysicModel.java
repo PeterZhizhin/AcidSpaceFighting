@@ -92,13 +92,28 @@ public class ComplexPhysicModel extends PhysicModel {
                             graphicModels.add(cm.graModel.get(bodies.indexOf(bodiesLists[i].get(j))));
                         ComplexPhysicModel physicModel = new ComplexPhysicModel(bodiesLists[i]);
                         ComplexGraphicModel graphicModel = new ComplexGraphicModel(physicModel, graphicModels);
+                        //Получаем вектор скорости центра масс новой системы относительно текущей системы
+                        Point deltaSpeed = new Point(physicModel.getCentre());
+                        deltaSpeed.move(massCentre.negate());
+                        deltaSpeed = new Point(deltaSpeed.getY(), deltaSpeed.getX());
+                        deltaSpeed.normalise(deltaSpeed);
+                        deltaSpeed = deltaSpeed.multiply((float)massCentre.getDistanceToPoint(physicModel.getCentre()) * w);
+                        physicModel.addSpeed(deltaSpeed);
                         World.addModel(new Model(graphicModel, physicModel));
                     }
                     else
                     {
                         PhysicModel physicModel = bodiesLists[i].get(0);
                         GraphicModel graphicModel = cm.graModel.get(bodies.indexOf(physicModel));
+                        //Получаем вектор скорости центра масс новой системы относительно текущей системы
+                        Point deltaSpeed = new Point(physicModel.getCentre());
+                        deltaSpeed.move(massCentre.negate());
+                        deltaSpeed = new Point(deltaSpeed.getY(), deltaSpeed.getX());
+                        deltaSpeed.normalise(deltaSpeed);
+                        deltaSpeed = deltaSpeed.multiply((float)massCentre.getDistanceToPoint(physicModel.getCentre()) * w);
+                        physicModel.addSpeed(deltaSpeed);
                         World.addModel(new Model(graphicModel, physicModel));
+
                     }
                 }
                 //Удаляем все графические модели из комплексной модели (те, что отпали)
@@ -130,7 +145,7 @@ public class ComplexPhysicModel extends PhysicModel {
     protected void updateKinematic(float deltaTime) {
         for (PhysicModel body : bodies)
         {
-            body.speedVector = speedVector;
+            body.speedVector = new Point(speedVector);
             body.w = this.w;
             body.acceleration = new Point(0, 0);
             body.centreOfRotation = new Point(massCentre);
@@ -195,6 +210,7 @@ public class ComplexPhysicModel extends PhysicModel {
             J += localJ;
             w+=body.w * localJ;
             body.setParent(this);
+            body.centreOfRotation = massCentre;
         }
         acceleration = new Point(0, 0);
         w/=J;

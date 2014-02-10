@@ -70,6 +70,11 @@ public class PhysicModel {
         return speedVector.getY();
     }
 
+    protected void addSpeed(Point dV)
+    {
+        speedVector.move(dV);
+    }
+
     public void doSpecialActionA(float deltaTime) {
     }
 
