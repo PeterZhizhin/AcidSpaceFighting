@@ -39,7 +39,7 @@ public class AsteroidGraphicModel extends GraphicModel {
 
     public AsteroidGraphicModel(GeometricModel body) {
         super(body);
-        t=new Tale(new Color(1f, 1f, 0.6f), new Color(1f, 1f, 0.6f, 0f), 0, 20, 3, false);
+        t=new Tale(new Color(1f, 1f, 0.6f), new Color(1f, 1f, 0.6f, 0f), 0, 20, 3, 8, false);
     }
 
 }

@@ -173,8 +173,8 @@ public class World {
 
         World.addModel(m3);
 
-        AsteroidModel asteroidModel  = new AsteroidModel(-50000,-50000,10000f, 50000f);
-        World.addModel(asteroidModel);
+        //AsteroidModel asteroidModel  = new AsteroidModel(-50000,-50000,10000f, 50000f);
+        //World.addModel(asteroidModel);
     }
 
 }

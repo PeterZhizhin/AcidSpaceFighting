@@ -21,6 +21,7 @@ public class Tale {
     private int interval;
     private int timer;
     private boolean useSmoke;
+    private int smokeCoef;
 
     public void draw() {
 
@@ -58,7 +59,7 @@ public class Tale {
         }
             timer=0;
             if (useSmoke) {
-            Smoke s=new Smoke(coordinate.x, coordinate.y, width*8);
+            Smoke s=new Smoke(coordinate.x, coordinate.y, width*smokeCoef);
             World.addEffect(s);     }
         }
         else {
@@ -67,7 +68,7 @@ public class Tale {
         }
     }
 
-    public Tale(Color start, Color end, float deltaPos, int size, int interv, boolean useSmoke) {
+    public Tale(Color start, Color end, float deltaPos, int size, int interv, int smokeCoef, boolean useSmoke) {
         interval=interv;
         this.size=size;
         coordinates=new LinkedList<Point>();
@@ -80,6 +81,7 @@ public class Tale {
         }
         deltaPosition=deltaPos;
         this.useSmoke=useSmoke;
+        this.smokeCoef=smokeCoef;
     }
 
 

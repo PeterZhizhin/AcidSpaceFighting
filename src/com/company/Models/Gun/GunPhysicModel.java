@@ -21,7 +21,7 @@ public class GunPhysicModel extends PhysicModel {
 
             Model m=new AsteroidModel(getCentre().getX()+force.x, getCentre().getY() + force.y, 100f, 100f);
 
-            force=force.setLength(100000);
+            force=force.setLength(100000000);
             m.useForce(m.getCenter(), force);
             World.addModel(m);
 

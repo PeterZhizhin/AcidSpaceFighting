@@ -12,7 +12,7 @@ public class Background {
     public static void draw() {
 
 
-        glColor3f(0.2f, 0.2f, 0.2f);
+        glColor3f(0.06f, 0.06f, 0.06f);
         glBegin(GL_QUADS);
         glVertex2f(0, Display.getHeight());
         glVertex2f(Display.getWidth(), Display.getHeight());
@@ -25,6 +25,12 @@ public class Background {
 
         float width=Display.getWidth();
         float height=Display.getHeight();
+
+        while (Camera.translateDistance(width)<=20 || Camera.translateDistance(height)<=20) {
+            width*=2;
+            height*=2;
+        }
+
         float width2=width/2;
         float height2=height/2;
 
@@ -44,7 +50,7 @@ public class Background {
         for (int i=startX; i<startX2; i+=width) {
             for (int j=startY; j<startY2; j+=height) {
 
-                 glColor3f(0.3f, 0.3f, 0.3f);
+                 glColor3f(0.1f, 0.1f, 0.1f);
 
                 Camera.translatePoint(i, j);
                 Camera.translatePoint(i + width2, j);
