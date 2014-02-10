@@ -98,7 +98,7 @@ public class PhysicModel {
     public void updateMotion(float deltaTime) {
         body.rotate(getRotationAngle(deltaTime));
         body.move(getMoveVector(deltaTime));
-        centreOfRotation.move(getMoveVector(deltaTime));
+        centreOfRotation = getCentre();
         updateKinematic(deltaTime);
     }
 
