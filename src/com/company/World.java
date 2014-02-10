@@ -18,7 +18,7 @@ import java.util.LinkedList;
 public class World {
 
     private static ArrayList<Model> models;
-    private static LinkedList<Posteffect> effects;
+    private static ArrayList<Posteffect> effects;
 
     public static Model getModel(int num) {
         return models.get(num);
@@ -137,7 +137,7 @@ public class World {
     private static ComplexPhysicModel totalModel;
 
     public static void init() {
-        effects=new LinkedList<Posteffect>();
+        effects=new ArrayList<Posteffect>();
 
         models = new ArrayList<Model>();
         addModelBuffer = new LinkedList<Model>();

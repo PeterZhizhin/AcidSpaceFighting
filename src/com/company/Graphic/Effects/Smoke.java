@@ -10,20 +10,17 @@ public class Smoke implements Posteffect {
     private float radius;
     private float currentRadius;
     private float x, y;
-    private int timer;
 
     public Smoke(float x, float y, float radius) {
         currentRadius=radius/1000f;
         this.radius=radius;
         this.x=x;
         this.y=y;
-        timer=6;
     }
 
     @Override
     public void draw() {
 
-        if (timer<=0) {
         glBegin(GL_TRIANGLE_FAN);
         float l=currentRadius*2/3;
 
@@ -42,17 +39,12 @@ public class Smoke implements Posteffect {
         Camera.translatePoint(x, y - currentRadius);
 
         glEnd();
-        }
-
     }
 
     @Override
     public void update(float deltaTime) {
-        if (timer<=0) {
         float delta=(currentRadius*4+radius)/5-currentRadius;
         currentRadius+=delta*10*deltaTime;
-        }
-        else timer--;
     }
 
     @Override

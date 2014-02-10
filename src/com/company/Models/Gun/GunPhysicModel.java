@@ -25,7 +25,7 @@ public class GunPhysicModel extends PhysicModel {
             useForce(getCentre(), force.multiply(-1));
             activity=timeLimit;
 
-            Explosion e=new Explosion(getCentre().x, getCentre().y, 100);
+            Explosion e=new Explosion(getCentre(), 100);
             World.addEffect(e);
         }
     }

@@ -12,7 +12,7 @@ public class DynamitePhysicModel extends PhysicModel {
 
     public void doSpecialActionA(float deltaTime) {
         health=0;
-        Explosion a=new Explosion(getCentre(), body.getMaxLength()/10);
+        Explosion a=new Explosion(getCentre(), 100);
         World.addEffect(a);
     }
 
