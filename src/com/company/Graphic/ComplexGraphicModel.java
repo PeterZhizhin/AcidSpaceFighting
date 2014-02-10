@@ -16,6 +16,10 @@ import static org.lwjgl.opengl.GL11.glEnable;
 public class ComplexGraphicModel extends GraphicModel {
 
     private ArrayList<GraphicModel> grModels;
+    public GraphicModel get(int index)
+    {
+        return grModels.get(index);
+    }
     private ComplexPhysicModel coPhy;
 
     @Override
@@ -54,6 +58,13 @@ public class ComplexGraphicModel extends GraphicModel {
 
     public void remove(int num) {
         grModels.remove(num);
+    }
+
+    public ComplexGraphicModel(ComplexPhysicModel c, ArrayList<GraphicModel> models)
+    {
+        super(null);
+        coPhy = c;
+        grModels = models;
     }
 
     public ComplexGraphicModel(ComplexPhysicModel c) {

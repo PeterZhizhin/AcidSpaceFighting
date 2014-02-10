@@ -2,6 +2,9 @@ package com.company.Physic;
 
 import com.company.ComplexModel;
 import com.company.Geometry.Point;
+import com.company.Graphic.ComplexGraphicModel;
+import com.company.Graphic.GraphicModel;
+import com.company.Model;
 import com.company.World;
 
 import java.util.ArrayList;
@@ -67,7 +70,7 @@ public class ComplexPhysicModel extends PhysicModel {
 
         boolean wasDeleted = false;
         for (int i=0; i<bodies.getSize(); i++)
-            if (bodies.get(i).getHealth()<0)
+            if (bodies.get(i).getHealth()<=0)
             {
                 bodies.remove(i);
                 cm.graModel.remove(i);
@@ -79,6 +82,29 @@ public class ComplexPhysicModel extends PhysicModel {
             if (needRecalculation)
             {
                 BodiesList[] bodiesLists = bodies.getComponents();
+                //Создаем графические модели для каждой новой компоненты
+                for (int i = 1; i<bodiesLists.length; i++)
+                {
+                    if (bodiesLists[i].getSize()>1)
+                    {
+                        ArrayList<GraphicModel> graphicModels = new ArrayList<GraphicModel>();
+                        for(int j=0; j<bodiesLists[i].getSize(); j++)
+                            graphicModels.add(cm.graModel.get(bodies.indexOf(bodiesLists[i].get(j))));
+                        ComplexPhysicModel physicModel = new ComplexPhysicModel(bodiesLists[i]);
+                        ComplexGraphicModel graphicModel = new ComplexGraphicModel(physicModel, graphicModels);
+                        World.addModel(new Model(graphicModel, physicModel));
+                    }
+                    else
+                    {
+                        PhysicModel physicModel = bodiesLists[i].get(0);
+                        GraphicModel graphicModel = cm.graModel.get(bodies.indexOf(physicModel));
+                        World.addModel(new Model(graphicModel, physicModel));
+                    }
+                }
+                //Удаляем все графические модели из комплексной модели (те, что отпали)
+                for (int i=1; i<bodiesLists.length; i++)
+                    for (PhysicModel body : bodiesLists[i])
+                        cm.graModel.remove(bodies.indexOf(body));
                 this.bodies = bodiesLists[0];
             }
             пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
@@ -102,7 +128,6 @@ public class ComplexPhysicModel extends PhysicModel {
     //А здесь сбросить угловые ускорения и скорости у тел
     @Override
     protected void updateKinematic(float deltaTime) {
-        super.updateKinematic(deltaTime);
         for (PhysicModel body : bodies)
         {
             body.speedVector = speedVector;
@@ -111,6 +136,7 @@ public class ComplexPhysicModel extends PhysicModel {
             body.centreOfRotation = new Point(massCentre);
             body.beta = 0.0f;
         }
+        super.updateKinematic(deltaTime);
     }
 
     //TODO: Припилить столкновение для: ComplexPhysicModel & ComplexPhysicModel; ComplexPhysicModel & PhysicModel
@@ -162,13 +188,16 @@ public class ComplexPhysicModel extends PhysicModel {
         }
         massCentre = massCentre.multiply(1.0f / mass);
         speedVector = speedVector.multiply(1.0f / mass);
+        w = 0;
         for (PhysicModel body : bodies)
         {
-            J += body.J;
-            J += body.mass * body.getCentre().getLengthSquared(this.massCentre);
+            float localJ = body.J + body.mass * body.getCentre().getLengthSquared(this.massCentre);
+            J += localJ;
+            w+=body.w * localJ;
             body.setParent(this);
         }
         acceleration = new Point(0, 0);
+        w/=J;
         this.beta = 0;
     }
 
