@@ -5,6 +5,8 @@ import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Geometry.Segment;
 
+import java.util.LinkedList;
+
 
 public class PhysicModel {
 
@@ -165,6 +167,17 @@ public class PhysicModel {
         } else
             parent.useForce(posOfForce, force);
         health-=getDamage(force.length());
+    }
+
+    /**
+     * Получение списка тел для обработки столкновений
+     * @return Список, состоящий из всех тел системы
+     */
+    protected LinkedList<PhysicModel> getBodies()
+    {
+        LinkedList<PhysicModel> result = new LinkedList<PhysicModel>();
+        result.add(this);
+        return result;
     }
 
     private boolean applyIntersection(PhysicModel m, float deltaTime) {
