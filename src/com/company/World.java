@@ -63,7 +63,7 @@ public class World {
         for (Posteffect effect : effects) {
             effect.draw();
         }
-        TextureDrawer.finishDrawTextures();
+        TextureDrawer.finishDraw();
     }
 
     public static void update(float deltaTime) {

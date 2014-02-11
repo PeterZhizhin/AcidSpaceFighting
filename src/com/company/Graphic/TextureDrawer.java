@@ -15,6 +15,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class TextureDrawer {
 
     private static int textures;
+    private static int noise;
     private static int background;
 
     public static void drawBackground() {
@@ -32,6 +33,13 @@ public class TextureDrawer {
         glEnd();
     }
 
+    public static void startDrawNoise() {
+        glBindTexture(GL11.GL_TEXTURE_2D, noise);
+        glColor4f(1f, 1f, 1f, 1f);
+        glEnable(GL_TEXTURE_2D);
+        glBegin(GL_QUADS);
+    }
+
     public static void startDrawTextures() {
         glBindTexture(GL11.GL_TEXTURE_2D, textures);
         glColor4f(1f, 1f, 1f, 1f);
@@ -39,8 +47,21 @@ public class TextureDrawer {
         glBegin(GL_QUADS);
     }
 
-    public static void finishDrawTextures() {
+    public static void finishDraw() {
         glEnd();
+        glDisable(GL_TEXTURE_2D);
+    }
+
+    public static void drawQuad(Point p1, Point p2, Point p3, Point p4) {
+
+        glTexCoord2f(0, 0);
+        Camera.translatePoint(p1);
+        glTexCoord2f(1f, 0);
+        Camera.translatePoint(p2);
+        glTexCoord2f(1f, 1f);
+        Camera.translatePoint(p3);
+        glTexCoord2f(0f, 1f);
+        Camera.translatePoint(p4);
     }
 
     public static void drawQuad(Point p1, Point p2, Point p3, Point p4, int texture) {
@@ -101,6 +122,7 @@ public class TextureDrawer {
     public static void init() {
         textures=load("Textures.png");
         background=load("Background.png");
+        noise=load("Noise.png");
     }
 
 }
