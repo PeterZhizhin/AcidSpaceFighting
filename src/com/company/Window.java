@@ -15,7 +15,7 @@ import org.lwjgl.opengl.Display;
 public class Window extends BasicWindow {
 
     public Window() {
-        super(1000, 700, 10000, "Sample");
+        super(1200, 700, 10000, "Sample");
         World.init();
         Camera.init();
         GUI.init();

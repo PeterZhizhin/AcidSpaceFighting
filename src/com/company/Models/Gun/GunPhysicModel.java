@@ -8,6 +8,8 @@ import com.company.Models.Bullet.BulletModel;
 import com.company.Physic.PhysicModel;
 import com.company.World;
 
+import static com.company.World.addEffect;
+
 public class GunPhysicModel extends PhysicModel {
 
     private static final float timeLimit=1f;
@@ -15,6 +17,7 @@ public class GunPhysicModel extends PhysicModel {
     public void doSpecialActionA(float deltaTime) {
         if (activity<=0) {
 
+            World.explode(getCentre(), body.getMaxLength());
             Point force=body.getPoint(2).add(getCentre().negate()).setLength(body.getMaxLength());
 
             Model m=new BulletModel(getCentre().getX()+force.x, getCentre().getY() + force.y, 100f, 100f);
@@ -22,6 +25,8 @@ public class GunPhysicModel extends PhysicModel {
             force=force.setLength(100000000);
             m.useForce(m.getCenter(), force);
             World.addModel(m);
+
+
 
             useForce(getCentre(), force.multiply(-1));
             activity=timeLimit;
