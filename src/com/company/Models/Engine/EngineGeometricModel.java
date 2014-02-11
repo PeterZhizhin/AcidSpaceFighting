@@ -10,13 +10,19 @@ public class EngineGeometricModel extends GeometricModel {
     }
 
     private static Point[] getVertexes(float x, float y, float w) {
-        Point[] p = new Point[5];
+        Point[] p = new Point[4];
 
-        p[0] = new Point(x, y);
+        /*p[0] = new Point(x, y);
         p[1] = new Point(x + w / 2, y);
         p[2] = new Point(x + w, y + w / 2);
         p[3] = new Point(x + w / 2, y + w);
-        p[4] = new Point(x, y + w);
+        p[4] = new Point(x, y + w); */
+
+        p[0] = new Point(x, y);
+        p[1] = new Point(x + w, y);
+        p[2] = new Point(x + w, y + w);
+        p[3] = new Point(x, y + w);
+
 
         return p;
     }
