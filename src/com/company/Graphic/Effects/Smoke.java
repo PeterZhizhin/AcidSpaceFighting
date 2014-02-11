@@ -1,6 +1,7 @@
 package com.company.Graphic.Effects;
 
-import com.company.Graphic.Camera;
+import com.company.Geometry.Point;
+import com.company.Graphic.TextureDrawer;
 import com.company.Graphic.Posteffect;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -20,25 +21,10 @@ public class Smoke implements Posteffect {
 
     @Override
     public void draw() {
-
-        glBegin(GL_TRIANGLE_FAN);
+        glColor4f(1f, 1f, 1f, 1-currentRadius/radius);
         float l=currentRadius*2/3;
-
-        glColor4f(0, 0, 0, (1-currentRadius/radius));
-        Camera.translatePoint(x, y);
-
-        glColor4f(0f, 0f, 0f, 0f);
-        Camera.translatePoint(x, y - currentRadius);
-        Camera.translatePoint(x - l, y - l);
-        Camera.translatePoint(x - currentRadius, y);
-        Camera.translatePoint(x - l, y + l);
-        Camera.translatePoint(x, y + currentRadius);
-        Camera.translatePoint(x + l, y + l);
-        Camera.translatePoint(x + currentRadius, y);
-        Camera.translatePoint(x + l, y - l);
-        Camera.translatePoint(x, y - currentRadius);
-
-        glEnd();
+        TextureDrawer.drawQuad(new Point(x - l, y), new Point(x, y - l), new Point(x + l, y), new Point(x, y + l), 7);
+        glColor3f(1f, 1f, 1f);
     }
 
     @Override

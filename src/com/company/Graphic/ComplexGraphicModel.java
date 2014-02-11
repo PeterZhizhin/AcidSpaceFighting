@@ -39,12 +39,12 @@ public class ComplexGraphicModel extends GraphicModel {
         for (GraphicModel g : grModels)
             g.drawHealthLine();
 
-        glEnable(GL_TEXTURE_2D);
+        /*glEnable(GL_TEXTURE_2D);
         for (int i=0; i<coPhy.getConnectionPointsCount(); i++) {
             Point p=getTranslatedPoint(coPhy.getConnectionPoint(i));
             FontDrawer.drawString(p.x, p.y, i+" point", new Color(1f, 1f, 1f), false);
         }
-        glDisable(GL_TEXTURE_2D);
+        glDisable(GL_TEXTURE_2D); */
     }
 
     public void setBase(GraphicModel g) {

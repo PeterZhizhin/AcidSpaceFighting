@@ -2,8 +2,9 @@ package com.company;
 
 import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
+import com.company.Graphic.Effects.Explosion;
+import com.company.Graphic.TextureDrawer;
 import com.company.Graphic.Posteffect;
-import com.company.Models.Asteroid.AsteroidModel;
 import com.company.Models.Base.BaseModel;
 import com.company.Models.Dynamite.DynamiteModel;
 import com.company.Models.Engine.EngineModel;
@@ -19,6 +20,22 @@ public class World {
 
     private static ArrayList<Model> models;
     private static ArrayList<Posteffect> effects;
+
+    public static void explode(Point center, float power) {
+        Explosion e=new Explosion(center, power/8);
+        addEffect(e);
+
+
+        //todo: realise
+        /*for (Model m: models) {
+             Point force=m.getCenter().negate().add(center);
+             float l=force.length();
+             force=force.setLength(1);
+             force=force.multiply(power*power*power*power/l);
+             System.out.println(force+" "+power);
+             m.useForce(m.getCenter(), force);
+        } */
+    }
 
     public static Model getModel(int num) {
         return models.get(num);
@@ -37,15 +54,16 @@ public class World {
         for (Model model : models) {
             model.drawBackgroundLayer();
         }
+
+        TextureDrawer.startDrawTextures();
         for (Model model : models) {
             model.drawTopLayer();
         }
-        for (Model model : models) {
-            model.drawHealthLine();
-        }
+
         for (Posteffect effect : effects) {
             effect.draw();
         }
+        TextureDrawer.finishDraw();
     }
 
     public static void update(float deltaTime) {

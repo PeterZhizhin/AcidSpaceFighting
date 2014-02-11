@@ -13,18 +13,11 @@ public class GraphicModel {
 
     protected GeometricModel shape;
     protected PhysicModel body;
-    private float[] color = new float[3];
 
     public void drawBackgroundLayer() {
     }
 
     public void drawTopLayer() {
-        glColor3f(color[0], color[1], color[2]);
-        glBegin(GL_QUADS);
-        for (int i = 0; i < shape.getPointCount(); i++) {
-            Camera.translatePoint(shape.getPoint(i).getX(), shape.getPoint(i).getY());
-        }
-        glEnd();
     }
 
     public void drawHealthLine() {
@@ -55,12 +48,6 @@ public class GraphicModel {
     }
 
     public GraphicModel(GeometricModel body) {
-
-        Random rnd = new Random();
-        color[0] = rnd.nextFloat() / 2 + 0.5f;
-        color[1] = rnd.nextFloat() / 2 + 0.5f;
-        color[2] = rnd.nextFloat() / 2 + 0.5f;
-
         if (body != null) {
             shape = body;
         }

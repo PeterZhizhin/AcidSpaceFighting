@@ -20,21 +20,7 @@ public class AsteroidGraphicModel extends GraphicModel {
     }
 
     public void drawTopLayer() {
-
-        //body
-        glColor3f(1f, 1f, 0.6f);
-        glBegin(GL_POLYGON);
-        for (int i = 0; i < shape.getPointCount(); i++)
-            Camera.translatePoint(shape.getPoint(i));
-        glEnd();
-
-        //frame
-        glColor3f(0.5f, 0.5f, 0f);
-        glBegin(GL_LINE_LOOP);
-        for (int i = 0; i < shape.getPointCount(); i++)
-            Camera.translatePoint(shape.getPoint(i));
-        glEnd();
-
+        //todo: realise
     }
 
     public AsteroidGraphicModel(GeometricModel body) {

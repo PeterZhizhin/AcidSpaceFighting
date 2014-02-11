@@ -61,17 +61,15 @@ public class PTS {
         ArrayList<Task> tasks=new ArrayList<Task>();
 
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Потеря массы пули"));
-        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая модель - пуля"));
-        tasks.add(new Task(state.Planned, author.None, type.Bug, "Метеориты (вероятно, не только они) рисуются не там, где они расположены"));
-        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая деталь-локатор"));
+        tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая модель - пуля"));tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая деталь-локатор"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая деталь-броня"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Новая деталь-энергоблок"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Распределение энергии"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "Присоединение деталей на ходу"));
         tasks.add(new Task(state.Planned, author.None, type.NewFeature, "GUI с параментрами движения корабля (скорость, угловая скорость, текущая сила на двигателях)"));
 
-        tasks.add(new Task(state.InDevelopment, author.ZhizhinPeter, type.NewFeature, "Разрушения"));
-
+        tasks.add(new Task(state.Done, author.ZhizhinPeter, type.NewFeature, "Разрушения"));
+        tasks.add(new Task(state.Done, author.ZhizhinPeter, type.Bug, "Метеориты (вероятно, не только они) рисуются не там, где они расположены"));
         tasks.add(new Task(state.Done, author.ShirinkinArseny, type.Change, "Отрисовка целостности детали"));
         tasks.add(new Task(state.Done, author.ShirinkinArseny, type.Change, "Выстрелы в сторону"));
         tasks.add(new Task(state.Done, author.ShirinkinArseny, type.Change, "Отдача от выстрелов"));
