@@ -8,9 +8,14 @@ import com.company.World;
 
 public class DynamitePhysicModel extends PhysicModel {
 
+    private boolean inFirstTime=true;
+
     public void doSpecialActionA(float deltaTime) {
         health=0;
+        if (inFirstTime) {
         World.explode(getCentre(), body.getMaxLength());
+            inFirstTime=false;
+        }
     }
 
     public DynamitePhysicModel(GeometricModel body, Point[] conns, float mass) {

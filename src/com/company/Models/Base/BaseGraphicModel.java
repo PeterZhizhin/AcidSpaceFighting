@@ -6,9 +6,6 @@ import com.company.Graphic.TextureDrawer;
 
 public class BaseGraphicModel extends GraphicModel {
 
-    public void drawBackgroundLayer() {
-    }
-
     public void drawTopLayer() {
         TextureDrawer.drawQuad(shape.getPoint(0), shape.getPoint(1), shape.getPoint(2), shape.getPoint(3), 0);
     }

@@ -8,8 +8,6 @@ import com.company.Graphic.Tale;
 
 import java.util.Random;
 
-import static org.lwjgl.opengl.GL11.*;
-
 public class Explosion implements Posteffect {
 
     private float radius;
@@ -26,7 +24,7 @@ public class Explosion implements Posteffect {
             double angle=rnd.nextFloat()*Math.PI*2;
             float length=rnd.nextFloat()*rnd.nextFloat()*rnd.nextFloat();
             centers[i]=new Segment(x, y, (float)Math.cos(angle)*length*power, (float)Math.sin(angle)*length*power);
-            tales[i]=new Tale(new Color(1f, 1f, 0f), new Color(1f, 0f, 0f), 10, 10, 5, 6, false);
+            tales[i]=new Tale(new Color(1f, 1f, 0f), new Color(1f, 0f, 0f), 10, 10, 5, 6, true);
         }
         currentRadius=power/1000f;
         radius=power;
@@ -38,9 +36,7 @@ public class Explosion implements Posteffect {
 
     @Override
     public void draw() {
-        glDisable(GL_TEXTURE_2D);
         for (Tale t: tales) t.draw();
-        glEnable(GL_TEXTURE_2D);
     }
 
     @Override
@@ -53,6 +49,7 @@ public class Explosion implements Posteffect {
         }
         float delta=(currentRadius*3+radius)/4-currentRadius;
         currentRadius+=delta*10*deltaTime;
+
     }
 
     @Override

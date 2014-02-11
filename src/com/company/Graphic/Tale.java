@@ -8,7 +8,7 @@ import com.company.World;
 import java.util.LinkedList;
 import java.util.Random;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glColor3f;
 
 public class Tale {
 
@@ -25,42 +25,46 @@ public class Tale {
 
     public void draw() {
 
-        glBegin(GL_QUADS);
         Point normal = Point.empty;
         gradations[size-1].bind();
 
         for (int i = 0; i < size - 2; i++) {
 
 
-
-            Camera.translatePoint(coordinates.get(i).getX() + normal.getX(), coordinates.get(i).getY() + normal.getY());
-            Camera.translatePoint(coordinates.get(i).getX() - normal.getX(), coordinates.get(i).getY() - normal.getY());
+            Point p1=coordinates.get(i).add(normal);
+            Point p2=coordinates.get(i).add(normal.negate());
 
             normal = Point.getBisection(coordinates.get(i), coordinates.get(i+1), coordinates.get(i+2));
             normal = normal.multiply(widths.get(i)*i/size);
             gradations[i].bind();
 
-            Camera.translatePoint(coordinates.get(i + 1).getX() - normal.getX(), coordinates.get(i + 1).getY() - normal.getY());
-            Camera.translatePoint(coordinates.get(i + 1).getX() + normal.getX(), coordinates.get(i + 1).getY() + normal.getY());
-        }
+            Point p3=coordinates.get(i+1).add(normal.negate());
+            Point p4=coordinates.get(i+1).add(normal);
 
-        glEnd();
+            TextureDrawer.drawQuad(p1, p2, p3, p4, 6);
+             }
+        glColor3f(1f, 1f, 1f);
     }
 
     public void addPoint(Point coordinate, float width) {
+
         timer++;
         if (timer>=interval) {
 
         coordinates.add(coordinate.add(new Point((rnd.nextFloat()-0.5f), (rnd.nextFloat()-0.5f)).multiply(deltaPosition)));
-        widths.add(width);
-        if (coordinates.size()>size) {
-            coordinates.remove(0);
-            widths.remove(0);
-        }
+
             timer=0;
             if (useSmoke) {
             Smoke s=new Smoke(coordinate.x, coordinate.y, width*smokeCoef);
-            World.addEffect(s);     }
+            World.addEffect(s);
+
+                width*=4;
+                widths.add(width);
+                if (coordinates.size()>size) {
+                    coordinates.remove(0);
+                    widths.remove(0);
+                }
+            }
         }
         else {
             coordinates.set(size-1, coordinate.add(new Point((rnd.nextFloat()-0.5f), (rnd.nextFloat()-0.5f)).multiply(deltaPosition)));

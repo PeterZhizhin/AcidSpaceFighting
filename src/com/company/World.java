@@ -22,6 +22,7 @@ public class World {
     private static ArrayList<Posteffect> effects;
 
     public static void explode(Point center, float power) {
+        System.out.println(power);
         Explosion e=new Explosion(center, power/8);
         addEffect(e);
 
@@ -51,11 +52,12 @@ public class World {
 
     public static void draw() {
         Camera.setPosition(totalModel.getCentre().getX(), totalModel.getCentre().getY());
+
+        TextureDrawer.startDrawTextures();
         for (Model model : models) {
             model.drawBackgroundLayer();
         }
 
-        TextureDrawer.startDrawTextures();
         for (Model model : models) {
             model.drawTopLayer();
         }
