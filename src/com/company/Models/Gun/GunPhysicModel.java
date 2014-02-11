@@ -4,9 +4,7 @@ import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Graphic.Effects.Explosion;
 import com.company.Model;
-import com.company.Models.Asteroid.AsteroidGeometricModel;
-import com.company.Models.Asteroid.AsteroidGraphicModel;
-import com.company.Models.Asteroid.AsteroidModel;
+import com.company.Models.Bullet.BulletModel;
 import com.company.Physic.PhysicModel;
 import com.company.World;
 
@@ -19,7 +17,7 @@ public class GunPhysicModel extends PhysicModel {
 
             Point force=body.getPoint(2).add(getCentre().negate()).setLength(body.getMaxLength());
 
-            Model m=new AsteroidModel(getCentre().getX()+force.x, getCentre().getY() + force.y, 100f, 100f);
+            Model m=new BulletModel(getCentre().getX()+force.x, getCentre().getY() + force.y, 100f, 100f);
 
             force=force.setLength(100000000);
             m.useForce(m.getCenter(), force);
@@ -27,9 +25,6 @@ public class GunPhysicModel extends PhysicModel {
 
             useForce(getCentre(), force.multiply(-1));
             activity=timeLimit;
-
-            Explosion e=new Explosion(getCentre(), 100);
-            World.addEffect(e);
         }
     }
 

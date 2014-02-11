@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.Graphic.TextureDrawer;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Mouse;
@@ -96,6 +97,7 @@ public abstract class BasicWindow {
             Display.setVSyncEnabled(false);
             Display.sync(frameRate);
             Mouse.create();
+            TextureDrawer.init();
             glClearColor(0f, 0f, 0f, 1f);
             glEnable(GL_BLEND);
             glEnable(GL_POINT_SMOOTH);
@@ -106,6 +108,7 @@ public abstract class BasicWindow {
             glEnable(GL_POINT_SMOOTH);
             glEnable(GL_LINE_SMOOTH);
             glEnable(GL_POLYGON_SMOOTH);
+            glEnable(GL_TEXTURE_2D);
         } catch (LWJGLException e) {
             System.err.println("Failed to setup display");
             exit();
@@ -141,7 +144,7 @@ public abstract class BasicWindow {
     }
 
     /**
-     * Отчищаем память
+     * Очищаем память
      * Clear your memory
      */
     public static void exit() {

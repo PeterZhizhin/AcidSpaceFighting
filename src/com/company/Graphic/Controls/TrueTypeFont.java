@@ -30,6 +30,7 @@ import org.lwjgl.util.glu.GLU;
  * @original author Peter Korzuszek (genail)
  * @new version edited by David Aaron Muhar (bobjob)
  */
+
 public class TrueTypeFont {
     public final static int
             ALIGN_LEFT = 0,
