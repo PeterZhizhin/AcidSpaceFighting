@@ -18,6 +18,8 @@ import java.util.LinkedList;
 
 public class World {
 
+    //TODO: реализовать удаление моделей
+
     private static ArrayList<Model> models;
     private static ArrayList<Posteffect> effects;
 

@@ -65,10 +65,7 @@ public class ComplexPhysicModel extends PhysicModel {
      */
     @Override
     public void update(float deltaTime) {
-        Iterator<PhysicModel> iterator = bodies.iterator();
-        while (iterator.hasNext())
-            iterator.next().update(deltaTime);
-
+        //Проверяем удаление моделей в системе
         boolean wasDeleted = false;
         for (int i=0; i<bodies.getSize(); i++)
             if (bodies.get(i).getHealth()<=0)
@@ -105,6 +102,7 @@ public class ComplexPhysicModel extends PhysicModel {
                     else
                     {
                         PhysicModel physicModel = bodiesLists[i].get(0);
+                        //Отвязываем тело
                         physicModel.setParent(null);
                         GraphicModel graphicModel = cm.graModel.get(bodies.indexOf(physicModel));
                         //Получаем вектор скорости центра масс новой системы относительно текущей системы
@@ -126,6 +124,8 @@ public class ComplexPhysicModel extends PhysicModel {
             }
             пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
         }
+        for (PhysicModel body : bodies)
+            body.update(deltaTime);
     }
 
     //Здесь нужно передать изменения всей системе тел
@@ -169,10 +169,10 @@ public class ComplexPhysicModel extends PhysicModel {
     }
 
     /**
-     * Здесь должна была быть обработка столкновений
-     * @param m
-     * @param deltaTime
-     * @return
+     * Обработка столкновений. Просто проверяем столкновения отдельных частей.
+     * @param m Модель для проверки столкновений
+     * @param deltaTime Дельта время
+     * @return Было столкновение (true) или нет (false)
      */
     @Override
     public boolean crossThem(PhysicModel m, float deltaTime) {
@@ -196,11 +196,6 @@ public class ComplexPhysicModel extends PhysicModel {
         if (massCentre.getDistanceToPoint(posOfForce) >= Point.epsilon) {
             double length = Point.getLengthToLine(massCentre, posOfForce, posOfForce.add(force));
             double deltaBeta = force.length() * length / J;
-            //Получаем знак
-            //Если конец вектора лежит в правой полуплоскости относительно прямой, проходящей через центр масс и точку приложения силы
-            //То вращается вправо (знак минус), иначе влево
-
-            //System.out.println(n.toString() + " " + new Float(deltaBeta).toString());
             beta += deltaBeta;
         }
     }

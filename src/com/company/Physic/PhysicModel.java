@@ -26,6 +26,10 @@ public class PhysicModel {
     public float getDamage(float force) {
         return force/4000000000f;
     }
+    public void deleteFromWorld()
+    {
+        //TODO: добавить в мир удаление и удалить здесь эту модель
+    }
 
     public float getActivity() {
         return activity;
@@ -111,6 +115,8 @@ public class PhysicModel {
 
     //for their own timers
     public void update(float deltaTime) {
+        if (parent == null & health <=0)
+            deleteFromWorld();
     }
 
     /**
@@ -265,28 +271,6 @@ public class PhysicModel {
 
             useForce(intersection.getStart(), rotationForces);
             m.useForce(intersection.getStart(), rotationForces.negate());
-
-            //speedVector = v1; m.speedVector = v2;
-
-            //GeometricModel g11=new GeometricModel(body);
-            //GeometricModel g21=new GeometricModel(m.body);
-
-
-            //Segment intersection1=g11.getIntersection(g21);
-
-            /*if (intersection1!=null)
-            {
-                System.out.println("FUCK! dV: " + Point.add(v1,speedVector.negate()));
-                //Очень похоже, что нормаль направлена не в ту сторону.
-                //И силы приложились не в том направлении. Значит нужно приложить силы в противоположном направлении.
-                force = force.negate().multiply(2);
-                useForce(body.getCentre(), force);
-                m.useForce(m.body.getCentre(), force.negate());
-            }
-            else
-            {
-               // System.out.println("dV: " + Point.add(v1,Point.negate(speedVector)));
-            }*/
         }
         return wasIntersection;
     }
