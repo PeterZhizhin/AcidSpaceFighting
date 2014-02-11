@@ -58,6 +58,7 @@ public class ComplexPhysicModel extends PhysicModel {
             body.applyStaticForces(m,deltaTime);
     }
 
+
     /**
      * Здесь мы будем удалять те тела, что с отрицательным здоровьем.
      * @param deltaTime
@@ -157,20 +158,33 @@ public class ComplexPhysicModel extends PhysicModel {
 
     //TODO: Припилить столкновение для: ComplexPhysicModel & ComplexPhysicModel; ComplexPhysicModel & PhysicModel
 
+
+    @Override
+    protected LinkedList<PhysicModel> getBodies()
+    {
+        LinkedList<PhysicModel> result = new LinkedList<PhysicModel>();
+        for (PhysicModel body : bodies)
+            result.add(body);
+        return result;
+    }
+
     /**
      * Здесь должна была быть обработка столкновений
-     *
      * @param m
      * @param deltaTime
      * @return
      */
     @Override
     public boolean crossThem(PhysicModel m, float deltaTime) {
-        return false;
-    }
-
-    public boolean crossThem(ComplexPhysicModel m, float deltaTime) {
-        return false;
+        boolean result = false;
+        LinkedList<PhysicModel> anotherModelBodies = m.getBodies();
+        for (PhysicModel body : bodies)
+            for (PhysicModel anotherModelBody : anotherModelBodies)
+            {
+                boolean tempResult = body.crossThem(anotherModelBody, deltaTime);
+                result = result | tempResult;
+            }
+        return result;
     }
 
 
