@@ -13,7 +13,7 @@ public class BulletModel extends Model {
         super(null, null);
         GeometricModel g = new BulletGeometricModel(x, y, radius);
         PhysicModel p = new BulletPhysicModel(g, new Point[]{}, mass);
-        GraphicModel g2=new BaseGraphicModel(g);
+        GraphicModel g2=new BulletGraphicModel(g);
         setGraphicModel(g2);
         setPhysicModel(p);
         g2.setPhysicModel(p);

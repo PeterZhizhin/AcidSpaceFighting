@@ -21,7 +21,7 @@ public class EngineModel extends Model {
         PhysicModel p = new EnginePhysicModel(g, new Point[]{
                 new Point(x + radius / 2, y + radius / 2)
         }, radius);
-        GraphicModel g2=new BaseGraphicModel(g);
+        GraphicModel g2=new EngineGraphicModel(g);
         setGraphicModel(g2);
         setPhysicModel(p);
         g2.setPhysicModel(p);

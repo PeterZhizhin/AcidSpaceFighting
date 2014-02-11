@@ -19,7 +19,7 @@ public class DynamiteModel extends Model {
                 new Point(x, y + radius / 2),
                 new Point(x + radius, y + radius / 2)
         }, radius);
-        GraphicModel g2=new BaseGraphicModel(g);
+        GraphicModel g2=new DynamiteGraphicModel(g);
         setGraphicModel(g2);
         setPhysicModel(p);
         g2.setPhysicModel(p);

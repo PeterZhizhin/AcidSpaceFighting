@@ -11,6 +11,14 @@ public class Model {
     private static int lastNumber=0;
     private int number;
 
+    protected GraphicModel getGraphicModel() {
+        return graphic;
+    }
+
+    protected PhysicModel getPhysicModel() {
+        return physic;
+    }
+
     public void useForce(Point where, Point toWhere) {
         physic.useForce(where, toWhere);
     }
