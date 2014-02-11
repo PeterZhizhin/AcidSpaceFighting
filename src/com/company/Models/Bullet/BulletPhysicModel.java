@@ -10,6 +10,11 @@ public class BulletPhysicModel extends PhysicModel {
 
     private boolean firstTime;
 
+    public void update(float time) {
+        System.out.println(health);
+        health-= time*0.1f;
+    }
+
     public void useForce(Point posOfForce, Point force) {
         if (force.length()>=1000000)  {
             firstTime=!firstTime;

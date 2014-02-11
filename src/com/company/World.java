@@ -22,26 +22,28 @@ public class World {
 
     private static ArrayList<Model> models;
     private static ArrayList<Posteffect> effects;
+    private static ArrayList<Integer> removeBuffer;
 
     public static void explode(Point center, float power) {
-        System.out.println(power);
         Explosion e=new Explosion(center, power/8);
         addEffect(e);
 
 
-        //todo: realise
         /*for (Model m: models) {
              Point force=m.getCenter().negate().add(center);
              float l=force.length();
              force=force.setLength(1);
              force=force.multiply(power*power*power*power/l);
-             System.out.println(force+" "+power);
              m.useForce(m.getCenter(), force);
         } */
     }
 
     public static Model getModel(int num) {
         return models.get(num);
+    }
+
+    public static void removeModel(int num) {
+        removeBuffer.add(num);
     }
 
     public static void addEffect(Posteffect p) {
@@ -128,6 +130,18 @@ public class World {
             if (p.noNeedMore())
             effects.remove(i);
         }
+
+        if (removeBuffer.size()!=0) {
+        for (int m: removeBuffer) {
+            for (int i=0; i<models.size(); i++) {
+                if (m==models.get(i).getNumber()) {
+                    models.remove(i);
+                    break;
+                }
+            }
+        }
+            removeBuffer.clear();
+        }
     }
 
     public static Point getNearestPhysicModel(Point p) {
@@ -161,6 +175,7 @@ public class World {
     public static void init() {
         effects=new ArrayList<Posteffect>();
 
+        removeBuffer=new ArrayList<Integer>();
         models = new ArrayList<Model>();
         addModelBuffer = new LinkedList<Model>();
 

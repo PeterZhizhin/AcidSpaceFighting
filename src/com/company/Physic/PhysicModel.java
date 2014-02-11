@@ -19,6 +19,7 @@ public class PhysicModel {
     protected Point speedVector;
     protected Point acceleration;
     protected ComplexPhysicModel parent;
+    protected int number;
 
     private Point[] connectionPoints;
     private boolean[] isConnectionFree;
@@ -29,6 +30,10 @@ public class PhysicModel {
     public void deleteFromWorld()
     {
         //TODO: добавить в мир удаление и удалить здесь эту модель
+    }
+
+    public void setNumber(int num) {
+        number=num;
     }
 
     public float getActivity() {
@@ -343,6 +348,7 @@ public class PhysicModel {
         isConnectionFree = new boolean[connectionPoints.length];
         for (int i = 0; i < isConnectionFree.length; i++)
             isConnectionFree[i] = true;
+        this.number=number;
     }
 
 }

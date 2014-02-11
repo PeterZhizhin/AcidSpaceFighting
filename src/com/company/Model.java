@@ -8,6 +8,8 @@ public class Model {
 
     protected GraphicModel graphic;
     protected PhysicModel physic;
+    private static int lastNumber=0;
+    private int number;
 
     public void useForce(Point where, Point toWhere) {
         physic.useForce(where, toWhere);
@@ -45,8 +47,15 @@ public class Model {
         return physic.getCentre();
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     public Model(GraphicModel g, PhysicModel p) {
         graphic = g;
+        p.setNumber(number);
+        number=lastNumber;
+        lastNumber++;
         physic = p;
     }
 }
