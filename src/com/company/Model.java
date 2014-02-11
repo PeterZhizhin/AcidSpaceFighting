@@ -6,8 +6,8 @@ import com.company.Physic.PhysicModel;
 
 public class Model {
 
-    protected GraphicModel graphic;
-    protected PhysicModel physic;
+    private GraphicModel graphic;
+    private PhysicModel physic;
     private static int lastNumber=0;
     private int number;
 
@@ -51,11 +51,25 @@ public class Model {
         return number;
     }
 
+    public void setPhysicModel(PhysicModel p) {
+        p.setNumber(number);
+        physic = p;
+    }
+
+    public void setGraphicModel(GraphicModel g) {
+        graphic = g;
+    }
+
+    public void doSpecialActionA() {
+        physic.doSpecialActionA();
+    }
+
     public Model(GraphicModel g, PhysicModel p) {
         graphic = g;
-        p.setNumber(number);
         number=lastNumber;
         lastNumber++;
+        if (p!=null)
+            p.setNumber(number);
         physic = p;
     }
 }

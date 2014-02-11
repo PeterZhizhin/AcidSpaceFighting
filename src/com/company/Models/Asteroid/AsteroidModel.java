@@ -2,6 +2,7 @@ package com.company.Models.Asteroid;
 
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
+import com.company.Graphic.GraphicModel;
 import com.company.Model;
 import com.company.Physic.PhysicModel;
 
@@ -11,8 +12,9 @@ public class AsteroidModel extends Model {
         super(null, null);
         GeometricModel g = new AsteroidGeometricModel(x, y, radius);
         PhysicModel p = new PhysicModel(g, new Point[]{}, mass);
-        graphic = new AsteroidGraphicModel(g);
-        physic = p;
-        graphic.setPhysicModel(p);
+        GraphicModel g2=new AsteroidGraphicModel(g);
+        setGraphicModel(g2);
+        setPhysicModel(p);
+        g2.setPhysicModel(p);
     }
 }

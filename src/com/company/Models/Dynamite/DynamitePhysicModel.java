@@ -10,7 +10,7 @@ public class DynamitePhysicModel extends PhysicModel {
 
     private boolean inFirstTime=true;
 
-    public void doSpecialActionA(float deltaTime) {
+    public void doSpecialActionA() {
         health=0;
         if (inFirstTime) {
         World.explode(getCentre(), body.getMaxLength());

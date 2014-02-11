@@ -75,24 +75,24 @@ public class World {
     public static void update(float deltaTime) {
 
         if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
-            rocketPhys.doSpecialActionA(deltaTime);
+            rocketPhys.doSpecialActionA();
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-            rocketPhys2.doSpecialActionA(deltaTime);
-            rocketPhys4.doSpecialActionA(deltaTime);
+            rocketPhys2.doSpecialActionA();
+            rocketPhys4.doSpecialActionA();
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
-            rocketPhys3.doSpecialActionA(deltaTime);
+            rocketPhys3.doSpecialActionA();
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-            rocketPhys5.doSpecialActionA(deltaTime);
+            rocketPhys5.doSpecialActionA();
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_X)) {
-            boom.doSpecialActionA(deltaTime);
+            boom.doSpecialActionA();
         }
 
         boolean wasIntersection = true;
@@ -164,12 +164,12 @@ public class World {
     }
 
     private static LinkedList<Model> addModelBuffer;
-    private static PhysicModel rocketPhys;
-    private static PhysicModel rocketPhys2;
-    private static PhysicModel rocketPhys3;
-    private static PhysicModel rocketPhys4;
-    private static PhysicModel rocketPhys5;
-    private static PhysicModel boom;
+    private static Model rocketPhys;
+    private static Model rocketPhys2;
+    private static Model rocketPhys3;
+    private static Model rocketPhys4;
+    private static Model rocketPhys5;
+    private static Model boom;
     private static ComplexPhysicModel totalModel;
 
     public static void init() {
@@ -180,24 +180,24 @@ public class World {
         addModelBuffer = new LinkedList<Model>();
 
         Model m = new EngineModel(0, 0, 250f, 1.57f);
-        rocketPhys = m.physic;
+        rocketPhys = m;
 
         Model m2 = new EngineModel(0, 300, 250f);
-        rocketPhys2 = m2.physic;
+        rocketPhys2 = m2;
 
         Model m6 = new EngineModel(0, 700, 250f);
-        rocketPhys4 = m6.physic;
+        rocketPhys4 = m6;
 
         Model m5 = new EngineModel(0, 1000, 250f, -1.57f);
-        rocketPhys3 = m5.physic;
+        rocketPhys3 = m5;
 
         Model m4 = new BaseModel(500, 0, 1250f);
 
         Model m7 = new DynamiteModel(1800, 0, 1250f);
-        boom=m7.physic;
+        boom=m7;
 
         Model m8 = new GunModel(2700, -370, 1250f, (float) (Math.PI/2));
-        rocketPhys5=m8.physic;
+        rocketPhys5=m8;
 
         ComplexModel m3 = new ComplexModel(m4);
         m3.add(m, 0);

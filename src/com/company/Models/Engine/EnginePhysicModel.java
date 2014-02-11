@@ -24,18 +24,8 @@ public class EnginePhysicModel extends PhysicModel {
         useForce(body.getCentre(), new Point(Math.cos(body.getAngle()), Math.sin(body.getAngle())).multiply(power*activity));
     }
 
-    public void doSpecialActionA(float deltaTime) {
+    public void doSpecialActionA() {
         isPressed = true;
-    }
-
-    public void doSpecialActionB(float deltaTime) {
-        useForce(body.getCentre(), new Point(Math.cos(body.getAngle()), Math.sin(body.getAngle())).negate().multiply(power));
-        isPressed = true;
-    }
-
-    public void doSpecialActionC(float deltaTime) {
-        w = 0;
-        speedVector.set(0, 0);
     }
 
     public EnginePhysicModel(GeometricModel body, Point[] connetionPoints, float mass) {

@@ -2,6 +2,7 @@ package com.company.Models.Engine;
 
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
+import com.company.Graphic.GraphicModel;
 import com.company.Model;
 import com.company.Models.Base.BaseGeometricModel;
 import com.company.Models.Base.BaseGraphicModel;
@@ -20,8 +21,9 @@ public class EngineModel extends Model {
         PhysicModel p = new EnginePhysicModel(g, new Point[]{
                 new Point(x + radius / 2, y + radius / 2)
         }, radius);
-        graphic=new EngineGraphicModel(g);
-        physic = p;
-        graphic.setPhysicModel(p);
+        GraphicModel g2=new BaseGraphicModel(g);
+        setGraphicModel(g2);
+        setPhysicModel(p);
+        g2.setPhysicModel(p);
     }
 }

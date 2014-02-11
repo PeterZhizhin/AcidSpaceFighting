@@ -14,7 +14,7 @@ public class GunPhysicModel extends PhysicModel {
 
     private static final float timeLimit=1f;
 
-    public void doSpecialActionA(float deltaTime) {
+    public void doSpecialActionA() {
         if (activity<=0) {
 
             World.explode(getCentre(), body.getMaxLength());

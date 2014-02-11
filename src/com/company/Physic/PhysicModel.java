@@ -86,13 +86,7 @@ public class PhysicModel {
         speedVector.move(dV);
     }
 
-    public void doSpecialActionA(float deltaTime) {
-    }
-
-    public void doSpecialActionB(float deltaTime) {
-    }
-
-    public void doSpecialActionC(float deltaTime) {
+    public void doSpecialActionA() {
     }
 
     protected void rotate(Point centre, float angle) {
@@ -348,7 +342,6 @@ public class PhysicModel {
         isConnectionFree = new boolean[connectionPoints.length];
         for (int i = 0; i < isConnectionFree.length; i++)
             isConnectionFree[i] = true;
-        this.number=number;
     }
 
 }
