@@ -109,11 +109,6 @@ public class PhysicModel {
 
     //for their own timers
     public void update(float deltaTime) {
-        if(health<0)
-        {
-            System.out.print("Health: ");
-            System.out.println(getHealth());
-        }
     }
 
     /**
@@ -342,6 +337,7 @@ public class PhysicModel {
             System.err.println("[PhysicModel] Пустая тушка в конструкторе на входе");
             BasicWindow.exit();
         }
+        this.parent = null;
     }
 
     public PhysicModel(GeometricModel body, Point[] connectionPoints, float mass) {

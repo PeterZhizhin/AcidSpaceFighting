@@ -104,6 +104,7 @@ public class ComplexPhysicModel extends PhysicModel {
                     else
                     {
                         PhysicModel physicModel = bodiesLists[i].get(0);
+                        physicModel.setParent(null);
                         GraphicModel graphicModel = cm.graModel.get(bodies.indexOf(physicModel));
                         //Получаем вектор скорости центра масс новой системы относительно текущей системы
                         Point deltaSpeed = new Point(physicModel.getCentre());
