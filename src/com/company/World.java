@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.Audio.Sound;
 import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
 import com.company.Graphic.Effects.Explosion;
@@ -23,6 +24,8 @@ public class World {
     private static ArrayList<Model> models;
     private static ArrayList<Posteffect> effects;
     private static ArrayList<Integer> removeBuffer;
+
+    private static Sound music;
 
     public static void explode(Point center, float power) {
         Explosion e=new Explosion(center, power/8);
@@ -173,6 +176,12 @@ public class World {
     private static ComplexPhysicModel totalModel;
 
     public static void init() {
+
+        music = new Sound("ambience02.wav");
+        music.setIsLooped(true);
+
+        music.play();
+
         effects=new ArrayList<Posteffect>();
 
         removeBuffer=new ArrayList<Integer>();
@@ -212,6 +221,12 @@ public class World {
 
         //AsteroidModel asteroidModel  = new AsteroidModel(-50000,-50000,10000f, 50000f);
         //World.addModel(asteroidModel);
+    }
+
+
+    public static void destroy()
+    {
+        music.dispose();
     }
 
 }

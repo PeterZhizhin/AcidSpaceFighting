@@ -38,4 +38,10 @@ public class Window extends BasicWindow {
         World.draw();
         GUI.draw();
     }
+
+    @Override
+    protected void destroy()
+    {
+        World.destroy();
+    }
 }

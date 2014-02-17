@@ -15,6 +15,9 @@ public class BulletPhysicModel extends PhysicModel {
         super.update(time);
     }
 
+
+
+
     public void useForce(Point posOfForce, Point force) {
         if (force.length()>=1000000)  {
             firstTime=!firstTime;

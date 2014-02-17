@@ -4,6 +4,7 @@ import com.company.Graphic.TextureDrawer;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
@@ -90,6 +91,7 @@ public abstract class BasicWindow {
      */
     public BasicWindow(int width, int height, int frameRate, String title) {
         try {
+            AL.create();
             this.title = title;
             this.frameRate = frameRate;
             Display.setDisplayMode(new DisplayMode(width, height));
@@ -125,6 +127,8 @@ public abstract class BasicWindow {
             Display.sync(frameRate);
             Display.update();
         }
+        destroy();
+        AL.destroy();
     }
 
     /**
@@ -143,12 +147,19 @@ public abstract class BasicWindow {
     protected void draw() {
     }
 
+    protected void destroy()
+    {
+
+    }
+
+
     /**
      * Очищаем память
      * Clear your memory
      */
     public static void exit() {
         System.out.println("[BasicWindow] Exiting");
+        AL.destroy();
         Display.destroy();
         Mouse.destroy();
         System.exit(0);
