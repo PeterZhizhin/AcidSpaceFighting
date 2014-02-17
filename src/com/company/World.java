@@ -12,6 +12,7 @@ import com.company.Models.Engine.EngineModel;
 import com.company.Models.Gun.GunModel;
 import com.company.Physic.ComplexPhysicModel;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -75,6 +76,8 @@ public class World {
     }
 
     public static void update(float deltaTime) {
+
+        Camera.reScale(Mouse.getDWheel());
 
         if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
             rocketPhys.doSpecialActionA();

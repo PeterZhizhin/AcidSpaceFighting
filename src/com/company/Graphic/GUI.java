@@ -65,7 +65,6 @@ public class GUI {
             mouseDownY = nowY;
         }
         lastStateButtonIsPressed = isPressed;
-        Camera.reScale(Mouse.getDWheel());
 
     }
 
