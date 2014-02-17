@@ -13,10 +13,10 @@ import java.util.ArrayList;
  */
 public class SpaceShip {
 
-    private static ArrayList<Model> rocketEng=new ArrayList<Model>();
-    private static ArrayList<Model> rocketLeft=new ArrayList<Model>();
-    private static ArrayList<Model> rocketRight=new ArrayList<Model>();
-    private static ComplexModel totalModel;
+    private ArrayList<Model> rocketEng=new ArrayList<Model>();
+    private ArrayList<Model> rocketLeft=new ArrayList<Model>();
+    private ArrayList<Model> rocketRight=new ArrayList<Model>();
+    private ComplexModel totalModel;
 
 
     public float getX()

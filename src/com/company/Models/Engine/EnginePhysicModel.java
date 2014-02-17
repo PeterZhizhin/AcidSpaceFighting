@@ -7,7 +7,7 @@ import com.company.Physic.PhysicModel;
 
 public class EnginePhysicModel extends PhysicModel {
 
-    private static final float power = 2000000f;
+    private static final float power = 8000000f;
     private static final float deltaActivity = 1f;
     private boolean isPressed = false;
 
