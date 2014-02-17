@@ -9,6 +9,7 @@ import com.company.Graphic.TextureDrawer;
 import com.company.Graphic.Posteffect;
 import com.company.Models.Asteroid.AsteroidModel;
 import com.company.Models.Base.BaseModel;
+import com.company.Models.Connector.ConnectorModel;
 import com.company.Models.Dynamite.DynamiteModel;
 import com.company.Models.Engine.EngineModel;
 import com.company.Models.Gun.GunModel;
@@ -57,7 +58,7 @@ public class World {
     }
 
     public static void draw() {
-        //Camera.setPosition(totalModel.getCentre().getX(), totalModel.getCentre().getY());
+        Camera.setPosition(totalModel.getCentre().getX(), totalModel.getCentre().getY());
 
         TextureDrawer.startDrawTextures();
         for (Model model : models) {
@@ -83,17 +84,17 @@ public class World {
         Camera.reScale(Mouse.getDWheel());
 
         if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
-            rocketPhys.doSpecialActionA();
+            for (Model m: rocketLeft) m.doSpecialActionA();
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-            rocketPhys2.doSpecialActionA();
-            rocketPhys4.doSpecialActionA();
+            for (Model m: rocketEng) m.doSpecialActionA();
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
-            rocketPhys3.doSpecialActionA();
+            for (Model m: rocketRight) m.doSpecialActionA();
         }
+/*
 
         if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
             rocketPhys5.doSpecialActionA();
@@ -102,6 +103,7 @@ public class World {
         if (Keyboard.isKeyDown(Keyboard.KEY_X)) {
             boom.doSpecialActionA();
         }
+*/
 
         if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
             Window.pauseGame();
@@ -192,12 +194,9 @@ public class World {
     }
 
     private static LinkedList<Model> addModelBuffer;
-    private static Model rocketPhys;
-    private static Model rocketPhys2;
-    private static Model rocketPhys3;
-    private static Model rocketPhys4;
-    private static Model rocketPhys5;
-    private static Model boom;
+    private static ArrayList<Model> rocketEng=new ArrayList<Model>();
+    private static ArrayList<Model> rocketLeft=new ArrayList<Model>();
+    private static ArrayList<Model> rocketRight=new ArrayList<Model>();
     private static ComplexPhysicModel totalModel;
 
     public static void init() {
@@ -213,42 +212,48 @@ public class World {
         explosionBuffer=new ArrayList<Point>();
         explosionPowerBuffer=new ArrayList<Float>();
 
-        Model m = new EngineModel(0, 0, 250f, 1.57f);
-        rocketPhys = m;
+        float p2= -(float) (Math.PI/2);
 
-        Model m2 = new EngineModel(0, 300, 250f);
-        rocketPhys2 = m2;
+        BaseModel base = new BaseModel(0, 0, 1000);
+        EngineModel bl=new EngineModel(-1000, 0, 1000, p2);
+        EngineModel br=new EngineModel(1000, 0, 1000, p2);
+        EngineModel bll=new EngineModel(-2000, 0, 1000, p2);
+        EngineModel brr=new EngineModel(2000, 0, 1000, p2);
+        rocketLeft.add(bl); rocketLeft.add(bll);
+        rocketRight.add(br); rocketRight.add(brr);
+        ConnectorModel cb=new ConnectorModel(0, 1000, 1000);
+        ConnectorModel cbb=new ConnectorModel(0, 2000, 1000);
+        EngineModel cbbb=new EngineModel(0, 3000, 1000, p2);
+        EngineModel cbbbl=new EngineModel(-1000, 3000, 1000, p2);
+        EngineModel cbbbr=new EngineModel(1000, 3000, 1000, p2);
+        EngineModel cbbbll=new EngineModel(-2000, 3000, 1000, p2);
+        EngineModel cbbbrr=new EngineModel(2000, 3000, 1000, p2);
+        rocketEng.add(cbbb);
+        rocketEng.add(cbbbl);
+        rocketEng.add(cbbbr);
+        rocketEng.add(cbbbll);
+        rocketEng.add(cbbbrr);
 
-        Model m6 = new EngineModel(0, 700, 250f);
-        rocketPhys4 = m6;
+        ComplexModel m = new ComplexModel(base);
+        m.add(bl, 0);
+        m.add(br, 0);
+        m.add(bll, 0);
+        m.add(brr, 0);
+        m.add(cb, 0);
+        m.add(cbb, 0);
+        m.add(cbbb, 0);
+        m.add(cbbbl, 0);
+        m.add(cbbbr, 0);
+        m.add(cbbbll, 0);
+        m.add(cbbbrr, 0);
 
-        Model m5 = new EngineModel(0, 1000, 250f, -1.57f);
-        rocketPhys3 = m5;
+        World.addModel(m);
 
-        Model m4 = new BaseModel(500, 0, 1250f);
-
-        Model m7 = new DynamiteModel(1800, 0, 1250f);
-        boom=m7;
-
-        Model m8 = new GunModel(2700, -500, 1250f, (float) (Math.PI/2));
-        rocketPhys5=m8;
-
-        ComplexModel m3 = new ComplexModel(m4);
-        m3.add(m, 0);
-        m3.add(m2, 0);
-        m3.add(m5, 0);
-        m3.add(m6, 0);
-        m3.add(m7, 0);
-        m3.add(m8, 10);
-        totalModel = m3.phyModel;
-
-        World.addModel(m3);
-
+        totalModel=m.phyModel;
 
         Model mm=new AsteroidModel(4500, 4500, 1000, 5000);
         World.addModel(mm);
 
-        World.addModel(m3);
 
     }
 
