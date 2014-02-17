@@ -3,20 +3,15 @@ package com.company;
 import com.company.Models.Base.BaseModel;
 import com.company.Models.Connector.ConnectorModel;
 import com.company.Models.Engine.EngineModel;
-import com.company.Physic.ComplexPhysicModel;
 
-import javax.jws.WebParam;
 import java.util.ArrayList;
 
-/**
- * Created by peter on 17.02.14.
- */
 public class SpaceShip {
 
-    private static ArrayList<Model> rocketEng=new ArrayList<Model>();
-    private static ArrayList<Model> rocketLeft=new ArrayList<Model>();
-    private static ArrayList<Model> rocketRight=new ArrayList<Model>();
-    private static ComplexModel totalModel;
+    private ArrayList<Model> rocketEng=new ArrayList<Model>();
+    private ArrayList<Model> rocketLeft=new ArrayList<Model>();
+    private ArrayList<Model> rocketRight=new ArrayList<Model>();
+    private ComplexModel totalModel;
 
 
     public float getX()
