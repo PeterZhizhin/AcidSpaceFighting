@@ -37,8 +37,25 @@ public class GUI {
             @Override
             public void run() {
                 Window.resumeGame();
+
             }
         });
+        Button initAsteroids = new Button(10,110,  100, 20, "Asteroids");
+        initAsteroids.setEvent(new Runnable() {
+            @Override
+            public void run() {
+                Window.initAsteroids();
+            }
+        });
+        Button initOneShip = new Button(10, 140, 100, 20, "One Ship");
+        initOneShip.setEvent(new Runnable() {
+            @Override
+            public void run() {
+                Window.initOneShip();
+            }
+        });
+        controls.add(initOneShip);
+        controls.add(initAsteroids);
         controls.add(startButton);
         controls.add(resumeButton);
     }

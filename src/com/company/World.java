@@ -16,6 +16,7 @@ import com.company.Models.Gun.GunModel;
 import com.company.Physic.ComplexPhysicModel;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 
 import java.security.Key;
 import java.util.ArrayList;
@@ -59,7 +60,17 @@ public class World {
     }
 
     public static void draw() {
-      Camera.setPosition(player1.getX(), player1.getY());
+        if (needPlayer)
+        {
+            //Получаем позицию камеры
+            float x1 = player1.getX(); float y1 = player1.getY();
+            float x2 = player2.getX(); float y2 = player2.getY();
+            Camera.setPosition((x1+x2)/2, (y1+y2)/2);
+        }
+        if (isNeedDeletions)
+        {
+            Camera.setPosition(totalModel.phyModel.getCentre().getX(), totalModel.phyModel.getCentre().getY());
+        }
 
         TextureDrawer.startDrawTextures();
         for (Model model : models) {
@@ -80,27 +91,85 @@ public class World {
         TextureDrawer.finishDraw();
     }
 
+    private static boolean lastStateButtonIsPressed = false;
+    private static int mouseDownX = 0;
+    private static int mouseDownY = 0;
+
     public static void update(float deltaTime) {
 
         Camera.reScale(Mouse.getDWheel());
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
-            player1.turnLeft();
+
+        boolean isPressed = Mouse.isButtonDown(0);
+
+        if (isPressed) {
+            int nowX = Mouse.getX();
+            int nowY = Display.getHeight() - Mouse.getY();
+            if (lastStateButtonIsPressed) {
+
+                Camera.move(mouseDownX - nowX, mouseDownY - nowY);
+            }
+            mouseDownX = nowX;
+            mouseDownY = nowY;
+        }
+        lastStateButtonIsPressed = isPressed;
+
+
+        if (needPlayer)
+        {
+            if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
+                player1.turnLeft();
+            }
+
+            if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+                player1.throttle();
+            }
+
+            if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
+                player1.turnRight();
+            }
+
+            if (Keyboard.isKeyDown(Keyboard.KEY_A))
+                player1.fireLeft();
+
+            if (Keyboard.isKeyDown(Keyboard.KEY_D))
+                player1.fireRight();
+
+            if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD8))
+                player2.throttle();
+            if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD7))
+                player2.turnLeft();
+            if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD9))
+                player2.turnRight();
+            if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD4))
+                player2.fireLeft();
+            if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD6))
+                player2.fireRight();
         }
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-            player1.throttle();
+        if (isNeedDeletions)
+        {
+            if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
+                rocketPhys.doSpecialActionA();
+            }
+
+            if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+                rocketPhys2.doSpecialActionA();
+                rocketPhys4.doSpecialActionA();
+            }
+
+            if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
+                rocketPhys3.doSpecialActionA();
+            }
+
+            if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+                rocketPhys5.doSpecialActionA();
+            }
+
+            if (Keyboard.isKeyDown(Keyboard.KEY_X)) {
+                boom.doSpecialActionA();
+            }
         }
-
-        if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
-            player1.turnRight();
-        }
-
-        if (Keyboard.isKeyDown(Keyboard.KEY_A))
-            player1.fireLeft();
-
-        if (Keyboard.isKeyDown(Keyboard.KEY_D))
-            player1.fireRight();
 
         if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
             Window.pauseGame();
@@ -193,11 +262,11 @@ public class World {
     private static LinkedList<Model> addModelBuffer;
 
     private static SpaceShip player1;
+    private static SpaceShip player2;
+    private static boolean needPlayer = false;
 
-    public static void init() {
-
-        SoundBase.playMusic();
-
+    private static void baseInit()
+    {
         effects=new ArrayList<Posteffect>();
 
         removeBuffer=new ArrayList<Integer>();
@@ -206,14 +275,84 @@ public class World {
 
         explosionBuffer=new ArrayList<Point>();
         explosionPowerBuffer=new ArrayList<Float>();
+    }
+
+    public static void initAsteroids()
+    {
+        baseInit();
+
+        for (int i = 0; i<5; i++)
+            for (int j = 0; j<5; j++)
+            {
+                Model m = new AsteroidModel(i * 500, j * 500, 100, 10);
+                World.addModel(m);
+            }
+    }
+
+    public static void initShips()
+    {
+        baseInit();
+
+        needPlayer = true;
 
         player1 = new SpaceShip(0,0);
         World.addModel(player1.getBody());
 
-        SpaceShip player2 = new SpaceShip(10000,10000);
+        player2 = new SpaceShip(10000,10000);
         World.addModel(player2.getBody());
+    }
 
 
+    private static Model rocketPhys;
+    private static Model rocketPhys2;
+    private static Model rocketPhys3;
+    private static Model rocketPhys4;
+    private static Model rocketPhys5;
+    private static Model boom;
+    private static ComplexModel totalModel;
+    private static boolean isNeedDeletions  = false;
+
+    public static void initOneShip()
+    {
+        SoundBase.playMusic();
+
+        baseInit();
+        isNeedDeletions = true;
+
+        Model m = new EngineModel(0, 0, 250f, 1.57f);
+        rocketPhys = m;
+
+        Model m2 = new EngineModel(0, 300, 250f);
+        rocketPhys2 = m2;
+
+        Model m6 = new EngineModel(0, 700, 250f);
+        rocketPhys4 = m6;
+
+        Model m5 = new EngineModel(0, 1000, 250f, -1.57f);
+        rocketPhys3 = m5;
+
+        Model m4 = new BaseModel(500, 0, 1250f);
+
+        Model m7 = new DynamiteModel(1800, 0, 1250f);
+        boom=m7;
+
+        Model m8 = new GunModel(2700, -500, 1250f, (float) (Math.PI/2));
+        rocketPhys5=m8;
+
+        ComplexModel m3 = new ComplexModel(m4);
+        m3.add(m, 0);
+        m3.add(m2, 0);
+        m3.add(m5, 0);
+        m3.add(m6, 0);
+        m3.add(m7, 0);
+        m3.add(m8, 10);
+        totalModel = m3;
+
+        World.addModel(m3);
+    }
+
+    public static void init() {
+        initShips();
     }
 
 }

@@ -18,6 +18,21 @@ public class Window extends BasicWindow {
     private static boolean isInited = false;
 
 
+    public static void initAsteroids()
+    {
+        World.initAsteroids();
+        Camera.init();
+        isInited = true;
+        gameState = GameState.GAME;
+    }
+
+    public static void initOneShip()
+    {
+        World.initOneShip();
+        Camera.init();
+        isInited = true;
+        gameState = GameState.GAME;
+    }
 
     public static void initWorld()
     {
