@@ -52,7 +52,7 @@ public class World {
     }
 
     public static void draw() {
-       // Camera.setPosition(totalModel.getCentre().getX(), totalModel.getCentre().getY());
+        Camera.setPosition(totalModel.getCentre().getX(), totalModel.getCentre().getY());
 
         TextureDrawer.startDrawTextures();
         for (Model model : models) {
