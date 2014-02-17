@@ -11,7 +11,6 @@ import com.company.Models.Dynamite.DynamiteModel;
 import com.company.Models.Engine.EngineModel;
 import com.company.Models.Gun.GunModel;
 import com.company.Physic.ComplexPhysicModel;
-import com.company.Physic.PhysicModel;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
@@ -67,6 +66,10 @@ public class World {
 
         for (Model model : models) {
             model.drawTopLayer();
+        }
+
+        for (Model model : models) {
+            model.drawHealth();
         }
 
         for (Posteffect effect : effects) {
@@ -205,7 +208,7 @@ public class World {
         Model m7 = new DynamiteModel(1800, 0, 1250f);
         boom=m7;
 
-        Model m8 = new GunModel(2700, -370, 1250f, (float) (Math.PI/2));
+        Model m8 = new EngineModel(2700, 0, 1250f);
         rocketPhys5=m8;
 
         ComplexModel m3 = new ComplexModel(m4);

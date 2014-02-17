@@ -70,21 +70,27 @@ public class TextureDrawer {
 
         switch (texture) {
             case 0: {tp=new Point(0, 0); break;}
-            case 1: {tp=new Point(0.5f, 0); break;}
+            case 1: {tp=new Point(0.25f, 0); break;}
             case 2: {tp=new Point(0, 0.25f); break;}
-            case 3: {tp=new Point(0.5, 0.25f); break;}
+            case 3: {tp=new Point(0.25f, 0.25f); break;}
             case 4: {tp=new Point(0, 0.5f); break;}
-            case 5: {tp=new Point(0.5f, 0.5f); break;}
+            case 5: {tp=new Point(0.25f, 0.5f); break;}
             case 6: {tp=new Point(0, 0.75f); break;}
-            case 7: {tp=new Point(0.5, 0.75f); break;}
+            case 7: {tp=new Point(0.25f, 0.75f); break;}
+
+            case 8: {tp=new Point(0.5f, 0.75f); break;}
+            case 9: {tp=new Point(0.5f, 0.5f); break;}
+            case 10: {tp=new Point(0.5f, 0.25f); break;}
+            case 11: {tp=new Point(0.5f, 0f); break;}
+            case 12: {tp=new Point(0.75f, 0.75f); break;}
         }
 
 
         glTexCoord2f(tp.x, tp.y);
         Camera.translatePoint(p1);
-        glTexCoord2f(tp.x+0.5f, tp.y);
+        glTexCoord2f(tp.x+0.25f, tp.y);
         Camera.translatePoint(p2);
-        glTexCoord2f(tp.x+0.5f, tp.y+0.25f);
+        glTexCoord2f(tp.x+0.25f, tp.y+0.25f);
         Camera.translatePoint(p3);
         glTexCoord2f(tp.x, tp.y+0.25f);
         Camera.translatePoint(p4);

@@ -20,7 +20,7 @@ public class EngineGraphicModel extends GraphicModel {
     }
 
     public void drawTopLayer() {
-        TextureDrawer.drawQuad(shape.getPoint(0), shape.getPoint(1), shape.getPoint(3), shape.getPoint(4), 1);
+        TextureDrawer.drawQuad(shape.getPoint(0), shape.getPoint(1), shape.getPoint(2), shape.getPoint(3), 1);
     }
 
     public EngineGraphicModel(GeometricModel body) {

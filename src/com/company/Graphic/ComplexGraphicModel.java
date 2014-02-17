@@ -1,17 +1,9 @@
 package com.company.Graphic;
 
 
-import com.company.Geometry.Point;
-import com.company.Graphic.Controls.Color;
-import com.company.Graphic.Controls.FontDrawer;
 import com.company.Physic.ComplexPhysicModel;
 
 import java.util.ArrayList;
-
-import static com.company.Graphic.Camera.getTranslatedPoint;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
 
 public class ComplexGraphicModel extends GraphicModel {
 
@@ -35,9 +27,9 @@ public class ComplexGraphicModel extends GraphicModel {
 
     }
 
-    public void drawHealthLine() {
+    public void drawHealth() {
         for (GraphicModel g : grModels)
-            g.drawHealthLine();
+            g.drawHealth();
 
         /*glEnable(GL_TEXTURE_2D);
         for (int i=0; i<coPhy.getConnectionPointsCount(); i++) {

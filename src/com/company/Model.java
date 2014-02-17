@@ -35,8 +35,8 @@ public class Model {
         graphic.drawBackgroundLayer();
     }
 
-    public void drawHealthLine() {
-        graphic.drawHealthLine();
+    public void drawHealth() {
+        graphic.drawHealth();
     }
 
     public boolean crossThem(Model p, float deltaTime) {
