@@ -53,6 +53,9 @@ public class Sound {
         waveData.dispose();
         AL10.alSourcei(source, AL10.AL_BUFFER, buffer);
 
+        AL10.alSourcef(source, AL10.AL_MAX_GAIN, 1.0f);
+        AL10.alSourcef(source, AL10.AL_MIN_GAIN, 0.0f);
+
     }
 
     public void dispose()

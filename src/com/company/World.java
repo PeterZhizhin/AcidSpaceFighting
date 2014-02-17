@@ -182,6 +182,7 @@ public class World {
 
         music = new Sound("ambience02.wav");
         music.setIsLooped(true);
+        music.setVolume(0.3f);
 
         music.play();
 
