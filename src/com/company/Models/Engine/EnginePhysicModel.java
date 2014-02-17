@@ -31,7 +31,10 @@ public class EnginePhysicModel extends PhysicModel {
     public void doSpecialActionA() {
         isPressed = true;
 
+        if (timer<=0) {
         SoundBase.playEngine();
+            timer=5;
+        }
     }
 
     public EnginePhysicModel(GeometricModel body, Point[] connetionPoints, float mass) {
