@@ -9,6 +9,7 @@ import com.company.Graphic.Posteffect;
 import com.company.Models.Base.BaseModel;
 import com.company.Models.Dynamite.DynamiteModel;
 import com.company.Models.Engine.EngineModel;
+import com.company.Models.Gun.GunModel;
 import com.company.Physic.ComplexPhysicModel;
 import org.lwjgl.input.Keyboard;
 
@@ -151,9 +152,10 @@ public class World {
             {
                 Point force=m.getCenter().negate().add(explosionBuffer.get(0)).negate();
                 float l=force.length();
+                l+=1;
                 force=force.setLength(1);
                 float power=explosionPowerBuffer.get(0);
-                force=force.multiply(power*power*power*power/l);
+                force=force.multiply(0.4f*power*power*power*power/l);
                 m.useForce(m.getCenter(), force);
             }
             explosionBuffer.remove(0);
@@ -223,7 +225,7 @@ public class World {
         Model m7 = new DynamiteModel(1800, 0, 1250f);
         boom=m7;
 
-        Model m8 = new EngineModel(2700, 0, 1250f);
+        Model m8 = new GunModel(2700, -500, 1250f, (float) (Math.PI/2));
         rocketPhys5=m8;
 
         ComplexModel m3 = new ComplexModel(m4);
@@ -237,8 +239,6 @@ public class World {
 
         World.addModel(m3);
 
-        //AsteroidModel asteroidModel  = new AsteroidModel(-50000,-50000,10000f, 50000f);
-        //World.addModel(asteroidModel);
     }
 
 
