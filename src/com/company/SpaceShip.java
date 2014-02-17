@@ -3,14 +3,9 @@ package com.company;
 import com.company.Models.Base.BaseModel;
 import com.company.Models.Connector.ConnectorModel;
 import com.company.Models.Engine.EngineModel;
-import com.company.Physic.ComplexPhysicModel;
 
-import javax.jws.WebParam;
 import java.util.ArrayList;
 
-/**
- * Created by peter on 17.02.14.
- */
 public class SpaceShip {
 
     private ArrayList<Model> rocketEng=new ArrayList<Model>();
