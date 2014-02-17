@@ -17,6 +17,7 @@ import com.company.Physic.ComplexPhysicModel;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -94,16 +95,12 @@ public class World {
         if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
             player1.turnRight();
         }
-/*
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-            rocketPhys5.doSpecialActionA();
-        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_A))
+            player1.fireLeft();
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_X)) {
-            boom.doSpecialActionA();
-        }
-*/
+        if (Keyboard.isKeyDown(Keyboard.KEY_D))
+            player1.fireRight();
 
         if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
             Window.pauseGame();

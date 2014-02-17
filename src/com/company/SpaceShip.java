@@ -3,6 +3,7 @@ package com.company;
 import com.company.Models.Base.BaseModel;
 import com.company.Models.Connector.ConnectorModel;
 import com.company.Models.Engine.EngineModel;
+import com.company.Models.Gun.GunModel;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,10 @@ public class SpaceShip {
     private ArrayList<Model> rocketEng=new ArrayList<Model>();
     private ArrayList<Model> rocketLeft=new ArrayList<Model>();
     private ArrayList<Model> rocketRight=new ArrayList<Model>();
+
+    private ArrayList<Model> gunsLeft = new ArrayList<Model>();
+    private ArrayList<Model> gunsRight = new ArrayList<Model>();
+
     private ComplexModel totalModel;
 
 
@@ -37,6 +42,15 @@ public class SpaceShip {
     public void turnRight()
     {
        for (Model m : rocketRight) m.doSpecialActionA();
+    }
+
+    public void fireLeft()
+    {
+        for (Model m : gunsLeft) m.doSpecialActionA();
+    }
+    public void fireRight()
+    {
+        for (Model m : gunsRight) m.doSpecialActionA();
     }
 
     public Model getBody()
@@ -68,7 +82,21 @@ public class SpaceShip {
         rocketEng.add(cbbbll);
         rocketEng.add(cbbbrr);
 
+        GunModel g1 = new GunModel(-1000+x, 600+y, 1000, p2);
+        GunModel g2 = new GunModel(-1000+x, 1600+y, 1000, p2);
+        gunsLeft.add(g1); gunsLeft.add(g2);
+
+
+        GunModel gg1 = new GunModel(1000+x, 600+y, 1000, -p2);
+        GunModel gg2 = new GunModel(1000+x, 1600+y, 1000, -p2);
+        gunsRight.add(gg1); gunsRight.add(gg2);
+
+
         ComplexModel m = new ComplexModel(base);
+        m.add(g1,0);
+        m.add(g2,0);
+        m.add(gg1,0);
+        m.add(gg2,0);
         m.add(bl, 0);
         m.add(br, 0);
         m.add(bll, 0);
