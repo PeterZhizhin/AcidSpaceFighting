@@ -336,12 +336,24 @@ public class PhysicModel {
         this.parent = null;
     }
 
+    protected PhysicModel(GeometricModel body, float mass, Point speedVector)
+    {
+        this(body,mass);
+        this.speedVector = speedVector;
+    }
+
     public PhysicModel(GeometricModel body, Point[] connectionPoints, float mass) {
         this(body, mass);
         this.connectionPoints = connectionPoints;
         isConnectionFree = new boolean[connectionPoints.length];
         for (int i = 0; i < isConnectionFree.length; i++)
             isConnectionFree[i] = true;
+    }
+
+    public PhysicModel(GeometricModel body, Point[] connectionPoints, float mass, Point speedVector)
+    {
+        this(body,connectionPoints, mass);
+        this.speedVector = speedVector;
     }
 
 }

@@ -58,7 +58,7 @@ public class World {
     }
 
     public static void draw() {
-        Camera.setPosition(totalModel.getCentre().getX(), totalModel.getCentre().getY());
+      Camera.setPosition(player1.getX(), player1.getY());
 
         TextureDrawer.startDrawTextures();
         for (Model model : models) {
@@ -84,15 +84,15 @@ public class World {
         Camera.reScale(Mouse.getDWheel());
 
         if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
-            for (Model m: rocketLeft) m.doSpecialActionA();
+            player1.turnLeft();
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-            for (Model m: rocketEng) m.doSpecialActionA();
+            player1.throttle();
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
-            for (Model m: rocketRight) m.doSpecialActionA();
+            player1.turnRight();
         }
 /*
 
@@ -194,10 +194,8 @@ public class World {
     }
 
     private static LinkedList<Model> addModelBuffer;
-    private static ArrayList<Model> rocketEng=new ArrayList<Model>();
-    private static ArrayList<Model> rocketLeft=new ArrayList<Model>();
-    private static ArrayList<Model> rocketRight=new ArrayList<Model>();
-    private static ComplexPhysicModel totalModel;
+
+    private static SpaceShip player1;
 
     public static void init() {
 
@@ -212,47 +210,11 @@ public class World {
         explosionBuffer=new ArrayList<Point>();
         explosionPowerBuffer=new ArrayList<Float>();
 
-        float p2= -(float) (Math.PI/2);
+        player1 = new SpaceShip(0,0);
+        World.addModel(player1.getBody());
 
-        BaseModel base = new BaseModel(0, 0, 1000);
-        EngineModel bl=new EngineModel(-1000, 0, 1000, p2);
-        EngineModel br=new EngineModel(1000, 0, 1000, p2);
-        EngineModel bll=new EngineModel(-2000, 0, 1000, p2);
-        EngineModel brr=new EngineModel(2000, 0, 1000, p2);
-        rocketLeft.add(bl); rocketLeft.add(bll);
-        rocketRight.add(br); rocketRight.add(brr);
-        ConnectorModel cb=new ConnectorModel(0, 1000, 1000);
-        ConnectorModel cbb=new ConnectorModel(0, 2000, 1000);
-        EngineModel cbbb=new EngineModel(0, 3000, 1000, p2);
-        EngineModel cbbbl=new EngineModel(-1000, 3000, 1000, p2);
-        EngineModel cbbbr=new EngineModel(1000, 3000, 1000, p2);
-        EngineModel cbbbll=new EngineModel(-2000, 3000, 1000, p2);
-        EngineModel cbbbrr=new EngineModel(2000, 3000, 1000, p2);
-        rocketEng.add(cbbb);
-        rocketEng.add(cbbbl);
-        rocketEng.add(cbbbr);
-        rocketEng.add(cbbbll);
-        rocketEng.add(cbbbrr);
-
-        ComplexModel m = new ComplexModel(base);
-        m.add(bl, 0);
-        m.add(br, 0);
-        m.add(bll, 0);
-        m.add(brr, 0);
-        m.add(cb, 0);
-        m.add(cbb, 0);
-        m.add(cbbb, 0);
-        m.add(cbbbl, 0);
-        m.add(cbbbr, 0);
-        m.add(cbbbll, 0);
-        m.add(cbbbrr, 0);
-
-        World.addModel(m);
-
-        totalModel=m.phyModel;
-
-        Model mm=new AsteroidModel(4500, 4500, 1000, 5000);
-        World.addModel(mm);
+        SpaceShip player2 = new SpaceShip(10000,10000);
+        World.addModel(player2.getBody());
 
 
     }

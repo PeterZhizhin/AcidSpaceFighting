@@ -53,8 +53,12 @@ public class ComplexPhysicModel extends PhysicModel {
     //Статические силы теперь тоже применяются ко всей системе
     @Override
     public void applyStaticForces(PhysicModel m, float deltaTime) {
+        LinkedList<PhysicModel> another = m.getBodies();
         for(PhysicModel body : bodies)
-            body.applyStaticForces(m,deltaTime);
+        {
+            for (PhysicModel anotherBody : another)
+                body.applyStaticForces(anotherBody,deltaTime);
+        }
     }
 
 
