@@ -52,7 +52,7 @@ public class World {
     }
 
     public static void draw() {
-        Camera.setPosition(totalModel.getCentre().getX(), totalModel.getCentre().getY());
+       // Camera.setPosition(totalModel.getCentre().getX(), totalModel.getCentre().getY());
 
         TextureDrawer.startDrawTextures();
         for (Model model : models) {
@@ -145,17 +145,20 @@ public class World {
         }
 
 
-        for (Model m: models)
-            while (explosionBuffer.size()>0) {
+        while (explosionBuffer.size() > 0)
+        {
+            for (Model m: models)
+            {
                 Point force=m.getCenter().negate().add(explosionBuffer.get(0)).negate();
                 float l=force.length();
                 force=force.setLength(1);
                 float power=explosionPowerBuffer.get(0);
                 force=force.multiply(power*power*power*power/l);
                 m.useForce(m.getCenter(), force);
-                explosionBuffer.remove(0);
-                explosionPowerBuffer.remove(0);
             }
+            explosionBuffer.remove(0);
+            explosionPowerBuffer.remove(0);
+        }
     }
 
     public static Point getNearestPhysicModel(Point p) {
