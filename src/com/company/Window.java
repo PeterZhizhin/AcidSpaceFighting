@@ -14,7 +14,7 @@ import org.lwjgl.opengl.Display;
  */
 public class Window extends BasicWindow {
 
-    public static GameState gameState;
+    private static GameState gameState;
     private static boolean isInited = false;
 
 
