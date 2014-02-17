@@ -153,10 +153,10 @@ public abstract class BasicWindow {
      */
     public static void exit() {
         System.out.println("[BasicWindow] Exiting");
+        SoundBase.dispose();
         AL.destroy();
         Display.destroy();
         Mouse.destroy();
-        SoundBase.dispose();
         System.exit(0);
     }
 }
