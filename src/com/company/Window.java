@@ -4,7 +4,6 @@ import com.company.Audio.SoundBase;
 import com.company.Graphic.Background;
 import com.company.Graphic.Camera;
 import com.company.Graphic.GUI;
-import org.lwjgl.opengl.Display;
 
 /**
  * User class which helps allows you to make update() drawTopLayer() cycle easily

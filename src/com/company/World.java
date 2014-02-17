@@ -7,6 +7,7 @@ import com.company.Graphic.Camera;
 import com.company.Graphic.Effects.Explosion;
 import com.company.Graphic.TextureDrawer;
 import com.company.Graphic.Posteffect;
+import com.company.Models.Asteroid.AsteroidModel;
 import com.company.Models.Base.BaseModel;
 import com.company.Models.Dynamite.DynamiteModel;
 import com.company.Models.Engine.EngineModel;
@@ -56,7 +57,7 @@ public class World {
     }
 
     public static void draw() {
-        Camera.setPosition(totalModel.getCentre().getX(), totalModel.getCentre().getY());
+        //Camera.setPosition(totalModel.getCentre().getX(), totalModel.getCentre().getY());
 
         TextureDrawer.startDrawTextures();
         for (Model model : models) {
@@ -240,6 +241,12 @@ public class World {
         m3.add(m7, 0);
         m3.add(m8, 10);
         totalModel = m3.phyModel;
+
+        World.addModel(m3);
+
+
+        Model mm=new AsteroidModel(4500, 4500, 1000, 5000);
+        World.addModel(mm);
 
         World.addModel(m3);
 
