@@ -1,5 +1,7 @@
 package com.company.Models.Gun;
 
+import com.company.Audio.Sound;
+import com.company.Audio.SoundBase;
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Graphic.Effects.Explosion;
@@ -17,7 +19,6 @@ public class GunPhysicModel extends PhysicModel {
     public void doSpecialActionA() {
         if (activity<=0) {
 
-            World.explode(getCentre(), body.getMaxLength());
             Point force=body.getPoint(2).add(getCentre().negate()).setLength(body.getMaxLength());
 
             Model m=new BulletModel(getCentre().getX()+force.x, getCentre().getY() + force.y, 100f, 100f);

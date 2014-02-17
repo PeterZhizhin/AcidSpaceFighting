@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.Audio.SoundBase;
 import com.company.Graphic.TextureDrawer;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
@@ -127,8 +128,7 @@ public abstract class BasicWindow {
             Display.sync(frameRate);
             Display.update();
         }
-        destroy();
-        AL.destroy();
+        exit();
     }
 
     /**
@@ -147,12 +147,6 @@ public abstract class BasicWindow {
     protected void draw() {
     }
 
-    protected void destroy()
-    {
-
-    }
-
-
     /**
      * Очищаем память
      * Clear your memory
@@ -162,6 +156,7 @@ public abstract class BasicWindow {
         AL.destroy();
         Display.destroy();
         Mouse.destroy();
+        SoundBase.dispose();
         System.exit(0);
     }
 }

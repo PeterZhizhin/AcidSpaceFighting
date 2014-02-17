@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.Audio.Sound;
+import com.company.Audio.SoundBase;
 import com.company.Geometry.Point;
 import com.company.Graphic.Camera;
 import com.company.Graphic.Effects.Explosion;
@@ -27,11 +28,12 @@ public class World {
     private static ArrayList<Point> explosionBuffer;
     private static ArrayList<Float> explosionPowerBuffer;
 
-    private static Sound music;
 
     public static void explode(Point center, float power) {
         Explosion e=new Explosion(center, power/8);
         addEffect(e);
+
+        SoundBase.playExplosion();
 
         explosionBuffer.add(center);
         explosionPowerBuffer.add(power);
@@ -136,18 +138,18 @@ public class World {
             Posteffect p =effects.get(i);
             p.update(deltaTime);
             if (p.noNeedMore())
-            effects.remove(i);
+                effects.remove(i);
         }
 
         if (removeBuffer.size()!=0) {
-        for (int m: removeBuffer) {
-            for (int i=0; i<models.size(); i++) {
-                if (m==models.get(i).getNumber()) {
-                    models.remove(i);
-                    break;
+            for (int m: removeBuffer) {
+                for (int i=0; i<models.size(); i++) {
+                    if (m==models.get(i).getNumber()) {
+                        models.remove(i);
+                        break;
+                    }
                 }
             }
-        }
             removeBuffer.clear();
         }
 
@@ -199,11 +201,7 @@ public class World {
 
     public static void init() {
 
-        music = new Sound("ambience02.wav");
-        music.setIsLooped(true);
-        music.setVolume(0.3f);
-
-        music.play();
+        SoundBase.playMusic();
 
         effects=new ArrayList<Posteffect>();
 
@@ -245,12 +243,6 @@ public class World {
 
         World.addModel(m3);
 
-    }
-
-
-    public static void destroy()
-    {
-        music.dispose();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.company.Models.Engine;
 
+import com.company.Audio.SoundBase;
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Physic.PhysicModel;
@@ -22,10 +23,15 @@ public class EnginePhysicModel extends PhysicModel {
         isPressed = false;
         if (activity>0)
         useForce(body.getCentre(), new Point(Math.cos(body.getAngle()), Math.sin(body.getAngle())).multiply(power*activity));
+
+        timer--;
     }
 
+    private int timer=0;
     public void doSpecialActionA() {
         isPressed = true;
+
+        SoundBase.playEngine();
     }
 
     public EnginePhysicModel(GeometricModel body, Point[] connetionPoints, float mass) {

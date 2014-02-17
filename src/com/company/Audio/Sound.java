@@ -1,18 +1,9 @@
 package com.company.Audio;
 
-import com.company.BasicWindow;
-import com.company.World;
 import org.lwjgl.openal.AL10;
 import org.lwjgl.util.WaveData;
-
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-/**
- * Created by peter on 17.02.14.
- */
 public class Sound {
     private int buffer;
     private int source;

@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.Audio.SoundBase;
 import com.company.Graphic.Background;
 import com.company.Graphic.Camera;
 import com.company.Graphic.GUI;
@@ -43,6 +44,7 @@ public class Window extends BasicWindow {
     public Window() {
         super(1200, 700, 10000, "Sample");
         gameState = GameState.MENU;
+        SoundBase.init();
         GUI.init();
         startWorking();
     }
@@ -89,10 +91,4 @@ public class Window extends BasicWindow {
         }
     }
 
-    @Override
-    protected void destroy()
-    {
-        if (isInited)
-            World.destroy();
-    }
 }
