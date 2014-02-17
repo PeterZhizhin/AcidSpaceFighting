@@ -11,7 +11,7 @@ public class BulletGraphicModel extends GraphicModel {
     private Tale t;
 
     public void drawBackgroundLayer() {
-        t.addPoint(shape.getCentre(), shape.getMaxLength()/2);
+        t.addPoint(shape.getCentre(), shape.getMaxLength());
         t.draw();
     }
 
@@ -21,7 +21,7 @@ public class BulletGraphicModel extends GraphicModel {
 
     public BulletGraphicModel(GeometricModel body) {
         super(body);
-        t=new Tale(new Color(1f, 1f, 0.6f), new Color(1f, 1f, 0.6f, 0f), 0, 20, 3, 0, false);
+        t=new Tale(new Color(1f, 1f, 0f), new Color(1f, 0f, 0f), 0, 20, 5, 4, true);
     }
 
 }

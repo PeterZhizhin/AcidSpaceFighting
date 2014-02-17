@@ -31,6 +31,7 @@ public class GunPhysicModel extends PhysicModel {
 
             useForce(getCentre(), force.multiply(-1));
             activity=timeLimit;
+            SoundBase.playGun();
         }
     }
 

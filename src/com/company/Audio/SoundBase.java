@@ -6,6 +6,7 @@ public class SoundBase {
     private static Sound []engine;
     private static Sound explosion;
     private static Sound connect;
+    private static Sound gun;
 
     private static int num=0;
     public static void playEngine() {
@@ -16,6 +17,10 @@ public class SoundBase {
 
     public static void playExplosion() {
         explosion.play();
+    }
+
+    public static void playGun() {
+        gun.play();
     }
 
     public static void playConnect() {
@@ -44,6 +49,10 @@ public class SoundBase {
         explosion.setIsLooped(false);
         explosion.setVolume(0.3f);
 
+        gun = new Sound("xPlosion.wav");
+        gun.setIsLooped(false);
+        gun.setVolume(0.2f);
+
         connect = new Sound("connect.wav");
         connect.setIsLooped(false);
         connect.setVolume(0.3f);
@@ -53,6 +62,7 @@ public class SoundBase {
         music.dispose();
         connect.dispose();
         explosion.dispose();
+        gun.dispose();
         for (Sound anEngine : engine) anEngine.dispose();
     }
 
