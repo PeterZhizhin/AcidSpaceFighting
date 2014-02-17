@@ -12,7 +12,6 @@ public class BulletPhysicModel extends PhysicModel {
 
     public void update(float time) {
         health-= time*0.1f;
-        super.update(time);
     }
 
     public void useForce(Point posOfForce, Point force) {

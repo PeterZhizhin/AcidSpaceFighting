@@ -21,7 +21,7 @@ public class GraphicModel {
     }
 
     public void drawHealth() {
-        int hp=Math.round(body.getHealth()*4)+8;
+        int hp=Math.round(body.getHealth()*4)+7;
         TextureDrawer.drawQuad(shape.getPoint(0), shape.getPoint(1), shape.getPoint(2), shape.getPoint(3), hp);
     }
 

@@ -8,7 +8,6 @@ import com.company.Graphic.Posteffect;
 import com.company.Models.Base.BaseModel;
 import com.company.Models.Dynamite.DynamiteModel;
 import com.company.Models.Engine.EngineModel;
-import com.company.Models.Gun.GunModel;
 import com.company.Physic.ComplexPhysicModel;
 import org.lwjgl.input.Keyboard;
 
@@ -22,19 +21,15 @@ public class World {
     private static ArrayList<Model> models;
     private static ArrayList<Posteffect> effects;
     private static ArrayList<Integer> removeBuffer;
+    private static ArrayList<Point> explosionBuffer;
+    private static ArrayList<Float> explosionPowerBuffer;
 
     public static void explode(Point center, float power) {
         Explosion e=new Explosion(center, power/8);
         addEffect(e);
 
-
-        /*for (Model m: models) {
-             Point force=m.getCenter().negate().add(center);
-             float l=force.length();
-             force=force.setLength(1);
-             force=force.multiply(power*power*power*power/l);
-             m.useForce(m.getCenter(), force);
-        } */
+        explosionBuffer.add(center);
+        explosionPowerBuffer.add(power);
     }
 
     public static Model getModel(int num) {
@@ -145,6 +140,19 @@ public class World {
         }
             removeBuffer.clear();
         }
+
+
+        for (Model m: models)
+            while (explosionBuffer.size()>0) {
+                Point force=m.getCenter().negate().add(explosionBuffer.get(0)).negate();
+                float l=force.length();
+                force=force.setLength(1);
+                float power=explosionPowerBuffer.get(0);
+                force=force.multiply(power*power*power*power/l);
+                m.useForce(m.getCenter(), force);
+                explosionBuffer.remove(0);
+                explosionPowerBuffer.remove(0);
+            }
     }
 
     public static Point getNearestPhysicModel(Point p) {
@@ -181,6 +189,9 @@ public class World {
         removeBuffer=new ArrayList<Integer>();
         models = new ArrayList<Model>();
         addModelBuffer = new LinkedList<Model>();
+
+        explosionBuffer=new ArrayList<Point>();
+        explosionPowerBuffer=new ArrayList<Float>();
 
         Model m = new EngineModel(0, 0, 250f, 1.57f);
         rocketPhys = m;

@@ -8,7 +8,6 @@ import com.company.Model;
 import com.company.World;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class ComplexPhysicModel extends PhysicModel {

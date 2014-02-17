@@ -4,7 +4,6 @@ import com.company.BasicWindow;
 import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Geometry.Segment;
-import com.company.World;
 
 import java.util.LinkedList;
 
@@ -30,7 +29,7 @@ public class PhysicModel {
     }
     public void deleteFromWorld()
     {
-        World.removeModel(number);
+        //TODO: добавить в мир удаление и удалить здесь эту модель
     }
 
     public void setNumber(int num) {

@@ -1,5 +1,6 @@
 package com.company.Graphic;
 
+import com.company.Graphic.Controls.Button;
 import com.company.Graphic.Controls.Control;
 import com.company.Graphic.Controls.FontDrawer;
 import com.company.Graphic.Controls.Label;
@@ -8,6 +9,7 @@ import org.lwjgl.opengl.Display;
 
 import java.util.ArrayList;
 
+import static com.company.BasicWindow.exit;
 import static org.lwjgl.opengl.GL11.*;
 
 public class GUI {
@@ -20,8 +22,17 @@ public class GUI {
     public static void init() {
         FontDrawer.init();
         controls = new ArrayList<Control>();
-        //controls.add(new Label(20, 20, "It is text label which is control, read it.", true));
-        //controls.add(new Label(20, 50, "It is small text label which is control, read it.", false));
+        controls.add(new Label(20, 20, "It is text label which is control, read it.", true));
+        controls.add(new Label(20, 50, "It is small text label which is control, read it.", false));
+        Button c =new Button(20, 80, 90, 25, "GeyButton");
+        c.setEvent(new Runnable() {
+            @Override
+            public void run() {
+                System.err.println("DO NOT TOUCH GEY-BUTTON!");
+                exit();
+            }
+        });
+        controls.add(c);
     }
 
     public static void update() {
