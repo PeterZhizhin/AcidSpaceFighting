@@ -1,9 +1,12 @@
 package com.company.Graphic;
 
+import com.company.GameState;
 import com.company.Graphic.Controls.Button;
 import com.company.Graphic.Controls.Control;
 import com.company.Graphic.Controls.FontDrawer;
 import com.company.Graphic.Controls.Label;
+import com.company.Window;
+import com.company.World;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
@@ -22,17 +25,22 @@ public class GUI {
     public static void init() {
         FontDrawer.init();
         controls = new ArrayList<Control>();
-        controls.add(new Label(20, 20, "It is text label which is control, read it.", true));
-        controls.add(new Label(20, 50, "It is small text label which is control, read it.", false));
-        Button c =new Button(20, 80, 90, 25, "GeyButton");
-        c.setEvent(new Runnable() {
+        Button startButton = new Button(10, 50, 100, 20, "Start Game");
+        startButton.setEvent(new Runnable() {
             @Override
             public void run() {
-                System.err.println("DO NOT TOUCH GEY-BUTTON!");
-                exit();
+                Window.initWorld();
             }
         });
-        controls.add(c);
+        Button resumeButton = new Button(10, 80, 100, 20, "Resume Game");
+        resumeButton.setEvent(new Runnable() {
+            @Override
+            public void run() {
+                Window.resumeGame();
+            }
+        });
+        controls.add(startButton);
+        controls.add(resumeButton);
     }
 
     public static void update() {

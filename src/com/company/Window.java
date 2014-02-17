@@ -14,34 +14,85 @@ import org.lwjgl.opengl.Display;
  */
 public class Window extends BasicWindow {
 
-    public Window() {
-        super(1200, 700, 10000, "Sample");
+    public static GameState gameState;
+    private static boolean isInited = false;
+
+
+
+    public static void initWorld()
+    {
         World.init();
         Camera.init();
+        isInited = true;
+        gameState = GameState.GAME;
+    }
+
+    public static void resumeGame()
+    {
+        if (!isInited)
+            initWorld();
+        else
+            gameState = GameState.GAME;
+    }
+
+    public static void pauseGame()
+    {
+        gameState = GameState.MENU;
+    }
+
+    public Window() {
+        super(1200, 700, 10000, "Sample");
+        gameState = GameState.MENU;
         GUI.init();
         startWorking();
     }
 
     public void setTitle(String s) {
-        super.setTitle(s + " " +  World.getMessage());
+        String addition = "";
+        switch (gameState)
+        {
+            case GAME:
+                addition = World.getMessage();
+                break;
+            case MENU:
+                addition = "Acid Space Fighting";
+                break;
+        }
+        super.setTitle(s + " " + addition);
     }
 
     @Override
     protected void update(int deltaTime) {
-        World.update(deltaTime / 1000f);
-        GUI.update();
+        switch (gameState)
+        {
+            case MENU:
+                GUI.update();
+                break;
+            case GAME:
+                World.update(deltaTime / 1000f);
+                break;
+        }
+
     }
 
     @Override
     protected void draw() {
-        Background.draw();
-        World.draw();
-        GUI.draw();
+        switch (gameState)
+        {
+            case MENU:
+                GUI.draw();
+                break;
+            case GAME:
+                Background.draw();
+                World.draw();
+                break;
+        }
     }
 
     @Override
     protected void destroy()
     {
-        World.destroy();
+        if (isInited)
+            World.destroy();
     }
 }

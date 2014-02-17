@@ -97,6 +97,9 @@ public class World {
             boom.doSpecialActionA();
         }
 
+        if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
+            Window.pauseGame();
+
         boolean wasIntersection = true;
         for (int n=0; wasIntersection & n <= 5; n++) {
             n++;
