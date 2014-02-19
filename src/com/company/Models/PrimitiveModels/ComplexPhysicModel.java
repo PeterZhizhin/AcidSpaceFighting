@@ -1,9 +1,6 @@
-package com.company.Physic;
+package com.company.Models.PrimitiveModels;
 
-import com.company.ComplexModel;
 import com.company.Geometry.Point;
-import com.company.Graphic.ComplexGraphicModel;
-import com.company.Graphic.GraphicModel;
 import com.company.Model;
 import com.company.World;
 
@@ -74,6 +71,7 @@ public class ComplexPhysicModel extends PhysicModel {
             if (bodies.get(i).getHealth()<=0)
             {
                 bodies.remove(i);
+                cm.graModel.get(i).destroy();
                 cm.graModel.remove(i);
                 wasDeleted = true;
             }
@@ -92,7 +90,7 @@ public class ComplexPhysicModel extends PhysicModel {
                         for(int j=0; j<bodiesLists[i].getSize(); j++)
                             graphicModels.add(cm.graModel.get(bodies.indexOf(bodiesLists[i].get(j))));
                         ComplexPhysicModel physicModel = new ComplexPhysicModel(bodiesLists[i]);
-                        ComplexGraphicModel graphicModel = new ComplexGraphicModel(physicModel, graphicModels);
+                        ComplexGraphicModel graphicModel = new ComplexGraphicModel(graphicModels);
                         //Получаем вектор скорости центра масс новой системы относительно текущей системы
                         Point deltaSpeed = new Point(physicModel.getCentre());
                         deltaSpeed.move(massCentre.negate());

@@ -1,6 +1,6 @@
 package com.company.Models.Base;
 
-import com.company.Geometry.GeometricModel;
+import com.company.Models.PrimitiveModels.GeometricModel;
 import com.company.Geometry.Point;
 
 public class BaseGeometricModel extends GeometricModel {

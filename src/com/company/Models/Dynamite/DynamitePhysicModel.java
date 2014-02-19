@@ -1,9 +1,8 @@
 package com.company.Models.Dynamite;
 
-import com.company.Geometry.GeometricModel;
+import com.company.Models.PrimitiveModels.GeometricModel;
 import com.company.Geometry.Point;
-import com.company.Graphic.Effects.Explosion;
-import com.company.Physic.PhysicModel;
+import com.company.Models.PrimitiveModels.PhysicModel;
 import com.company.World;
 
 public class DynamitePhysicModel extends PhysicModel {

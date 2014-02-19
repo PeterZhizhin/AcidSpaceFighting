@@ -1,11 +1,11 @@
 package com.company.Models.Connector;
 
-import com.company.Geometry.GeometricModel;
+import com.company.Models.PrimitiveModels.GeometricModel;
 import com.company.Geometry.Point;
-import com.company.Graphic.GraphicModel;
+import com.company.Models.PrimitiveModels.GraphicModel;
 import com.company.Model;
 import com.company.Models.Base.BaseGeometricModel;
-import com.company.Physic.PhysicModel;
+import com.company.Models.PrimitiveModels.PhysicModel;
 
 public class ConnectorModel extends Model {
 

@@ -19,21 +19,11 @@ import static org.lwjgl.opengl.GL11.glOrtho;
  * Abstract class of main window. It counts FPS. It can drawTopLayer, update with methods of child class
  */
 public abstract class BasicWindow {
-    //Заголовок. Не содержит в себе упоминание о FPS
-    //Title. It does not include any information about FPS.
     private String title;
-
-    //Позволяет убить окно откуда угодно
     public boolean isWorking = true;
-
-    //Переменные для подсчёта FPS.
-    //Variables for FPS counting
     private long lastFPS = getWorkTime();
     private int FPS = 0;
     private int frameRate;
-
-    //Переменная, содержащая в себе время, когда был отрисован предыдущий кадр.
-    //Variable for time when last frame was drawn.
     private long lastFrame = getWorkTime();
 
     /**

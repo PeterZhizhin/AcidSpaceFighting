@@ -1,7 +1,7 @@
 package com.company.Models.Base;
 
-import com.company.Geometry.GeometricModel;
-import com.company.Graphic.GraphicModel;
+import com.company.Models.PrimitiveModels.GeometricModel;
+import com.company.Models.PrimitiveModels.GraphicModel;
 import com.company.Graphic.TextureDrawer;
 
 public class BaseGraphicModel extends GraphicModel {
@@ -14,4 +14,8 @@ public class BaseGraphicModel extends GraphicModel {
         super(body);
     }
 
+    @Override
+    public void destroy() {
+
+    }
 }

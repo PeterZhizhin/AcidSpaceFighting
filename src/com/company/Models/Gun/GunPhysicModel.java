@@ -1,16 +1,12 @@
 package com.company.Models.Gun;
 
-import com.company.Audio.Sound;
 import com.company.Audio.SoundBase;
-import com.company.Geometry.GeometricModel;
+import com.company.Models.PrimitiveModels.GeometricModel;
 import com.company.Geometry.Point;
-import com.company.Graphic.Effects.Explosion;
 import com.company.Model;
 import com.company.Models.Bullet.BulletModel;
-import com.company.Physic.PhysicModel;
+import com.company.Models.PrimitiveModels.PhysicModel;
 import com.company.World;
-
-import static com.company.World.addEffect;
 
 public class GunPhysicModel extends PhysicModel {
 

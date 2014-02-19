@@ -1,7 +1,6 @@
-package com.company.Physic;
+package com.company.Models.PrimitiveModels;
 
 import com.company.BasicWindow;
-import com.company.Geometry.GeometricModel;
 import com.company.Geometry.Point;
 import com.company.Geometry.Segment;
 

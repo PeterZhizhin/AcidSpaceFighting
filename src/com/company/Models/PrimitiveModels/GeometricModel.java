@@ -1,8 +1,13 @@
-package com.company.Geometry;
+package com.company.Models.PrimitiveModels;
 
+import com.company.Geometry.Matrix3fGeometry;
+import com.company.Geometry.Point;
+import com.company.Geometry.Segment;
 import org.lwjgl.util.vector.Matrix3f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
+
+//TODO: вычистить здесь всё
 
 import static com.company.Geometry.Point.getTriangleSquare;
 

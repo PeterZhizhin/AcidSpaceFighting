@@ -8,10 +8,6 @@ public class Point extends Vector2f {
     public static final float epsilon = 0.0001f;
     public static final Point empty=new Point(0, 0);
 
-    public static Point mixPoints(Point p1, Point p2, float mix) {
-        float mix2=1-mix;
-        return new Point(p1.x*mix+p2.x*mix2, p1.y*mix+p2.y*mix2);
-    }
 
     public static double getTriangleSquare(Point p1, Point p2, Point analRape) {
 

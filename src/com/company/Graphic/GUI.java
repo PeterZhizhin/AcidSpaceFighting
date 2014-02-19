@@ -1,18 +1,14 @@
 package com.company.Graphic;
 
-import com.company.GameState;
 import com.company.Graphic.Controls.Button;
 import com.company.Graphic.Controls.Control;
 import com.company.Graphic.Controls.FontDrawer;
-import com.company.Graphic.Controls.Label;
 import com.company.Window;
-import com.company.World;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
 import java.util.ArrayList;
 
-import static com.company.BasicWindow.exit;
 import static org.lwjgl.opengl.GL11.*;
 
 public class GUI {
@@ -40,22 +36,6 @@ public class GUI {
 
             }
         });
-        Button initAsteroids = new Button(10,110,  100, 20, "Asteroids");
-        initAsteroids.setEvent(new Runnable() {
-            @Override
-            public void run() {
-                Window.initAsteroids();
-            }
-        });
-        Button initOneShip = new Button(10, 140, 100, 20, "One Ship");
-        initOneShip.setEvent(new Runnable() {
-            @Override
-            public void run() {
-                Window.initOneShip();
-            }
-        });
-        controls.add(initOneShip);
-        controls.add(initAsteroids);
         controls.add(startButton);
         controls.add(resumeButton);
     }

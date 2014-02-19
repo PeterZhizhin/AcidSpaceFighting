@@ -3,12 +3,10 @@ package com.company.Graphic.Effects;
 import com.company.Geometry.Point;
 import com.company.Geometry.Segment;
 import com.company.Graphic.Controls.Color;
-import com.company.Graphic.Posteffect;
-import com.company.Graphic.Tale;
 
 import java.util.Random;
 
-public class Explosion implements Posteffect {
+public class Explosion implements Effect {
 
     private float radius;
     private float currentRadius;
@@ -50,6 +48,12 @@ public class Explosion implements Posteffect {
         float delta=(currentRadius*3+radius)/4-currentRadius;
         currentRadius+=delta*10*deltaTime;
 
+    }
+
+    public void destroy() {
+        for (Tale t: tales) {
+            t.destroy();
+        }
     }
 
     @Override

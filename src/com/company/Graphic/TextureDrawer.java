@@ -53,7 +53,6 @@ public class TextureDrawer {
     }
 
     public static void drawQuad(Point p1, Point p2, Point p3, Point p4) {
-
         glTexCoord2f(0, 0);
         Camera.translatePoint(p1);
         glTexCoord2f(1f, 0);
@@ -98,7 +97,7 @@ public class TextureDrawer {
 
     private static int load (String title) {
         try {
-            InputStream input = TextureDrawer.class.getResourceAsStream(title);
+            InputStream input = TextureDrawer.class.getResourceAsStream("Textures/"+title);
             PNGDecoder dec = new PNGDecoder(input);
             int width = dec.getWidth();
             int height = dec.getHeight();

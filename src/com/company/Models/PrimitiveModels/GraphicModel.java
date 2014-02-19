@@ -1,9 +1,8 @@
-package com.company.Graphic;
+package com.company.Models.PrimitiveModels;
 
-import com.company.Geometry.GeometricModel;
-import com.company.Physic.PhysicModel;
+import com.company.Graphic.TextureDrawer;
 
-public class GraphicModel {
+public abstract class GraphicModel implements Destroyable{
 
     protected GeometricModel shape;
     protected PhysicModel body;

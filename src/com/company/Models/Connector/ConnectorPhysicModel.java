@@ -1,9 +1,8 @@
 package com.company.Models.Connector;
 
-import com.company.Geometry.GeometricModel;
+import com.company.Models.PrimitiveModels.GeometricModel;
 import com.company.Geometry.Point;
-import com.company.Physic.PhysicModel;
-import com.company.World;
+import com.company.Models.PrimitiveModels.PhysicModel;
 
 public class ConnectorPhysicModel extends PhysicModel {
 

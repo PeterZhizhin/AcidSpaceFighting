@@ -1,9 +1,8 @@
 package com.company.Models.Bullet;
 
-import com.company.Geometry.GeometricModel;
+import com.company.Models.PrimitiveModels.GeometricModel;
 import com.company.Geometry.Point;
-import com.company.Graphic.Effects.Explosion;
-import com.company.Physic.PhysicModel;
+import com.company.Models.PrimitiveModels.PhysicModel;
 import com.company.World;
 
 public class BulletPhysicModel extends PhysicModel {

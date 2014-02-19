@@ -1,10 +1,7 @@
 package com.company.Models.Asteroid;
 
-import com.company.Geometry.GeometricModel;
+import com.company.Models.PrimitiveModels.GeometricModel;
 import com.company.Geometry.Point;
-import com.company.Geometry.Segment;
-
-import static com.company.Geometry.Point.getAngle;
 
 public class AsteroidGeometricModel extends GeometricModel {
     private static final double PI8 = Math.PI / 8;

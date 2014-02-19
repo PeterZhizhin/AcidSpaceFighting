@@ -17,23 +17,6 @@ public class Window extends BasicWindow {
     private static GameState gameState;
     private static boolean isInited = false;
 
-
-    public static void initAsteroids()
-    {
-        World.initAsteroids();
-        Camera.init();
-        isInited = true;
-        gameState = GameState.GAME;
-    }
-
-    public static void initOneShip()
-    {
-        World.initOneShip();
-        Camera.init();
-        isInited = true;
-        gameState = GameState.GAME;
-    }
-
     public static void initWorld()
     {
         World.init();
@@ -88,7 +71,6 @@ public class Window extends BasicWindow {
                 World.update(deltaTime / 1000f);
                 break;
         }
-
     }
 
     @Override

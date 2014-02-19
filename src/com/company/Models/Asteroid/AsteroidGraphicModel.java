@@ -1,12 +1,11 @@
 package com.company.Models.Asteroid;
 
-import com.company.Geometry.GeometricModel;
-import com.company.Geometry.Point;
+import com.company.Models.PrimitiveModels.GeometricModel;
 import com.company.Graphic.Camera;
 import com.company.Graphic.Controls.Color;
-import com.company.Graphic.GraphicModel;
-import com.company.Graphic.Tale;
-import com.company.Graphic.TextureDrawer;
+import com.company.Models.PrimitiveModels.GraphicModel;
+import com.company.Graphic.Effects.Tale;
+import com.company.World;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.glEnd;
@@ -16,8 +15,7 @@ public class AsteroidGraphicModel extends GraphicModel {
     private Tale t;
 
     public void drawBackgroundLayer() {
-        t.addPoint(shape.getCentre(), shape.getMaxLength()/2);
-        t.draw();
+        t.addPoint(shape.getCentre(), shape.getMaxLength() / 2);
     }
 
     public void drawTopLayer() {
@@ -32,21 +30,15 @@ public class AsteroidGraphicModel extends GraphicModel {
         for (int i=0; i<shape.getPointCount(); i++)
         {
 
-            if (angle<=Math.PI/4)
-                glTexCoord2f(1, 0.25f-(float) (0.25f*Math.tan(angle)));
-            else
-            if (angle<=3*Math.PI/4)
-                glTexCoord2f(1f-(float) (0.25f*Math.tan(angle)), 0f);
-            else
-            if (angle<=5*Math.PI/4)
-                glTexCoord2f(0.75f, (float) (0.25f*Math.tan(angle)));
-            else
-            if (angle<=7*Math.PI/4)
-                glTexCoord2f(0.75f+(float) (0.25f*Math.tan(angle)), 0.25f);
+            glTexCoord2d(0.875f+0.125*Math.cos(angle), 0.125f+0.125*Math.sin(angle));
 
             Camera.translatePoint(shape.getPoint(i));
             angle+=dAngle;
         }
+
+        glTexCoord2d(0.875f+0.125*Math.cos(angle), 0.125f+0.125*Math.sin(angle));
+
+        Camera.translatePoint(shape.getPoint(0));
         glEnd();
         glBegin(GL_QUADS);
     }
@@ -54,6 +46,10 @@ public class AsteroidGraphicModel extends GraphicModel {
     public AsteroidGraphicModel(GeometricModel body) {
         super(body);
         t=new Tale(new Color(1f, 1f, 0.6f), new Color(1f, 1f, 0.6f, 0f), 0, 20, 3, 8, false);
+        World.addEffect(t);
     }
 
+    public void destroy() {
+        t.destroy();
+    }
 }

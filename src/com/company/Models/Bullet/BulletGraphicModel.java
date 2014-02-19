@@ -1,10 +1,11 @@
 package com.company.Models.Bullet;
 
-import com.company.Geometry.GeometricModel;
+import com.company.Models.PrimitiveModels.GeometricModel;
 import com.company.Graphic.Controls.Color;
-import com.company.Graphic.GraphicModel;
+import com.company.Models.PrimitiveModels.GraphicModel;
 import com.company.Graphic.TextureDrawer;
-import com.company.Graphic.Tale;
+import com.company.Graphic.Effects.Tale;
+import com.company.World;
 
 public class BulletGraphicModel extends GraphicModel {
 
@@ -12,7 +13,6 @@ public class BulletGraphicModel extends GraphicModel {
 
     public void drawBackgroundLayer() {
         t.addPoint(shape.getCentre(), shape.getMaxLength());
-        t.draw();
     }
 
     public void drawTopLayer() {
@@ -22,6 +22,10 @@ public class BulletGraphicModel extends GraphicModel {
     public BulletGraphicModel(GeometricModel body) {
         super(body);
         t=new Tale(new Color(1f, 1f, 0f), new Color(1f, 0f, 0f), 0, 20, 5, 4, true);
+        World.addEffect(t);
     }
 
+    public void destroy() {
+        t.destroy();
+    }
 }

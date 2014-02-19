@@ -1,9 +1,11 @@
-package com.company.Graphic;
+package com.company.Graphic.Effects;
 
-public interface Posteffect {
+public interface Effect {
 
     public void draw();
     public void update(float deltaTime);
     public boolean noNeedMore();
+    public void destroy();
+
 
 }

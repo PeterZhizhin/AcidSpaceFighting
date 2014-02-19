@@ -35,14 +35,6 @@ public class Camera {
         return "Coordinates: " + xPos + " ; " + yPos + " Scale: " + scale;
     }
 
-    public static void translatePoint(float x, float y) {
-        GL11.glVertex2f((x - xPos) / scale, (y - yPos) / scale);
-    }
-
-    public static Point getTranslatedPoint(Point p) {
-        return new Point((p.getX() - xPos) / scale, (p.getY() - yPos) / scale);
-    }
-
     public static Point getSourcePoint(Point p) {
         return new Point(p.getX() *scale + xPos, p.getY() *scale + yPos);
     }
@@ -55,6 +47,7 @@ public class Camera {
         GL11.glVertex2f((p.getX() - xPos) / scale, (p.getY() - yPos) / scale);
     }
 
+    //return point in the world by point on the screen
     public static Point repairPoint(float x, float y) {
         return new Point(x * scale + xPos, y * scale + yPos);
     }

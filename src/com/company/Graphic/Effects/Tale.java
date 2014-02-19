@@ -1,8 +1,8 @@
-package com.company.Graphic;
+package com.company.Graphic.Effects;
 
 import com.company.Geometry.Point;
 import com.company.Graphic.Controls.Color;
-import com.company.Graphic.Effects.Smoke;
+import com.company.Graphic.TextureDrawer;
 import com.company.World;
 
 import java.util.LinkedList;
@@ -10,7 +10,7 @@ import java.util.Random;
 
 import static org.lwjgl.opengl.GL11.glColor3f;
 
-public class Tale {
+public class Tale implements Effect {
 
     private Color[] gradations;
     private float deltaPosition;
@@ -21,7 +21,9 @@ public class Tale {
     private int interval;
     private int timer;
     private boolean useSmoke;
+    private Smoke smoke;
     private int smokeCoef;
+    private boolean noNeedMore=false;
 
     public void draw() {
 
@@ -46,6 +48,13 @@ public class Tale {
         glColor3f(1f, 1f, 1f);
     }
 
+    public void update(float deltaTime) {
+    }
+
+    public boolean noNeedMore() {
+        return noNeedMore;// && smoke.noNeedMore();
+    }
+
     public void addPoint(Point coordinate, float width) {
 
         timer++;
@@ -55,8 +64,7 @@ public class Tale {
 
             timer=0;
             if (useSmoke) {
-            Smoke s=new Smoke(coordinate.x, coordinate.y, width*smokeCoef);
-            World.addEffect(s);
+                smoke.addPoint(coordinate.x, coordinate.y, width * smokeCoef);
 
                 width*=4;
                 widths.add(width);
@@ -72,6 +80,11 @@ public class Tale {
         }
     }
 
+    public void destroy() {
+        if (useSmoke) smoke.destroy();
+        noNeedMore=true;
+    }
+
     public Tale(Color start, Color end, float deltaPos, int size, int interv, int smokeCoef, boolean useSmoke) {
         interval=interv;
         this.size=size;
@@ -85,6 +98,10 @@ public class Tale {
         }
         deltaPosition=deltaPos;
         this.useSmoke=useSmoke;
+        if (useSmoke) {
+            smoke =new Smoke(size);
+            World.addEffect(smoke);
+        }
         this.smokeCoef=smokeCoef;
     }
 

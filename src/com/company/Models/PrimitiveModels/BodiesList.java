@@ -1,11 +1,8 @@
-package com.company.Physic;
+package com.company.Models.PrimitiveModels;
 
 import com.company.Geometry.Point;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Objects;
 
 /**
  * Массив тел. Имеет доступ к себе в качестве иттератора.

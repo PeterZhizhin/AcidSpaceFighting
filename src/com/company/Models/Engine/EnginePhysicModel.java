@@ -1,9 +1,9 @@
 package com.company.Models.Engine;
 
 import com.company.Audio.SoundBase;
-import com.company.Geometry.GeometricModel;
+import com.company.Models.PrimitiveModels.GeometricModel;
 import com.company.Geometry.Point;
-import com.company.Physic.PhysicModel;
+import com.company.Models.PrimitiveModels.PhysicModel;
 
 public class EnginePhysicModel extends PhysicModel {
 

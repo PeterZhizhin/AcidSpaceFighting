@@ -1,21 +1,25 @@
 package com.company;
 
 import com.company.Geometry.Point;
-import com.company.Graphic.GraphicModel;
-import com.company.Physic.PhysicModel;
+import com.company.Models.PrimitiveModels.GraphicModel;
+import com.company.Models.PrimitiveModels.PhysicModel;
 
-public class Model {
+public class Model{
 
     private GraphicModel graphic;
     private PhysicModel physic;
     private static int lastNumber=0;
     private int number;
 
-    protected GraphicModel getGraphicModel() {
+    public void destroy() {
+        graphic.destroy();
+    }
+
+    public GraphicModel getGraphicModel() {
         return graphic;
     }
 
-    protected PhysicModel getPhysicModel() {
+    public PhysicModel getPhysicModel() {
         return physic;
     }
 

@@ -1,7 +1,7 @@
 package com.company.Models.Dynamite;
 
-import com.company.Geometry.GeometricModel;
-import com.company.Graphic.GraphicModel;
+import com.company.Models.PrimitiveModels.GeometricModel;
+import com.company.Models.PrimitiveModels.GraphicModel;
 import com.company.Graphic.TextureDrawer;
 
 public class DynamiteGraphicModel extends GraphicModel {
@@ -14,4 +14,8 @@ public class DynamiteGraphicModel extends GraphicModel {
         super(body);
     }
 
+    @Override
+    public void destroy() {
+
+    }
 }
