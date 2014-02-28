@@ -30,6 +30,10 @@ public class BodiesList implements Iterable<PhysicModel> {
     private int[][] adjacencyMatrix;
     //Количество тел
     private int length;
+    public int getLength()
+    {
+        return length;
+    }
 
     //Количество компонент меняется при вызове recalculateMatrix()
     private int components;

@@ -2,8 +2,26 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class ComplexGraphicModel extends GraphicModel {
+
+    private LinkedList<Integer> deleteBuffer = new LinkedList<Integer>();
+    public void addToDeleteBuffer(int number)
+    {
+        deleteBuffer.add(number);
+    }
+    public void removeFromDeleteBuffer()
+    {
+        //TODO: удалить всё здесь из списка моделей. Номера хранятся в deleteBuffer
+
+        deleteBuffer.clear();
+    }
+
+    public int getLength()
+    {
+        return grModels.size();
+    }
 
     public void destroy() {
        for (GraphicModel g: grModels) {

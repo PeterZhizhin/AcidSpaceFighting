@@ -122,7 +122,8 @@ public class ComplexPhysicModel extends PhysicModel {
                 //Удаляем все графические модели из комплексной модели (те, что отпали)
                 for (int i=1; i<bodiesLists.length; i++)
                     for (PhysicModel body : bodiesLists[i])
-                        cm.graModel.remove(bodies.indexOf(body));
+                        cm.graModel.addToDeleteBuffer(bodies.indexOf(body));
+                cm.graModel.removeFromDeleteBuffer();
                 this.bodies = bodiesLists[0];
             }
             пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
@@ -180,12 +181,19 @@ public class ComplexPhysicModel extends PhysicModel {
     @Override
     public boolean crossThem(PhysicModel m, float deltaTime) {
         boolean result = false;
+        boolean needDestroy = m.getIsComplex();
         LinkedList<PhysicModel> anotherModelBodies = m.getBodies();
         for (PhysicModel body : bodies)
             for (PhysicModel anotherModelBody : anotherModelBodies)
             {
                 boolean tempResult = body.crossThem(anotherModelBody, deltaTime);
                 result = result | tempResult;
+                //Если мы сталкиваемся с комплексной моделью - уничтожаем столкнувшиеся части
+                if (needDestroy & tempResult)
+                {
+                    anotherModelBody.health = 0;
+                    body.health = 0;
+                }
             }
         return result;
     }
