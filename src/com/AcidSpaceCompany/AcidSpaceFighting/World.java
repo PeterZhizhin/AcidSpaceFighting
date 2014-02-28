@@ -2,6 +2,7 @@ package com.AcidSpaceCompany.AcidSpaceFighting;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Audio.SoundBase;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Background;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Camera;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Effect;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Explosion;
@@ -12,25 +13,43 @@ import org.lwjgl.input.Mouse;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+
 public class World {
 
     private static ArrayList<Model> models;
-    private static ArrayList<Effect> effects;
+    private static LinkedList<Effect> effects;
 
     public static void explode(Point center, float power) {
-        Explosion e=new Explosion(center, power/8);
+        Explosion e=new Explosion(center, power/5);
         addEffect(e);
-
         SoundBase.playExplosion();
+
+        sortEffects();
 
         explosionBuffer.add(center);
         explosionPowerBuffer.add(power);
     }
 
     private static ArrayList<Integer> removeBuffer;
+
     public static void removeModel(int num) {
         removeBuffer.add(num);
         models.get(num).destroy();
+    }
+
+    private static void sortEffects() {
+        for (int i=0; i<effects.size()-1; i++) {
+
+            int min=i;
+            for (int j=i+1; j<effects.size(); j++)
+                if (effects.get(j).getEfectType()<effects.get(min).getEfectType()) min=j;
+            if (min!=i) {
+                Effect e = effects.get(i);
+                effects.set(i, effects.get(min));
+                effects.set(min, e);
+            }
+
+        }
     }
 
     private static LinkedList<Model> addModelBuffer;
@@ -43,10 +62,16 @@ public class World {
     }
 
     public static String getMessage() {
-        return Camera.getMessage() + " Models: " + models.size();
+        return Camera.getMessage() + " Models: " + models.size()+" Effects: "+effects.size();
     }
 
     public static void draw() {
+        Background.draw();
+
+        for (Effect effect : effects) {
+            effect.draw();
+        }
+
         TextureDrawer.startDrawTextures();
         for (Model model : models) {
             model.drawBackgroundLayer();
@@ -56,15 +81,10 @@ public class World {
             model.drawTopLayer();
         }
 
-        for (Model model : models) {
-            model.drawHealth();
-        }
-
-        for (Effect effect : effects) {
-            effect.draw();
-        }
-        TextureDrawer.finishDraw();
     }
+
+    private static boolean lastStateButtonIsPressed;
+    private static int mouseDownX, mouseDownY;
 
     private static void updateCameraPosition() {
         Camera.reScale(Mouse.getDWheel());
@@ -74,10 +94,10 @@ public class World {
             //Получаем позицию камеры
             float x1 = player1.getX(); float y1 = player1.getY();
             float x2 = player2.getX(); float y2 = player2.getY();
-            Camera.setPosition((x1+x2)/2, (y1+y2)/2);
+            Camera.setPosition(x1, y1);
 
-        /*if (isPressed) {
-        boolean isPressed = Mouse.isButtonDown(0);
+        /*boolean isPressed = Mouse.isButtonDown(0);
+        if (isPressed) {
             int nowX = Mouse.getX();
             int nowY = Display.getHeight() - Mouse.getY();
             if (lastStateButtonIsPressed) {
@@ -109,6 +129,9 @@ public class World {
             if (Keyboard.isKeyDown(Keyboard.KEY_D))
                 player1.fireRight();
 
+         if (Keyboard.isKeyDown(Keyboard.KEY_S))
+                player1.explode();
+
             if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD8))
                 player2.throttle();
             if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD7))
@@ -119,6 +142,8 @@ public class World {
                 player2.fireLeft();
             if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD6))
                 player2.fireRight();
+
+
 
         if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
             Window.pauseGame();
@@ -191,8 +216,9 @@ public class World {
         for (int i=0; i<effects.size(); i++) {
             Effect p =effects.get(i);
             p.update(deltaTime);
-            if (p.noNeedMore())
+            if (p.noNeedMore()) {
                 effects.remove(i);
+            }
         }
     }
 
@@ -210,7 +236,7 @@ public class World {
     private static SpaceShip player2;
 
     public static void init() {
-        effects=new ArrayList<Effect>();
+        effects=new LinkedList<Effect>();
 
         removeBuffer=new ArrayList<Integer>();
         models = new ArrayList<Model>();

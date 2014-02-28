@@ -16,12 +16,12 @@ public class BulletGraphicModel extends GraphicModel {
     }
 
     public void drawTopLayer() {
-        TextureDrawer.drawQuad(shape.getPoint(0), shape.getPoint(1), shape.getPoint(3), shape.getPoint(4), 4);
+        TextureDrawer.drawBlock(shape.getPoint(0), shape.getPoint(2), shape.getPoint(4), shape.getPoint(6), 5, body.getHealth());
     }
 
     public BulletGraphicModel(GeometricModel body) {
         super(body);
-        t=new Tale(new Color(1f, 1f, 0f), new Color(1f, 0f, 0f), 0, 20, 5, 4, true);
+        t=new Tale(0, 20, 5, 4, true);
         World.addEffect(t);
     }
 

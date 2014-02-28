@@ -1,6 +1,7 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Explosion;
 import com.AcidSpaceCompany.AcidSpaceFighting.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
@@ -70,6 +71,7 @@ public class ComplexPhysicModel extends PhysicModel {
         for (int i=0; i<bodies.getSize(); i++)
             if (bodies.get(i).getHealth()<=0)
             {
+                World.explode(bodies.get(i).getCentre(), bodies.get(i).getMaxWidth());
                 bodies.remove(i);
                 cm.graModel.get(i).destroy();
                 cm.graModel.remove(i);

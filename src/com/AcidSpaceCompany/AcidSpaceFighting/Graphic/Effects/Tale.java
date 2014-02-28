@@ -2,21 +2,26 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Controls.Color;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.ShadersBase;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
+import org.lwjgl.opengl.GL11;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
-import static org.lwjgl.opengl.GL11.glColor3f;
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glEnd;
 
 public class Tale implements Effect {
 
-    private Color[] gradations;
     private float deltaPosition;
     private Random rnd=new Random();
     private LinkedList<Point> coordinates;
     private LinkedList<Float> widths;
+    private LinkedList<Float> widths01;
     private int size;
     private int interval;
     private int timer;
@@ -25,30 +30,42 @@ public class Tale implements Effect {
     private int smokeCoef;
     private boolean noNeedMore=false;
 
+    public int getEfectType() {
+        return 0;
+    }
+
+    private Point getPoint(int i) {
+        return coordinates.get(Math.min(coordinates.size() - 1, i));
+    }
+
     public void draw() {
 
+        TextureDrawer.startDrawFire();
         Point normal = Point.empty;
-        gradations[size-1].bind();
+        glBegin(GL_QUADS);
+        for (int i = 0; i < size-1; i++) {
 
-        for (int i = 0; i < size - 2; i++) {
+            Point p1=getPoint(i).add(normal);
+            Point p2=getPoint(i).add(normal.negate());
+
+            normal = Point.getBisection(getPoint(i),getPoint(i + 1),
+                    getPoint(i + 2)).multiply(widths.get(i));
 
 
-            Point p1=coordinates.get(i).add(normal);
-            Point p2=coordinates.get(i).add(normal.negate());
-
-            normal = Point.getBisection(coordinates.get(i), coordinates.get(i+1), coordinates.get(i+2));
-            normal = normal.multiply(widths.get(i)*i/size);
-            gradations[i].bind();
-
-            Point p3=coordinates.get(i+1).add(normal.negate());
-            Point p4=coordinates.get(i+1).add(normal);
-
-            TextureDrawer.drawQuad(p1, p2, p3, p4, 6);
-             }
-        glColor3f(1f, 1f, 1f);
+            Point p3=getPoint(i + 1).add(normal.negate());
+            Point p4=getPoint(i + 1).add(normal);
+            ShadersBase.setFloatValue(ShadersBase.fireStateID, widths01.get(i));
+            TextureDrawer.drawQuadWIdthoutBeginAndEnd(p2, p3, p4, p1);
+        }
+        glEnd();
     }
 
     public void update(float deltaTime) {
+        for (int i=0; i<widths.size(); i++)
+        {
+            widths.set(i, widths.get(i)/1.01f);
+            widths01.set(i, widths01.get(i)/1.01f);
+        }
     }
 
     public boolean noNeedMore() {
@@ -60,23 +77,25 @@ public class Tale implements Effect {
         timer++;
         if (timer>=interval) {
 
-        coordinates.add(coordinate.add(new Point((rnd.nextFloat()-0.5f), (rnd.nextFloat()-0.5f)).multiply(deltaPosition)));
+        coordinates.add(coordinate.add(new Point((rnd.nextFloat() - 0.5f), (rnd.nextFloat() - 0.5f)).multiply(deltaPosition)));
 
             timer=0;
-            if (useSmoke) {
+            if (useSmoke)
                 smoke.addPoint(coordinate.x, coordinate.y, width * smokeCoef);
 
-                width*=4;
-                widths.add(width);
-                if (coordinates.size()>size) {
-                    coordinates.remove(0);
-                    widths.remove(0);
-                }
+            width*=4;
+            widths.add(width);
+            widths01.add(1f);
+            if (coordinates.size()>size) {
+                coordinates.remove(0);
+                widths.remove(0);
+                widths01.remove(0);
             }
         }
         else {
-            coordinates.set(size-1, coordinate.add(new Point((rnd.nextFloat()-0.5f), (rnd.nextFloat()-0.5f)).multiply(deltaPosition)));
+            coordinates.set(size - 1, coordinate.add(new Point((rnd.nextFloat() - 0.5f), (rnd.nextFloat() - 0.5f)).multiply(deltaPosition)));
             widths.set(size-1, width);
+            widths01.set(size-1, 1f);
         }
     }
 
@@ -85,16 +104,16 @@ public class Tale implements Effect {
         noNeedMore=true;
     }
 
-    public Tale(Color start, Color end, float deltaPos, int size, int interv, int smokeCoef, boolean useSmoke) {
+    public Tale(float deltaPos, int size, int interv, int smokeCoef, boolean useSmoke) {
         interval=interv;
         this.size=size;
         coordinates=new LinkedList<Point>();
         widths=new LinkedList<Float>();
-        gradations=new Color[size];
+        widths01=new LinkedList<Float>();
         for (int i=0; i<size; i++) {
-            gradations[i]=new Color(start, end, 1f*i/size);
             coordinates.add(new Point(0, 0));
             widths.add(0f);
+            widths01.add(0f);
         }
         deltaPosition=deltaPos;
         this.useSmoke=useSmoke;

@@ -11,7 +11,6 @@ public class PhysicModel {
 
     private static final double G = 10f;//G is the gravitational constant
 
-
     protected GeometricModel body;
     protected float activity = 0f;
     protected float mass;
@@ -26,6 +25,11 @@ public class PhysicModel {
     public float getDamage(float force) {
         return force/4000000000f;
     }
+
+    public float getMaxWidth() {
+        return body.getMaxLength();
+    }
+
     public void deleteFromWorld()
     {
         //TODO: добавить в мир удаление и удалить здесь эту модель

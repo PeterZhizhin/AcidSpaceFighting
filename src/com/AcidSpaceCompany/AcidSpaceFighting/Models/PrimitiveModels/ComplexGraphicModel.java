@@ -30,10 +30,11 @@ public class ComplexGraphicModel extends GraphicModel {
 
     }
 
-    public void drawHealth() {
+    /*public void drawHealth() {
         for (GraphicModel g : grModels)
             g.drawHealth();
     }
+    */
 
     public void setBase(GraphicModel g) {
         grModels.clear();

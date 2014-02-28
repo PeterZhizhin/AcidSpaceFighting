@@ -8,6 +8,18 @@ public class Camera {
 
     private static float xPos, yPos, scale;
 
+    public static float getX(){
+           return xPos;
+    }
+
+    public static float getY(){
+            return yPos;
+    }
+
+    public static float getScale() {
+        return scale;
+    }
+
     public static void init() {
         xPos = 0;
         yPos = 0;

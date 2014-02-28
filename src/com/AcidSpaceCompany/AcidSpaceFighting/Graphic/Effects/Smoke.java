@@ -1,6 +1,7 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.ShadersBase;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -13,6 +14,9 @@ public class Smoke implements Effect {
     private int size;
     private boolean noMoreNeeded;
 
+    public int getEfectType() {
+        return 1;
+    }
 
     public Smoke(int size) {
         this.size=size;
@@ -30,6 +34,7 @@ public class Smoke implements Effect {
     }
 
     private int last;
+
     public void addPoint(float x, float y, float width) {
         radius[last]=width;
         currentRadius[last]=radius[last]/1000f;
@@ -41,15 +46,18 @@ public class Smoke implements Effect {
 
     @Override
     public void draw() {
+        TextureDrawer.startDrawSmoke();
+        glBegin(GL_QUADS);
         for (int i=0; i<size; i++) {
             if (currentRadius[i]>=0) {
-            glColor4f(1f, 1f, 1f, 1-currentRadius[i]/radius[i]);
             float l=currentRadius[i]*2/3;
-            TextureDrawer.drawQuad(new Point(x[i] - l, y[i]), new Point(x[i], y[i] - l),
-                    new Point(x[i] + l, y[i]), new Point(x[i], y[i] + l), 7);
-            glColor3f(1f, 1f, 1f);
+
+                ShadersBase.setFloatValue(ShadersBase.smokeStateID, 1f-currentRadius[i]/radius[i]);
+                TextureDrawer.drawQuadWIdthoutBeginAndEnd(new Point(x[i] - l, y[i]), new Point(x[i], y[i] - l),
+                new Point(x[i] + l, y[i]), new Point(x[i], y[i] + l));
             }
         }
+        glEnd();
     }
 
     private boolean getElementIsUsed(int i) {

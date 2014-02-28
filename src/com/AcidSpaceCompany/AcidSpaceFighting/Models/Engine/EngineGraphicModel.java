@@ -14,18 +14,18 @@ public class EngineGraphicModel extends GraphicModel {
 
     public void drawBackgroundLayer() {
         float activity = body.getActivity();
-         t.addPoint(shape.getCentre().add(new Point(Math.cos(shape.getAngle()), Math.sin(shape.getAngle())).multiply(shape.getMaxLength()* activity *2).negate()),
+        t.addPoint(shape.getCentre().add(new Point(Math.cos(shape.getAngle()), Math.sin(shape.getAngle())).multiply(shape.getMaxLength()* activity *2).negate()),
                  shape.getMaxLength()* activity /2);
-        t.draw();
     }
 
     public void drawTopLayer() {
-        TextureDrawer.drawQuad(shape.getPoint(0), shape.getPoint(1), shape.getPoint(2), shape.getPoint(3), 1);
+        TextureDrawer.drawBlock(shape.getPoint(0), shape.getPoint(1),
+                shape.getPoint(2), shape.getPoint(3), 1, body.getHealth());
     }
 
     public EngineGraphicModel(GeometricModel body) {
         super(body);
-        t=new Tale(new Color(1f, 1f, 0f), new Color(1f, 0f, 0f), 20, 20, 5, 16, true);
+        t=new Tale(20, 20, 5, 40, true);
         World.addEffect(t);
     }
 

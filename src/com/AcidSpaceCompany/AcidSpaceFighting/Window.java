@@ -1,9 +1,7 @@
 package com.AcidSpaceCompany.AcidSpaceFighting;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Audio.SoundBase;
-import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Background;
-import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Camera;
-import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.GUI;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.*;
 
 /**
  * User class which helps allows you to make update() drawTopLayer() cycle easily
@@ -39,10 +37,11 @@ public class Window extends BasicWindow {
     }
 
     public Window() {
-        super(1200, 700, 10000, "Sample");
+        super(1200, 700, 10000, "Window; ");
         gameState = GameState.MENU;
         SoundBase.init();
         GUI.init();
+        ShadersBase.init();
         startWorking();
     }
 
@@ -81,7 +80,6 @@ public class Window extends BasicWindow {
                 GUI.draw();
                 break;
             case GAME:
-                Background.draw();
                 World.draw();
                 break;
         }

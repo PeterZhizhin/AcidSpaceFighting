@@ -17,8 +17,9 @@ public class SpaceShip {
     private ArrayList<Model> gunsLeft = new ArrayList<Model>();
     private ArrayList<Model> gunsRight = new ArrayList<Model>();
 
-    private ComplexModel totalModel;
+    private ArrayList<Model> explosions = new ArrayList<Model>();
 
+    private ComplexModel totalModel;
 
     public float getX()
     {
@@ -53,6 +54,10 @@ public class SpaceShip {
     {
         for (Model m : gunsRight) m.doSpecialActionA();
     }
+    public void explode()
+    {
+        for (Model m : explosions) m.doSpecialActionA();
+    }
 
     public Model getBody()
     {
@@ -64,6 +69,7 @@ public class SpaceShip {
        float p2= -(float) (Math.PI/2);
 
         BaseModel base = new BaseModel(x, y, 1000);
+
         EngineModel bl=new EngineModel(-1000+x, y, 1000, p2);
         EngineModel br=new EngineModel(1000+x, y, 1000, p2);
         EngineModel bll=new EngineModel(-2000+x, y, 1000, p2);
@@ -72,6 +78,8 @@ public class SpaceShip {
         rocketRight.add(br); rocketRight.add(brr);
         ConnectorModel cb=new ConnectorModel(x, 1000+y, 1000);
         ConnectorModel cbb=new ConnectorModel(x, 2000+y, 1000);
+        explosions.add(cb);
+        explosions.add(cbb);
         EngineModel cbbb=new EngineModel(x, 3000+y, 1000, p2);
         EngineModel cbbbl=new EngineModel(-1000+x, 3000+y, 1000, p2);
         EngineModel cbbbr=new EngineModel(1000+x, 3000+y, 1000, p2);

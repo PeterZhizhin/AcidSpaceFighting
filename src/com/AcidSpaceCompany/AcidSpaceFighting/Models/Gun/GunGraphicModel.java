@@ -7,7 +7,8 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 public class GunGraphicModel extends GraphicModel {
 
     public void drawTopLayer() {
-        TextureDrawer.drawQuad(shape.getPoint(0), shape.getPoint(1), shape.getPoint(3), shape.getPoint(4), 5);
+        TextureDrawer.drawBlock(shape.getPoint(0), shape.getPoint(1),
+                shape.getPoint(2), shape.getPoint(3), 4, body.getHealth());
     }
 
     public GunGraphicModel(GeometricModel body) {

@@ -6,9 +6,12 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.*;
 
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.glOrtho;
@@ -62,7 +65,7 @@ public abstract class BasicWindow {
         //Если с момента последнего обновления FPS прошло больше 1 секунды, то надо обновить в заголовок этот FPS
         //If time since last FPS updates more than 1 sec then we update FPS info to title
         if (getWorkTime() - lastFPS > 1000) {
-            setTitle(title + ": " + FPS);
+            setTitle(title + " FPS: " + FPS);
             lastFPS += 1000;
             FPS = 0;
         }

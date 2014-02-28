@@ -1,19 +1,16 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Graphic;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
-import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Controls.Color;
-import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Controls.FontDrawer;
 import org.lwjgl.opengl.Display;
 
-import static com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer.drawQuad;
-import static com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer.finishDraw;
-import static com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer.startDrawNoise;
-import static org.lwjgl.opengl.GL11.*;
+import static com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer.*;
 
 public class Background {
 
     public static void draw() {
-        glEnable(GL_TEXTURE_2D);
+
+        ShadersBase.use(ShadersBase.background);
+
         TextureDrawer.drawBackground();
 
         float width=Display.getWidth();
@@ -46,25 +43,6 @@ public class Background {
         }
         finishDraw();
 
-        glEnable(GL_TEXTURE_2D);
-
-        FontDrawer.drawString(10, 10,
-                Camera.getSourcePoint(new Point(10, 10)).toString(),
-                new Color(1f, 1f, 1f), false);
-
-        FontDrawer.drawString(Display.getWidth()-150, Display.getHeight()-50,
-                Camera.getSourcePoint(new Point(Display.getWidth()-150, Display.getHeight()-50)).toString(),
-                new Color(1f, 1f, 1f), false);
-
-        FontDrawer.drawString(10, Display.getHeight()-50,
-                Camera.getSourcePoint(new Point(10, Display.getHeight()-50)).toString(),
-                new Color(1f, 1f, 1f), false);
-
-        FontDrawer.drawString(Display.getWidth()-150, 10,
-                Camera.getSourcePoint(new Point(Display.getWidth()-150, 10)).toString(),
-                new Color(1f, 1f, 1f), false);
-
-        glDisable(GL_TEXTURE_2D);
     }
 
 }
