@@ -66,6 +66,7 @@ public class World {
     }
 
     public static void draw() {
+        Camera.setPosition(player1.getPoint());
         Background.draw();
 
         for (Effect effect : effects) {
@@ -88,13 +89,6 @@ public class World {
 
     private static void updateCameraPosition() {
         Camera.reScale(Mouse.getDWheel());
-
-
-
-            //Получаем позицию камеры
-            float x1 = player1.getX(); float y1 = player1.getY();
-            float x2 = player2.getX(); float y2 = player2.getY();
-            Camera.setPosition(x1, y1);
 
         /*boolean isPressed = Mouse.isButtonDown(0);
         if (isPressed) {

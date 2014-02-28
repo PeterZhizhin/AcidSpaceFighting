@@ -2,6 +2,7 @@ package com.AcidSpaceCompany.AcidSpaceFighting;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Audio.SoundBase;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.*;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Controls.FontDrawer;
 
 /**
  * User class which helps allows you to make update() drawTopLayer() cycle easily
@@ -42,6 +43,7 @@ public class Window extends BasicWindow {
         SoundBase.init();
         GUI.init();
         ShadersBase.init();
+        FontDrawer.init();
         startWorking();
     }
 

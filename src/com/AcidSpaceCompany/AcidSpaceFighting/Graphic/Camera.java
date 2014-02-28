@@ -38,6 +38,10 @@ public class Camera {
         yPos = y - xHeight;
     }
 
+    public static void setPosition(Point p) {
+        setPosition(p.x, p.y);
+    }
+
     public static void reScale(int reScale) {
         if (reScale > 0) scale /= 1.3f;
         else if (reScale < 0) scale *= 1.3f;

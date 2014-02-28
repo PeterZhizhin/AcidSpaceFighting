@@ -1,5 +1,6 @@
 package com.AcidSpaceCompany.AcidSpaceFighting;
 
+import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Base.BaseModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Connector.ConnectorModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Engine.EngineModel;
@@ -21,15 +22,9 @@ public class SpaceShip {
 
     private ComplexModel totalModel;
 
-    public float getX()
+    public Point getPoint()
     {
-        return totalModel.phyModel.getCentre().getX();
-    }
-
-
-    public float getY()
-    {
-        return totalModel.phyModel.getCentre().getY();
+        return totalModel.phyModel.getCentre();
     }
 
     public void throttle()

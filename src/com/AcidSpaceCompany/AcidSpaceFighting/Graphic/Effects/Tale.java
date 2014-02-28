@@ -20,6 +20,7 @@ public class Tale implements Effect {
     private float deltaPosition;
     private Random rnd=new Random();
     private LinkedList<Point> coordinates;
+    private Point lastCoord;
     private LinkedList<Float> widths;
     private LinkedList<Float> widths01;
     private int size;
@@ -42,21 +43,24 @@ public class Tale implements Effect {
 
         TextureDrawer.startDrawFire();
         Point normal = Point.empty;
+        Point p1, p2, p3, p4;
+        p1=getPoint(0).add(normal);
+        p2=getPoint(0).add(normal.negate());
         glBegin(GL_QUADS);
         for (int i = 0; i < size-1; i++) {
-
-            Point p1=getPoint(i).add(normal);
-            Point p2=getPoint(i).add(normal.negate());
 
             normal = Point.getBisection(getPoint(i),getPoint(i + 1),
                     getPoint(i + 2)).multiply(widths.get(i));
 
 
-            Point p3=getPoint(i + 1).add(normal.negate());
-            Point p4=getPoint(i + 1).add(normal);
+            p3=getPoint(i + 1).add(normal.negate());
+            p4=getPoint(i + 1).add(normal);
             ShadersBase.setFloatValue(ShadersBase.fireStateID, widths01.get(i));
             TextureDrawer.drawQuadWIdthoutBeginAndEnd(p2, p3, p4, p1);
+            p1=p3;
+            p2=p4;
         }
+        TextureDrawer.drawQuadWIdthoutBeginAndEnd(p2, lastCoord, lastCoord, p1);
         glEnd();
     }
 
@@ -83,7 +87,6 @@ public class Tale implements Effect {
             if (useSmoke)
                 smoke.addPoint(coordinate.x, coordinate.y, width * smokeCoef);
 
-            width*=4;
             widths.add(width);
             widths01.add(1f);
             if (coordinates.size()>size) {
@@ -92,11 +95,7 @@ public class Tale implements Effect {
                 widths01.remove(0);
             }
         }
-        else {
-            coordinates.set(size - 1, coordinate.add(new Point((rnd.nextFloat() - 0.5f), (rnd.nextFloat() - 0.5f)).multiply(deltaPosition)));
-            widths.set(size-1, width);
-            widths01.set(size-1, 1f);
-        }
+        lastCoord=coordinate;
     }
 
     public void destroy() {
@@ -115,6 +114,7 @@ public class Tale implements Effect {
             widths.add(0f);
             widths01.add(0f);
         }
+        lastCoord=new Point(0, 0);
         deltaPosition=deltaPos;
         this.useSmoke=useSmoke;
         if (useSmoke) {
