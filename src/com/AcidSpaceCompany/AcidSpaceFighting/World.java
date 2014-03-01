@@ -7,6 +7,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Camera;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Effect;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Explosion;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
+import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -28,13 +29,6 @@ public class World {
 
         explosionBuffer.add(center);
         explosionPowerBuffer.add(power);
-    }
-
-    private static ArrayList<Integer> removeBuffer;
-
-    public static void removeModel(int num) {
-        removeBuffer.add(num);
-        models.get(num).destroy();
     }
 
     private static void sortEffects() {
@@ -84,13 +78,16 @@ public class World {
 
     }
 
-    private static boolean lastStateButtonIsPressed;
-    private static int mouseDownX, mouseDownY;
-
     private static void updateCameraPosition() {
         Camera.reScale(Mouse.getDWheel());
 
-        /*boolean isPressed = Mouse.isButtonDown(0);
+        /*
+
+
+    private static boolean lastStateButtonIsPressed;
+    private static int mouseDownX, mouseDownY;
+
+        boolean isPressed = Mouse.isButtonDown(0);
         if (isPressed) {
             int nowX = Mouse.getX();
             int nowY = Display.getHeight() - Mouse.getY();
@@ -169,21 +166,18 @@ public class World {
     }
 
     private static void addAndRemoveModels() {
+
+        for (int i=0; i<models.size(); i++) {
+            if (models.get(i).getIsNoNeedMore())
+            {
+                models.get(i).destroy();
+                models.remove(i);
+            }
+        }
+
         if (addModelBuffer.size() > 0) {
             models.addAll(addModelBuffer);
             addModelBuffer.clear();
-        }
-
-        if (removeBuffer.size()!=0) {
-            for (int m: removeBuffer) {
-                for (int i=0; i<models.size(); i++) {
-                    if (m==models.get(i).getNumber()) {
-                        models.remove(i);
-                        break;
-                    }
-                }
-            }
-            removeBuffer.clear();
         }
     }
 
@@ -232,7 +226,6 @@ public class World {
     public static void init() {
         effects=new LinkedList<Effect>();
 
-        removeBuffer=new ArrayList<Integer>();
         models = new ArrayList<Model>();
         addModelBuffer = new LinkedList<Model>();
 

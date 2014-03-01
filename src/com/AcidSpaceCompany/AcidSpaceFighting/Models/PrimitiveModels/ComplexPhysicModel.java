@@ -1,14 +1,17 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
-import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Explosion;
-import com.AcidSpaceCompany.AcidSpaceFighting.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ComplexPhysicModel extends PhysicModel {
+
+    //TODO: Теперь удалениями занимается ComplexModel (как и в World). Поэтому выпили отсюда всякий левак.
+
+    //TODO: Теперь всё будет моделе-ориентированное. Настоятельно рекомендую получать физмодели только из ComplexModel.
+
 
     public boolean getIsComplex() {
         return true;
@@ -72,11 +75,9 @@ public class ComplexPhysicModel extends PhysicModel {
             if (bodies.get(i).getHealth()<=0)
             {
                 World.explode(bodies.get(i).getCentre(), bodies.get(i).getMaxWidth());
-                bodies.remove(i);
-                cm.graModel.get(i).destroy();
-                cm.graModel.remove(i);
                 wasDeleted = true;
             }
+
         if (wasDeleted)
         {
             boolean needRecalculation = bodies.recalculateMatrix()!=1;
@@ -88,12 +89,23 @@ public class ComplexPhysicModel extends PhysicModel {
                 {
                     if (bodiesLists[i].getSize()>1)
                     {
+
+
+                        /*
                         ArrayList<GraphicModel> graphicModels = new ArrayList<GraphicModel>();
                         for(int j=0; j<bodiesLists[i].getSize(); j++)
-                            graphicModels.add(cm.graModel.get(bodies.indexOf(bodiesLists[i].get(j))));
+                            graphicModels.add(cm.getModel(bodies.indexOf(bodiesLists[i].get(j))).getGraphicModel());
                         ComplexPhysicModel physicModel = new ComplexPhysicModel(bodiesLists[i]);
-                        ComplexGraphicModel graphicModel = new ComplexGraphicModel(graphicModels);
-                        //Получаем вектор скорости центра масс новой системы относительно текущей системы
+                        ComplexGraphicModel graphicModel = new ComplexGraphicModel();
+
+                        TODO: Убрать блок кода выше (закомментированный), создать комплексную модель и добавлять в неё модели.
+                        КоГраМодель и КоФиМОдель отныне создаём только в КоМодели.
+                        */
+
+
+
+                        /*
+                        Получаем вектор скорости центра масс новой системы относительно текущей системы
                         Point deltaSpeed = new Point(physicModel.getCentre());
                         deltaSpeed.move(massCentre.negate());
                         deltaSpeed = new Point(deltaSpeed.getY(), deltaSpeed.getX());
@@ -101,13 +113,28 @@ public class ComplexPhysicModel extends PhysicModel {
                         deltaSpeed = deltaSpeed.multiply((float)massCentre.getDistanceToPoint(physicModel.getCentre()) * w);
                         physicModel.addSpeed(deltaSpeed);
                         World.addModel(new Model(graphicModel, physicModel));
+                        TODO: Переделать блок кода выше, особенно new Model(graphicModel, physicModel).
+
+                        Кстате
+
+                        для
+                        deltaSpeed.normalise(deltaSpeed);
+                        deltaSpeed = deltaSpeed.multiply((float)massCentre.getDistanceToPoint(physicModel.getCentre()) * w);
+
+                        есть метод
+                        deltaSpeed = deltaSpeed.setLength((float)massCentre.getDistanceToPoint(physicModel.getCentre()) * w);
+
+
+                        */
+
+
                     }
                     else
                     {
                         PhysicModel physicModel = bodiesLists[i].get(0);
                         //Отвязываем тело
                         physicModel.setParent(null);
-                        GraphicModel graphicModel = cm.graModel.get(bodies.indexOf(physicModel));
+                        GraphicModel graphicModel = cm.getModel(bodies.indexOf(physicModel)).getGraphicModel();
                         //Получаем вектор скорости центра масс новой системы относительно текущей системы
                         Point deltaSpeed = new Point(physicModel.getCentre());
                         deltaSpeed.move(massCentre.negate());
@@ -119,14 +146,9 @@ public class ComplexPhysicModel extends PhysicModel {
 
                     }
                 }
-                //Удаляем все графические модели из комплексной модели (те, что отпали)
-                for (int i=1; i<bodiesLists.length; i++)
-                    for (PhysicModel body : bodiesLists[i])
-                        cm.graModel.addToDeleteBuffer(bodies.indexOf(body));
-                cm.graModel.removeFromDeleteBuffer();
                 this.bodies = bodiesLists[0];
             }
-            пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
+            recomputeMassCenters();
         }
         for (PhysicModel body : bodies)
             body.update(deltaTime);
@@ -189,6 +211,7 @@ public class ComplexPhysicModel extends PhysicModel {
                 boolean tempResult = body.crossThem(anotherModelBody, deltaTime);
                 result = result | tempResult;
                 //Если мы сталкиваемся с комплексной моделью - уничтожаем столкнувшиеся части
+                //TODO: Не сталкиваемся, а пересекаемся. Если физон отработал нормально - всё ок. Если уже интерсект - взрываемся.
                 if (needDestroy & tempResult)
                 {
                     anotherModelBody.health = 0;
@@ -211,7 +234,7 @@ public class ComplexPhysicModel extends PhysicModel {
         }
     }
 
-    public void пересчитатьВсякиеТамЦентрыМассИПрочуюХрень () {
+    public void recomputeMassCenters() {
         massCentre = new Point(0, 0);
         speedVector = new Point(0, 0);
         mass = 0;
@@ -244,20 +267,21 @@ public class ComplexPhysicModel extends PhysicModel {
 
     public void add(PhysicModel p, int addPointIndex) {
         bodies.add(p, addPointIndex);
-        пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
+        recomputeMassCenters();
     }
 
     private ComplexPhysicModel(BodiesList list)
     {
         super(null, 0);
         bodies = list;
-        пересчитатьВсякиеТамЦентрыМассИПрочуюХрень();
+        recomputeMassCenters();
     }
 
     public ComplexPhysicModel(ComplexModel c, PhysicModel firstModel) {
         super(null, 0);
         bodies = new BodiesList(maxBodiesSize, firstModel);
         cm=c;
+        recomputeMassCenters();
     }
 
 }

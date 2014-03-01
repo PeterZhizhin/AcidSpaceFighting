@@ -22,6 +22,10 @@ public class PhysicModel {
     private Point[] connectionPoints;
     private boolean[] isConnectionFree;
 
+    public void destroy() {
+        //if somebody need it
+    }
+
     public float getDamage(float force) {
         return force/4000000000f;
     }
@@ -30,9 +34,8 @@ public class PhysicModel {
         return body.getMaxLength();
     }
 
-    public void deleteFromWorld()
-    {
-        //TODO: добавить в мир удаление и удалить здесь эту модель
+    public boolean getIsNoNeedMore() {
+        return health<=0;
     }
 
     public void setNumber(int num) {
@@ -117,8 +120,8 @@ public class PhysicModel {
 
     //for their own timers
     public void update(float deltaTime) {
-        if (parent == null & health <=0)
-            deleteFromWorld();
+        //НЕ НАДО СЮДА НИЧЕГО ДОБАВЛЯТЬ
+        //МЕТОД ИСКЛЮЧИТЕЛЬНО ДЛЯ КОНКРЕТНЫХ РЕАЛИЗАЦИЙ МОДЕЛИ
     }
 
     /**

@@ -25,11 +25,6 @@ public class FontDrawer {
     }
 
     public static void drawString(float x, float y, String s, Color color, boolean big) {
-        /*
-
-        TODO: разобраться с поехавшей вконец рисовкой символов вверх ногами
-
-         */
         color.bind();
         if (big)
             fontBig.drawString(x, y + 20, s, 1f, -1f);

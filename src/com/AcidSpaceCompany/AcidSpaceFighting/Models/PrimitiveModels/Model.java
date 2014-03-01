@@ -1,8 +1,6 @@
-package com.AcidSpaceCompany.AcidSpaceFighting;
+package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
-import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GraphicModel;
-import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.PhysicModel;
 
 public class Model{
 
@@ -11,8 +9,13 @@ public class Model{
     private static int lastNumber=0;
     private int number;
 
+    public boolean getIsNoNeedMore() {
+        return physic.getIsNoNeedMore();
+    }
+
     public void destroy() {
         graphic.destroy();
+        physic.destroy();
     }
 
     public GraphicModel getGraphicModel() {
@@ -39,11 +42,6 @@ public class Model{
         graphic.drawBackgroundLayer();
     }
 
-    /*
-    public void drawHealth() {
-        graphic.drawHealth();
-    }*/
-
     public boolean crossThem(Model p, float deltaTime) {
         return physic.crossThem(p.physic, deltaTime);
     }
@@ -58,10 +56,6 @@ public class Model{
 
     public Point getCenter() {
         return physic.getCentre();
-    }
-
-    public int getNumber() {
-        return number;
     }
 
     public void setPhysicModel(PhysicModel p) {

@@ -1,11 +1,18 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
-import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
-
 public abstract class GraphicModel implements Destroyable{
 
     protected GeometricModel shape;
     protected PhysicModel body;
+    protected boolean noNeedMore=false;
+
+    public void setNoNeedMore() {
+        noNeedMore=true;
+    }
+
+    public boolean getIsNoNeedMore() {
+        return noNeedMore;
+    }
 
     public void drawBackgroundLayer() {
     }

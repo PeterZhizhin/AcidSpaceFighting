@@ -3,7 +3,7 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Models.Asteroid;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GeometricModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GraphicModel;
-import com.AcidSpaceCompany.AcidSpaceFighting.Model;
+import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.PhysicModel;
 
 public class AsteroidModel extends Model {

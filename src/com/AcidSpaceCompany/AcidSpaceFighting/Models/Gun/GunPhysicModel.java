@@ -3,7 +3,7 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Models.Gun;
 import com.AcidSpaceCompany.AcidSpaceFighting.Audio.SoundBase;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GeometricModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
-import com.AcidSpaceCompany.AcidSpaceFighting.Model;
+import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Bullet.BulletModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.PhysicModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
