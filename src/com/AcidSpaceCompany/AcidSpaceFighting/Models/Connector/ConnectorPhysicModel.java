@@ -11,8 +11,8 @@ public class ConnectorPhysicModel extends PhysicModel {
         health=0;
     }
 
-    public ConnectorPhysicModel(GeometricModel body, Point[] conns, float mass) {
-        super(body, conns, mass);
+    public ConnectorPhysicModel(GeometricModel body, float mass) {
+        super(body, mass);
     }
 
 }

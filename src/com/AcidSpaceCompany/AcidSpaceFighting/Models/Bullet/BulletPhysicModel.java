@@ -27,8 +27,8 @@ public class BulletPhysicModel extends PhysicModel {
         super.useForce(posOfForce, force);
     }
 
-    public BulletPhysicModel(GeometricModel body, Point[] conns, float mass) {
-        super(body, conns, mass);
+    public BulletPhysicModel(GeometricModel body, float mass) {
+        super(body, mass);
         firstTime=true;
     }
 

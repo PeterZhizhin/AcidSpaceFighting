@@ -16,9 +16,7 @@ public class EngineModel extends Model {
         super(null, null);
         GeometricModel g = new EngineGeometricModel(x, y, radius);
         g.rotate(angle);
-        PhysicModel p = new EnginePhysicModel(g, new Point[]{
-                new Point(x + radius / 2, y + radius / 2)
-        }, radius);
+        PhysicModel p = new EnginePhysicModel(g, radius);
         GraphicModel g2=new EngineGraphicModel(g);
         setGraphicModel(g2);
         setPhysicModel(p);
