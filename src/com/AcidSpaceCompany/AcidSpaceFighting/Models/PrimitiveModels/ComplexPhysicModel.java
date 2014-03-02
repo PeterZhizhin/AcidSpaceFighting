@@ -36,20 +36,6 @@ public class ComplexPhysicModel extends PhysicModel {
         return massCentre;
     }
 
-    @Override
-    public int getConnectionPointsCount() {
-        return bodies.getConnectionPointsCount();
-    }
-
-    @Override
-    public Point getConnectionPoint(int index) {
-        return bodies.getConnectionPoint(index);
-    }
-
-    @Override
-    public boolean getIsConnectionPointFree(int index) {
-        return bodies.getIsConnectionPointFree(index);
-    }
 
     //Статические силы теперь тоже применяются ко всей системе
     @Override
@@ -264,8 +250,8 @@ public class ComplexPhysicModel extends PhysicModel {
         bodies = new BodiesList(maxBodiesSize, p);
     }
 
-    public void add(PhysicModel p, int addPointIndex) {
-        bodies.add(p, addPointIndex);
+    public void add(PhysicModel p, int bodyIndex) {
+        bodies.add(p, bodyIndex);
         recomputeMassCenters();
     }
 

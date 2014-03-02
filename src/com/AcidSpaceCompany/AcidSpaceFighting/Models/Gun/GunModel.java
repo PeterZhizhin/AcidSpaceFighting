@@ -12,7 +12,7 @@ public class GunModel extends Model {
         super(null, null);
         GeometricModel g = new GunGeometricModel(x, y, radius);
         g.rotate(angle);
-        PhysicModel p = new GunPhysicModel(g, new Point[]{new Point(x + radius / 2, y + radius / 2)}, radius);
+        PhysicModel p = new GunPhysicModel(g, radius);
         GraphicModel g2=new GunGraphicModel(g);
         setGraphicModel(g2);
         setPhysicModel(p);

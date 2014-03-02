@@ -36,8 +36,8 @@ public class GunPhysicModel extends PhysicModel {
             activity-=time;
     }
 
-    public GunPhysicModel(GeometricModel body, Point[] conns, float mass) {
-        super(body, conns, mass);
+    public GunPhysicModel(GeometricModel body, float mass) {
+        super(body, mass);
     }
 
 }

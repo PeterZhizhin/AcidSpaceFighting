@@ -37,8 +37,8 @@ public class EnginePhysicModel extends PhysicModel {
         }
     }
 
-    public EnginePhysicModel(GeometricModel body, Point[] connetionPoints, float mass) {
-        super(body, connetionPoints, mass);
+    public EnginePhysicModel(GeometricModel body, float mass) {
+        super(body, mass);
     }
 
 }

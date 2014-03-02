@@ -163,14 +163,15 @@ public class BodiesList implements Iterable<PhysicModel> {
 
     private void add(PhysicModel modelToAdd, PhysicModel modelToConnect)
     {
-        addBody(modelToAdd, indexOf(modelToConnect));
+        add(modelToAdd, indexOf(modelToConnect));
     }
 
     /**
-     * Добавляем тело в список, связывая его с уже существующим добавленным
-     * @param bodyIndex Локальный
+     * Добавляем элемент в систему
+     * @param model Элемент для добавления
+     * @param bodyIndex Номер тела
      */
-    private void addBody(PhysicModel model, int bodyIndex)
+    public void add(PhysicModel model, int bodyIndex)
     {
         //Получаем место для соединения
         int index = getFirstFree();
@@ -200,61 +201,6 @@ public class BodiesList implements Iterable<PhysicModel> {
                 adjacencyMatrix[realIndex][i] = component;
                 fillMatrix(wasVisited, i, component);
             }
-    }
-
-    /**
-     * Получаем количество точек соединения (вот тут могут быть проблемы со скоростью) если что - переделывается.
-     * @return Количество точек соединения
-     */
-    public int getConnectionPointsCount()
-    {
-        int result = 0;
-        for (int i = 0; i<length; i++)
-            result+=bodies[indexes[i]].getConnectionPointsCount();
-        return result;
-    }
-
-    /**
-     * Получаем точку соединения по её индексу
-     * @param index Индекс
-     * @return  Точка
-     */
-    public Point getConnectionPoint(int index)
-    {
-        int bodyNo = 0;
-        while (index>=0)
-        {
-            index-=bodies[indexes[bodyNo]].getConnectionPointsCount();
-            bodyNo++;
-        }
-        bodyNo--;
-        index+=bodies[indexes[bodyNo]].getConnectionPointsCount();
-        return bodies[indexes[bodyNo]].getConnectionPoint(index);
-    }
-
-    public boolean getIsConnectionPointFree(int index)
-    {
-        int bodyNo = 0;
-        while (index>=0)
-        {
-            index-=bodies[indexes[bodyNo]].getConnectionPointsCount();
-            bodyNo++;
-        }
-        bodyNo--;
-        index+=bodies[indexes[bodyNo]].getConnectionPointsCount();
-        return bodies[indexes[bodyNo]].getIsConnectionPointFree(index);
-    }
-
-    private int getBodyByPointIndex(int index)
-    {
-        int bodyNo = 0;
-        while (index>=0)
-        {
-            index-=bodies[indexes[bodyNo]].getConnectionPointsCount();
-            bodyNo++;
-        }
-        bodyNo--;
-        return bodyNo;
     }
 
     /**
@@ -302,17 +248,6 @@ public class BodiesList implements Iterable<PhysicModel> {
     public int getSize()
     {
         return length;
-    }
-
-    /**
-     * Добавляем элемент в систему
-     * @param model Элемент для добавления
-     * @param connectionPointIndex  Номер точки присоединения
-     */
-    public void add(PhysicModel model, int connectionPointIndex)
-    {
-        //Получаем номер тела по точке соединения
-        addBody(model, getBodyByPointIndex(connectionPointIndex));
     }
 
     /**
