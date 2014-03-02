@@ -9,6 +9,10 @@ public class Model{
     private static int lastNumber=0;
     private int number;
 
+    public float getMaxWidth() {
+        return physic.getMaxWidth();
+    }
+
     public boolean getIsNoNeedMore() {
         return physic.getIsNoNeedMore();
     }

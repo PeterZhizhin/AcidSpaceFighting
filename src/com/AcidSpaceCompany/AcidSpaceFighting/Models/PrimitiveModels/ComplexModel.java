@@ -1,5 +1,7 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
+import com.AcidSpaceCompany.AcidSpaceFighting.World;
+
 import java.util.ArrayList;
 
 public class ComplexModel extends Model {
@@ -22,6 +24,7 @@ public class ComplexModel extends Model {
             if (models.get(i).getIsNoNeedMore())
             {
                 models.get(i).destroy();
+                World.explode(models.get(i).getCenter(), models.get(i).getMaxWidth());
                 models.remove(i);
             }
         }

@@ -74,7 +74,6 @@ public class ComplexPhysicModel extends PhysicModel {
         for (int i=0; i<bodies.getSize(); i++)
             if (bodies.get(i).getHealth()<=0)
             {
-                World.explode(bodies.get(i).getCentre(), bodies.get(i).getMaxWidth());
                 wasDeleted = true;
             }
 

@@ -6,6 +6,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Background;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Camera;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Effect;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Explosion;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.HUD;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import org.lwjgl.input.Keyboard;
@@ -61,6 +62,7 @@ public class World {
 
     public static void draw() {
         Camera.setPosition(player1.getPoint());
+
         Background.draw();
 
         for (Effect effect : effects) {
@@ -75,6 +77,8 @@ public class World {
         for (Model model : models) {
             model.drawTopLayer();
         }
+
+        HUD.draw();
 
     }
 
