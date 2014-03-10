@@ -3,6 +3,7 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 import com.AcidSpaceCompany.AcidSpaceFighting.BasicWindow;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Segment;
+import org.lwjgl.util.vector.Vector3f;
 
 import java.util.LinkedList;
 
@@ -172,6 +173,24 @@ public class PhysicModel {
         LinkedList<PhysicModel> result = new LinkedList<PhysicModel>();
         result.add(this);
         return result;
+    }
+
+    protected float getForce(Point position, Point normal, PhysicModel anotherBody, float energyLess, float deltaTime)
+    {
+        Point r1 = new Point(position); r1.add(this.getCentre().negate());
+        Point r2 = new Point(position); r2.add(anotherBody.getCentre().negate());
+        Point vR = new Point(speedVector); vR.add(anotherBody.getCentre().negate());
+        Vector3f cross1 = new Vector3f(r1.getRealVector3f());
+        Vector3f.cross(cross1, normal.getRealVector3f(), cross1);
+        cross1.scale(1.0f/J);
+        Vector3f.cross(cross1, r1.getRealVector3f(), cross1);
+
+        Vector3f cross2 = new Vector3f(r2.getRealVector3f());
+        Vector3f.cross(cross2, normal.getRealVector3f(), cross2);
+        cross2.scale(1.0f/anotherBody.J);
+        Vector3f.cross(cross2, r2.getRealVector3f(), cross2);
+
+        return (vR.length()*(energyLess+1))/(1.0f/mass + 1.0f/anotherBody.mass + cross1.length() + cross2.length())/deltaTime;
     }
 
     private boolean applyIntersection(PhysicModel m, float deltaTime) {

@@ -2,13 +2,14 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
  * Массив тел. Имеет доступ к себе в качестве иттератора.
  * Всё как со списком. Можно добавлять, удалять элементы
  */
-public class BodiesList implements Iterable<PhysicModel> {
+public class BodiesList<E> implements Iterable<E> {
     //Индекс базы в массиве. Если её удалить - тело не должно существовать (по идее)
     private int baseIndex;
     //Жива ли база
@@ -19,7 +20,7 @@ public class BodiesList implements Iterable<PhysicModel> {
     }
 
     //Собственно физические модели
-    private PhysicModel[] bodies;
+    private ArrayList<E> bodies;
     //Индексы тел в массиве bodies
     private int[] indexes;
     //Индексы тел из массива bodies в массиве indexes
@@ -30,7 +31,11 @@ public class BodiesList implements Iterable<PhysicModel> {
     private int[][] adjacencyMatrix;
     //Количество тел
     private int length;
-    public int getLength()
+    /**
+     * Получаем размер списка
+     * @return Размер списка от 0 до maxSize
+     */
+    public int size()
     {
         return length;
     }
@@ -50,9 +55,9 @@ public class BodiesList implements Iterable<PhysicModel> {
      * Получаем иттератор (порядок обхода не важен)
      * @return Иттератор
      */
-    public Iterator<PhysicModel> iterator()
+    public Iterator<E> iterator()
     {
-        return new Iterator<PhysicModel>() {
+        return new Iterator<E>() {
             private int index = 0;
 
             @Override
@@ -61,8 +66,8 @@ public class BodiesList implements Iterable<PhysicModel> {
             }
 
             @Override
-            public PhysicModel next() {
-                PhysicModel result = bodies[indexes[index]];
+            public E next() {
+                E result = bodies.get(indexes[index]);
                 index++;
                 return result;
             }
@@ -79,20 +84,21 @@ public class BodiesList implements Iterable<PhysicModel> {
      * @param index Индекс
      * @return Элемент
      */
-    public PhysicModel get(int index)
+    public E get(int index)
     {
-        return bodies[indexes[index]];
+        return bodies.get(indexes[index]);
     }
+
 
     /**
      * Получаем индекс модели в массиве
      * @param model  Модель для поиска
      * @return       Индекс
      */
-    public int indexOf(PhysicModel model)
+    public int indexOf(E model)
     {
         int index = 0;
-        while (index<length & !bodies[indexes[index]].equals(model))
+        while (index<length & !bodies.get(indexes[index]).equals(model))
             index++;
         if (index>=length)
             return -1;
@@ -136,14 +142,14 @@ public class BodiesList implements Iterable<PhysicModel> {
             wasAdded[i] = false;
         int realBaseIndex = indexes[baseIndex];
         int baseComponentNo = adjacencyMatrix[realBaseIndex][realBaseIndex];
-        result[baseComponentNo-1] = new BodiesList(bodies.length, bodies[realBaseIndex]);
+        result[baseComponentNo-1] = new BodiesList(bodies.size(), bodies.get(realBaseIndex));
         addBodies(wasAdded, baseIndex, result[baseComponentNo-1]);
         for (int i = 0; i<length; i++)
             if (!wasAdded[i])
             {
                 int realIndex = indexes[i];
                 int componentNo = adjacencyMatrix[realIndex][realIndex];
-                result[componentNo-1] = new BodiesList(bodies.length, bodies[realIndex]);
+                result[componentNo-1] = new BodiesList(bodies.size(), bodies.get(realIndex));
                 addBodies(wasAdded, i, result[componentNo-1]);
             }
         return result;
@@ -156,12 +162,12 @@ public class BodiesList implements Iterable<PhysicModel> {
         for (int i=0; i<wasVisited.length; i++)
             if (!wasVisited[i] && adjacencyMatrix[indexes[i]][realIndex]!=0)
             {
-                listToAdd.add(bodies[indexes[i]], bodies[realIndex]);
+                listToAdd.add(bodies.get(indexes[i]), bodies.get(realIndex));
                 addBodies(wasVisited, i, listToAdd);
             }
     }
 
-    private void add(PhysicModel modelToAdd, PhysicModel modelToConnect)
+    private void add(E modelToAdd, E modelToConnect)
     {
         add(modelToAdd, indexOf(modelToConnect));
     }
@@ -171,13 +177,13 @@ public class BodiesList implements Iterable<PhysicModel> {
      * @param model Элемент для добавления
      * @param bodyIndex Номер тела
      */
-    public void add(PhysicModel model, int bodyIndex)
+    public void add(E model, int bodyIndex)
     {
         //Получаем место для соединения
         int index = getFirstFree();
         indexes[length] = index;
         bodyIndexesInIndexes[index] = length;
-        bodies[index] = model;
+        bodies.set(index, model);
 
         int componentNo = getComponentNumber(bodyIndex);
         bodyIndex = indexes[bodyIndex];
@@ -208,9 +214,9 @@ public class BodiesList implements Iterable<PhysicModel> {
      * @param maxSize  Максимальный размер
      * @param firstBody  Первое тело
      */
-    public BodiesList(int maxSize, PhysicModel firstBody)
+    public BodiesList(int maxSize, E firstBody)
     {
-        bodies = new PhysicModel[maxSize];
+        bodies = new ArrayList<E>(maxSize);
         indexes = new int[maxSize];
         bodyIndexesInIndexes = new int[maxSize];
         adjacencyMatrix = new int[maxSize][maxSize];
@@ -219,14 +225,14 @@ public class BodiesList implements Iterable<PhysicModel> {
         //Оно иначе при поиске первого свободного Exception выдает (ищется первый не null)
         for(int i=0; i<maxSize; i++)
         {
-            bodies[i] = null;
+            bodies.add(null);
             bodyIndexesInIndexes[i] = -1;
             indexes[i]=-1;
             for (int j = 0; j<maxSize; j++)
                 adjacencyMatrix[i][j] = 0;
         }
 
-        bodies[0] = firstBody;
+        bodies.set(0, firstBody);
         indexes[0] = 0;
         bodyIndexesInIndexes[0] = 0;
         adjacencyMatrix[0][0] = 1;
@@ -259,7 +265,7 @@ public class BodiesList implements Iterable<PhysicModel> {
         if (bodyIndex==baseIndex)
             isAlive_ = false;
         int realBodyIndex = indexes[bodyIndex];
-        bodies[realBodyIndex] = null;
+        bodies.set(realBodyIndex, null);
         bodyIndexesInIndexes[realBodyIndex] = -1;
         //Теперь нужно сместить массив индексов вверх
         for (int i=bodyIndex; i<length-1; i++)
@@ -285,7 +291,7 @@ public class BodiesList implements Iterable<PhysicModel> {
     private int getFirstFree()
     {
         int i=0;
-        while (bodies[i]!=null)
+        while (bodies.get(i)!=null)
             i++;
         return i;
     }
