@@ -23,7 +23,7 @@ public class Camera {
     public static void init() {
         xPos = 0;
         yPos = 0;
-        scale = 1;
+        scale = 4f;
     }
 
     public static void move(int dX, int dY) {
@@ -47,6 +47,10 @@ public class Camera {
         else if (reScale < 0) scale *= 1.3f;
     }
 
+    public static void setScaleByDistance(float dist) {
+        Camera.scale=dist/Display.getWidth();
+    }
+
     public static String getMessage() {
         return "Coordinates: " + xPos + " ; " + yPos + " Scale: " + scale;
     }
@@ -59,8 +63,16 @@ public class Camera {
          return f/scale;
     }
 
+    public static float untranslateDistance(float f) {
+        return f*scale;
+    }
+
     public static void translatePoint(Point p) {
-        GL11.glVertex2f((p.getX() - xPos) / scale, (p.getY() - yPos) / scale);
+        translatePoint(p.x, p.y);
+    }
+
+    public static void translatePoint(float x, float y) {
+        GL11.glVertex2f((x - xPos) / scale, (y - yPos) / scale);
     }
 
     //return point in the world by point on the screen

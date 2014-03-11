@@ -9,11 +9,16 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Explosion;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.HUD;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
+import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Plot;
+import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.PlotBase;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glEnd;
 
 
 public class World {
@@ -25,8 +30,6 @@ public class World {
         Explosion e=new Explosion(center, power/5);
         addEffect(e);
         SoundBase.playExplosion();
-
-        sortEffects();
 
         explosionBuffer.add(center);
         explosionPowerBuffer.add(power);
@@ -43,13 +46,18 @@ public class World {
                 effects.set(i, effects.get(min));
                 effects.set(min, e);
             }
-
         }
     }
 
     private static LinkedList<Model> addModelBuffer;
+    private static int unsorted=0;
     public static void addModel(Model m) {
         addModelBuffer.add(m);
+        if (unsorted==0){
+            sortEffects();
+            unsorted=100;
+        }
+        else unsorted--;
     }
 
     public static void addEffect(Effect p) {
@@ -61,13 +69,15 @@ public class World {
     }
 
     public static void draw() {
-        Camera.setPosition(player1.getPoint());
+        Camera.setPosition(player1.getCenter());
 
         Background.draw();
 
+        glBegin(GL_QUADS);
         for (Effect effect : effects) {
             effect.draw();
         }
+        glEnd();
 
         TextureDrawer.startDrawTextures();
         for (Model model : models) {
@@ -82,63 +92,9 @@ public class World {
 
     }
 
-    private static void updateCameraPosition() {
-        Camera.reScale(Mouse.getDWheel());
-
-        /*
-
-
-    private static boolean lastStateButtonIsPressed;
-    private static int mouseDownX, mouseDownY;
-
-        boolean isPressed = Mouse.isButtonDown(0);
-        if (isPressed) {
-            int nowX = Mouse.getX();
-            int nowY = Display.getHeight() - Mouse.getY();
-            if (lastStateButtonIsPressed) {
-
-                Camera.move(mouseDownX - nowX, mouseDownY - nowY);
-            }
-            mouseDownX = nowX;
-            mouseDownY = nowY;
-        }
-        lastStateButtonIsPressed = isPressed;*/
-    }
-
     private static void updateKeyboardInput() {
-            if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
-                player1.turnLeft();
-            }
 
-            if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-                player1.throttle();
-            }
-
-            if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
-                player1.turnRight();
-            }
-
-            if (Keyboard.isKeyDown(Keyboard.KEY_A))
-                player1.fireLeft();
-
-            if (Keyboard.isKeyDown(Keyboard.KEY_D))
-                player1.fireRight();
-
-         if (Keyboard.isKeyDown(Keyboard.KEY_S))
-                player1.explode();
-
-            if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD8))
-                player2.throttle();
-            if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD7))
-                player2.turnLeft();
-            if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD9))
-                player2.turnRight();
-            if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD4))
-                player2.fireLeft();
-            if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD6))
-                player2.fireRight();
-
-
+        player1.updateKeyboardInput();
 
         if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
             Window.pauseGame();
@@ -215,19 +171,30 @@ public class World {
     }
 
     public static void update(float deltaTime) {
-
-        updateCameraPosition();
         updateKeyboardInput();
         updateModels(deltaTime);
         addAndRemoveModels();
         updateExplosions();
         updateEffects(deltaTime);
+        PlotBase.reCheck();
     }
 
     private static SpaceShip player1;
-    private static SpaceShip player2;
+    private static ArrayList<SpaceShip> ships=new ArrayList<SpaceShip>();
+
+    public static SpaceShip getPlayerShip() {
+        return player1;
+    }
+
+    public static boolean getShipIsAlive(int number) {
+          for (SpaceShip sh: ships)
+              if (sh.getNumber()==number) return true;
+        return false;
+    }
 
     public static void init() {
+        Plot.init();
+
         effects=new LinkedList<Effect>();
 
         models = new ArrayList<Model>();
@@ -237,10 +204,12 @@ public class World {
         explosionPowerBuffer=new ArrayList<Float>();
 
         player1 = new SpaceShip(0,0);
-        World.addModel(player1.getBody());
+        ships.add(player1);
 
-        player2 = new SpaceShip(10000,10000);
-        World.addModel(player2.getBody());
+        SpaceShip player2 = new SpaceShip(10000,10000);
+        ships.add(player2);
+
+        for (SpaceShip ship : ships) World.addModel(ship);
     }
 
 }

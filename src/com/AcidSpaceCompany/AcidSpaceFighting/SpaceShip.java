@@ -1,120 +1,75 @@
 package com.AcidSpaceCompany.AcidSpaceFighting;
 
-import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Base.BaseModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Connector.ConnectorModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Engine.EngineModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Gun.GunModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.ComplexModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
+import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Items.Bag;
+import org.lwjgl.input.Keyboard;
 
-import java.util.ArrayList;
+public class SpaceShip extends ComplexModel{
 
-public class SpaceShip {
+    private Bag bag=new Bag();
 
-    private ArrayList<Model> rocketEng=new ArrayList<Model>();
-    private ArrayList<Model> rocketLeft=new ArrayList<Model>();
-    private ArrayList<Model> rocketRight=new ArrayList<Model>();
-
-    private ArrayList<Model> gunsLeft = new ArrayList<Model>();
-    private ArrayList<Model> gunsRight = new ArrayList<Model>();
-
-    private ArrayList<Model> explosions = new ArrayList<Model>();
-
-    private ComplexModel totalModel;
-
-    public Point getPoint()
-    {
-        return totalModel.phyModel.getCentre();
+    public Bag getBag() {
+        return bag;
     }
 
-    public void throttle()
-    {
-        for (Model m: rocketEng) m.doSpecialActionA();
+    public int getNumber() {
+        return 0;
     }
 
-    public void turnLeft()
-    {
-        for (Model m: rocketLeft) m.doSpecialActionA();
-    }
-    public void turnRight()
-    {
-       for (Model m : rocketRight) m.doSpecialActionA();
-    }
+    private int[][] keyMap= new int[][]{
+            {2, 3, 4, 5, 6,7 ,8 ,9 ,10},
+            {16, 17, 18, 19, 20, 21, 22},
+            {30, 31, 32, 33, 34, 35, 36},
+            {44, 45, 46, 47, 48, 49, 50}
+    };
 
-    public void fireLeft()
-    {
-        for (Model m : gunsLeft) m.doSpecialActionA();
-    }
-    public void fireRight()
-    {
-        for (Model m : gunsRight) m.doSpecialActionA();
-    }
-    public void explode()
-    {
-        for (Model m : explosions) m.doSpecialActionA();
-    }
+    private Model[][] modelMap= new Model[4][9];
 
-    public Model getBody()
-    {
-        return totalModel;
+    public void updateKeyboardInput() {
+         for (int i=0; i<4; i++) {
+             for (int j=0; j<9; j++) {
+                 if (modelMap[i][j]!=null)
+                     if (Keyboard.isKeyDown(keyMap[i][j]))
+                         modelMap[i][j].doSpecialActionA();
+             }
+         }
     }
 
     public SpaceShip(float x, float y)
     {
-       float p2= -(float) (Math.PI/2);
+        super(new BaseModel(x, y, 100));
+        float p2= -(float) (Math.PI/2);
 
-        BaseModel base = new BaseModel(x, y, 1000);
+        EngineModel bl=new EngineModel(-100+x, y, 100);
+        EngineModel br=new EngineModel(100+x, y, 100, 2*p2);
 
-        EngineModel bl=new EngineModel(-1000+x, y, 1000, p2);
-        EngineModel br=new EngineModel(1000+x, y, 1000, p2);
-        EngineModel bll=new EngineModel(-2000+x, y, 1000, p2);
-        EngineModel brr=new EngineModel(2000+x, y, 1000, p2);
-        rocketLeft.add(bl); rocketLeft.add(bll);
-        rocketRight.add(br); rocketRight.add(brr);
-        ConnectorModel cb=new ConnectorModel(x, 1000+y, 1000);
-        ConnectorModel cbb=new ConnectorModel(x, 2000+y, 1000);
-        explosions.add(cb);
-        explosions.add(cbb);
-        EngineModel cbbb=new EngineModel(x, 3000+y, 1000, p2);
-        EngineModel cbbbl=new EngineModel(-1000+x, 3000+y, 1000, p2);
-        EngineModel cbbbr=new EngineModel(1000+x, 3000+y, 1000, p2);
-        EngineModel cbbbll=new EngineModel(-2000+x, 3000+y, 1000, p2);
-        EngineModel cbbbrr=new EngineModel(2000+x, 3000+y, 1000, p2);
-        rocketEng.add(cbbb);
-        rocketEng.add(cbbbl);
-        rocketEng.add(cbbbr);
-        rocketEng.add(cbbbll);
-        rocketEng.add(cbbbrr);
+        ConnectorModel cb=new ConnectorModel(x, 100+y, 100);
+        ConnectorModel cbb=new ConnectorModel(x, 200+y, 100);
+        ConnectorModel cbbb=new ConnectorModel(x, 300+y, 100);
+        ConnectorModel cbbbb=new ConnectorModel(x, 400+y, 100);
+        ConnectorModel cbbbbb=new ConnectorModel(x, 500+y, 100);
+        EngineModel cbbbbbb=new EngineModel(x, 600+y, 100, p2);
 
-        GunModel g1 = new GunModel(-1000+x, 600+y, 1000, p2);
-        GunModel g2 = new GunModel(-1000+x, 1600+y, 1000, p2);
-        gunsLeft.add(g1); gunsLeft.add(g2);
+        GunModel g = new GunModel(x, -100+y, 100);
+        modelMap[1][3]=bl;
+        modelMap[1][4]=g;
+        modelMap[1][5]=br;
+        modelMap[2][4]=cbbbbbb;
 
-
-        GunModel gg1 = new GunModel(1000+x, 600+y, 1000, -p2);
-        GunModel gg2 = new GunModel(1000+x, 1600+y, 1000, -p2);
-        gunsRight.add(gg1); gunsRight.add(gg2);
-
-
-        ComplexModel m = new ComplexModel(base);
-        m.add(g1,0);
-        m.add(g2,0);
-        m.add(gg1,0);
-        m.add(gg2,0);
-        m.add(bl, 0);
-        m.add(br, 0);
-        m.add(bll, 0);
-        m.add(brr, 0);
-        m.add(cb, 0);
-        m.add(cbb, 0);
-        m.add(cbbb, 0);
-        m.add(cbbbl, 0);
-        m.add(cbbbr, 0);
-        m.add(cbbbll, 0);
-        m.add(cbbbrr, 0);
-
-        totalModel = m;
+        add(g, 0);
+        add(bl, 0);
+        add(br, 0);
+        add(cb, 0);
+        add(cbb, 0);
+        add(cbbb, 0);
+        add(cbbbb, 0);
+        add(cbbbbb, 0);
+        add(cbbbbbb, 0);
     }
 
 }

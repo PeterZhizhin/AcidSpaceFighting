@@ -28,7 +28,7 @@ public class Tale implements Effect {
     private int timer;
     private boolean useSmoke;
     private Smoke smoke;
-    private int smokeCoef;
+    private float smokeCoef;
     private boolean noNeedMore=false;
 
     public int getEfectType() {
@@ -46,7 +46,6 @@ public class Tale implements Effect {
         Point p1, p2, p3, p4;
         p1=getPoint(0).add(normal);
         p2=getPoint(0).add(normal.negate());
-        glBegin(GL_QUADS);
         for (int i = 0; i < size-1; i++) {
 
             normal = Point.getBisection(getPoint(i),getPoint(i + 1),
@@ -61,7 +60,6 @@ public class Tale implements Effect {
             p2=p4;
         }
         TextureDrawer.drawQuadWIdthoutBeginAndEnd(p2, lastCoord, lastCoord, p1);
-        glEnd();
     }
 
     public void update(float deltaTime) {

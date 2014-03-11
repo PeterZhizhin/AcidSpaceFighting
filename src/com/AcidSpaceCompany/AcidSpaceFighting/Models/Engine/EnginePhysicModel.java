@@ -7,7 +7,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.PhysicModel
 
 public class EnginePhysicModel extends PhysicModel {
 
-    private static final float power = 8000000f;
+    private static final float power = 160000f;
     private static final float deltaActivity = 1f;
     private boolean isPressed = false;
 
@@ -37,8 +37,8 @@ public class EnginePhysicModel extends PhysicModel {
         }
     }
 
-    public EnginePhysicModel(GeometricModel body, float mass) {
-        super(body, mass);
+    public EnginePhysicModel(GeometricModel body, Point[] connetionPoints, float mass) {
+        super(body, connetionPoints, mass);
     }
 
 }

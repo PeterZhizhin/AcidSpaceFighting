@@ -1,10 +1,7 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects;
 
-import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.ShadersBase;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
-
-import static org.lwjgl.opengl.GL11.*;
 
 public class Smoke implements Effect {
 
@@ -25,7 +22,6 @@ public class Smoke implements Effect {
         this.x=new float[size];
         this.y=new float[size];
         for (int i=0; i<size; i++)  {
-            //currentRadius[i]=radius/1000f;
             currentRadius[i]=0;
             radius[i]=-1;
             this.x[i]=0;
@@ -47,17 +43,12 @@ public class Smoke implements Effect {
     @Override
     public void draw() {
         TextureDrawer.startDrawSmoke();
-        glBegin(GL_QUADS);
         for (int i=0; i<size; i++) {
             if (currentRadius[i]>=0) {
-            float l=currentRadius[i]*2/3;
-
                 ShadersBase.setFloatValue(ShadersBase.smokeStateID, 1f-currentRadius[i]/radius[i]);
-                TextureDrawer.drawQuadWIdthoutBeginAndEnd(new Point(x[i] - l, y[i]), new Point(x[i], y[i] - l),
-                new Point(x[i] + l, y[i]), new Point(x[i], y[i] + l));
+                TextureDrawer.drawQuadWIdthoutBeginAndEnd(x[i], y[i], currentRadius[i]);
             }
         }
-        glEnd();
     }
 
     private boolean getElementIsUsed(int i) {

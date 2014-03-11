@@ -126,14 +126,14 @@ public class ComplexPhysicModel extends PhysicModel {
         }
         if (result)
         {
-        normal.multiply(1.0f/intersectionNumber);
-        point.multiply(1.0f/intersectionNumber);
-        normal = normal.getNormal();
+            normal.multiply(1.0f/intersectionNumber);
+            point.multiply(1.0f/intersectionNumber);
+            normal = normal.getNormal();
 
-        float force = this.getForce(point, normal, m, 1, deltaTime);
-        Point f1 = new Point(normal); f1.multiply(force);
-        this.useForce(point, f1);
-        m.useForce(point, f1.negate());
+            float force = this.getForce(point, normal, m, 1, deltaTime);
+            Point f1 = new Point(normal); f1.multiply(force);
+            this.useForce(point, f1);
+            m.useForce(point, f1.negate());
         }
         return result;
     }

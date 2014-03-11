@@ -17,7 +17,7 @@ public class BulletPhysicModel extends PhysicModel {
 
 
     public void useForce(Point posOfForce, Point force) {
-        if (force.length()>=500000000)  {
+        if (force.length()>=50000000)  {
             firstTime=!firstTime;
             if (firstTime) {
                  health=0;
@@ -27,8 +27,8 @@ public class BulletPhysicModel extends PhysicModel {
         super.useForce(posOfForce, force);
     }
 
-    public BulletPhysicModel(GeometricModel body, float mass) {
-        super(body, mass);
+    public BulletPhysicModel(GeometricModel body, Point[] conns, float mass) {
+        super(body, conns, mass);
         firstTime=true;
     }
 

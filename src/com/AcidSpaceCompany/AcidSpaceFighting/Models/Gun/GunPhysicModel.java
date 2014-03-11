@@ -15,11 +15,11 @@ public class GunPhysicModel extends PhysicModel {
     public void doSpecialActionA() {
         if (activity<=0) {
 
-            Point force=body.getPoint(2).add(getCentre().negate()).setLength(body.getMaxLength());
+            Point force=body.getPoint(1).add(body.getPoint(2)).add(getCentre().negate()).setLength(body.getMaxLength());
 
             Model m=new BulletModel(getCentre().getX()+force.x, getCentre().getY() + force.y, 100f, 100f);
 
-            force=force.setLength(1000000000);
+            force=force.setLength(100000000);
             m.useForce(m.getCenter(), force);
             World.addModel(m);
 
@@ -36,8 +36,8 @@ public class GunPhysicModel extends PhysicModel {
             activity-=time;
     }
 
-    public GunPhysicModel(GeometricModel body, float mass) {
-        super(body, mass);
+    public GunPhysicModel(GeometricModel body, Point[] conns, float mass) {
+        super(body, conns, mass);
     }
 
 }

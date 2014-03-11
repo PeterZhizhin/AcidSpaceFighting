@@ -11,7 +11,7 @@ public class AsteroidModel extends Model {
     public AsteroidModel(float x, float y, float radius, float mass) {
        super(null, null);
         GeometricModel g = new AsteroidGeometricModel(x, y, radius);
-        PhysicModel p = new PhysicModel(g, mass);
+        PhysicModel p = new PhysicModel(g, new Point[]{}, mass);
         GraphicModel g2=new AsteroidGraphicModel(g);
         setGraphicModel(g2);
         setPhysicModel(p);
@@ -21,7 +21,7 @@ public class AsteroidModel extends Model {
     {
         super(null, null);
         GeometricModel g = new AsteroidGeometricModel(x, y, radius);
-        PhysicModel p = new PhysicModel(g, mass, speed);
+        PhysicModel p = new PhysicModel(g, new Point[]{}, mass, speed);
         GraphicModel g2=new AsteroidGraphicModel(g);
         setGraphicModel(g2);
         setPhysicModel(p);

@@ -44,13 +44,17 @@ public class TextureDrawer {
     }
 
     public static void startDrawSmoke() {
-        if (ShadersBase.use(ShadersBase.smoke))
+        if (ShadersBase.use(ShadersBase.smoke))      {
         ShadersBase.bindTexture(ShadersBase.smokeID, smoke) ;
+            glBegin(GL_QUADS);
+        }
     }
 
     public static void startDrawFire() {
-        if (ShadersBase.use(ShadersBase.fire))
+        if (ShadersBase.use(ShadersBase.fire)) {
         ShadersBase.bindTexture(ShadersBase.fireID, fire);
+            glBegin(GL_QUADS);
+        }
     }
 
     public static void finishDraw() {
@@ -69,6 +73,17 @@ public class TextureDrawer {
             ShadersBase.bindSecondTexture(ShadersBase.damageID, damages[damage]);
 
         drawQuad(p1, p2, p3, p4);
+    }
+
+    public static void drawQuadWIdthoutBeginAndEnd(float x, float y, float r) {
+        glTexCoord2f(0, 0);
+        Camera.translatePoint(x+r, y);
+        glTexCoord2f(1, 0);
+        Camera.translatePoint(x, y+r);
+        glTexCoord2f(1, 1);
+        Camera.translatePoint(x-r, y);
+        glTexCoord2f(0, 1);
+        Camera.translatePoint(x, y-r);
     }
 
     public static void drawQuadWIdthoutBeginAndEnd(Point p1, Point p2, Point p3, Point p4) {

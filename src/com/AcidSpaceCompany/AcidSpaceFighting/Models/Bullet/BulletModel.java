@@ -11,7 +11,7 @@ public class BulletModel extends Model {
     public BulletModel(float x, float y, float radius, float mass) {
         super(null, null);
         GeometricModel g = new BulletGeometricModel(x, y, radius);
-        PhysicModel p = new BulletPhysicModel(g, mass);
+        PhysicModel p = new BulletPhysicModel(g, new Point[]{}, mass);
         GraphicModel g2=new BulletGraphicModel(g);
         setGraphicModel(g2);
         setPhysicModel(p);

@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 
 import static org.lwjgl.opengl.ARBShaderObjects.glGetUniformLocationARB;
+import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL20.glGetAttribLocation;
 import static org.lwjgl.opengl.GL20.glVertexAttrib1f;
 
@@ -38,6 +39,7 @@ public class ShadersBase {
 
     public static boolean use(int i) {
         if (i!=current) {
+            glEnd();
             shaders[i].use();
             current=i;
             return true;
