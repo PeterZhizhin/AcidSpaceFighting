@@ -16,13 +16,15 @@ public class TextureDrawer {
     private static int noise;
     private static int background;
     private static int white;
+    private static int achiveCorner;
+    private static int achiveMain;
     private static int fire;
     private static int smoke;
     private static int[] blocks;
     private static int[] damages;
 
     public static void drawBackground() {
-        ShadersBase.bindTexture(ShadersBase.backgroundTextureID, background);
+        ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, background);
         glBegin(GL_QUADS);
         glTexCoord2f(0, 0);
         glVertex2f(0, 0);
@@ -36,7 +38,7 @@ public class TextureDrawer {
     }
 
     public static void startDrawNoise() {
-        ShadersBase.bindTexture(ShadersBase.backgroundTextureID, noise);
+        ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, noise);
     }
 
     public static void startDrawTextures() {
@@ -55,6 +57,45 @@ public class TextureDrawer {
         ShadersBase.bindTexture(ShadersBase.fireID, fire);
             glBegin(GL_QUADS);
         }
+    }
+
+    public static void drawAchives(float dy) {
+        ShadersBase.use(ShadersBase.defaultShader);
+        ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, achiveCorner);
+
+        float xMainStart= Display.getWidth()*2/3;
+        float xFigStart= xMainStart-(Display.getHeight()/7-10);
+        float yMainStart= Display.getHeight()*6/7;
+        float yMainEnd= Display.getHeight()-10;
+
+        float yD= Display.getHeight()/7;
+
+        yMainEnd+=dy*yD;
+        yMainStart+=dy*yD;
+
+        glBegin(GL_QUADS);
+        glTexCoord2f(0, 0);
+        glVertex2f(xFigStart, yMainStart);
+        glTexCoord2f(1, 0);
+        glVertex2f(xMainStart, yMainStart);
+        glTexCoord2f(1, 1);
+        glVertex2f(xMainStart, yMainEnd);
+        glTexCoord2f(0, 1);
+        glVertex2f(xFigStart, yMainEnd);
+        glEnd();
+
+        ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, achiveMain);
+        glBegin(GL_QUADS);
+        glTexCoord2f(0, 0);
+        glVertex2f(xMainStart, yMainStart);
+        glTexCoord2f(1, 0);
+        glVertex2f(Display.getWidth()-10, yMainStart);
+        glTexCoord2f(1, 1);
+        glVertex2f(Display.getWidth()-10, yMainEnd);
+        glTexCoord2f(0, 1);
+        glVertex2f(xMainStart, yMainEnd);
+        glEnd();
+
     }
 
     public static void finishDraw() {
@@ -153,6 +194,8 @@ public class TextureDrawer {
         noise=load("Noise.png");
         fire=load("Fire.png");
         smoke=load("Smoke.png");
+        achiveCorner=load("AchiveCorner.png");
+        achiveMain=load("AchiveMain.png");
     }
 
 }

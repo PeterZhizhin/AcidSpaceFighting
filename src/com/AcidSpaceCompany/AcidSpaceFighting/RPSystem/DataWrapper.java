@@ -1,5 +1,6 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.RPSystem;
 
+import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD.HUD;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Items.Bag;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Items.Item;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
@@ -43,7 +44,7 @@ public class DataWrapper {
     }
 
     public static void addAchive(int number) {
-            System.err.println("ACHIVE "+number+" ADDED");
+        HUD.addAchive(null);
     }
 
     public static void changeStat(int type, float delta) {

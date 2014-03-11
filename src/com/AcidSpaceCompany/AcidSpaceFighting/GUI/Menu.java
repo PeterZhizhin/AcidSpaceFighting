@@ -4,9 +4,6 @@ import com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls.Button;
 import com.AcidSpaceCompany.AcidSpaceFighting.Window;
 import org.lwjgl.input.Keyboard;
 
-/**
- * Created by peter on 11.03.14.
- */
 public class Menu extends GUI {
 
 

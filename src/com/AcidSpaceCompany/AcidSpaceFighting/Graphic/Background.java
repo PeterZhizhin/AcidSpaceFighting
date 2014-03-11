@@ -9,7 +9,7 @@ public class Background {
 
     public static void draw() {
 
-        ShadersBase.use(ShadersBase.background);
+        ShadersBase.use(ShadersBase.defaultShader);
 
         TextureDrawer.drawBackground();
 

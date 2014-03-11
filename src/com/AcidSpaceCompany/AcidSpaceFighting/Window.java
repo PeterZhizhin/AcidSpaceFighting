@@ -1,14 +1,10 @@
 package com.AcidSpaceCompany.AcidSpaceFighting;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Audio.SoundBase;
-import com.AcidSpaceCompany.AcidSpaceFighting.GUI.GUI;
-import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD;
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.Menu;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.*;
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls.FontDrawer;
 import org.lwjgl.input.Keyboard;
-
-import java.security.Key;
 
 /**
  * User class which helps allows you to make update() drawTopLayer() cycle easily
@@ -23,7 +19,6 @@ public class Window extends BasicWindow {
     private static boolean isInited = false;
 
     private static Menu menu;
-    private static HUD hud;
 
     public static void initWorld()
     {
@@ -56,7 +51,6 @@ public class Window extends BasicWindow {
         super(1200, 700, 10000, "Window; ");
         gameState = GameState.MENU;
         menu = new Menu();
-        hud = new HUD();
         SoundBase.init();
         ShadersBase.init();
         FontDrawer.init();
@@ -89,7 +83,6 @@ public class Window extends BasicWindow {
                 menu.update();
                 break;
             case GAME:
-                hud.update();
                 World.update(deltaTime / 1000f);
                 break;
         }
@@ -103,7 +96,6 @@ public class Window extends BasicWindow {
                 menu.draw();
                 break;
             case GAME:
-                hud.draw();
                 World.draw();
                 break;
         }
