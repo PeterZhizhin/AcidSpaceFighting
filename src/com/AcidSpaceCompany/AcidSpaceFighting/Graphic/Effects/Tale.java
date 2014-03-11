@@ -1,19 +1,12 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
-import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Controls.Color;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.ShadersBase;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
-import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
-
-import static org.lwjgl.opengl.GL11.GL_QUADS;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glEnd;
 
 public class Tale implements Effect {
 

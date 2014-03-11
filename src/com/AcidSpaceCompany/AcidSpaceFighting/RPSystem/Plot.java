@@ -4,6 +4,7 @@ public class Plot {
 
     public static void init() {
 
+
         Condition c = new Condition() {
             public boolean getResult() {
                 return DataWrapper.getX()>10000 && !PlotBase.getConditionWasTrueInPast(0);
@@ -15,6 +16,8 @@ public class Plot {
                 DataWrapper.addAchive(0);
             }
         };
+
+        PlotBase.init();
 
         PlotBase.addEventAndCondition(e, c);
 

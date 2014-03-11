@@ -2,7 +2,6 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Segment;
-import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Controls.Color;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 import java.util.Random;

@@ -2,7 +2,6 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Models.Asteroid;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GeometricModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Camera;
-import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Controls.Color;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GraphicModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Tale;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;

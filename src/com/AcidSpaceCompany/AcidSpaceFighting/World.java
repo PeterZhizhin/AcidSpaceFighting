@@ -6,7 +6,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Background;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Camera;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Effect;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Explosion;
-import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.HUD;
+import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Plot;
@@ -87,17 +87,11 @@ public class World {
         for (Model model : models) {
             model.drawTopLayer();
         }
-
-        HUD.draw();
-
     }
 
     private static void updateKeyboardInput() {
 
         player1.updateKeyboardInput();
-
-        if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
-            Window.pauseGame();
     }
 
     private static void updateModels(float deltaTime) {
@@ -199,6 +193,7 @@ public class World {
 
         models = new ArrayList<Model>();
         addModelBuffer = new LinkedList<Model>();
+        ships = new ArrayList<SpaceShip>();
 
         explosionBuffer=new ArrayList<Point>();
         explosionPowerBuffer=new ArrayList<Float>();

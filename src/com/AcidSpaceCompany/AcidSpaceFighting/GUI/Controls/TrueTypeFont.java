@@ -1,4 +1,4 @@
-package com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Controls;
+package com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls;
 
 import java.awt.Color;
 import java.awt.Font;

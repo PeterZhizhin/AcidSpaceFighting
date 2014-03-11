@@ -26,6 +26,11 @@ public class Camera {
         scale = 4f;
     }
 
+    public static void move(Point delta)
+    {
+        move((int)delta.x, (int)delta.y);
+    }
+
     public static void move(int dX, int dY) {
         xPos += dX * scale;
         yPos += dY * scale;

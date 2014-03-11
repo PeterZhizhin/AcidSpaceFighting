@@ -11,6 +11,14 @@ public class PlotBase {
     private static ArrayList<Boolean> conditionsHappended=new ArrayList<Boolean>();
     private static ArrayList<Integer> conditionToEventConnection=new ArrayList<Integer>();
 
+    public static void init()
+    {
+        events = new ArrayList<Event>();
+        conditions = new ArrayList<Condition>();
+        conditionsHappended = new ArrayList<Boolean>();
+        conditionToEventConnection = new ArrayList<Integer>();
+    }
+
     public static int addEvent(Event e) {
          events.add(e);
         return events.size()-1;

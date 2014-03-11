@@ -1,4 +1,4 @@
-package com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Controls;
+package com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls;
 
 import static org.lwjgl.opengl.GL11.glColor4f;
 
