@@ -7,6 +7,7 @@ public class SoundBase {
     private static Sound explosion;
     private static Sound connect;
     private static Sound gun;
+    private static Sound achive;
 
     private static int num=0;
     public static void playEngine() {
@@ -29,6 +30,10 @@ public class SoundBase {
 
     public static void playMusic() {
         music.play();
+    }
+
+    public static void playAchiveAdd() {
+        achive.play();
     }
 
     public static void init() {
@@ -56,6 +61,10 @@ public class SoundBase {
         connect = new Sound("connect.wav");
         connect.setIsLooped(false);
         connect.setVolume(0.3f);
+
+        achive = new Sound("connect.wav");
+        achive.setIsLooped(false);
+        achive.setVolume(0.3f);
     }
 
     public static void dispose() {

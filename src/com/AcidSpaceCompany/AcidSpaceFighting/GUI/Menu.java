@@ -20,14 +20,14 @@ public class Menu extends GUI {
     public Menu()
     {
         super();
-        Button startButton = new Button(10, 50, 100, 20, "Start Game");
+        Button startButton = new Button(10, 50, 300, 40, "Start Game");
         startButton.setEvent(new Runnable() {
             @Override
             public void run() {
                 start();
             }
         });
-        Button resumeButton = new Button(10, 80, 100, 20, "Resume Game");
+        Button resumeButton = new Button(10, 100, 300, 40, "Resume Game");
         resumeButton.setEvent(new Runnable() {
             @Override
             public void run() {

@@ -1,6 +1,7 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls;
 
-import static org.lwjgl.opengl.GL11.glVertex2f;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Font;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 
 public class Button extends Control {
 
@@ -16,14 +17,12 @@ public class Button extends Control {
     public void drawBackground() {
         int isSelectedInverted = gradations - isSelected - 1;
         colors[isSelectedInverted].bind();
-        glVertex2f(x, y);
-        glVertex2f(x, y2);
-        glVertex2f(x2, y2);
-        glVertex2f(x2, y);
+        TextureDrawer.drawUntranslatedQuad(x, y, x2, y2);
     }
 
     public void drawTitle() {
-        FontDrawer.drawString(x + 10, y, text, colors[isSelected], false);
+        colors[isSelected].bind();
+        Font.drawString(x, y+5, 32, text);
     }
 
     public void setEvent(Runnable e) {

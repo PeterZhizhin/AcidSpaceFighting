@@ -1,6 +1,7 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls;
 
-import static org.lwjgl.opengl.GL11.glVertex2f;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Font;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 
 public class Control extends Rectangle {
     protected String text;
@@ -13,15 +14,12 @@ public class Control extends Rectangle {
 
     public void drawBackground() {
         niceGray.bind();
-        glVertex2f(x, y);
-        glVertex2f(x, y2);
-        glVertex2f(x2, y2);
-        glVertex2f(x2, y);
-        System.out.println(x + " " + y + " " + x2 + " " + y2);
+        TextureDrawer.drawUntranslatedQuad(x, y, x2, y2);
     }
 
     public void drawTitle() {
-        FontDrawer.drawString(x + 10, y, text, niceWhite, false);
+        niceWhite.bind();
+        Font.drawString(x, y, 32, text);
     }
 
     public void setText(String s) {

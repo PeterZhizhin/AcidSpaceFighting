@@ -1,13 +1,12 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls;
 
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Font;
+
 public class Label extends Control {
 
-    private boolean isBig;
-
-    public Label(int x, int y, String s, boolean isBig) {
+    public Label(int x, int y, String s) {
         super(x, y, 0, 0);
         text = s;
-        this.isBig = isBig;
     }
 
     public void update(int x, int y, boolean isDown) {
@@ -15,7 +14,8 @@ public class Label extends Control {
     }
 
     public void drawTitle() {
-        FontDrawer.drawString(x, y, text, niceWhite, isBig);
+        niceWhite.bind();
+        Font.drawString(x, y, 32, text);
     }
 
     public void drawBackground() {

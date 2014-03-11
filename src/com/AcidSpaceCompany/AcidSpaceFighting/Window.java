@@ -3,7 +3,6 @@ package com.AcidSpaceCompany.AcidSpaceFighting;
 import com.AcidSpaceCompany.AcidSpaceFighting.Audio.SoundBase;
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.Menu;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.*;
-import com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls.FontDrawer;
 import org.lwjgl.input.Keyboard;
 
 /**
@@ -53,7 +52,6 @@ public class Window extends BasicWindow {
         menu = new Menu();
         SoundBase.init();
         ShadersBase.init();
-        FontDrawer.init();
         startWorking();
     }
 

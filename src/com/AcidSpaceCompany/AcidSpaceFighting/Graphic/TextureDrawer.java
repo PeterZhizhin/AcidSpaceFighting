@@ -20,6 +20,7 @@ public class TextureDrawer {
     private static int achiveMain;
     private static int fire;
     private static int smoke;
+    private static int font;
     private static int[] blocks;
     private static int[] damages;
 
@@ -59,11 +60,22 @@ public class TextureDrawer {
         }
     }
 
+    public static void startDrawControls() {
+        ShadersBase.use(ShadersBase.defaultShader);
+        ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, white);
+    }
+
+    public static void startDrawText() {
+        ShadersBase.use(ShadersBase.defaultShader);
+            ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, font);
+        }
+
     public static void drawAchives(float dy) {
         ShadersBase.use(ShadersBase.defaultShader);
         ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, achiveCorner);
 
         float xMainStart= Display.getWidth()*2/3;
+        float xMainEnd= Display.getWidth()-10;
         float xFigStart= xMainStart-(Display.getHeight()/7-10);
         float yMainStart= Display.getHeight()*6/7;
         float yMainEnd= Display.getHeight()-10;
@@ -74,28 +86,25 @@ public class TextureDrawer {
         yMainStart+=dy*yD;
 
         glBegin(GL_QUADS);
-        glTexCoord2f(0, 0);
-        glVertex2f(xFigStart, yMainStart);
-        glTexCoord2f(1, 0);
-        glVertex2f(xMainStart, yMainStart);
-        glTexCoord2f(1, 1);
-        glVertex2f(xMainStart, yMainEnd);
-        glTexCoord2f(0, 1);
-        glVertex2f(xFigStart, yMainEnd);
+        drawUntranslatedQuad(xFigStart, yMainStart, xMainStart, yMainEnd);
         glEnd();
 
         ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, achiveMain);
         glBegin(GL_QUADS);
-        glTexCoord2f(0, 0);
-        glVertex2f(xMainStart, yMainStart);
-        glTexCoord2f(1, 0);
-        glVertex2f(Display.getWidth()-10, yMainStart);
-        glTexCoord2f(1, 1);
-        glVertex2f(Display.getWidth()-10, yMainEnd);
-        glTexCoord2f(0, 1);
-        glVertex2f(xMainStart, yMainEnd);
+        drawUntranslatedQuad(xMainStart, yMainStart, xMainEnd, yMainEnd);
         glEnd();
 
+    }
+
+    public static void drawUntranslatedQuad(float sx, float sy, float ex, float ey) {
+        glTexCoord2f(0, 0);
+        glVertex2f(sx, sy);
+        glTexCoord2f(1, 0);
+        glVertex2f(ex, sy);
+        glTexCoord2f(1, 1);
+        glVertex2f(ex, ey);
+        glTexCoord2f(0, 1);
+        glVertex2f(sx, ey);
     }
 
     public static void finishDraw() {
@@ -196,6 +205,7 @@ public class TextureDrawer {
         smoke=load("Smoke.png");
         achiveCorner=load("AchiveCorner.png");
         achiveMain=load("AchiveMain.png");
+        font=load("Font.png");
     }
 
 }

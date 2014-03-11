@@ -2,7 +2,7 @@ package com.AcidSpaceCompany.AcidSpaceFighting.GUI;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls.Control;
-import com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls.FontDrawer;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
@@ -18,7 +18,6 @@ public abstract class GUI {
     protected LinkedList<Control> controls;
 
     public GUI() {
-        FontDrawer.init();
         controls = new LinkedList<Control>();
     }
 
@@ -50,20 +49,27 @@ public abstract class GUI {
 
     }
 
-    public void draw() {
-
-        glBegin(GL_QUADS);
+    private void drawBackgrounds() {
         for (Control control : controls) {
             control.drawBackground();
         }
-        glEnd();
+    }
 
-        glEnable(GL_TEXTURE_2D);
+    private void drawTitles() {
         for (Control control : controls) {
             control.drawTitle();
         }
-        glDisable(GL_TEXTURE_2D);
+    }
 
+    public void draw() {
+        TextureDrawer.startDrawControls();
+        glBegin(GL_QUADS);
+        drawBackgrounds();
+        glEnd();
+        TextureDrawer.startDrawText();
+        glBegin(GL_QUADS);
+        drawTitles();
+        glEnd();
     }
 
 
