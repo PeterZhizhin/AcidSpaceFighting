@@ -1,39 +1,22 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.GUI;
 
-import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls.Control;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.ShadersBase;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
 import java.util.LinkedList;
 
+import static com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer.*;
 import static org.lwjgl.opengl.GL11.*;
 
-public abstract class GUI {
+public abstract class Form {
 
-    private boolean lastStateButtonIsPressed = false;
-    private int mouseDownX = 0;
-    private int mouseDownY = 0;
     protected LinkedList<Control> controls;
 
-    public GUI() {
+    public Form() {
         controls = new LinkedList<Control>();
-    }
-
-    public Point getDeltaMouse()
-    {
-        int nowX = Mouse.getX();
-        int nowY = Display.getHeight() - Mouse.getY();
-        Point result = new Point(nowX - mouseDownX, nowY - mouseDownY);
-        mouseDownX = nowX;
-        mouseDownY = nowY;
-        return result;
-    }
-
-    public boolean isKeyPressed(boolean isLeft)
-    {
-        return Mouse.isButtonDown(isLeft ? 0 : 1);
     }
 
     public void update() {
@@ -45,8 +28,6 @@ public abstract class GUI {
         for (Control control : controls) {
             control.update(x, y, buttonIsPressed);
         }
-
-
     }
 
     private void drawBackgrounds() {
@@ -61,8 +42,30 @@ public abstract class GUI {
         }
     }
 
+    private static float BCKGRND=0;
+    private static final float speed=1f;
+
     public void draw() {
-        TextureDrawer.startDrawControls();
+
+        ShadersBase.use(ShadersBase.blackAndWhite);
+        ShadersBase.setFloatValue(ShadersBase.stateForBAWID, 1f+Mouse.getY()*1f/Display.getHeight()+1f-Mouse.getX()*1f/Display.getWidth());
+        drawNUARBackground();
+
+        BCKGRND-=speed;
+        if (BCKGRND<=-512) BCKGRND+=512;
+
+
+        startDrawNoise();
+        glBegin(GL_QUADS);
+        for (float i=BCKGRND; i<Display.getWidth(); i+=512) {
+            for (float j=BCKGRND; j<Display.getHeight(); j+=512) {
+                drawUntranslatedQuad(i, j, i + 512, j + 512);
+            }
+        }
+        glEnd();
+        finishDraw();
+
+        startDrawControls();
         glBegin(GL_QUADS);
         drawBackgrounds();
         glEnd();

@@ -4,11 +4,12 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import org.lwjgl.opengl.Display;
 
 import static com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer.*;
+import static org.lwjgl.opengl.GL11.glColor3f;
 
 public class Background {
 
     public static void draw() {
-
+        glColor3f(1f, 1f, 1f);
         ShadersBase.use(ShadersBase.defaultShader);
 
         TextureDrawer.drawBackground();

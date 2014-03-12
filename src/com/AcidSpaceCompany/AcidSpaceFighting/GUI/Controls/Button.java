@@ -1,6 +1,5 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls;
 
-import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Font;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 
 public class Button extends Control {
@@ -18,11 +17,6 @@ public class Button extends Control {
         int isSelectedInverted = gradations - isSelected - 1;
         colors[isSelectedInverted].bind();
         TextureDrawer.drawUntranslatedQuad(x, y, x2, y2);
-    }
-
-    public void drawTitle() {
-        colors[isSelected].bind();
-        Font.drawString(x, y+5, 32, text);
     }
 
     public void setEvent(Runnable e) {

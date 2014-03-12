@@ -7,7 +7,7 @@ public class Control extends Rectangle {
     protected String text;
 
     public static Color niceWhite = new Color(1f, 1f, 1f);
-    public static Color niceGray = new Color(0.06640625f, 0.06640625f, 0.06640625f);
+    public static Color niceGray = new Color(0, 0, 0, 0.7f);
     protected static Color[] colors;
     protected static boolean isInitialised = false;
     protected static final int gradations = 15;
@@ -19,7 +19,7 @@ public class Control extends Rectangle {
 
     public void drawTitle() {
         niceWhite.bind();
-        Font.drawString(x, y, 32, text);
+        Font.drawString(x, y+5, 32, text);
     }
 
     public void setText(String s) {

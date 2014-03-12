@@ -24,6 +24,20 @@ public class TextureDrawer {
     private static int[] blocks;
     private static int[] damages;
 
+    public static void drawNUARBackground() {
+        ShadersBase.bindTexture(ShadersBase.textureForBAWID, background);
+        glBegin(GL_QUADS);
+        glTexCoord2f(0, 0);
+        glVertex2f(0, 0);
+        glTexCoord2f(1f, 0f);
+        glVertex2f(Display.getWidth(), 0);
+        glTexCoord2f(1f, 1f);
+        glVertex2f(Display.getWidth(), Display.getHeight());
+        glTexCoord2f(0, 1f);
+        glVertex2f(0, Display.getHeight());
+        glEnd();
+    }
+
     public static void drawBackground() {
         ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, background);
         glBegin(GL_QUADS);

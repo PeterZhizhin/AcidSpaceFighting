@@ -17,6 +17,7 @@ public class ShadersBase {
     public static int block=1;
     public static int defaultShader =2;
     public static int smoke=3;
+    public static int blackAndWhite=4;
 
     private static int current=-1;
 
@@ -54,13 +55,15 @@ public class ShadersBase {
     public static int blockID;
     public static int damageID;
     public static int textureForDefaultShaderID;
+    public static int textureForBAWID;
+    public static int stateForBAWID;
     public static int fireID;
     public static int fireStateID;
     public static int smokeID;
     public static int smokeStateID;
 
     public static void init() {
-        shaders=new Shader[4];
+        shaders=new Shader[5];
         shaders[fire]=new Shader("fire");
         fireID = glGetUniformLocationARB(shaders[fire].getNumber(), "Fire");
         fireStateID = glGetAttribLocation(shaders[fire].getNumber(), "State");
@@ -75,6 +78,10 @@ public class ShadersBase {
         shaders[smoke]=new Shader("smoke");
         smokeID= glGetUniformLocationARB(shaders[smoke].getNumber(), "Smoke");
         smokeStateID = glGetAttribLocation(shaders[smoke].getNumber(), "State");
+
+        shaders[blackAndWhite]=new Shader("blackAndWhite");
+        textureForBAWID= glGetUniformLocationARB(shaders[blackAndWhite].getNumber(), "Texture");
+        stateForBAWID= glGetAttribLocation(shaders[blackAndWhite].getNumber(), "State");
     }
 
 }

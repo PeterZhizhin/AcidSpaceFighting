@@ -2,9 +2,8 @@ package com.AcidSpaceCompany.AcidSpaceFighting.GUI;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls.Button;
 import com.AcidSpaceCompany.AcidSpaceFighting.Window;
-import org.lwjgl.input.Keyboard;
 
-public class Menu extends GUI {
+public class Menu extends Form {
 
 
     private void resume()
@@ -27,15 +26,23 @@ public class Menu extends GUI {
                 start();
             }
         });
-        Button resumeButton = new Button(10, 100, 300, 40, "Resume Game");
+        Button resumeButton = new Button(10, 90, 300, 40, "Resume Game");
         resumeButton.setEvent(new Runnable() {
             @Override
             public void run() {
                 resume();
             }
         });
+        Button quit = new Button(10, 130, 300, 40, "Quit");
+        quit.setEvent(new Runnable() {
+            @Override
+            public void run() {
+                Window.exit();
+            }
+        });
         controls.add(startButton);
         controls.add(resumeButton);
+        controls.add(quit);
     }
 
 }
