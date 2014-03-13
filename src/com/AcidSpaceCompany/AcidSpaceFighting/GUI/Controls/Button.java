@@ -2,6 +2,8 @@ package com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 
+import static org.lwjgl.opengl.GL11.glColor4f;
+
 public class Button extends Control {
 
     private boolean oldIsDown;

@@ -3,6 +3,7 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Graphic;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import de.matthiasmann.twl.utils.PNGDecoder;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
 import java.io.IOException;
@@ -27,6 +28,10 @@ public class TextureDrawer {
     private static final boolean hardDebug=false;
 
     public static void drawNUARBackground() {
+        ShadersBase.use(ShadersBase.blackAndWhite);
+        ShadersBase.setFloatValue(ShadersBase.stateForBAWID,
+                1f+ Mouse.getY()*1f/Display.getHeight()+1f-Mouse.getX()*1f/Display.getWidth());
+
         ShadersBase.bindTexture(ShadersBase.textureForBAWID, background);
         glBegin(GL_QUADS);
         glTexCoord2f(0, 0);
@@ -38,6 +43,7 @@ public class TextureDrawer {
         glTexCoord2f(0, 1f);
         glVertex2f(0, Display.getHeight());
         glEnd();
+        finishDraw();
     }
 
     public static void drawBackground() {
@@ -55,6 +61,7 @@ public class TextureDrawer {
     }
 
     public static void startDrawNoise() {
+        ShadersBase.use(ShadersBase.defaultShader);
         ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, noise);
     }
 

@@ -3,10 +3,12 @@ package com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Font;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 
+import static org.lwjgl.opengl.GL11.glColor4f;
+
 public class Control extends Rectangle {
     protected String text;
 
-    public static Color niceWhite = new Color(1f, 1f, 1f);
+    public static Color niceWhite = new Color(1f, 1f, 1f, 1f);
     public static Color niceGray = new Color(0, 0, 0, 0.7f);
     protected static Color[] colors;
     protected static boolean isInitialised = false;
@@ -43,7 +45,8 @@ public class Control extends Rectangle {
                 colors[i] = new Color(
                         (Control.niceGray.r * i + Control.niceWhite.r * (gradations - i)) / gradations,
                         (Control.niceGray.g * i + Control.niceWhite.g * (gradations - i)) / gradations,
-                        (Control.niceGray.b * i + Control.niceWhite.b * (gradations - i)) / gradations);
+                        (Control.niceGray.b * i + Control.niceWhite.b * (gradations - i)) / gradations,
+                        (Control.niceGray.a * i + Control.niceWhite.a * (gradations - i)) / gradations);
             }
             colors[0] = Control.niceWhite;
             colors[gradations - 1] = Control.niceGray;

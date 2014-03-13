@@ -47,13 +47,10 @@ public abstract class Form {
 
     public void draw() {
 
-        ShadersBase.use(ShadersBase.blackAndWhite);
-        ShadersBase.setFloatValue(ShadersBase.stateForBAWID, 1f+Mouse.getY()*1f/Display.getHeight()+1f-Mouse.getX()*1f/Display.getWidth());
         drawNUARBackground();
 
         BCKGRND-=speed;
         if (BCKGRND<=-512) BCKGRND+=512;
-
 
         startDrawNoise();
         glBegin(GL_QUADS);
@@ -65,14 +62,17 @@ public abstract class Form {
         glEnd();
         finishDraw();
 
-        TextureDrawer.finishDraw();
+        startDrawControls();
         glBegin(GL_QUADS);
         drawBackgrounds();
         glEnd();
+        finishDraw();
+
         TextureDrawer.startDrawText();
         glBegin(GL_QUADS);
         drawTitles();
         glEnd();
+        finishDraw();
     }
 
 
