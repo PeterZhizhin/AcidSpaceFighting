@@ -65,7 +65,7 @@ public abstract class Form {
         glEnd();
         finishDraw();
 
-        startDrawControls();
+        TextureDrawer.finishDraw();
         glBegin(GL_QUADS);
         drawBackgrounds();
         glEnd();

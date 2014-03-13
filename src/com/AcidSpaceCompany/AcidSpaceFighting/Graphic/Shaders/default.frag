@@ -3,9 +3,9 @@
 
         void main(){
         vec4 color =texture2D(Texture, gl_TexCoord[0].st);
-        float r=color.x*gl_Color.x;
-        float g=color.y*gl_Color.y;
-        float b=color.z*gl_Color.z;
-        float a=color.w*(1.0f-gl_Color.w);
-        gl_FragColor = vec4(r, g, b, a);
+        float r=color.x*(1f-gl_Color.x);
+        float g=color.y*(1f-gl_Color.y);
+        float b=color.z*(1f-gl_Color.z);
+        float a=color.w;//*gl_Color.w;
+        gl_FragColor = vec4(r, g, b, 1f);
         }

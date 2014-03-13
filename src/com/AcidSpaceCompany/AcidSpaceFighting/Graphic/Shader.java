@@ -1,6 +1,5 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Graphic;
 
-import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.*;
 
 import java.io.BufferedReader;
@@ -8,12 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static org.lwjgl.opengl.GL20.glGetProgramInfoLog;
-import static org.lwjgl.opengl.GL20.glGetProgrami;
-
 public class Shader {
 
     private int shader, vertShader, fragShader;
+    private static final boolean hardDebug=false;
 
     public int getNumber() {
         return shader;
@@ -23,17 +20,17 @@ public class Shader {
         shader= ARBShaderObjects.glCreateProgramObjectARB();
         if(shader!=0){
             vertShader=createShader(loadCode("Shaders/"+s+".vert"), ARBVertexShader.GL_VERTEX_SHADER_ARB);
-            System.out.println("[Shader] Vertex shader code loaded: "+s);
+            if (hardDebug) System.out.println("[Shader] Vertex shader code loaded: "+s);
             fragShader=createShader(loadCode("Shaders/"+s+".frag"), ARBFragmentShader.GL_FRAGMENT_SHADER_ARB);
-            System.out.println("[Shader] Fragment shader code loaded: "+s);
+            if (hardDebug) System.out.println("[Shader] Fragment shader code loaded: "+s);
         }else  {
             System.err.println("[Shader] Failed to create shaders");
         }
         if(vertShader!=0 && fragShader!=0){
             ARBShaderObjects.glAttachObjectARB(shader, vertShader);
-            System.out.println("[Shader] Vertex shader code attached: "+s);
+            if (hardDebug) System.out.println("[Shader] Vertex shader code attached: "+s);
             ARBShaderObjects.glAttachObjectARB(shader, fragShader);
-            System.out.println("[Shader] Fragment shader code attached: "+s);
+            if (hardDebug) System.out.println("[Shader] Fragment shader code attached: "+s);
             ARBShaderObjects.glLinkProgramARB(shader);
             ARBShaderObjects.glValidateProgramARB(shader);
 
@@ -41,9 +38,8 @@ public class Shader {
             if (ARBShaderObjects.glGetObjectParameteriARB(shader,
                     ARBShaderObjects.GL_OBJECT_VALIDATE_STATUS_ARB) == GL11.GL_FALSE) {
                 System.err.println("[Shader] "+getLogInfo(shader));
-            }
-
-            System.out.println("[Shader] Shader ready to work: "+s);
+            } else
+            if (hardDebug) System.out.println("[Shader] Shader ready to work: "+s);
         }else {
             System.err.println("[Shader] Failed to compile shader");
         }

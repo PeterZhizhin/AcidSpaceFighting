@@ -24,6 +24,8 @@ public class TextureDrawer {
     private static int[] blocks;
     private static int[] damages;
 
+    private static final boolean hardDebug=false;
+
     public static void drawNUARBackground() {
         ShadersBase.bindTexture(ShadersBase.textureForBAWID, background);
         glBegin(GL_QUADS);
@@ -196,7 +198,7 @@ public class TextureDrawer {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
-            System.out.println("[TextureDrawer]Texture " + title + " loaded");
+            if (hardDebug) System.out.println("[TextureDrawer]Texture " + title + " loaded");
             return ret;
         } catch (IOException e) {
             System.err.println("[TextureDrawer] Failed to load texture "+title);
