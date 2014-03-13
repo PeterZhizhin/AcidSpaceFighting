@@ -21,15 +21,20 @@ public class ShadersBase {
 
     private static int current=-1;
 
+    private static int lastNum=0;
+
 
     public static void setFloatValue(int num, float value) {
         glVertexAttrib1f(num, value);
     }
 
     public static void bindSecondTexture(int name, int num) {
+        if (lastNum!=num) {
+            lastNum=num;
         GL13.glActiveTexture(GL13.GL_TEXTURE1);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, num);
         ARBShaderObjects.glUniform1iARB(name, 1);
+        }
     }
 
     public static void bindTexture(int name, int num) {

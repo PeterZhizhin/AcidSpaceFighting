@@ -1,11 +1,15 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Graphic;
 
+import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import static org.lwjgl.opengl.GL20.glGetProgramInfoLog;
+import static org.lwjgl.opengl.GL20.glGetProgrami;
 
 public class Shader {
 
@@ -32,6 +36,13 @@ public class Shader {
             System.out.println("[Shader] Fragment shader code attached: "+s);
             ARBShaderObjects.glLinkProgramARB(shader);
             ARBShaderObjects.glValidateProgramARB(shader);
+
+
+            if (ARBShaderObjects.glGetObjectParameteriARB(shader,
+                    ARBShaderObjects.GL_OBJECT_VALIDATE_STATUS_ARB) == GL11.GL_FALSE) {
+                System.err.println("[Shader] "+getLogInfo(shader));
+            }
+
             System.out.println("[Shader] Shader ready to work: "+s);
         }else {
             System.err.println("[Shader] Failed to compile shader");
