@@ -199,6 +199,7 @@ public class World {
         HUD.showMessage("Hello!", "Welcome to AcidSpaceFighting!");
 
         effects=new LinkedList<Effect>();
+        ships = new ArrayList<SpaceShip>();
 
         models = new ArrayList<Model>();
         addModelBuffer = new LinkedList<Model>();
