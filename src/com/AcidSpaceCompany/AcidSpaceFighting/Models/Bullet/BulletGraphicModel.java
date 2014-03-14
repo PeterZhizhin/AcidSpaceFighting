@@ -10,11 +10,8 @@ public class BulletGraphicModel extends GraphicModel {
 
     private Tale t;
 
-    public void drawBackgroundLayer() {
-        t.addPoint(shape.getCentre(), shape.getMaxLength());
-    }
-
     public void drawTopLayer() {
+        t.addPoint(shape.getCentre(), shape.getMaxLength());
         TextureDrawer.drawBlock(shape.getPoint(0), shape.getPoint(2), shape.getPoint(4), shape.getPoint(6), 5, body.getHealth());
     }
 

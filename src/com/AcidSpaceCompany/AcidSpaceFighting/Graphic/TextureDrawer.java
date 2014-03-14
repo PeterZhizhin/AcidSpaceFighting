@@ -62,11 +62,13 @@ public class TextureDrawer {
 
     public static void startDrawTextures() {
         ShadersBase.use(ShadersBase.block);
+        glColor3f(1f, 1f, 1f);
     }
 
     public static void startDrawConnections() {
         ShadersBase.use(ShadersBase.defaultShader);
         ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, white);
+        glColor3f(1f, 0.5f, 0f);
     }
 
     public static void startDrawSmoke() {

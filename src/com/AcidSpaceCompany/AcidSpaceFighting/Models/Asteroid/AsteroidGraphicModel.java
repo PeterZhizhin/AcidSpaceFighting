@@ -13,11 +13,8 @@ public class AsteroidGraphicModel extends GraphicModel {
 
     private Tale t;
 
-    public void drawBackgroundLayer() {
-        t.addPoint(shape.getCentre(), shape.getMaxLength() / 2);
-    }
-
     public void drawTopLayer() {
+        t.addPoint(shape.getCentre(), shape.getMaxLength() / 2);
         glEnd();
         glBegin(GL_TRIANGLE_FAN);
 

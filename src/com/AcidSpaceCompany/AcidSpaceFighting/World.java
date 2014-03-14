@@ -82,6 +82,12 @@ public class World {
 
         Background.draw();
 
+        TextureDrawer.startDrawConnections();
+        for (Model model : models) {
+            model.drawBackgroundLayer();
+        }
+        TextureDrawer.finishDraw();
+
         glBegin(GL_QUADS);
         for (Effect effect : effects) {
             effect.draw();
@@ -89,10 +95,6 @@ public class World {
         glEnd();
 
         TextureDrawer.startDrawTextures();
-        for (Model model : models) {
-            model.drawBackgroundLayer();
-        }
-
         for (Model model : models) {
             model.drawTopLayer();
         }

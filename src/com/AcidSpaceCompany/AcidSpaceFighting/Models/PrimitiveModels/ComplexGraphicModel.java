@@ -22,12 +22,6 @@ public class ComplexGraphicModel extends GraphicModel {
 
     @Override
     public void drawBackgroundLayer() {
-        for (int i=0; i<cm.getSize(); i++) {
-            cm.getModel(i).getGraphicModel().drawBackgroundLayer();
-        }
-
-        TextureDrawer.finishDraw();
-        TextureDrawer.startDrawConnections();
         GL11.glBegin(GL11.GL_QUADS);
         for (int i=0; i<cm.getSize()-1; i++) {
             for (int j=i+1; j<cm.getSize(); j++) {
@@ -39,8 +33,6 @@ public class ComplexGraphicModel extends GraphicModel {
             }
         }
         GL11.glEnd();
-        TextureDrawer.finishDraw();
-        TextureDrawer.startDrawTextures();
     }
 
     public ComplexGraphicModel(ComplexModel c)
