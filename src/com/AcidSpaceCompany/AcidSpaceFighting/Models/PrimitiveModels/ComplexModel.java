@@ -2,6 +2,8 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
+import java.awt.*;
+
 public class ComplexModel extends Model {
 
 
@@ -73,9 +75,45 @@ public class ComplexModel extends Model {
         }
     }
 
-    public void add(Model m, int num) {
-        models.add(m, num);
+    public void add(Model m) {
+        models.add(m);
         phyModel.recomputeMassCenters();
+    }
+
+    /**
+     * Проверка того, можно ли соединять модели
+     * @param model1
+     * @param model2
+     * @return
+     */
+    private boolean checkDistanceIsToConnect(Model model1, Model model2)
+    {
+
+        double distance = Math.min(model1.getPhysicModel().getConnectionDistance(),
+                model2.getPhysicModel().getConnectionDistance());
+        //distance*=distance;
+        //Расстояние между
+        return model1.getPhysicModel().getCentre().getDistanceToPoint(
+        //Центрами тел
+                (model2.getPhysicModel().getCentre()))
+        //Должно быть меньше или равно
+                <=
+        //Чем минимальное из расстояний между телами
+                distance;
+    }
+
+    /**
+     * Должен быть вызван, когда добавление всех моделей завершено
+     */
+    public void additionsFinished()
+    {
+        //Вызываем для каждой из возможной связи в модели проверку на связь
+        //(расстояние между центрами моделей меньше определенного значения)
+        for (int i=0; i<models.size()-1; i++)
+            for (int j = i+1; j<models.size(); j++)
+                if (checkDistanceIsToConnect(models.get(i),models.get(j)))
+                    models.addConnection(i,j);
+        recalculateComponents();
     }
 
     private ComplexModel(BodiesList<Model> models)

@@ -34,6 +34,10 @@ public class PhysicModel {
     public float getMaxWidth() {
         return body.getMaxLength();
     }
+    public float getConnectionDistance()
+    {
+        return body.getConnectionDistance();
+    }
 
     public boolean getIsNoNeedMore() {
         return health<=0;

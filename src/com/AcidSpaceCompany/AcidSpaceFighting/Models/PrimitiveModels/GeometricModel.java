@@ -38,6 +38,15 @@ public class GeometricModel {
     private Point[] vertexes;
     private float angle;
 
+    //Максимальное расстояние между центрами масс (оптимизация пересечения)
+    private float maxLength;
+    //Расстояние для присоединения модели в комплексную модель
+    private float connectionDistance;
+    public float getConnectionDistance()
+    {
+        return connectionDistance;
+    }
+
     /**
      * Считаем момент инерции многоугольника относительно центра масс
      * @return Геометрический момент инерции
@@ -64,8 +73,6 @@ public class GeometricModel {
         return J;
     }
 
-    //Максимальное расстояние между центрами масс (оптимизация пересечения)
-    private float maxLength;
 
     public float getAngle() {
         return angle;
@@ -260,6 +267,9 @@ public class GeometricModel {
             max = Math.max(max, centre.getDistanceToPoint(vertex));
         }
         maxLength = (float) max;
+
+        //TODO: выпилить
+        connectionDistance = 2.0f*maxLength;
 
         rawVertexes = new Point[vertexes.length];
         for (int i = 0; i < vertexes.length; i++) {

@@ -61,15 +61,16 @@ public class SpaceShip extends ComplexModel{
         modelMap[1][5]=br;
         modelMap[2][4]=cbbbbbb;
 
-        add(g, 0);
-        add(bl, 0);
-        add(br, 0);
-        add(cb, 0);
-        add(cbb, 0);
-        add(cbbb, 0);
-        add(cbbbb, 0);
-        add(cbbbbb, 0);
-        add(cbbbbbb, 0);
+        add(g);
+        add(bl);
+        add(br);
+        add(cb);
+        add(cbb);
+        add(cbbb);
+        add(cbbbb);
+        add(cbbbbb);
+        add(cbbbbbb);
+        additionsFinished();
     }
 
 }

@@ -89,6 +89,10 @@ public class BodiesList<E> implements Iterable<E> {
         return bodies.get(indexes[index]);
     }
 
+    public boolean getConnection(int bodyIndex1, int bodyIndex2)
+    {
+        return adjacencyMatrix[indexes[bodyIndex1]][indexes[bodyIndex2]]!=0;
+    }
 
     /**
      * Получаем индекс модели в массиве
@@ -167,17 +171,36 @@ public class BodiesList<E> implements Iterable<E> {
             }
     }
 
+    /**
+     * Соединение двух те Потом необходим вызов recalculateMatrix()!
+     * @param modelToAdd
+     * @param modelToConnect
+     */
     private void add(E modelToAdd, E modelToConnect)
     {
-        add(modelToAdd, indexOf(modelToConnect));
+        add(modelToAdd);
+        addConnection(indexOf(modelToConnect), indexOf(modelToAdd));
     }
 
     /**
-     * Добавляем элемент в систему
-     * @param model Элемент для добавления
-     * @param bodyIndex Номер тела
+     * Создает связь между двумя телами. После добавления всех связей нужно вызвать recalculateMatrix()!
+     * @param bodyIndex1 Тело 1
+     * @param bodyIndex2 Тело 2
      */
-    public void add(E model, int bodyIndex)
+    public void addConnection(int bodyIndex1, int bodyIndex2)
+    {
+        int realIndex1 = indexes[bodyIndex1];
+        int realIndex2 = indexes[bodyIndex2];
+        //Помечаем наличие связи между телами единицой (потом компоненты пересчитаются в recalculateMatrix()
+        adjacencyMatrix[realIndex1][realIndex2] = 1;
+        adjacencyMatrix[realIndex2][realIndex1] = 1;
+    }
+
+    /**
+     * Добавляем элемент в систему. После добавления всех тел нужно добавить все связи!
+     * @param model Элемент для добавления
+     */
+    public void add(E model)
     {
         //Получаем место для соединения
         int index = getFirstFree();
@@ -185,11 +208,8 @@ public class BodiesList<E> implements Iterable<E> {
         bodyIndexesInIndexes[index] = length;
         bodies.set(index, model);
 
-        int componentNo = getComponentNumber(bodyIndex);
-        bodyIndex = indexes[bodyIndex];
-        adjacencyMatrix[index][index] = componentNo;
-        adjacencyMatrix[bodyIndex][index] = componentNo;
-        adjacencyMatrix[index][bodyIndex] = componentNo;
+        //Помечаем наличие связи единичкой (потом компоненты пересчитаются в recalculateMatrix())
+        adjacencyMatrix[index][index] = 1;
 
         length++;
     }
