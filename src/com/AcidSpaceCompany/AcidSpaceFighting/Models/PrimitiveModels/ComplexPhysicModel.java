@@ -105,15 +105,15 @@ public class ComplexPhysicModel extends PhysicModel {
             PhysicModel body = model.getPhysicModel();
             for (PhysicModel anotherModelBody : anotherModelBodies)
             {
-                Segment tempNormal = body.body.getIntersection(anotherModelBody.body);
+                /*Segment tempNormal = body.body.getIntersection(anotherModelBody.body);
                 if (tempNormal!=null)
                 {
                     result = true;
                     point.add(tempNormal.getStart());
                     normal.add(tempNormal.getEnd());
                     intersectionNumber++;
-                }
-                /*boolean tempResult = body.crossThem(anotherModelBody, deltaTime);
+                } */
+                boolean tempResult = body.crossThem(anotherModelBody, deltaTime);
                 result = result | tempResult;
                 //Если мы сталкиваемся с комплексной моделью - уничтожаем столкнувшиеся части
                 //TODO: Не сталкиваемся, а пересекаемся. Если физон отработал нормально - всё ок. Если уже интерсект - взрываемся.
@@ -121,10 +121,10 @@ public class ComplexPhysicModel extends PhysicModel {
                 {
                     anotherModelBody.health = 0;
                     body.health = 0;
-                } */
+                }
             }
         }
-        if (result)
+       /* if (result)
         {
             normal.multiply(1.0f/intersectionNumber);
             point.multiply(1.0f/intersectionNumber);
@@ -134,7 +134,7 @@ public class ComplexPhysicModel extends PhysicModel {
             Point f1 = new Point(normal); f1.multiply(force);
             this.useForce(point, f1);
             m.useForce(point, f1.negate());
-        }
+        }*/
         return result;
     }
 
