@@ -20,7 +20,7 @@ public class BulletGraphicModel extends GraphicModel {
 
     public BulletGraphicModel(GeometricModel body) {
         super(body);
-        t=new Tale(0, 20, 5, 4, true);
+        t=new Tale(0, 20, 0.05f, 4, true);
         World.addEffect(t);
     }
 

@@ -17,8 +17,8 @@ public class Tale implements Effect {
     private LinkedList<Float> widths;
     private LinkedList<Float> widths01;
     private int size;
-    private int interval;
-    private int timer;
+    private float interval;
+    private float timer;
     private boolean useSmoke;
     private Smoke smoke;
     private float smokeCoef;
@@ -39,10 +39,13 @@ public class Tale implements Effect {
         Point p1, p2, p3, p4;
         p1=getPoint(0).add(normal);
         p2=getPoint(0).add(normal.negate());
-        for (int i = 0; i < size-1; i++) {
+        for (int i = 0; i < size-1; i++)
+            if (widths01.get(i)>=0) {
+
+                float ww=widths.get(i)*widths01.get(i);
 
             normal = Point.getBisection(getPoint(i),getPoint(i + 1),
-                    getPoint(i + 2)).multiply(widths.get(i));
+                    getPoint(i + 2)).multiply(ww);
 
 
             p3=getPoint(i + 1).add(normal.negate());
@@ -58,9 +61,9 @@ public class Tale implements Effect {
     public void update(float deltaTime) {
         for (int i=0; i<widths.size(); i++)
         {
-            widths.set(i, widths.get(i)/1.01f);
-            widths01.set(i, widths01.get(i)/1.01f);
+            widths01.set(i, widths01.get(i)-deltaTime);
         }
+        timer+=deltaTime;
     }
 
     public boolean noNeedMore() {
@@ -69,7 +72,6 @@ public class Tale implements Effect {
 
     public void addPoint(Point coordinate, float width) {
 
-        timer++;
         if (timer>=interval) {
 
         coordinates.add(coordinate.add(new Point((rnd.nextFloat() - 0.5f), (rnd.nextFloat() - 0.5f)).multiply(deltaPosition)));
@@ -94,7 +96,7 @@ public class Tale implements Effect {
         noNeedMore=true;
     }
 
-    public Tale(float deltaPos, int size, int interv, int smokeCoef, boolean useSmoke) {
+    public Tale(float deltaPos, int size, float interv, int smokeCoef, boolean useSmoke) {
         interval=interv;
         this.size=size;
         coordinates=new LinkedList<Point>();

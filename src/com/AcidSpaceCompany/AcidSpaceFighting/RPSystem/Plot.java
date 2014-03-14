@@ -31,8 +31,6 @@ public class Plot {
             }
         };
         PlotBase.addEventAndCondition(e2, c2);
-
-        System.out.println("[Plot] Initialised");
     }
 
 }
