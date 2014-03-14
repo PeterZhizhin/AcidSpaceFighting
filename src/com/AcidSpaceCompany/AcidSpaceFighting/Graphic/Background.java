@@ -12,8 +12,9 @@ public class Background {
     public static void draw() {
         glColor3f(1f, 1f, 1f);
 
-        TextureDrawer.drawBackground(!World.getPhysicIsActive());
+        TextureDrawer.drawBackground(!World.getPhysicActivity());
 
+        ShadersBase.use(ShadersBase.defaultShader);
         float width=Display.getWidth();
 
         Point p1=Camera.getSourcePoint(new Point(0, 0));

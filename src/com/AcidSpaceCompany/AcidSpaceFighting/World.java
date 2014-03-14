@@ -27,11 +27,11 @@ public class World {
     private static LinkedList<Effect> effects;
     private static boolean physicIsActive=true;
 
-    public static void setPhysicActivity(boolean active) {
-        physicIsActive=active;
+    public static void setPhysicActivity(boolean activity) {
+        physicIsActive=activity;
     }
 
-    public static boolean getPhysicIsActive() {
+    public static boolean getPhysicActivity() {
         return physicIsActive;
     }
 
@@ -182,12 +182,11 @@ public class World {
 
     public static void update(float deltaTime) {
         updateKeyboardInput();
-        if (physicIsActive)
-        {
-            updateModels(deltaTime);
-            addAndRemoveModels();
+        addAndRemoveModels();
+        if (physicIsActive) {
             updateExplosions();
             updateEffects(deltaTime);
+            updateModels(deltaTime);
             PlotBase.reCheck();
         }
         HUD.update(deltaTime);

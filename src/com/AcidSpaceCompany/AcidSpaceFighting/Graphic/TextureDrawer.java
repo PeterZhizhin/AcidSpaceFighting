@@ -28,16 +28,19 @@ public class TextureDrawer {
     private static final boolean hardDebug=false;
 
     public static void drawBackground(boolean retro) {
+
         if (retro) {
             ShadersBase.use(ShadersBase.blackAndWhite);
             ShadersBase.setFloatValue(ShadersBase.stateForBAWID,
                     1f+ Mouse.getY()*1f/Display.getHeight()+1f-Mouse.getX()*1f/Display.getWidth());
+
             ShadersBase.bindTexture(ShadersBase.textureForBAWID, background);
         }
         else {
             ShadersBase.use(ShadersBase.defaultShader);
             ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, background);
         }
+
         glBegin(GL_QUADS);
         glTexCoord2f(0, 0);
         glVertex2f(0, 0);
@@ -48,10 +51,8 @@ public class TextureDrawer {
         glTexCoord2f(0, 1f);
         glVertex2f(0, Display.getHeight());
         glEnd();
-        if (retro) {
-            ShadersBase.use(ShadersBase.defaultShader);
-            ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, background);
-        }
+        if (retro)
+            finishDraw();
     }
 
     public static void startDrawNoise() {
