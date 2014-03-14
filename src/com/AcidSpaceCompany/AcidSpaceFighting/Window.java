@@ -40,8 +40,9 @@ public class Window extends BasicWindow {
 
     private static void toggleGameState()
     {
-        if (gameState == GameState.GAME)
+        if (gameState == GameState.GAME) {
             pauseGame();
+        }
         else
             resumeGame();
     }

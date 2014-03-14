@@ -8,6 +8,7 @@ public class HUD {
     public static void update(float dt) {
         MessageLayer.update(dt);
         MapLayer.update(dt);
+        QuestionLayer.update();
     }
 
     public static void addAchive(Achive a) {
@@ -18,8 +19,17 @@ public class HUD {
         MessageLayer.addAchive(title, text);
     }
 
+    public static void askQuestion(String[] answers, Runnable[] actions) {
+        QuestionLayer.askQuestion(answers, actions);
+    }
+
+    public static void hideQuestion() {
+        QuestionLayer.hideQuestion();
+    }
+
     public static void draw() {
         MessageLayer.draw();
+        QuestionLayer.draw();
         MapLayer.draw();
     }
 

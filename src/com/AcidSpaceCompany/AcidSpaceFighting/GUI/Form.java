@@ -46,15 +46,12 @@ public abstract class Form {
     private static final float speed=1f;
 
     public void draw() {
-
-        drawNUARBackground();
-
         BCKGRND-=speed;
         if (BCKGRND<=-512) BCKGRND+=512;
 
         startDrawNoise();
         glBegin(GL_QUADS);
-        for (float i=BCKGRND; i<Display.getWidth(); i+=512) {
+        for (float i=BCKGRND; i< Display.getWidth(); i+=512) {
             for (float j=BCKGRND; j<Display.getHeight(); j+=512) {
                 drawUntranslatedQuad(i, j, i + 512, j + 512);
             }

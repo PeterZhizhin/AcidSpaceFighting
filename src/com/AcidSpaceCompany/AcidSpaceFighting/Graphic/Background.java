@@ -1,6 +1,7 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Graphic;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
+import com.AcidSpaceCompany.AcidSpaceFighting.World;
 import org.lwjgl.opengl.Display;
 
 import static com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer.*;
@@ -10,9 +11,8 @@ public class Background {
 
     public static void draw() {
         glColor3f(1f, 1f, 1f);
-        ShadersBase.use(ShadersBase.defaultShader);
 
-        TextureDrawer.drawBackground();
+        TextureDrawer.drawBackground(!World.getPhysicIsActive());
 
         float width=Display.getWidth();
 

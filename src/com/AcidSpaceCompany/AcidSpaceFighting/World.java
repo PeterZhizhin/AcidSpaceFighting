@@ -25,6 +25,15 @@ public class World {
 
     private static ArrayList<Model> models;
     private static LinkedList<Effect> effects;
+    private static boolean physicIsActive=true;
+
+    public static void setPhysicActivity(boolean active) {
+        physicIsActive=active;
+    }
+
+    public static boolean getPhysicIsActive() {
+        return physicIsActive;
+    }
 
     public static void explode(Point center, float power) {
         Explosion e=new Explosion(center, power/5);
@@ -173,12 +182,15 @@ public class World {
 
     public static void update(float deltaTime) {
         updateKeyboardInput();
-        updateModels(deltaTime);
-        addAndRemoveModels();
-        updateExplosions();
-        updateEffects(deltaTime);
+        if (physicIsActive)
+        {
+            updateModels(deltaTime);
+            addAndRemoveModels();
+            updateExplosions();
+            updateEffects(deltaTime);
+            PlotBase.reCheck();
+        }
         HUD.update(deltaTime);
-        PlotBase.reCheck();
     }
 
     private static SpaceShip player1;
@@ -196,7 +208,25 @@ public class World {
 
     public static void init() {
         Plot.init();
-        HUD.showMessage("Hello!", "Welcome to AcidSpaceFighting!");
+
+        HUD.askQuestion(new String[]{"Ответ 1", "Ответ 2"}, new Runnable[] {
+
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("ANSWER 1");
+                        HUD.hideQuestion();
+                    }
+                },
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("ANSWER 2");
+                        HUD.hideQuestion();
+                    }
+                }
+        });
+
 
         effects=new LinkedList<Effect>();
         ships = new ArrayList<SpaceShip>();

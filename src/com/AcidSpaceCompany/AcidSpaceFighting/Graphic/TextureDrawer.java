@@ -27,12 +27,17 @@ public class TextureDrawer {
 
     private static final boolean hardDebug=false;
 
-    public static void drawNUARBackground() {
-        ShadersBase.use(ShadersBase.blackAndWhite);
-        ShadersBase.setFloatValue(ShadersBase.stateForBAWID,
-                1f+ Mouse.getY()*1f/Display.getHeight()+1f-Mouse.getX()*1f/Display.getWidth());
-
-        ShadersBase.bindTexture(ShadersBase.textureForBAWID, background);
+    public static void drawBackground(boolean retro) {
+        if (retro) {
+            ShadersBase.use(ShadersBase.blackAndWhite);
+            ShadersBase.setFloatValue(ShadersBase.stateForBAWID,
+                    1f+ Mouse.getY()*1f/Display.getHeight()+1f-Mouse.getX()*1f/Display.getWidth());
+            ShadersBase.bindTexture(ShadersBase.textureForBAWID, background);
+        }
+        else {
+            ShadersBase.use(ShadersBase.defaultShader);
+            ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, background);
+        }
         glBegin(GL_QUADS);
         glTexCoord2f(0, 0);
         glVertex2f(0, 0);
@@ -43,21 +48,10 @@ public class TextureDrawer {
         glTexCoord2f(0, 1f);
         glVertex2f(0, Display.getHeight());
         glEnd();
-        finishDraw();
-    }
-
-    public static void drawBackground() {
-        ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, background);
-        glBegin(GL_QUADS);
-        glTexCoord2f(0, 0);
-        glVertex2f(0, 0);
-        glTexCoord2f(1f, 0f);
-        glVertex2f(Display.getWidth(), 0);
-        glTexCoord2f(1f, 1f);
-        glVertex2f(Display.getWidth(), Display.getHeight());
-        glTexCoord2f(0, 1f);
-        glVertex2f(0, Display.getHeight());
-        glEnd();
+        if (retro) {
+            ShadersBase.use(ShadersBase.defaultShader);
+            ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, background);
+        }
     }
 
     public static void startDrawNoise() {

@@ -1,19 +1,28 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.GUI;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls.Button;
+import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import com.AcidSpaceCompany.AcidSpaceFighting.Window;
+import org.lwjgl.opengl.Display;
+
+import static com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer.*;
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glEnd;
 
 public class Menu extends Form {
 
-
-    private void resume()
-    {
+    private void resume() {
         Window.resumeGame();
     }
 
-    private void start()
-    {
+    private void start() {
         Window.initWorld();
+    }
+
+    public void draw() {
+        drawBackground(true);
+        super.draw();
     }
 
     public Menu()
