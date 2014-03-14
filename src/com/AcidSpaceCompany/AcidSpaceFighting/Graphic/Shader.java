@@ -37,7 +37,7 @@ public class Shader {
 
             if (ARBShaderObjects.glGetObjectParameteriARB(shader,
                     ARBShaderObjects.GL_OBJECT_VALIDATE_STATUS_ARB) == GL11.GL_FALSE) {
-                System.err.println("[Shader] "+getLogInfo(shader));
+                System.err.println("[Shader] Failed to validate "+s);
             } else
             if (hardDebug) System.out.println("[Shader] Shader ready to work: "+s);
         }else {

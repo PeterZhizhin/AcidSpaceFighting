@@ -4,12 +4,19 @@ public class Achive {
 
     private String title;
     private String about;
-    private int iconNumber;
 
-    public Achive(String name, String about, int icon){
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getText() {
+        return about;
+    }
+
+    public Achive(String name, String about){
        title=name;
        this.about=about;
-       iconNumber=icon;
     }
 
     public void print() {

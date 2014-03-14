@@ -196,6 +196,7 @@ public class World {
 
     public static void init() {
         Plot.init();
+        HUD.showMessage("Hello!", "Welcome to AcidSpaceFighting!");
 
         effects=new LinkedList<Effect>();
 

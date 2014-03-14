@@ -93,12 +93,16 @@ public class TextureDrawer {
             ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, font);
         }
 
-    public static void drawAchives(float dy) {
+    private static final float fontWidth=32f;
+
+    public static void drawMessage(float dy, String title, String text) {
         ShadersBase.use(ShadersBase.defaultShader);
         ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, achiveCorner);
 
-        float xMainStart= Display.getWidth()*2/3;
+        float width=Font.getWidth(fontWidth, Math.max(title.length(), text.length()));
+
         float xMainEnd= Display.getWidth()-10;
+        float xMainStart= xMainEnd-width;
         float xFigStart= xMainStart-(Display.getHeight()/7-10);
         float yMainStart= Display.getHeight()*6/7;
         float yMainEnd= Display.getHeight()-10;
@@ -116,6 +120,13 @@ public class TextureDrawer {
         glBegin(GL_QUADS);
         drawUntranslatedQuad(xMainStart, yMainStart, xMainEnd, yMainEnd);
         glEnd();
+
+        startDrawText();
+        glBegin(GL_QUADS);
+        Font.drawString(xMainStart, yMainStart+12, fontWidth, title);
+        Font.drawString(xMainStart, yMainStart+46, fontWidth, text);
+        glEnd();
+        finishDraw();
 
     }
 
