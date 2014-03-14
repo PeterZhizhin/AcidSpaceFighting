@@ -23,7 +23,7 @@ public class Camera {
     public static void init() {
         xPos = 0;
         yPos = 0;
-        scale = 4f;
+        scale = 1f;
     }
 
     public static void move(Point delta)

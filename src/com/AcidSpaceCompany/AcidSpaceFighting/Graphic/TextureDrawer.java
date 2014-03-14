@@ -64,6 +64,11 @@ public class TextureDrawer {
         ShadersBase.use(ShadersBase.block);
     }
 
+    public static void startDrawConnections() {
+        ShadersBase.use(ShadersBase.defaultShader);
+        ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, white);
+    }
+
     public static void startDrawSmoke() {
         if (ShadersBase.use(ShadersBase.smoke))      {
         ShadersBase.bindTexture(ShadersBase.smokeID, smoke) ;
@@ -138,6 +143,17 @@ public class TextureDrawer {
 
     public static void finishDraw() {
         ShadersBase.drop();
+    }
+
+    public static void drawConnection(Point pa, Point pb, float width) {
+
+        Point normal=Point.getNormal(pa, pb);
+        Point p1=pa.add(normal.setLength(width));
+        Point p2=pa.add(normal.negate().setLength(width));
+        Point p3=pb.add(normal.negate().setLength(width));
+        Point p4=pb.add(normal.setLength(width));
+
+        drawQuadWIdthoutBeginAndEnd(p1, p2, p3, p4);
     }
 
     public static void drawBlock(Point p1, Point p2, Point p3, Point p4, int block, float health) {
