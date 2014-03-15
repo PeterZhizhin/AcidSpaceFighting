@@ -96,14 +96,18 @@ public class Tale implements Effect {
         noNeedMore=true;
     }
 
-    public Tale(float deltaPos, int size, float interv, int smokeCoef, boolean useSmoke) {
+    public Tale(Point coordinate, float deltaPos, int size, float interv, int smokeCoef, boolean useSmoke) {
+        this(coordinate.x, coordinate.y, deltaPos, size, interv, smokeCoef, useSmoke);
+    }
+
+    public Tale(float x, float y, float deltaPos, int size, float interv, int smokeCoef, boolean useSmoke) {
         interval=interv;
         this.size=size;
         coordinates=new LinkedList<Point>();
         widths=new LinkedList<Float>();
         widths01=new LinkedList<Float>();
         for (int i=0; i<size; i++) {
-            coordinates.add(new Point(0, 0));
+            coordinates.add(new Point(x, y));
             widths.add(0f);
             widths01.add(0f);
         }

@@ -20,7 +20,7 @@ public class EngineGraphicModel extends GraphicModel {
 
     public EngineGraphicModel(GeometricModel body) {
         super(body);
-        t=new Tale(20, 20, 0.05f, 20, true);
+        t=new Tale(body.getCentre(),20, 20, 0.05f, 20, true);
         World.addEffect(t);
     }
 

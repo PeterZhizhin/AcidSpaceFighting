@@ -1,6 +1,5 @@
 package com.AcidSpaceCompany.AcidSpaceFighting;
 
-import com.AcidSpaceCompany.AcidSpaceFighting.Audio.SoundBase;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Background;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Camera;
@@ -38,8 +37,6 @@ public class World {
     public static void explode(Point center, float power) {
         Explosion e=new Explosion(center, power/5);
         addEffect(e);
-        SoundBase.playExplosion();
-
         explosionBuffer.add(center);
         explosionPowerBuffer.add(power);
     }
@@ -142,6 +139,7 @@ public class World {
         for (int i=0; i<models.size(); i++) {
             if (models.get(i).getIsNoNeedMore())
             {
+                explode(models.get(i).getCenter(), models.get(i).getMaxWidth()*2);
                 models.get(i).destroy();
                 models.remove(i);
             }

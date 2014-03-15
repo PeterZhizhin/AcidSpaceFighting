@@ -41,7 +41,7 @@ public class AsteroidGraphicModel extends GraphicModel {
 
     public AsteroidGraphicModel(GeometricModel body) {
         super(body);
-        t=new Tale(0, 20, 0.05f, 8, false);
+        t=new Tale(body.getCentre(),0, 20, 0.05f, 8, false);
         World.addEffect(t);
     }
 

@@ -15,6 +15,7 @@ public class Background {
         TextureDrawer.drawBackground(!World.getPhysicActivity());
 
         ShadersBase.use(ShadersBase.defaultShader);
+        if (World.getPhysicActivity()) {
         float width=Display.getWidth();
 
         Point p1=Camera.getSourcePoint(new Point(0, 0));
@@ -42,6 +43,7 @@ public class Background {
                 drawQuad(new Point(i, j), new Point(i + width, j),
                         new Point(i + width, j + width), new Point(i, j + width));
             }
+        }
         }
         finishDraw();
 
