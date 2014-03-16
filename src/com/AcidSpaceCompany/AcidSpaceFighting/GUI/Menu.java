@@ -1,14 +1,9 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.GUI;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.Controls.Button;
-import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import com.AcidSpaceCompany.AcidSpaceFighting.Window;
-import org.lwjgl.opengl.Display;
 
 import static com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer.*;
-import static org.lwjgl.opengl.GL11.GL_QUADS;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glEnd;
 
 public class Menu extends Form {
 
@@ -49,9 +44,17 @@ public class Menu extends Form {
                 Window.exit();
             }
         });
+        Button creativeMode = new Button(10,170,300,40, "Creative mode");
+        creativeMode.setEvent(new Runnable() {
+            @Override
+            public void run() {
+                Window.setCreativeMode();
+            }
+        });
         controls.add(startButton);
         controls.add(resumeButton);
         controls.add(quit);
+        controls.add(creativeMode);
     }
 
 }

@@ -98,8 +98,8 @@ public class ComplexModel extends Model {
                 (model2.getPhysicModel().getCentre()))
         //Должно быть меньше или равно
                 <=
-        //Чем минимальное из расстояний между телами
-                distance;
+        //Чем минимальное из расстояний, позволяющих соединять
+                 distance;
     }
 
     /**

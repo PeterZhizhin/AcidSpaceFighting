@@ -13,12 +13,12 @@ public class QuestionLayer{
 
     public static void askQuestion(String[] answers, Runnable[] actions) {
         q=new Question(answers, actions);
-        World.setPhysicActivity(false);
+        World.setQuestionMode(true);
     }
 
     public static void hideQuestion() {
         q=null;
-        World.setPhysicActivity(true);
+        World.setQuestionMode(false);
     }
 
     public static void draw() {

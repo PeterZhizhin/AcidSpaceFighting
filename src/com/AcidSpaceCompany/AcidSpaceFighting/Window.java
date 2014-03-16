@@ -38,6 +38,15 @@ public class Window extends BasicWindow {
         gameState = GameState.MENU;
     }
 
+    public static void setCreativeMode()
+    {
+        if (isInited)
+        {
+            World.toggleCreativeMode();
+            resumeGame();
+        }
+    }
+
     private static void toggleGameState()
     {
         if (gameState == GameState.GAME) {

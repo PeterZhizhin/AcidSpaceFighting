@@ -24,10 +24,50 @@ public class World {
 
     private static ArrayList<Model> models;
     private static LinkedList<Effect> effects;
-    private static boolean physicIsActive=true;
+    private static boolean physicIsActive;
+    private static boolean isCreativeModeActive;
+    //Состояние игры: ИГРА, ВОПРОС, КРЕАТИВ
+    private static GameState gameState;
 
-    public static void setPhysicActivity(boolean activity) {
-        physicIsActive=activity;
+    private static void updateGameStateVariables()
+    {
+        switch (gameState)
+        {
+            case GAME:
+                physicIsActive = true;
+                isCreativeModeActive = false;
+                break;
+            case QUESTION:
+                physicIsActive=false;
+                isCreativeModeActive =false;
+                break;
+            case CREATIVE:
+                physicIsActive=false;
+                isCreativeModeActive =true;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void toggleCreativeMode()
+    {
+        gameState = (gameState!=GameState.CREATIVE) ? GameState.CREATIVE : GameState.GAME;
+        CreativeMode.setCreativeMode(gameState==GameState.CREATIVE);
+        updateGameStateVariables();
+    }
+
+    public static void setCreativeMode(boolean state)
+    {
+        gameState = state ? GameState.CREATIVE : GameState.GAME;
+        CreativeMode.setCreativeMode(state);
+        updateGameStateVariables();
+    }
+
+    public static void setQuestionMode(boolean setState)
+    {
+        gameState = setState ? GameState.QUESTION : GameState.GAME;
+        updateGameStateVariables();
     }
 
     public static boolean getPhysicActivity() {
@@ -100,6 +140,7 @@ public class World {
         HUD.draw();
 
     }
+
 
     private static void updateKeyboardInput() {
 
@@ -207,6 +248,10 @@ public class World {
 
     public static void init() {
         Plot.init();
+
+        isCreativeModeActive = false;
+        physicIsActive = true;
+        gameState = GameState.GAME;
 
         HUD.askQuestion(new String[]{"Ответ 1", "Ответ 2"}, new Runnable[] {
 
