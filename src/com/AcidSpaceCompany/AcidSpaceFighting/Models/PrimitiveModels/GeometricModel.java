@@ -9,23 +9,11 @@ import org.lwjgl.util.vector.Vector3f;
 
 //TODO: вычистить здесь всё
 
-import static com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point.getTriangleSquare;
-
 public class GeometricModel {
-    private int numberOfCalculations = 0;
-    private static final int maxNumberOfCalculations = 10000;
-
-    private void incCalculations() {
-        numberOfCalculations++;
-        //if (numberOfCalculations > maxNumberOfCalculations)
-        //    backupVertexes();
-    }
 
     private Matrix3f rotationMatrix = new Matrix3f(); //Матрица поворота
     private Matrix3f scaleMatrix = new Matrix3f();    //Матрица масштаба
     private Matrix3f translateMatrix = new Matrix3f(); //Матрица переноса
-
-    private Matrix3f resultMatrix = (Matrix3f) new Matrix3f().setIdentity(); //Результирующая матрица, умножив на неё радиус вектор точки - мы получим результирующую точку
 
     private Point[] rawVertexes; //"сырые" (не преобразованные точки)
     //Точки должны задаваться в системе координат, связанной с центром масс тела
@@ -53,20 +41,20 @@ public class GeometricModel {
      */
     public float calculateJ()
     {
-        float J = 0;
-        Vector3f[] vertexies = new Vector3f[vertexes.length];
+        float J;
+        Vector3f[] vertexes = new Vector3f[this.vertexes.length];
         Point centreNegated = getCentre().negate();
-        for (int i=0; i<vertexies.length; i++)
-            vertexies[i] = vertexes[i].add(centreNegated).getRealVector3f();
+        for (int i=0; i<vertexes.length; i++)
+            vertexes[i] = this.vertexes[i].add(centreNegated).getRealVector3f();
         float chislitel = 0.0f; float znamenatel = 0.0f;
         Vector3f dest = new Vector3f();
         float tempCross;
-        for (int i=0; i<vertexies.length-1; i++)
+        for (int i=0; i<vertexes.length-1; i++)
         {
-            Vector3f.cross(vertexies[i+1], vertexies[i], dest);
+            Vector3f.cross(vertexes[i+1], vertexes[i], dest);
             tempCross = dest.length();
-            chislitel += tempCross * (vertexies[i+1].lengthSquared() +
-                    Vector3f.dot(vertexies[i+1], vertexies[i]) + vertexies[i].lengthSquared());
+            chislitel += tempCross * (vertexes[i+1].lengthSquared() +
+                    Vector3f.dot(vertexes[i+1], vertexes[i]) + vertexes[i].lengthSquared());
             znamenatel += tempCross;
         }
         J = chislitel / znamenatel / 6.0f;
@@ -80,31 +68,7 @@ public class GeometricModel {
 
     //Rotate model
     public void rotate(float angle) {
-        /*this.angle += angle;
-
-        //Совместимость
-        for (Point vertex : vertexes) {
-            vertex.rotate(angle, centre);
-        }
-        while (this.angle >= PI2) this.angle -= PI2;
-        while (this.angle <= 0) this.angle += PI2;
-
-        //Создаем матрицу для поворота на этот угол
-        Matrix3fGeometry.createRotationMatrix(this.angle, rotationMatrix);
-        incCalculations();*/
         rotate(centre, angle);
-    }
-
-
-
-    public double getVolumePerDeep() {
-        double sumAggreagtor=0;
-
-        for (int i=2; i<rawVertexes.length; i++) {
-             sumAggreagtor+=getTriangleSquare(vertexes[0], vertexes[i-1], vertexes[i]);
-        }
-
-        return sumAggreagtor;
     }
 
     public void rotate(Point centreOfRotation, float angle) {
@@ -117,7 +81,6 @@ public class GeometricModel {
         while (this.angle <= 0) this.angle += PI2;
 
         centre.rotate(angle, centreOfRotation);
-        incCalculations();
     }
 
     //Move todel on p.x, p.y
@@ -128,16 +91,13 @@ public class GeometricModel {
         for (Point vertex : vertexes) {
             vertex.move(p);
         }
-
-        //Создаем матрицу для сдвига
-        incCalculations();
     }
 
     public float getMaxLength() {
         return maxLength;
     }
 
-    private boolean contains(Point p) {
+    public boolean contains(Point p) {
         double angle = 0;
         for (int i = 0; i < vertexes.length; i++) {
             angle += Point.getAngle(getPoint(i), p, getPoint(i + 1));
@@ -175,53 +135,7 @@ public class GeometricModel {
             }
         }
 
-        /*
-        for (int i=0; i<model.getPointCount(); i++)
-            if (contains(model.getPoint(i))) {
-                return model.getPoint(i);
-            }
-
-        for (int i=0; i<getPointCount(); i++)
-            if (model.contains(getPoint(i))) {
-                return getPoint(i);
-            }
-        */
-
         return null;
-    }
-
-    /**
-     * Принадлежность точки многоугольнику
-     * @param point
-     * @return
-     */
-    public boolean containsPoint(Point point)
-    {
-        //TODO: реализовать
-        return false;
-    }
-
-    /**
-     * Получаем результирующую матрицу (композицию всех преобразований)
-     */
-    private void createResultMatrix() {
-        Matrix3f.setIdentity(resultMatrix);
-        Matrix3f.mul(resultMatrix, translateMatrix, resultMatrix);
-        Matrix3f.mul(resultMatrix, rotationMatrix, resultMatrix);
-        Matrix3f.mul(resultMatrix, scaleMatrix, resultMatrix);
-    }
-
-    public void backupVertexes() {
-        //Пусть тут пока не будет ничего.
-        Matrix3fGeometry.createTranslateMatrix(centre, translateMatrix);
-        Matrix3fGeometry.createRotationMatrix(this.angle, rotationMatrix);
-        createResultMatrix();
-        vertexes = new Point[rawVertexes.length];
-        for (int i = 0; i < vertexes.length; i++) {
-            Vector3f result = new Vector3f();
-            Matrix3f.transform(resultMatrix, rawVertexes[i].getVector3f(), result);
-            vertexes[i] = new Point(result.getX(), result.getY());
-        }
     }
 
     //Return count of vertexes
@@ -252,7 +166,6 @@ public class GeometricModel {
         Matrix3f.load(g.rotationMatrix, rotationMatrix);
         Matrix3f.load(g.translateMatrix, translateMatrix);
         Matrix3f.load(g.scaleMatrix, scaleMatrix);
-        Matrix3f.load(g.resultMatrix, resultMatrix);
     }
 
     /**
