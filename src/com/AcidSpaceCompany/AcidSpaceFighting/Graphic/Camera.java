@@ -26,6 +26,13 @@ public class Camera {
         scale = 2f;
     }
 
+    public static Point translateDSDisplayWorld(Point dS)
+    {
+        Point result = new Point(dS);
+        result.multiply(1.0f/scale);
+        return result;
+    }
+
     public static void move(Point delta)
     {
         move((int)delta.x, (int)delta.y);
@@ -81,8 +88,12 @@ public class Camera {
     }
 
     //return point in the world by point on the screen
-    public static Point repairPoint(float x, float y) {
+    public static Point translateWindowWorld(float x, float y) {
         return new Point(x * scale + xPos, y * scale + yPos);
+    }
+    public static Point translateWindowWorld(Point point)
+    {
+        return translateWindowWorld(point.getX(), point.getY());
     }
 
 }

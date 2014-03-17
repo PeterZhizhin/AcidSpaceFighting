@@ -29,20 +29,41 @@ public class World {
     //Состояние игры: ИГРА, ВОПРОС, КРЕАТИВ
     private static GameState gameState;
 
+    /**
+     * Получает модель по точке.
+     * @param position Точка
+     * @return null - если модели в этой точке нет. Ну или модель в этой точке
+     */
+    public static Model getModel(Point position)
+    {
+        Model result;
+        for (Model model : models)
+            if ((result=model.containsPoint(position))!=null)
+                return result;
+        return null;
+    }
+
+
     private static void updateGameStateVariables()
     {
         switch (gameState)
         {
             case GAME:
                 physicIsActive = true;
+                if (isCreativeModeActive)
+                    CreativeMode.setCreativeMode(false);
                 isCreativeModeActive = false;
                 break;
             case QUESTION:
                 physicIsActive=false;
+                if (isCreativeModeActive)
+                    CreativeMode.setCreativeMode(false);
                 isCreativeModeActive =false;
                 break;
             case CREATIVE:
                 physicIsActive=false;
+                if (!isCreativeModeActive)
+                    CreativeMode.setCreativeMode(true);
                 isCreativeModeActive =true;
                 break;
             default:
@@ -230,6 +251,8 @@ public class World {
             updateModels(deltaTime);
             PlotBase.reCheck();
         }
+        if (isCreativeModeActive)
+            CreativeMode.updateCreativeMode();
         HUD.update(deltaTime);
     }
 

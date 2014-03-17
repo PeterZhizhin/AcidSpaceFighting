@@ -191,6 +191,17 @@ public class GeometricModel {
     }
 
     /**
+     * Принадлежность точки многоугольнику
+     * @param point
+     * @return
+     */
+    public boolean containsPoint(Point point)
+    {
+        //TODO: реализовать
+        return false;
+    }
+
+    /**
      * Получаем результирующую матрицу (композицию всех преобразований)
      */
     private void createResultMatrix() {

@@ -23,6 +23,21 @@ public class PhysicModel {
     private Point[] connectionPoints;
     private boolean[] isConnectionFree;
 
+    /**
+     * Выясняет, содержит ли данная физическая модель данную точку
+     * @param point Точка для проверки
+     * @return true - содержит. false - нет.
+     */
+    public boolean containsPoint(Point point)
+    {
+       return body.containsPoint(point);
+    }
+
+    public void moveGeometric(Point dS)
+    {
+        body.move(dS);
+    }
+
     public void destroy() {
         //if somebody need it
     }

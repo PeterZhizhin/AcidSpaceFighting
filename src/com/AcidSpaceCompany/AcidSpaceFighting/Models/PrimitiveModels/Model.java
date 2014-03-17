@@ -9,6 +9,24 @@ public class Model{
     private static int lastNumber=0;
     private int number;
 
+    /**
+     * Получает модель по точке.
+     * @param point Точка.
+     * @return null - если в модели точка не содержится. Или модель, которой точка принадлежит
+     */
+    public Model containsPoint(Point point)
+    {
+       if (physic.containsPoint(point))
+           return this;
+        else
+           return null;
+    }
+
+    public void moveGeometricModel(Point dS)
+    {
+
+    }
+
     public float getMaxWidth() {
         return physic.getMaxWidth();
     }

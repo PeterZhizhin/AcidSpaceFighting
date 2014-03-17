@@ -1,8 +1,8 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
+import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
-import java.awt.*;
 
 public class ComplexModel extends Model {
 
@@ -26,6 +26,21 @@ public class ComplexModel extends Model {
 
     public Model getModel(int num) {
         return models.get(num);
+    }
+
+    /**
+     * Возвращает модель, которой принадлежит данная точка
+     * @param point Точка.
+     * @return null - не принадлежит ни одной. Или модель, которой принадлежит.
+     */
+    @Override
+    public Model containsPoint(Point point)
+    {
+        Model result;
+        for (Model model : models)
+            if ((result=model.containsPoint(point))!=null)
+                return result;
+        return null;
     }
 
     public void update(float time) {
