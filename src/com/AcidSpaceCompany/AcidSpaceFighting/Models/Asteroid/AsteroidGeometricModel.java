@@ -6,6 +6,10 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 public class AsteroidGeometricModel extends GeometricModel {
     private static final double PI8 = Math.PI / 8;
 
+    public float getConnectionDistanceCoef() {
+        return 0f;
+    }
+
     private static Point[] getVertexes(float x, float y, float r) {
         Point[] p = new Point[16];
 

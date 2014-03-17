@@ -1,5 +1,6 @@
 package com.AcidSpaceCompany.AcidSpaceFighting;
 
+import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD.EditorLayer;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Background;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Camera;
@@ -10,7 +11,6 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Plot;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.PlotBase;
-import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -24,80 +24,17 @@ public class World {
 
     private static ArrayList<Model> models;
     private static LinkedList<Effect> effects;
-    private static boolean physicIsActive;
-    private static boolean isCreativeModeActive;
-    //Состояние игры: ИГРА, ВОПРОС, КРЕАТИВ
-    private static GameState gameState;
 
     /**
      * Получает модель по точке.
      * @param position Точка
      * @return null - если модели в этой точке нет. Ну или модель в этой точке
      */
-    public static Model getModel(Point position)
-    {
+    public static Model getModel(Point position) {
         for (Model model : models)
             if (model.containsPoint(position))
                 return model;
         return null;
-    }
-
-
-    public static void updateGameState(GameState gameState1)
-    {
-        gameState = gameState1;
-        updateGameStateVariables();
-    }
-
-    private static void updateGameStateVariables()
-    {
-        switch (gameState)
-        {
-            case GAME:
-                physicIsActive = true;
-                if (isCreativeModeActive)
-                    CreativeMode.setCreativeMode(false);
-                isCreativeModeActive = false;
-                break;
-            case QUESTION:
-                physicIsActive=false;
-                if (isCreativeModeActive)
-                    CreativeMode.setCreativeMode(false);
-                isCreativeModeActive =false;
-                break;
-            case CREATIVE:
-                physicIsActive=false;
-                if (!isCreativeModeActive)
-                    CreativeMode.setCreativeMode(true);
-                isCreativeModeActive =true;
-                break;
-            default:
-                break;
-        }
-    }
-
-    public static void toggleCreativeMode()
-    {
-        gameState = (gameState!=GameState.CREATIVE) ? GameState.CREATIVE : GameState.GAME;
-        CreativeMode.setCreativeMode(gameState==GameState.CREATIVE);
-        updateGameStateVariables();
-    }
-
-    public static void setCreativeMode(boolean state)
-    {
-        gameState = state ? GameState.CREATIVE : GameState.GAME;
-        CreativeMode.setCreativeMode(state);
-        updateGameStateVariables();
-    }
-
-    public static void setQuestionMode(boolean setState)
-    {
-        gameState = setState ? GameState.QUESTION : GameState.GAME;
-        updateGameStateVariables();
-    }
-
-    public static boolean getPhysicActivity() {
-        return physicIsActive;
     }
 
     public static void explode(Point center, float power) {
@@ -141,7 +78,11 @@ public class World {
     }
 
     public static void draw() {
+        if (HUD.getIsRealTime())
         Camera.setPosition(player1.getCenter());
+        else
+            Camera.moveTo(player1.getCenter());
+
 
         Background.draw();
 
@@ -165,15 +106,6 @@ public class World {
 
         HUD.draw();
 
-    }
-
-
-    private static void updateKeyboardInput() {
-
-        player1.updateKeyboardInput();
-
-        if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
-            Window.pauseGame();
     }
 
     private static void updateModels(float deltaTime) {
@@ -248,17 +180,16 @@ public class World {
     }
 
     public static void update(float deltaTime) {
-        updateKeyboardInput();
         addAndRemoveModels();
-        if (physicIsActive) {
-            updateExplosions();
-            updateEffects(deltaTime);
-            updateModels(deltaTime);
-            PlotBase.reCheck();
-        }
-        if (isCreativeModeActive)
-            CreativeMode.updateCreativeMode();
         HUD.update(deltaTime);
+        Camera.update(deltaTime);
+    }
+
+    public static void updatePhysic(float deltaTime) {
+        updateExplosions();
+        updateEffects(deltaTime);
+        updateModels(deltaTime);
+        PlotBase.reCheck();
     }
 
     private static SpaceShip player1;
@@ -276,29 +207,7 @@ public class World {
 
     public static void init() {
         Plot.init();
-
-        isCreativeModeActive = false;
-        physicIsActive = true;
-        gameState = GameState.GAME;
-
-        HUD.askQuestion(new String[]{"Ответ 1", "Ответ 2"}, new Runnable[] {
-
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println("ANSWER 1");
-                        HUD.hideQuestion();
-                    }
-                },
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println("ANSWER 2");
-                        HUD.hideQuestion();
-                    }
-                }
-        });
-
+        HUD.init();
 
         effects=new LinkedList<Effect>();
         ships = new ArrayList<SpaceShip>();

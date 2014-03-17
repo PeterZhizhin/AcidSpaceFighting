@@ -5,6 +5,10 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 
 public class EngineGeometricModel extends GeometricModel {
 
+    public float getConnectionDistanceCoef() {
+        return 2f;
+    }
+
     public void rotate(float f) {
         super.rotate(f);
     }

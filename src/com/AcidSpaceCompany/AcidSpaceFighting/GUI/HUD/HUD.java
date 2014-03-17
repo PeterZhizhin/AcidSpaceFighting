@@ -1,14 +1,35 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Achivements.Achive;
+import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 public class HUD {
 
+    public enum Input {game, form, editor}
+    private static Input input=Input.game;
+
+    public static boolean getIsRealTime() {
+        return input==Input.game;
+    }
+
+    public static void init() {
+         EditorLayer.init();
+    }
 
     public static void update(float dt) {
         MessageLayer.update(dt);
         MapLayer.update(dt);
-        QuestionLayer.update();
+        switch (input) {
+            case game:
+                World.updatePhysic(dt);
+                World.getPlayerShip().updateKeyboardInput();
+                break;
+            case form: FormLayer.update();
+                break;
+            case editor: EditorLayer.update();
+                break;
+        }
+
     }
 
     public static void addAchive(Achive a) {
@@ -19,17 +40,33 @@ public class HUD {
         MessageLayer.addAchive(title, text);
     }
 
+    public static void startEditor() {
+        input=Input.editor;
+    }
+
+    public static void returnToGame() {
+        input=Input.game;
+    }
+
     public static void askQuestion(String[] answers, Runnable[] actions) {
-        QuestionLayer.askQuestion(answers, actions);
+        FormLayer.askQuestion(answers, actions);
+        input=Input.form;
     }
 
     public static void hideQuestion() {
-        QuestionLayer.hideQuestion();
+        input=Input.game;
     }
 
     public static void draw() {
+        switch (input) {
+            case form:
+                FormLayer.draw();
+                break;
+            case editor:
+                EditorLayer.draw();
+                break;
+        }
         MessageLayer.draw();
-        QuestionLayer.draw();
         MapLayer.draw();
     }
 

@@ -25,9 +25,11 @@ public class ComplexGraphicModel extends GraphicModel {
         GL11.glBegin(GL11.GL_QUADS);
         for (int i=0; i<cm.getSize()-1; i++) {
             for (int j=i+1; j<cm.getSize(); j++) {
-               if (cm.getModels().getConnection(i, j)) {
+
+               if (cm.checkDistanceIsToConnect(i, j)) {
+
                    TextureDrawer.drawConnection(cm.getModel(i).getCenter(), cm.getModel(j).getCenter(),
-                           Math.max(cm.getModel(i).getMaxWidth(), cm.getModel(j).getMaxWidth())*0.3f
+                           Math.max(cm.getModel(i).getMaxWidth(), cm.getModel(j).getMaxWidth())*0.1f
                            );
                }
             }

@@ -60,6 +60,9 @@ public class DataWrapper {
            return 0;
     }
 
+    public static void enableEditor() {
+        HUD.startEditor();
+    }
 
 
 

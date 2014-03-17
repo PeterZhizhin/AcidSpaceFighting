@@ -1,5 +1,6 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Graphic;
 
+import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD.HUD;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 import org.lwjgl.opengl.Display;
@@ -12,10 +13,10 @@ public class Background {
     public static void draw() {
         glColor3f(1f, 1f, 1f);
 
-        TextureDrawer.drawBackground(!World.getPhysicActivity());
+        TextureDrawer.drawBackground(!HUD.getIsRealTime());
 
         ShadersBase.use(ShadersBase.defaultShader);
-        if (World.getPhysicActivity()) {
+        if (HUD.getIsRealTime()) {
         float width=Display.getWidth();
 
         Point p1=Camera.getSourcePoint(new Point(0, 0));

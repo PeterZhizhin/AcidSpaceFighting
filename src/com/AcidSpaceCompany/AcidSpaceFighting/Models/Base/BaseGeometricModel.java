@@ -5,6 +5,10 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 
 public class BaseGeometricModel extends GeometricModel {
 
+    public float getConnectionDistanceCoef() {
+        return 4f;
+    }
+
     private static Point[] getVertexes(float x, float y, float w) {
         Point[] p = new Point[4];
         p[0] = new Point(x, y);

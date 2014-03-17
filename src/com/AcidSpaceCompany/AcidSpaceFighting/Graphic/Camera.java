@@ -7,6 +7,8 @@ import org.lwjgl.opengl.GL11;
 public class Camera {
 
     private static float xPos, yPos, scale;
+    private static float xPosObject, yPosObject;
+    private static float cameraSpeed=250f;
 
     public static float getX(){
            return xPos;
@@ -16,31 +18,18 @@ public class Camera {
             return yPos;
     }
 
-    public static float getScale() {
-        return scale;
-    }
-
     public static void init() {
         xPos = 0;
         yPos = 0;
         scale = 2f;
     }
 
-    public static Point translateDSDisplayWorld(Point dS)
-    {
-        Point result = new Point(dS);
-        result.multiply(scale);
-        return result;
-    }
+    public static void update(float dt) {
+        if (xPos-Point.epsilon>xPosObject) xPos=Math.max(xPosObject, xPos-dt*cameraSpeed);
+        else if (xPos+Point.epsilon<xPosObject) xPos=Math.min(xPosObject, xPos+dt*cameraSpeed);
 
-    public static void move(Point delta)
-    {
-        move((int)delta.x, (int)delta.y);
-    }
-
-    public static void move(int dX, int dY) {
-        xPos += dX * scale;
-        yPos += dY * scale;
+        if (yPos-Point.epsilon>yPosObject) yPos=Math.max(yPosObject, yPos-dt*cameraSpeed);
+        else if (yPos+Point.epsilon<yPosObject) yPos=Math.min(yPosObject, yPos+dt*cameraSpeed);
     }
 
     public static void setPosition(float x, float y) {
@@ -48,11 +37,25 @@ public class Camera {
         float xHeight = Display.getHeight() * scale / 2;
         xPos = x - xWidth;
         yPos = y - xHeight;
+        xPosObject = xPos;
+        yPosObject = yPos;
+    }
+
+    public static void moveTo(float x, float y) {
+        float xWidth = Display.getWidth() * scale / 2;
+        float xHeight = Display.getHeight() * scale / 2;
+        xPosObject = x - xWidth;
+        yPosObject = y - xHeight;
     }
 
     public static void setPosition(Point p) {
         setPosition(p.x, p.y);
     }
+
+    public static void moveTo(Point p) {
+        moveTo(p.x, p.y);
+    }
+
 
     public static void reScale(int reScale) {
         if (reScale > 0) scale /= 1.3f;

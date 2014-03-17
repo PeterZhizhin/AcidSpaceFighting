@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import static com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer.*;
 import static org.lwjgl.opengl.GL11.*;
 
-public abstract class Form {
+public class Form {
 
     protected LinkedList<Control> controls;
 

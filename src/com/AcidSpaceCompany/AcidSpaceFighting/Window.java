@@ -14,51 +14,20 @@ import org.lwjgl.input.Keyboard;
  */
 public class Window extends BasicWindow {
 
-    private static GameState gameState;
-    private static boolean isInited = false;
-
+    private static boolean change = false;
+    private static boolean isMenu = true;
     private static Menu menu;
 
     public static void initWorld()
     {
         World.init();
         Camera.init();
-        isInited = true;
-        gameState = GameState.GAME;
+        isMenu=false;
     }
 
-    public static void resumeGame()
-    {
-        if (isInited)
-            gameState = GameState.GAME;
-    }
-
-    public static void pauseGame()
-    {
-        gameState = GameState.MENU;
-    }
-
-    public static void setCreativeMode()
-    {
-        if (isInited)
-        {
-            World.toggleCreativeMode();
-            resumeGame();
-        }
-    }
-
-    private static void toggleGameState()
-    {
-        if (gameState == GameState.GAME) {
-            pauseGame();
-        }
-        else
-            resumeGame();
-    }
 
     public Window() {
         super(1200, 700, 10000, "Window; ");
-        gameState = GameState.MENU;
         menu = new Menu();
         SoundBase.init();
         ShadersBase.init();
@@ -66,47 +35,30 @@ public class Window extends BasicWindow {
     }
 
     public void setTitle(String s) {
-        String addition = "";
-        switch (gameState)
-        {
-            case GAME:
-                addition = World.getMessage();
-                break;
-            case MENU:
-                addition = "Acid Space Fighting";
-                break;
-        }
-        super.setTitle(s + " " + addition);
+        super.setTitle(s + " " + (isMenu?"Acid Space Fighting":World.getMessage()));
+    }
+
+    public static void changeState() {
+        isMenu=!isMenu;
     }
 
     @Override
     protected void update(int deltaTime) {
-        while (Keyboard.next())
-            if (isInited & (Keyboard.getEventKey() == Keyboard.KEY_ESCAPE) & Keyboard.getEventKeyState())
-                    toggleGameState();
+        boolean current=Keyboard.isKeyDown(Keyboard.KEY_ESCAPE);
+            if (current&&!change)
+                changeState();
+        change=current;
 
-        switch (gameState)
-        {
-            case MENU:
-                menu.update();
-                break;
-            case GAME:
-                World.update(deltaTime / 1000f);
-                break;
-        }
+        if (isMenu) menu.update();
+        else
+        World.update(deltaTime / 1000f);
     }
 
     @Override
     protected void draw() {
-        switch (gameState)
-        {
-            case MENU:
-                menu.draw();
-                break;
-            case GAME:
-                World.draw();
-                break;
-        }
+        if (isMenu) menu.draw();
+        else
+            World.draw();
     }
 
 }

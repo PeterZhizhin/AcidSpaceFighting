@@ -30,7 +30,7 @@ public class PhysicModel {
      */
     public boolean containsPoint(Point point)
     {
-       return body.containsPoint(point);
+       return body.contains(point);
     }
 
     public void moveGeometric(Point dS)

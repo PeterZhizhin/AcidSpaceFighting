@@ -8,7 +8,7 @@ import static com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer.*;
 public class Menu extends Form {
 
     private void resume() {
-        Window.resumeGame();
+        Window.changeState();
     }
 
     private void start() {
@@ -44,17 +44,9 @@ public class Menu extends Form {
                 Window.exit();
             }
         });
-        Button creativeMode = new Button(10,170,300,40, "Creative mode");
-        creativeMode.setEvent(new Runnable() {
-            @Override
-            public void run() {
-                Window.setCreativeMode();
-            }
-        });
         controls.add(startButton);
         controls.add(resumeButton);
         controls.add(quit);
-        controls.add(creativeMode);
     }
 
 }

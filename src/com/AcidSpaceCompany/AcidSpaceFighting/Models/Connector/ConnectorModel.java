@@ -11,7 +11,7 @@ public class ConnectorModel extends Model {
 
     public ConnectorModel(float x, float y, float radius) {
         super(null, null);
-        GeometricModel g = new BaseGeometricModel(x, y, radius);
+        GeometricModel g = new ConnectorGeometricModel(x, y, radius);
         PhysicModel p = new ConnectorPhysicModel(g, new Point[]{
                 new Point(x + radius / 2, y),
                 new Point(x + radius / 2, y + radius),

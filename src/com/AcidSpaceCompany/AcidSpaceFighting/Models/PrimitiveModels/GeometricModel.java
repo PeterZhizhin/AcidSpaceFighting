@@ -188,7 +188,7 @@ public class GeometricModel {
      * @param point
      * @return
      */
-    public boolean containsPoint(Point point)
+    public boolean contains(Point point)
     {
         double angle = 0;
         for (int i = 0; i < vertexes.length; i++) {
@@ -251,6 +251,10 @@ public class GeometricModel {
         Matrix3f.load(g.resultMatrix, resultMatrix);
     }
 
+    public float getConnectionDistanceCoef() {
+        return 3f;
+    }
+
     /**
      * Создание модели
      *
@@ -275,8 +279,7 @@ public class GeometricModel {
         }
         maxLength = (float) max;
 
-        //TODO: выпилить
-        connectionDistance = 2.0f*maxLength;
+        connectionDistance = getConnectionDistanceCoef()*maxLength;
 
         rawVertexes = new Point[vertexes.length];
         for (int i = 0; i < vertexes.length; i++) {

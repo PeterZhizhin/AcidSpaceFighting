@@ -1,8 +1,6 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.RPSystem;
 
-import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD.HUD;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Achivements.Achive;
-import org.lwjgl.Sys;
 
 public class Plot {
 
@@ -17,6 +15,7 @@ public class Plot {
         Event e = new Event() {
             public void activate() {
                 DataWrapper.addAchive(new Achive("FAR FAR", "Your x > 10k!"));
+                DataWrapper.enableEditor();
             }
         };
         PlotBase.addEventAndCondition(e, c);

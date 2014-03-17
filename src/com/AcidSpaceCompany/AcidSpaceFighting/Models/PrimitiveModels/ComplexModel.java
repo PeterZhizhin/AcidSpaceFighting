@@ -142,6 +142,10 @@ public class ComplexModel extends Model {
                  distance;
     }
 
+    public boolean checkDistanceIsToConnect(int i1, int i2) {
+         return checkDistanceIsToConnect(models.get(i1), models.get(i2));
+    }
+
     public void recalculateModels()
     {
         for (int i=0; i<models.size()-1; i++)
@@ -149,6 +153,7 @@ public class ComplexModel extends Model {
                 if (!checkDistanceIsToConnect(models.get(i),models.get(j)))
                    models.deleteConnection(i,j);
         recalculateComponents();
+        phyModel.recomputeMassCenters();
     }
 
     /**
