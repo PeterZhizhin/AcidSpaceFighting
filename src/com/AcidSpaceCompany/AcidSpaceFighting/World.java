@@ -36,13 +36,18 @@ public class World {
      */
     public static Model getModel(Point position)
     {
-        Model result;
         for (Model model : models)
-            if ((result=model.containsPoint(position))!=null)
-                return result;
+            if (model.containsPoint(position))
+                return model;
         return null;
     }
 
+
+    public static void updateGameState(GameState gameState1)
+    {
+        gameState = gameState1;
+        updateGameStateVariables();
+    }
 
     private static void updateGameStateVariables()
     {

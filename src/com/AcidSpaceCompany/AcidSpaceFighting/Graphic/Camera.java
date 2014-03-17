@@ -29,7 +29,7 @@ public class Camera {
     public static Point translateDSDisplayWorld(Point dS)
     {
         Point result = new Point(dS);
-        result.multiply(1.0f/scale);
+        result.multiply(scale);
         return result;
     }
 

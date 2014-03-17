@@ -339,7 +339,7 @@ public class PhysicModel {
         if (!m.getIsComplex())
             return crossWithGeometricModel(m, deltaTime);
         else
-            return m.crossWithGeometricModel(this, deltaTime);
+            return m.crossThem(this, deltaTime);
     }
 
     public Point getCentre() {

@@ -15,6 +15,10 @@ public class CreativeMode {
     private static ComplexModel activeModel;
     private static Point previousCameraPosition;
     private static boolean isDragged;
+    /**
+     * Входит ли перетаскиваемая модель в комплексную активную
+     */
+    private static boolean isContainsActive;
     private static Model draggedModel;
 
     private static Point translateDeltaMouseWorld(Point dS)
@@ -28,10 +32,10 @@ public class CreativeMode {
         Point eventPosition = Camera.translateWindowWorld(pressedMousePosition);
         //Теперь определяем, нажали мы на какой-то элемент корабля или же нет.
         Model pressed = World.getModel(eventPosition);
-        if (pressed!=null)
+        if (pressed!=null && (!pressed.getIsComplex() | (isContainsActive=pressed.equals(activeModel))))
         {
             isDragged=true;
-            draggedModel = pressed;
+            draggedModel = pressed.getIsComplex() ? pressed.getModelUnderPoint(eventPosition) : pressed;
         }
     }
 
@@ -39,6 +43,15 @@ public class CreativeMode {
     {
         if (isDragged)
         {
+            if (isContainsActive)
+                activeModel.recalculateModels();
+            else
+                if (activeModel.isNeededToConnect(draggedModel))
+                {
+                    activeModel.add(draggedModel);
+                    activeModel.additionsFinished();
+                }
+
             isDragged=false;
             draggedModel=null;
         }
@@ -64,7 +77,7 @@ public class CreativeMode {
         if (isDragged)
             draggedModel.moveGeometricModel(
                     translateDeltaMouseWorld(
-                            new Point(Mouse.getDX(), Mouse.getDY())));
+                            new Point(Mouse.getDX(), -Mouse.getDY())));
     }
 
 

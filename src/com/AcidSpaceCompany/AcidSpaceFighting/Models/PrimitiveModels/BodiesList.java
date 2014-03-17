@@ -182,6 +182,14 @@ public class BodiesList<E> implements Iterable<E> {
         addConnection(indexOf(modelToConnect), indexOf(modelToAdd));
     }
 
+    public void deleteConnection(int bodyIndex1, int bodyIndex2)
+    {
+        int realIndex1 = indexes[bodyIndex1];
+        int realIndex2 = indexes[bodyIndex2];
+        adjacencyMatrix[realIndex1][realIndex2] = 0;
+        adjacencyMatrix[realIndex2][realIndex1] = 0;
+    }
+
     /**
      * Создает связь между двумя телами. После добавления всех связей нужно вызвать recalculateMatrix()!
      * @param bodyIndex1 Тело 1

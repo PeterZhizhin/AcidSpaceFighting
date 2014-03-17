@@ -2,10 +2,16 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
+import org.omg.CORBA._PolicyStub;
 
 
 public class ComplexModel extends Model {
 
+    @Override
+    public boolean getIsComplex()
+    {
+        return true;
+    }
 
     //Максимальное их число
     //private static final int maxBodiesSize = 10;   //Для отладки
@@ -34,13 +40,19 @@ public class ComplexModel extends Model {
      * @return null - не принадлежит ни одной. Или модель, которой принадлежит.
      */
     @Override
-    public Model containsPoint(Point point)
+    public Model getModelUnderPoint(Point point)
     {
         Model result;
         for (Model model : models)
-            if ((result=model.containsPoint(point))!=null)
+            if ((result=model.getModelUnderPoint(point))!=null)
                 return result;
         return null;
+    }
+
+    @Override
+    public boolean containsPoint(Point point)
+    {
+        return getModelUnderPoint(point)!=null;
     }
 
     public void update(float time) {
@@ -96,6 +108,19 @@ public class ComplexModel extends Model {
     }
 
     /**
+     * Проверяет, нужно ли подсоединять данную модель к комплексной
+     * @param checkModel Модель для проверки
+     * @return Нужно присоединять данную модель или нет
+     */
+    public boolean isNeededToConnect(Model checkModel)
+    {
+        for (Model model : models)
+            if (checkDistanceIsToConnect(checkModel, model))
+                return true;
+        return false;
+    }
+
+    /**
      * Проверка того, можно ли соединять модели
      * @param model1
      * @param model2
@@ -115,6 +140,15 @@ public class ComplexModel extends Model {
                 <=
         //Чем минимальное из расстояний, позволяющих соединять
                  distance;
+    }
+
+    public void recalculateModels()
+    {
+        for (int i=0; i<models.size()-1; i++)
+            for (int j = i+1; j<models.size(); j++)
+                if (!checkDistanceIsToConnect(models.get(i),models.get(j)))
+                   models.deleteConnection(i,j);
+        recalculateComponents();
     }
 
     /**

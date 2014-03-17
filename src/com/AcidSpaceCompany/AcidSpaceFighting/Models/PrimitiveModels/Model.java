@@ -9,12 +9,17 @@ public class Model{
     private static int lastNumber=0;
     private int number;
 
+    public boolean getIsComplex()
+    {
+        return false;
+    }
+
     /**
      * Получает модель по точке.
      * @param point Точка.
      * @return null - если в модели точка не содержится. Или модель, которой точка принадлежит
      */
-    public Model containsPoint(Point point)
+    public Model getModelUnderPoint(Point point)
     {
        if (physic.containsPoint(point))
            return this;
@@ -22,9 +27,14 @@ public class Model{
            return null;
     }
 
+    public boolean containsPoint(Point point)
+    {
+        return physic.containsPoint(point);
+    }
+
     public void moveGeometricModel(Point dS)
     {
-
+        physic.moveGeometric(dS);
     }
 
     public float getMaxWidth() {

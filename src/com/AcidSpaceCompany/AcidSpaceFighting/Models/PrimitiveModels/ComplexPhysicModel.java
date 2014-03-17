@@ -1,7 +1,6 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
-import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Segment;
 
 import java.util.LinkedList;
 
@@ -21,6 +20,12 @@ public class ComplexPhysicModel extends PhysicModel {
     @Override
     public Point getCentre() {
         return massCentre;
+    }
+
+    @Override
+    public boolean containsPoint(Point point)
+    {
+        return cm.getModelUnderPoint(point)!=null;
     }
 
 

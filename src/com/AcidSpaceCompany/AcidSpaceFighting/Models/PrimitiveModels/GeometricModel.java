@@ -137,13 +137,6 @@ public class GeometricModel {
         return maxLength;
     }
 
-    private boolean contains(Point p) {
-        double angle = 0;
-        for (int i = 0; i < vertexes.length; i++) {
-            angle += Point.getAngle(getPoint(i), p, getPoint(i + 1));
-        }
-        return Math.abs(angle - Math.PI * 2) <= Point.epsilon;
-    }
 
     //Get intersection between 2 models. If it is not exists - return null
     public Segment getIntersection(GeometricModel model) {
@@ -197,8 +190,11 @@ public class GeometricModel {
      */
     public boolean containsPoint(Point point)
     {
-        //TODO: реализовать
-        return false;
+        double angle = 0;
+        for (int i = 0; i < vertexes.length; i++) {
+            angle += Point.getAngle(getPoint(i), point, getPoint(i + 1));
+        }
+        return Math.abs(angle - Math.PI * 2) <= Point.epsilon;
     }
 
     /**
