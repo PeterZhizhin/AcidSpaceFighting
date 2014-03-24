@@ -9,9 +9,31 @@ public class Model{
     private static int lastNumber=0;
     private int number;
 
+    private boolean isSelected=false;
+
+    public void select() {
+        isSelected=true;
+    }
+
+    public void unselect() {
+        isSelected=false;
+    }
+
+    public boolean getIsSelected() {
+        return isSelected;
+    }
+
     public boolean getIsComplex()
     {
         return false;
+    }
+
+    public void setAngle(float f) {
+        physic.setAngle(f);
+    }
+
+    public float getAngle() {
+        return physic.getAngle();
     }
 
     /**
@@ -45,6 +67,11 @@ public class Model{
         return physic.getIsNoNeedMore();
     }
 
+    public void setIsNoNeedMore()
+    {
+        physic.setIsNoNeedMore();
+    }
+
     public void destroy() {
         graphic.destroy();
         physic.destroy();
@@ -67,10 +94,10 @@ public class Model{
     }
 
     public void drawTopLayer() {
-        graphic.drawTopLayer();
+        graphic.drawTopLayer(isSelected);
     }
 
-    public void drawBackgroundLayer() {
+    public void drawConnections() {
         graphic.drawBackgroundLayer();
     }
 

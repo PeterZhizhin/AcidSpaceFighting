@@ -1,12 +1,14 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD;
 
+import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Achivements.Achive;
+import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Message;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 public class HUD {
 
     public enum Input {game, form, editor}
-    private static Input input=Input.game;
+    private static Input input=Input.editor;
 
     public static boolean getIsRealTime() {
         return input==Input.game;
@@ -21,8 +23,8 @@ public class HUD {
         MapLayer.update(dt);
         switch (input) {
             case game:
-                World.updatePhysic(dt);
-                World.getPlayerShip().updateKeyboardInput();
+                OurWorld.updatePhysic(dt);
+                OurWorld.getPlayerShip().updateKeyboardInput();
                 break;
             case form: FormLayer.update();
                 break;
@@ -30,6 +32,10 @@ public class HUD {
                 break;
         }
 
+    }
+
+    public static void addAchive(Message a) {
+        showMessage(a.getTitle(), a.getText());
     }
 
     public static void addAchive(Achive a) {

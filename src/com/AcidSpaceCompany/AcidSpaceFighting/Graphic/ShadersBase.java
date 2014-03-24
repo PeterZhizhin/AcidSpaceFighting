@@ -92,6 +92,7 @@ public class ShadersBase {
         shaders[blackAndWhite]=new Shader("blackAndWhite");
         textureForBAWID= glGetUniformLocationARB(shaders[blackAndWhite].getNumber(), "Texture");
         stateForBAWID= glGetAttribLocation(shaders[blackAndWhite].getNumber(), "State");
+
     }
 
 }

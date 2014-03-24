@@ -14,9 +14,9 @@ public class ComplexGraphicModel extends GraphicModel {
     }
 
     @Override
-    public void drawTopLayer() {
+    public void drawTopLayer(boolean isSelected) {
         for (int i=0; i<cm.getSize(); i++) {
-            cm.getModel(i).getGraphicModel().drawTopLayer();
+            cm.getModel(i).getGraphicModel().drawTopLayer(cm.getModel(i).getIsSelected());
         }
     }
 

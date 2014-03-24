@@ -16,7 +16,7 @@ public class Form {
     protected LinkedList<Control> controls;
 
     public Form() {
-        controls = new LinkedList<Control>();
+        controls = new LinkedList<>();
     }
 
     public void update() {

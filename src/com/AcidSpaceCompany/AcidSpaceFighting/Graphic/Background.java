@@ -19,8 +19,8 @@ public class Background {
         if (HUD.getIsRealTime()) {
         float width=Display.getWidth();
 
-        Point p1=Camera.getSourcePoint(new Point(0, 0));
-        Point p2=Camera.getSourcePoint(new Point(Display.getWidth(), Display.getHeight()));
+        Point p1=Camera.untranslatePoint(0, 0);
+        Point p2=Camera.untranslatePoint(Display.getWidth(), Display.getHeight());
 
         while (Camera.translateDistance(width)<=500) {
             width*=2;

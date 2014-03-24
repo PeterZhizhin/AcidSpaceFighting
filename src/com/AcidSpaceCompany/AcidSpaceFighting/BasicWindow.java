@@ -8,11 +8,6 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.*;
 
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.glOrtho;
 

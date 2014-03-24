@@ -6,17 +6,17 @@ public class PlotBase {
 
     //todo: нормальные названия методов
 
-    private static ArrayList<Event> events=new ArrayList<Event>();
-    private static ArrayList<Condition> conditions=new ArrayList<Condition>();
-    private static ArrayList<Boolean> conditionsHappended=new ArrayList<Boolean>();
-    private static ArrayList<Integer> conditionToEventConnection=new ArrayList<Integer>();
+    private static ArrayList<Event> events=new ArrayList<>();
+    private static ArrayList<Condition> conditions=new ArrayList<>();
+    private static ArrayList<Boolean> conditionsHappended=new ArrayList<>();
+    private static ArrayList<Integer> conditionToEventConnection=new ArrayList<>();
 
     public static void init()
     {
-        events = new ArrayList<Event>();
-        conditions = new ArrayList<Condition>();
-        conditionsHappended = new ArrayList<Boolean>();
-        conditionToEventConnection = new ArrayList<Integer>();
+        events = new ArrayList<>();
+        conditions = new ArrayList<>();
+        conditionsHappended = new ArrayList<>();
+        conditionToEventConnection = new ArrayList<>();
     }
 
     public static int addEvent(Event e) {

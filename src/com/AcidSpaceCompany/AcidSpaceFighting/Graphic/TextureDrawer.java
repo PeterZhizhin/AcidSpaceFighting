@@ -22,7 +22,7 @@ public class TextureDrawer {
     private static int fire;
     private static int smoke;
     private static int font;
-    private static int[] blocks;
+    private static int[][] blocks;
     private static int[] damages;
 
     private static final boolean hardDebug=false;
@@ -128,6 +128,24 @@ public class TextureDrawer {
 
     }
 
+    public static void drawRoundSegment(Point[] p) {
+        ShadersBase.use(ShadersBase.defaultShader);
+        ShadersBase.bindTexture(ShadersBase.textureForDefaultShaderID, white);
+        glColor4f(1f, 1f, 1f, 0.75f);
+
+        glBegin(GL_QUADS);
+        glTexCoord2f(0, 0);
+        glVertex2f(p[0].x, p[0].y);
+        glTexCoord2f(1, 0);
+        glVertex2f(p[1].x, p[1].y);
+        glTexCoord2f(1, 1);
+        glVertex2f(p[2].x, p[2].y);
+        glTexCoord2f(0, 1);
+        glVertex2f(p[3].x, p[3].y);
+        glEnd();
+        ShadersBase.drop();
+    }
+
     public static void drawUntranslatedQuad(float sx, float sy, float ex, float ey) {
         glTexCoord2f(0, 0);
         glVertex2f(sx, sy);
@@ -154,11 +172,11 @@ public class TextureDrawer {
         drawQuadWIdthoutBeginAndEnd(p1, p2, p3, p4);
     }
 
-    public static void drawBlock(Point p1, Point p2, Point p3, Point p4, int block, float health) {
+    public static void drawBlock(Point p1, Point p2, Point p3, Point p4, int block, float health, boolean isSelected) {
 
         int damage=Math.round((1-health)*4);
 
-        ShadersBase.bindTexture(ShadersBase.blockID, blocks[block]);
+        ShadersBase.bindTexture(ShadersBase.blockID, blocks[block][isSelected?1:0]);
 
         if (damage>=5)
         ShadersBase.bindSecondTexture(ShadersBase.damageID, white);
@@ -234,9 +252,11 @@ public class TextureDrawer {
     }
 
     public static void init() {
-        blocks=new int[6];
-        for (int i=0; i<6; i++)
-            blocks[i]=load("Block"+i+".png");
+        blocks=new int[6][2];
+        for (int i=0; i<6; i++) {
+            blocks[i][0] = load("Block" + i + ".png");
+            blocks[i][1] = load("Block" + i + "_border.png");
+        }
 
         damages=new int[5];
         for (int i=0; i<5; i++)

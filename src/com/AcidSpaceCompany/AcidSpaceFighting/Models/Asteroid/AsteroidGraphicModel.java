@@ -4,6 +4,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GeometricMo
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Camera;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GraphicModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Tale;
+import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -13,7 +14,7 @@ public class AsteroidGraphicModel extends GraphicModel {
 
     private Tale t;
 
-    public void drawTopLayer() {
+    public void drawTopLayer(boolean isSelected) {
         t.addPoint(shape.getCentre(), shape.getMaxLength() / 2);
         glEnd();
         glBegin(GL_TRIANGLE_FAN);
@@ -42,7 +43,7 @@ public class AsteroidGraphicModel extends GraphicModel {
     public AsteroidGraphicModel(GeometricModel body) {
         super(body);
         t=new Tale(body.getCentre(),0, 20, 0.05f, 8, false);
-        World.addEffect(t);
+        OurWorld.addEffect(t);
     }
 
     public void destroy() {

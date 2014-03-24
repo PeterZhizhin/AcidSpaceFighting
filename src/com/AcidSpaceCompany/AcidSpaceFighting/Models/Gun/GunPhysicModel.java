@@ -6,6 +6,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Bullet.BulletModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.PhysicModel;
+import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 public class GunPhysicModel extends PhysicModel {
@@ -22,7 +23,7 @@ public class GunPhysicModel extends PhysicModel {
 
             force=force.setLength(10000000);
             m.useForce(m.getCenter(), force);
-            World.addModel(m);
+            OurWorld.addModel(m);
 
 
 

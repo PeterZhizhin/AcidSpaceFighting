@@ -1,6 +1,7 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
+import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 import org.omg.CORBA._PolicyStub;
 
@@ -63,7 +64,7 @@ public class ComplexModel extends Model {
             if (models.get(i).getIsNoNeedMore())
             {
                 models.get(i).destroy();
-                World.explode(models.get(i).getCenter(), models.get(i).getMaxWidth());
+                OurWorld.explode(models.get(i).getCenter(), models.get(i).getMaxWidth());
                 models.remove(i);
                 wasDeleted = true;
             }
@@ -89,16 +90,21 @@ public class ComplexModel extends Model {
                 if (components[i].size()>1)
                 {
                     //Если длина больше 1 - нужно создавать комплексную модель
-                    World.addModel(new ComplexModel(components[i]));
+                    OurWorld.addModel(new ComplexModel(components[i]));
                 }
                 else
                 {
                     //Если длина 1 - нужно создавать обычную модель
-                    World.addModel(components[i].get(0));
+                    OurWorld.addModel(components[i].get(0));
                 }
             //А теперь нужно изменить сам список моделей (текущий)
             //TODO: Отследить "смерть" (models.getIsAlive())
             models = components[0];
+            if (models.getSize()==1)
+            {
+                this.setIsNoNeedMore();
+                OurWorld.addModel(models.get(0));
+            }
         }
     }
 

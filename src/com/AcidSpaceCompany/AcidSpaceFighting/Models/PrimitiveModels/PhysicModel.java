@@ -20,9 +20,6 @@ public class PhysicModel {
     protected ComplexPhysicModel parent;
     protected int number;
 
-    private Point[] connectionPoints;
-    private boolean[] isConnectionFree;
-
     /**
      * Выясняет, содержит ли данная физическая модель данную точку
      * @param point Точка для проверки
@@ -42,8 +39,12 @@ public class PhysicModel {
         //if somebody need it
     }
 
-    public float getDamage(float force) {
-        return force/40000000000f;
+    public float getAngle() {
+        return body.getAngle();
+    }
+
+    public void useDamage(float force) {
+        health -= force/40000000f;
     }
 
     public float getMaxWidth() {
@@ -56,6 +57,11 @@ public class PhysicModel {
 
     public boolean getIsNoNeedMore() {
         return health<=0;
+    }
+
+    public void setIsNoNeedMore()
+    {
+        health = 0;
     }
 
     public void setNumber(int num) {
@@ -103,16 +109,16 @@ public class PhysicModel {
     public void doSpecialActionA() {
     }
 
+    protected void setAngle(float angle) {
+        body.rotate(angle-body.getAngle());
+    }
+
     protected void rotate(Point centre, float angle) {
         body.rotate(centre, angle);
-        for (Point connectionPoint : connectionPoints)
-            connectionPoint.rotate(angle, centre);
     }
 
     protected void move(Point dS) {
         body.move(dS);
-        for (Point connectionPoint : connectionPoints)
-            connectionPoint.move(dS);
     }
 
     public void rotate(float s) {
@@ -185,7 +191,7 @@ public class PhysicModel {
 
         } else
             parent.useForce(posOfForce, force);
-        health-=getDamage(force.length());
+        useDamage(force.length());
     }
 
     /**
@@ -376,10 +382,6 @@ public class PhysicModel {
 
     public PhysicModel(GeometricModel body, Point[] connectionPoints, float mass) {
         this(body, mass);
-        this.connectionPoints = connectionPoints;
-        isConnectionFree = new boolean[connectionPoints.length];
-        for (int i = 0; i < isConnectionFree.length; i++)
-            isConnectionFree[i] = true;
     }
 
     public PhysicModel(GeometricModel body, Point[] connectionPoints, float mass, Point speedVector)

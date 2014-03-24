@@ -1,6 +1,5 @@
 package com.AcidSpaceCompany.AcidSpaceFighting;
 
-import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD.EditorLayer;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Background;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Camera;
@@ -9,7 +8,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Explosion;
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD.HUD;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
-import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Plot;
+import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.SpaceShip;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.PlotBase;
 
 import java.util.ArrayList;
@@ -22,29 +21,29 @@ import static org.lwjgl.opengl.GL11.glEnd;
 
 public class World {
 
-    private static ArrayList<Model> models;
-    private static LinkedList<Effect> effects;
+    private ArrayList<Model> models;
+    private LinkedList<Effect> effects;
 
     /**
      * Получает модель по точке.
      * @param position Точка
      * @return null - если модели в этой точке нет. Ну или модель в этой точке
      */
-    public static Model getModel(Point position) {
+    public Model getModel(Point position) {
         for (Model model : models)
             if (model.containsPoint(position))
                 return model;
         return null;
     }
 
-    public static void explode(Point center, float power) {
+    public void explode(Point center, float power) {
         Explosion e=new Explosion(center, power/5);
         addEffect(e);
         explosionBuffer.add(center);
         explosionPowerBuffer.add(power);
     }
 
-    private static void sortEffects() {
+    private void sortEffects() {
         for (int i=0; i<effects.size()-1; i++) {
 
             int min=i;
@@ -58,9 +57,9 @@ public class World {
         }
     }
 
-    private static LinkedList<Model> addModelBuffer;
-    private static int unsorted=0;
-    public static void addModel(Model m) {
+    private LinkedList<Model> addModelBuffer;
+    private int unsorted=0;
+    public void addModel(Model m) {
         addModelBuffer.add(m);
         if (unsorted==0){
             sortEffects();
@@ -69,15 +68,11 @@ public class World {
         else unsorted--;
     }
 
-    public static void addEffect(Effect p) {
+    public void addEffect(Effect p) {
         effects.add(p);
     }
 
-    public static String getMessage() {
-        return Camera.getMessage() + " Models: " + models.size()+" Effects: "+effects.size();
-    }
-
-    public static void draw() {
+    public void draw() {
         if (HUD.getIsRealTime())
         Camera.setPosition(player1.getCenter());
         else
@@ -88,7 +83,7 @@ public class World {
 
         TextureDrawer.startDrawConnections();
         for (Model model : models) {
-            model.drawBackgroundLayer();
+            model.drawConnections();
         }
         TextureDrawer.finishDraw();
 
@@ -108,7 +103,7 @@ public class World {
 
     }
 
-    private static void updateModels(float deltaTime) {
+    private void updateModels(float deltaTime) {
         boolean wasIntersection = true;
         for (int n=0; wasIntersection & n <= 5; n++) {
             n++;
@@ -133,12 +128,13 @@ public class World {
         }
     }
 
-    private static void addAndRemoveModels() {
+    private void addAndRemoveModels() {
 
         for (int i=0; i<models.size(); i++) {
             if (models.get(i).getIsNoNeedMore())
             {
-                explode(models.get(i).getCenter(), models.get(i).getMaxWidth()*2);
+                if (!models.get(i).getIsComplex())
+                    explode(models.get(i).getCenter(), models.get(i).getMaxWidth()*2);
                 models.get(i).destroy();
                 models.remove(i);
             }
@@ -150,11 +146,10 @@ public class World {
         }
     }
 
-    private static ArrayList<Point> explosionBuffer;
-    private static ArrayList<Float> explosionPowerBuffer;
-    private static void updateExplosions() {
-        while (explosionBuffer.size() > 0)
-    {
+    private ArrayList<Point> explosionBuffer;
+    private ArrayList<Float> explosionPowerBuffer;
+    private void updateExplosions() {
+        while (explosionBuffer.size() > 0) {
         for (Model m: models)
         {
             Point force=m.getCenter().negate().add(explosionBuffer.get(0)).negate();
@@ -169,7 +164,7 @@ public class World {
         explosionPowerBuffer.remove(0);
     }}
 
-    private static void updateEffects(float deltaTime) {
+    private void updateEffects(float deltaTime) {
         for (int i=0; i<effects.size(); i++) {
             Effect p =effects.get(i);
             p.update(deltaTime);
@@ -179,52 +174,46 @@ public class World {
         }
     }
 
-    public static void update(float deltaTime) {
+    public void update(float deltaTime) {
         addAndRemoveModels();
         HUD.update(deltaTime);
         Camera.update(deltaTime);
     }
 
-    public static void updatePhysic(float deltaTime) {
+    public void updatePhysic(float deltaTime) {
         updateExplosions();
         updateEffects(deltaTime);
         updateModels(deltaTime);
         PlotBase.reCheck();
     }
 
-    private static SpaceShip player1;
-    private static ArrayList<SpaceShip> ships=new ArrayList<SpaceShip>();
+    private SpaceShip player1;
+    private ArrayList<SpaceShip> ships=new ArrayList<>();
 
-    public static SpaceShip getPlayerShip() {
+    public SpaceShip getPlayerShip() {
         return player1;
     }
 
-    public static boolean getShipIsAlive(int number) {
+    public boolean getShipIsAlive(int number) {
           for (SpaceShip sh: ships)
               if (sh.getNumber()==number) return true;
         return false;
     }
 
-    public static void init() {
-        Plot.init();
-        HUD.init();
+    public void setPlayerModel(SpaceShip m) {
+        player1=m;
+    }
 
-        effects=new LinkedList<Effect>();
-        ships = new ArrayList<SpaceShip>();
+    public World() {
 
-        models = new ArrayList<Model>();
-        addModelBuffer = new LinkedList<Model>();
+        effects=new LinkedList<>();
+        ships = new ArrayList<>();
 
-        explosionBuffer=new ArrayList<Point>();
-        explosionPowerBuffer=new ArrayList<Float>();
+        models = new ArrayList<>();
+        addModelBuffer = new LinkedList<>();
 
-        player1 = new SpaceShip(0,0);
-        ships.add(player1);
-
-        SpaceShip player2 = new SpaceShip(10000,10000);
-        ships.add(player2);
-
-        for (SpaceShip ship : ships) World.addModel(ship);
+        explosionBuffer=new ArrayList<>();
+        explosionPowerBuffer=new ArrayList<>();
     }
 
 }

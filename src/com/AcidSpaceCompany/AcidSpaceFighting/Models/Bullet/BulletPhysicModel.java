@@ -3,6 +3,7 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Models.Bullet;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GeometricModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.PhysicModel;
+import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 public class BulletPhysicModel extends PhysicModel {
@@ -18,7 +19,7 @@ public class BulletPhysicModel extends PhysicModel {
             firstTime=!firstTime;
             if (firstTime) {
                  health=0;
-                 World.explode(getCentre(), body.getMaxLength());
+                OurWorld.explode(getCentre(), body.getMaxLength());
             }
         }
         super.useForce(posOfForce, force);

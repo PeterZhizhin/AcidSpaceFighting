@@ -5,10 +5,11 @@
 
                 void main(){
                 vec4 theColor=texture2D(Texture, (gl_TexCoord[0].st));
-                float r=theColor.x*theColor.w;
-                float g=theColor.y*theColor.w;
-                float b=theColor.z*theColor.w;
-                float a=theColor.w*theColor.w;
+
+                float r=theColor.x;
+                float g=theColor.y;
+                float b=theColor.z;
+                float a=theColor.w;
 
                 float s=r+g+b;
                 s*=StateVar;

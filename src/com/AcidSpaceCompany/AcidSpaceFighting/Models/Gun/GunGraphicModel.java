@@ -6,9 +6,9 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 
 public class GunGraphicModel extends GraphicModel {
 
-    public void drawTopLayer() {
+    public void drawTopLayer(boolean isSelected) {
         TextureDrawer.drawBlock(shape.getPoint(0), shape.getPoint(1),
-                shape.getPoint(2), shape.getPoint(3), 4, body.getHealth());
+                shape.getPoint(2), shape.getPoint(3), 4, body.getHealth(), isSelected);
     }
 
     public GunGraphicModel(GeometricModel body) {

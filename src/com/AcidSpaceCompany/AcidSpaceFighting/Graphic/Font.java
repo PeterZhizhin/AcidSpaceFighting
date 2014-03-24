@@ -18,7 +18,6 @@ public class Font {
             drawGlyph(sx, y, size, xx, yy);
             sx+=sizeW;
         }
-
     }
 
     public static float getWidth(float size, int length) {

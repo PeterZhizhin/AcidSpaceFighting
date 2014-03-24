@@ -4,24 +4,25 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GeometricMo
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GraphicModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Tale;
+import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 public class EngineGraphicModel extends GraphicModel {
 
     private Tale t;
 
-    public void drawTopLayer() {
+    public void drawTopLayer(boolean isSelected) {
         float activity = body.getActivity();
         t.addPoint(shape.getCentre(),//.add(new Point(Math.cos(shape.getAngle()), Math.sin(shape.getAngle())).multiply(shape.getMaxLength()* activity *2).negate()),
                 shape.getMaxLength()* activity /2);
         TextureDrawer.drawBlock(shape.getPoint(0), shape.getPoint(1),
-                shape.getPoint(2), shape.getPoint(3), 1, body.getHealth());
+                shape.getPoint(2), shape.getPoint(3), 1, body.getHealth(), isSelected);
     }
 
     public EngineGraphicModel(GeometricModel body) {
         super(body);
         t=new Tale(body.getCentre(),20, 20, 0.05f, 20, true);
-        World.addEffect(t);
+        OurWorld.addEffect(t);
     }
 
     public void destroy() {

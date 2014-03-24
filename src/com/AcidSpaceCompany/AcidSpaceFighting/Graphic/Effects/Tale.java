@@ -3,6 +3,7 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.ShadersBase;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
+import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 import java.util.LinkedList;
@@ -116,7 +117,7 @@ public class Tale implements Effect {
         this.useSmoke=useSmoke;
         if (useSmoke) {
             smoke =new Smoke(size);
-            World.addEffect(smoke);
+            OurWorld.addEffect(smoke);
         }
         this.smokeCoef=smokeCoef;
     }

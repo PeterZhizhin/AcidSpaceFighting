@@ -1,6 +1,7 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.RPSystem;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD.HUD;
+import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Achivements.Achive;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Items.Bag;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Items.Item;
@@ -9,19 +10,19 @@ import com.AcidSpaceCompany.AcidSpaceFighting.World;
 public class DataWrapper {
 
     public static float getX() {
-        return World.getPlayerShip().getCenter().getX();
+        return OurWorld.getPlayerShip().getCenter().getX();
     }
 
     public static float getY() {
-        return World.getPlayerShip().getCenter().getY();
+        return OurWorld.getPlayerShip().getCenter().getY();
     }
 
     public static boolean getShipIsAlive(int shipNumber) {
-        return World.getShipIsAlive(shipNumber);
+        return OurWorld.getShipIsAlive(shipNumber);
     }
 
     public static Bag getBag() {
-        return World.getPlayerShip().getBag();
+        return OurWorld.getPlayerShip().getBag();
     }
 
     public static boolean getConditionWasTrue(int conditionNumber) {
@@ -29,7 +30,7 @@ public class DataWrapper {
     }
 
     public static void addItem(Item i) {
-        World.getPlayerShip().getBag().add(i);
+        OurWorld.getPlayerShip().getBag().add(i);
     }
 
     public static void spawnShip(float x, float y, float angle, int shipNumber) {
@@ -53,7 +54,7 @@ public class DataWrapper {
     }
 
     public static void showMessage(Message d) {
-
+        HUD.addAchive(d);
     }
 
     public static int showChoose(String[] variants) {

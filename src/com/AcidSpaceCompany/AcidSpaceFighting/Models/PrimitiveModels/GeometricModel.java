@@ -133,6 +133,18 @@ public class GeometricModel {
         incCalculations();
     }
 
+    public void moveTo(Point position)
+    {
+        move(centre.negate());
+        move(position);
+    }
+
+    public void rotateTo(float angle)
+    {
+        rotate(-this.angle);
+        rotate(angle);
+    }
+
     public float getMaxLength() {
         return maxLength;
     }

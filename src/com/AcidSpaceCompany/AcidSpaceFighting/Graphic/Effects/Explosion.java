@@ -2,6 +2,7 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Segment;
+import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
 import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 import java.util.Random;
@@ -25,7 +26,7 @@ public class Explosion implements Effect {
         for (int i=0; i<size; i++) {
             centers[i]=new Segment(x, y, rnd.nextFloat()*(rnd.nextFloat()-0.5f)*power, rnd.nextFloat()*(rnd.nextFloat()-0.5f)*power);
             tales[i]=new Tale(x, y, 40, 20, 0.05f, 10, true);
-            World.addEffect(tales[i]);
+            OurWorld.addEffect(tales[i]);
         }
         currentRadius=power/1000f;
         radius=power;

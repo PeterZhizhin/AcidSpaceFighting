@@ -1,6 +1,7 @@
 package com.AcidSpaceCompany.AcidSpaceFighting;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Audio.SoundBase;
+import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD.HUD;
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.Menu;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.*;
 import org.lwjgl.input.Keyboard;
@@ -20,7 +21,7 @@ public class Window extends BasicWindow {
 
     public static void initWorld()
     {
-        World.init();
+        OurWorld.init();
         Camera.init();
         isMenu=false;
     }
@@ -31,11 +32,12 @@ public class Window extends BasicWindow {
         menu = new Menu();
         SoundBase.init();
         ShadersBase.init();
+        HUD.init();
         startWorking();
     }
 
     public void setTitle(String s) {
-        super.setTitle(s + " " + (isMenu?"Acid Space Fighting":World.getMessage()));
+        super.setTitle(s + " Acid Space Fighting");
     }
 
     public static void changeState() {
@@ -51,14 +53,14 @@ public class Window extends BasicWindow {
 
         if (isMenu) menu.update();
         else
-        World.update(deltaTime / 1000f);
+            OurWorld.update(deltaTime / 1000f);
     }
 
     @Override
     protected void draw() {
         if (isMenu) menu.draw();
         else
-            World.draw();
+            OurWorld.draw();
     }
 
 }

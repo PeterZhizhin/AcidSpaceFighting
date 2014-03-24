@@ -12,4 +12,5 @@
         float a=theColor2.w-theColor.x*theColor.w;
 
         gl_FragColor = vec4(r, g, b, a);
+
         }

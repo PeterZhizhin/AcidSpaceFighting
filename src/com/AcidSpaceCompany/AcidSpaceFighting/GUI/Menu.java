@@ -24,26 +24,11 @@ public class Menu extends Form {
     {
         super();
         Button startButton = new Button(10, 50, 300, 40, "Start Game");
-        startButton.setEvent(new Runnable() {
-            @Override
-            public void run() {
-                start();
-            }
-        });
+        startButton.setEvent(this::start);
         Button resumeButton = new Button(10, 90, 300, 40, "Resume Game");
-        resumeButton.setEvent(new Runnable() {
-            @Override
-            public void run() {
-                resume();
-            }
-        });
+        resumeButton.setEvent(this::resume);
         Button quit = new Button(10, 130, 300, 40, "Quit");
-        quit.setEvent(new Runnable() {
-            @Override
-            public void run() {
-                Window.exit();
-            }
-        });
+        quit.setEvent(Window::exit);
         controls.add(startButton);
         controls.add(resumeButton);
         controls.add(quit);

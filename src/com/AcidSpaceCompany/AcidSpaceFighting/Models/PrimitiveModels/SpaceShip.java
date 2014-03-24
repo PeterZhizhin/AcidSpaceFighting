@@ -1,4 +1,4 @@
-package com.AcidSpaceCompany.AcidSpaceFighting;
+package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Base.BaseModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Connector.ConnectorModel;

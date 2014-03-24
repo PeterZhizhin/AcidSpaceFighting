@@ -17,7 +17,7 @@ public abstract class GraphicModel implements Destroyable{
     public void drawBackgroundLayer() {
     }
 
-    public void drawTopLayer() {
+    public void drawTopLayer(boolean isSelected) {
     }
 
     public void setPhysicModel(PhysicModel p) {

@@ -8,6 +8,9 @@ public class Point extends Vector2f {
     public static final float epsilon = 0.0001f;
     public static final Point empty=new Point(0, 0);
 
+    public Point() {
+
+    }
 
     public static double getTriangleSquare(Point p1, Point p2, Point analRape) {
 
