@@ -7,7 +7,6 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GeometricModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
-import com.AcidSpaceCompany.AcidSpaceFighting.World;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
@@ -31,14 +30,17 @@ public class EditorLayer {
             draggedModel = pressed.getIsComplex() ? pressed.getModelUnderPoint(eventPosition) : pressed;
             draggedModel.select();
         }
-        else
-            draggedModel=null;
+        else {
+            if (draggedModel!=null) {
+                draggedModel.unselect();
+                draggedModel = null;
+            }
+        }
         }
     }
 
     private static void mouseReleased() {
-        if (isDragged)
-        {
+        if (isDragged) {
             if (isContainsActive)
                 OurWorld.getPlayerShip().recalculateModels();
             else

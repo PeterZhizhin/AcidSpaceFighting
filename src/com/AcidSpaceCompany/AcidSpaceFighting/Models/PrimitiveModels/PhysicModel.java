@@ -44,7 +44,7 @@ public class PhysicModel {
     }
 
     public void useDamage(float force) {
-        health -= force/40000000f;
+        health -= force/400000000f;
     }
 
     public float getMaxWidth() {
