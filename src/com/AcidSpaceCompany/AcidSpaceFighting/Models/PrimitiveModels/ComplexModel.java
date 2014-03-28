@@ -31,6 +31,20 @@ public class ComplexModel extends Model {
         return models.size();
     }
 
+    public String getPositions() {
+        String s="";
+        for (Model m: models)
+            s+=m.getPositions()+",";
+        return s;
+    }
+
+    public String getSpeeds() {
+        String s="";
+        for (Model m: models)
+            s+=m.getSpeeds()+",";
+        return s;
+    }
+
     public Model getModel(int num) {
         return models.get(num);
     }

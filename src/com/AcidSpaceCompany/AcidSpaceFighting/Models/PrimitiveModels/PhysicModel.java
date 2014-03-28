@@ -20,6 +20,16 @@ public class PhysicModel {
     protected ComplexPhysicModel parent;
     protected int number;
 
+    public void setPositions(float x, float y, float w) {
+        setAngle(w);
+        body.moveTo(x, y);
+    }
+
+    public void setSpeeds(float x, float y, float w) {
+        this.w=w;
+        speedVector.set(x, y);
+    }
+
     /**
      * Выясняет, содержит ли данная физическая модель данную точку
      * @param point Точка для проверки
@@ -100,6 +110,11 @@ public class PhysicModel {
     public float getSpeedY() {
         return speedVector.getY();
     }
+
+    public float getSpeedW() {
+        return w;
+    }
+
 
     protected void addSpeed(Point dV)
     {

@@ -19,9 +19,9 @@ import static org.lwjgl.opengl.GL11.glBegin;
 import static org.lwjgl.opengl.GL11.glEnd;
 
 
-public class World {
+public abstract class World {
 
-    private ArrayList<Model> models;
+    protected ArrayList<Model> models;
     private LinkedList<Effect> effects;
 
     /**
@@ -58,18 +58,18 @@ public class World {
     }
 
     private LinkedList<Model> addModelBuffer;
-    private int unsorted=0;
     public void addModel(Model m) {
         addModelBuffer.add(m);
+    }
+
+    private int unsorted=0;
+    public void addEffect(Effect p) {
+        effects.add(p);
         if (unsorted==0){
             sortEffects();
             unsorted=100;
         }
         else unsorted--;
-    }
-
-    public void addEffect(Effect p) {
-        effects.add(p);
     }
 
     public void draw() {
@@ -103,7 +103,7 @@ public class World {
 
     }
 
-    private void updateModels(float deltaTime) {
+    protected void updateModels(float deltaTime) {
         boolean wasIntersection = true;
         for (int n=0; wasIntersection & n <= 5; n++) {
             n++;
@@ -128,6 +128,10 @@ public class World {
         }
     }
 
+    protected void removeModel(int i) {
+        models.remove(i);
+    }
+
     private void addAndRemoveModels() {
 
         for (int i=0; i<models.size(); i++) {
@@ -136,7 +140,7 @@ public class World {
                 if (!models.get(i).getIsComplex())
                     explode(models.get(i).getCenter(), models.get(i).getMaxWidth()*2);
                 models.get(i).destroy();
-                models.remove(i);
+                removeModel(i);
             }
         }
 
@@ -205,7 +209,6 @@ public class World {
     }
 
     public World() {
-
         effects=new LinkedList<>();
         ships = new ArrayList<>();
 

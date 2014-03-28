@@ -6,28 +6,40 @@ import java.net.*;
 import java.util.ArrayList;
 
 
-class Server {
+public class Server {
 
     private ArrayList<ClientConnection> clients;
 
-    public Server(int port) throws IOException {
-        clients=new ArrayList<>();
-        ServerSocket server = new ServerSocket(port);
-        try {
-            while (true) {
-                Socket client = server.accept();
-                System.out.println("Got client");
-                ClientConnection cl = new ClientConnection(client);
-                clients.add(cl);
-                cl.setEvent(() -> {
-                    for (ClientConnection c : clients)
-                        c.sendMessage(cl.getLastInputMessage());
-                });
+    public void sendMessage(String s) {
+       for (ClientConnection c: clients)
+           c.sendMessage(s);
+    }
+
+    public Server(int port){
+        new Thread(() -> {
+            clients=new ArrayList<>();
+            ServerSocket server;
+            try {
+                server = new ServerSocket(port);
+                while (true) {
+                    Socket client = server.accept();
+                    ClientConnection cl = new ClientConnection(client);
+                    clients.add(cl);
+                    cl.setOnInputEvent(() -> {
+                        System.out.println("[Server] Incoming message: " + cl.getLastInputMessage());
+                        for (ClientConnection c : clients)
+                            c.sendMessage("["+client.getInetAddress()+"] "+cl.getLastInputMessage());
+                    });
+                    cl.setOnCloseEvent(() -> {
+                        System.out.println("[Server] Disconnected client: "+client.getLocalAddress());
+                        clients.remove(cl);
+                    });
+                    System.out.println("[Server] Got client: "+client.getInetAddress());
+                }     }
+            catch (Exception e) {
+                System.err.println(e.getMessage());
             }
-        }
-        catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
+        }).start();
     }
 
     public static void main(String[] args) throws IOException {

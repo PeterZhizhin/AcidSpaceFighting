@@ -9,6 +9,24 @@ public class Model{
     private static int lastNumber=0;
     private int number;
 
+    //ONLY FOR NETWORK-SYNCING
+    public void setPositions(float x, float y, float w) {
+        physic.setPositions(x, y, w);
+    }
+
+    //ONLY FOR NETWORK-SYNCING
+    public void setSpeeds(float x, float y, float w) {
+          physic.setSpeeds(x, y, w);
+    }
+
+    public String getSpeeds() {
+        return physic.getSpeedX()+","+physic.getSpeedY()+","+physic.getSpeedW();
+    }
+
+    public String getPositions() {
+        return physic.getCentre().x+","+physic.getCentre().y+","+physic.getAngle();
+    }
+
     private boolean isSelected=false;
 
     public void select() {

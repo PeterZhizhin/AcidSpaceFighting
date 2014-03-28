@@ -48,13 +48,13 @@ public class OurWorld {
 
     public static void init() {
         Plot.init();
-        world=new World();
+        world=new WorldSynchronized();
 
         SpaceShip player1 = new SpaceShip(0,0);
         world.addModel(player1);
         world.setPlayerModel(player1);
 
-        SpaceShip player2 = new SpaceShip(4000,0);
-        world.addModel(player2);
+       // SpaceShip player2 = new SpaceShip(4000,0);
+       // world.addModel(player2);
     }
 }

@@ -7,33 +7,49 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-class Client {
+public class Client {
 
-    public static void main(String[] args) {
+    private String messageForSending=null;
+    private String lastInputString=null;
+    private Runnable onInput;
+
+    public void sendMessage(String s) {
+        messageForSending=s;
+    }
+
+    public void setOnInputEvent(Runnable r) {
+        onInput=r;
+    }
+
+    public String getLastInput() {
+        return lastInputString;
+    }
+
+    public Client(String ip, int port) {
 
         try {
 
             Socket clientSocket;
-            clientSocket = new Socket("127.0.0.1", 1234);
+            clientSocket = new Socket(ip, port);
             BufferedReader inu = new BufferedReader(new InputStreamReader(System.in));
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             AtomicBoolean isWorking=new AtomicBoolean(true);
 
             new Thread(() -> {
-                String fuser;
                 try {
-                    while ((fuser = inu.readLine()) != null) {
-
-                        out.println(fuser);
-
+                    while (isWorking.get()) {
+                        if (messageForSending!=null) {
+                            out.println(messageForSending);
+                            messageForSending = null;
+                        }
                     }
-                out.close();
-                in.close();
-                inu.close();
-                clientSocket.close();
+                    out.close();
+                    in.close();
+                    inu.close();
+                    clientSocket.close();
                     isWorking.set(false);
-                    System.out.println("Stop client");
+                    System.out.println("[Client] Stop client");
                 } catch (IOException e) {
                     System.err.println(e.getMessage());
                 }
@@ -45,9 +61,9 @@ class Client {
                     while (isWorking.get()) {
 
                         String fserver = in.readLine();
+                        lastInputString=fserver;
+                        onInput.run();
                         if (fserver==null) break;
-                        System.out.println(fserver);
-
                     }
                 } catch (IOException e) {
                     System.err.println(e.getMessage());
@@ -57,6 +73,10 @@ class Client {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static void main(String[] args) {
+        new Client("192.168.0.89", 1234);
     }
 
 }

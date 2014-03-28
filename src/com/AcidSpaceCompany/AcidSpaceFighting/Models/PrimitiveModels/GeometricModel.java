@@ -121,22 +121,32 @@ public class GeometricModel {
     }
 
     //Move todel on p.x, p.y
-    public void move(Point p) {
-        centre.move(p);
+    public void move(float x, float y) {
+        centre.move(x, y);
 
         //Совместимость
         for (Point vertex : vertexes) {
-            vertex.move(p);
+            vertex.move(x, y);
         }
 
         //Создаем матрицу для сдвига
         incCalculations();
     }
 
-    public void moveTo(Point position)
+    //Move todel on p.x, p.y
+    public void move(Point p) {
+        move(p.x, p.y);
+    }
+
+    public void moveTo(float x, float y)
     {
         move(centre.negate());
-        move(position);
+        move(x, y);
+    }
+
+    public void moveTo(Point position)
+    {
+        moveTo(position.x, position.y);
     }
 
     public void rotateTo(float angle)

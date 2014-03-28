@@ -12,8 +12,18 @@ public class ClientConnection {
     private String message=null;
     private String lastInput;
     private Runnable event;
+    private Runnable close;
+    AtomicBoolean isWorking=new AtomicBoolean(true);
 
-    public void setEvent(Runnable r) {
+    public boolean getIsWorking() {
+         return isWorking.get();
+    }
+
+    public void setOnCloseEvent(Runnable r) {
+        close=r;
+    }
+
+    public void setOnInputEvent(Runnable r) {
         event=r;
     }
 
@@ -28,7 +38,6 @@ public class ClientConnection {
     public ClientConnection(Socket client) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
         PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-        AtomicBoolean isWorking=new AtomicBoolean(true);
         new Thread(() -> {
             try {
                 String input;
@@ -41,6 +50,8 @@ public class ClientConnection {
                 out.close();
                 in.close();
                 isWorking.set(false);
+                close.run();
+
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
