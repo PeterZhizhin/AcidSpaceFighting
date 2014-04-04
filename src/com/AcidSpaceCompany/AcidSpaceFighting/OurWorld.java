@@ -10,8 +10,8 @@ public class OurWorld {
 
     private static World world;
 
-    public static void explode(Point center, float maxWidth) {
-        world.explode(center, maxWidth);
+    public static void explode(Point center, float power, float size) {
+        world.explode(center, power, size);
     }
 
     public static void addEffect(Effect t) {
@@ -46,15 +46,36 @@ public class OurWorld {
         return world.getShipIsAlive(shipNumber);
     }
 
-    public static void init() {
+    public static void initLocal() {
         Plot.init();
-        world=new WorldSynchronized();
+        world=new WorldLocal();
 
         SpaceShip player1 = new SpaceShip(0,0);
         world.addModel(player1);
         world.setPlayerModel(player1);
 
-       // SpaceShip player2 = new SpaceShip(4000,0);
-       // world.addModel(player2);
+
+            SpaceShip player2 = new SpaceShip(2000, 0);
+            world.addModel(player2);
+    }
+
+    public static void initServer() {
+        Plot.init();
+        world=new WorldSynchronizer();
+
+        SpaceShip player1 = new SpaceShip(0,0);
+        world.addModel(player1);
+        world.setPlayerModel(player1);
+    }
+
+    public static void initClient() {
+        Plot.init();
+
+        WorldSynchronized w=new WorldSynchronized();
+        world=w;
+
+        SpaceShip player1 = new SpaceShip(0,0);
+        w.addModelFromServer(player1);
+        world.setPlayerModel(player1);
     }
 }

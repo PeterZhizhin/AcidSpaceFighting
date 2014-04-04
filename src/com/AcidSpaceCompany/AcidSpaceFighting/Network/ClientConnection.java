@@ -5,11 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ClientConnection {
 
-    private String message=null;
+    private ArrayList<String> messages=new ArrayList<>();
     private String lastInput;
     private Runnable event;
     private Runnable close;
@@ -32,7 +33,7 @@ public class ClientConnection {
     }
 
     public void sendMessage(String s) {
-        message=s;
+        messages.add(s);
     }
 
     public ClientConnection(Socket client) throws IOException {
@@ -47,14 +48,17 @@ public class ClientConnection {
                     event.run();
 
                 }
-                out.close();
-                in.close();
-                isWorking.set(false);
-                close.run();
-
             } catch (Exception e) {
-                System.err.println(e.getMessage());
+                System.err.println("[ClientConnection] Error pt1 : "+e);
             }
+            try {
+                in.close();
+            } catch (IOException e) {
+                System.err.println("[ClientConnection] Error pt 2: "+e);
+            }
+            out.close();
+            isWorking.set(false);
+            close.run();
         }).start();
 
 
@@ -63,15 +67,15 @@ public class ClientConnection {
 
                 while (isWorking.get()) {
 
-                    if (message!=null) {
-                        out.println(message);
-                        message=null;
+                    for (int i=0; i<messages.size(); i++)
+                    {
+                        out.println(messages.get(0));
+                        messages.remove(0);
                     }
 
                 }
             } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
+                System.err.println("[ClientConnection] Error pt3: "+e);}
         }).start();
     }
 

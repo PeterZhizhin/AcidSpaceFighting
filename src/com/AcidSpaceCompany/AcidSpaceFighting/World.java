@@ -36,8 +36,8 @@ public abstract class World {
         return null;
     }
 
-    public void explode(Point center, float power) {
-        Explosion e=new Explosion(center, power/5);
+    public void explode(Point center, float power, float size) {
+        Explosion e=new Explosion(center, size);
         addEffect(e);
         explosionBuffer.add(center);
         explosionPowerBuffer.add(power);
@@ -73,10 +73,7 @@ public abstract class World {
     }
 
     public void draw() {
-        if (HUD.getIsRealTime())
         Camera.setPosition(player1.getCenter());
-        else
-            Camera.moveTo(player1.getCenter());
 
 
         Background.draw();
@@ -138,7 +135,7 @@ public abstract class World {
             if (models.get(i).getIsNoNeedMore())
             {
                 if (!models.get(i).getIsComplex())
-                    explode(models.get(i).getCenter(), models.get(i).getMaxWidth()*2);
+                    explode(models.get(i).getCenter(), models.get(i).getMaxWidth()*10, models.get(i).getMaxWidth());
                 models.get(i).destroy();
                 removeModel(i);
             }
@@ -161,7 +158,8 @@ public abstract class World {
             l+=1;
             force=force.setLength(1);
             float power=explosionPowerBuffer.get(0);
-            force=force.multiply(0.4f*power*power*power*power/l);
+            force=force.multiply(power*power*power*power/l/l);
+            System.out.println(force.length());
             m.useForce(m.getCenter(), force);
         }
         explosionBuffer.remove(0);

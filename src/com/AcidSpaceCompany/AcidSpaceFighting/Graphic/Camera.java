@@ -9,7 +9,7 @@ public class Camera {
 
     private static float xPos, yPos, scale;
     private static float xPosObject, yPosObject, scaleObject;
-    private static float cameraSpeed=25000f;
+    private static float cameraSpeed=250f;
     private static float scaleSpeed=50f;
 
     public static float getX(){
@@ -27,15 +27,26 @@ public class Camera {
         scaleObject=2f;
     }
 
+    private static void setScale(float f) {
+          scale=f;
+    }
+
     public static void update(float dt) {
-        if (xPos-Point.epsilon>xPosObject) xPos=Math.max(xPosObject, xPos-dt*cameraSpeed);
-        else if (xPos+Point.epsilon<xPosObject) xPos=Math.min(xPosObject, xPos+dt*cameraSpeed);
 
-        if (yPos-Point.epsilon>yPosObject) yPos=Math.max(yPosObject, yPos-dt*cameraSpeed);
-        else if (yPos+Point.epsilon<yPosObject) yPos=Math.min(yPosObject, yPos+dt*cameraSpeed);
+        float cameraSpeed=untranslateDistance(Camera.cameraSpeed);
 
-        if (scale-Point.epsilon>scaleObject) scale=Math.max(scaleObject, scale-dt*scaleSpeed);
-        else if (scale+Point.epsilon<scaleObject) scale=Math.min(scaleObject, scale+dt*scaleSpeed);
+
+        if (scale-Point.epsilon>scaleObject) setScale(Math.max(scaleObject, scale-dt*scaleSpeed));
+        else if (scale+Point.epsilon<scaleObject) setScale(Math.min(scaleObject, scale+dt*scaleSpeed));
+        else {
+
+            if (xPos-Point.epsilon>xPosObject) xPos=Math.max(xPosObject, xPos-dt*cameraSpeed);
+            else if (xPos+Point.epsilon<xPosObject) xPos=Math.min(xPosObject, xPos+dt*cameraSpeed);
+
+            if (yPos-Point.epsilon>yPosObject) yPos=Math.max(yPosObject, yPos-dt*cameraSpeed);
+            else if (yPos+Point.epsilon<yPosObject) yPos=Math.min(yPosObject, yPos+dt*cameraSpeed);
+
+        }
 
         //if (Mouse.getDWheel()!=0)
             reScale(Mouse.getDWheel());

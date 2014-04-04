@@ -1,14 +1,16 @@
 package com.AcidSpaceCompany.AcidSpaceFighting;
 
+import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.ComplexModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.Network.Client;
 
-import java.util.Arrays;
-
 public class WorldSynchronized extends World{
 
     Client s;
+
+    public void explode(Point center, float power) {
+    }
 
     private void syncSpeeds(float[] speeds) {
         int modelNumber=0;
@@ -71,17 +73,21 @@ public class WorldSynchronized extends World{
             switch (action) {
                 case 'a': syncSpeeds(argsFloat);
                     break;
-                case 'b': syncPositions(argsFloat);
+                case 'b':
+                    syncPositions(argsFloat);
                     break;
                 case 'c':
+                    addModelFromServer(Model.getModel(argsFloat));
                     break;
                 case 'd':
                     break;
                 case 'e':
                     break;
-                case 'f':
+                case 'f': removeModelFromServer((int) argsFloat[0]);
                     break;
                 case 'g':
+                    break;
+                case 'h':
                     break;
                 case 'z':
                     break;
@@ -89,6 +95,39 @@ public class WorldSynchronized extends World{
 
             //System.out.println("[WorldSynchronized] " + Arrays.toString(argsFloat) +"\n"+s);
         }
+    }
+
+
+    private void removeModelFromServer(int num) {
+        int modelNumber=0;
+        while (modelNumber<models.size()) {
+            if (models.get(modelNumber).getIsComplex()) {
+                ComplexModel c= (ComplexModel) models.get(modelNumber);
+                for (int i=0; i<c.getSize(); i++) {
+                    if (modelNumber==num) {
+                        c.getModel(i).setIsNoNeedMore();
+                        return;
+                    }
+                    modelNumber++;
+                }
+                c.recalculateModels();
+            }
+            else
+            {
+                if (modelNumber==num) {
+                    models.get(modelNumber).setIsNoNeedMore();
+                    return;
+                }
+                modelNumber++;
+            }
+        }
+    }
+
+    public void addModelFromServer(Model m) {
+        super.addModel(m);
+    }
+
+    public void addModel(Model m) {
     }
 
     protected void updateModels(float deltaTime) {

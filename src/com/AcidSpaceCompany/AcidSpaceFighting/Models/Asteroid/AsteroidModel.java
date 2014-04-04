@@ -8,23 +8,24 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.PhysicModel
 
 public class AsteroidModel extends Model {
 
-    public AsteroidModel(float x, float y, float radius, float mass) {
-       super(null, null);
+    public int getType() {
+        return 0;
+    }
+
+    public AsteroidModel(float x, float y, float radius) {
+       super(null, null, radius);
         GeometricModel g = new AsteroidGeometricModel(x, y, radius);
-        PhysicModel p = new PhysicModel(g, new Point[]{}, mass);
+        PhysicModel p = new PhysicModel(g, new Point[]{}, radius*radius);
         GraphicModel g2=new AsteroidGraphicModel(g);
         setGraphicModel(g2);
         setPhysicModel(p);
         g2.setPhysicModel(p);
     }
-    public AsteroidModel(float x, float y, float radius, float mass, Point speed)
+
+    public AsteroidModel(float x, float y, float radius, float angle, float speedX, float speedY, float speedW)
     {
-        super(null, null);
-        GeometricModel g = new AsteroidGeometricModel(x, y, radius);
-        PhysicModel p = new PhysicModel(g, new Point[]{}, mass, speed);
-        GraphicModel g2=new AsteroidGraphicModel(g);
-        setGraphicModel(g2);
-        setPhysicModel(p);
-        g2.setPhysicModel(p);
+        this(x, y, radius);
+        setAngle(angle);
+        setSpeeds(speedX, speedY, speedW);
     }
 }

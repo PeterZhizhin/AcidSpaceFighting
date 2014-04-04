@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 public class PhysicModel {
 
-    private static final double G = 10f;//G is the gravitational constant
+    private static final double G = 0.1f;//G is the gravitational constant
 
     protected GeometricModel body;
     protected float activity = 0f;
@@ -54,7 +54,7 @@ public class PhysicModel {
     }
 
     public void useDamage(float force) {
-        health -= force/400000000f;
+        health -= force/40000000000f;
     }
 
     public float getMaxWidth() {

@@ -11,7 +11,7 @@ public class WorldSynchronizer extends World{
 
     public void addModel(Model m) {
         super.addModel(m);
-        s.sendMessage("c"+m);
+        s.sendMessage("c"+m.toString());
     }
 
     public void addEffect(Effect p) {

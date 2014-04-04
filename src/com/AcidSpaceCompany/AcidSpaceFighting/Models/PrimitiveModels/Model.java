@@ -1,6 +1,12 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
+import com.AcidSpaceCompany.AcidSpaceFighting.Models.Asteroid.AsteroidModel;
+import com.AcidSpaceCompany.AcidSpaceFighting.Models.Base.BaseModel;
+import com.AcidSpaceCompany.AcidSpaceFighting.Models.Bullet.BulletModel;
+import com.AcidSpaceCompany.AcidSpaceFighting.Models.Connector.ConnectorModel;
+import com.AcidSpaceCompany.AcidSpaceFighting.Models.Engine.EngineModel;
+import com.AcidSpaceCompany.AcidSpaceFighting.Models.Gun.GunModel;
 
 public class Model{
 
@@ -8,6 +14,7 @@ public class Model{
     private PhysicModel physic;
     private static int lastNumber=0;
     private int number;
+    private float linearSize;
 
     //ONLY FOR NETWORK-SYNCING
     public void setPositions(float x, float y, float w) {
@@ -26,6 +33,16 @@ public class Model{
     public String getPositions() {
         return physic.getCentre().x+","+physic.getCentre().y+","+physic.getAngle();
     }
+
+    public int getType() {
+        return -1;
+    }
+
+    public String toString() {
+        return getType()+","+physic.getCentre().x+","+physic.getCentre().y+","+linearSize+","+
+                physic.getAngle()+","+getSpeeds();
+    }
+
 
     private boolean isSelected=false;
 
@@ -148,12 +165,27 @@ public class Model{
         physic.doSpecialActionA();
     }
 
-    public Model(GraphicModel g, PhysicModel p) {
+    public Model(GraphicModel g, PhysicModel p, float linearSize) {
         graphic = g;
         number=lastNumber;
         lastNumber++;
         if (p!=null)
             p.setNumber(number);
         physic = p;
+        this.linearSize=linearSize;
+    }
+
+    public static Model getModel(float[] args) {
+        int type= (int) args[0];
+
+        switch (type) {
+            case 0: return new AsteroidModel    (args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+            case 1: return new BulletModel      (args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+            case 2: return new BaseModel        (args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+            case 3: return new ConnectorModel   (args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+            case 4: return new GunModel         (args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+            case 5: return new EngineModel      (args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+        }
+        return null;
     }
 }

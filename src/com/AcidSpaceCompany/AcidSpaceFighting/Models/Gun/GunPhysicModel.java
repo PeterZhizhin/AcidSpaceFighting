@@ -19,7 +19,7 @@ public class GunPhysicModel extends PhysicModel {
             Point force=body.getPoint(1).add(body.getPoint(2)).add(getCentre()
                     .negate()).add(getCentre().negate()).setLength(body.getMaxLength());
 
-            Model m=new BulletModel(getCentre().getX()+force.x, getCentre().getY() + force.y, 100f, 10f);
+            Model m=new BulletModel(getCentre().getX()+force.x, getCentre().getY() + force.y, 10f);
 
             force=force.setLength(10000000);
             m.useForce(m.getCenter(), force);

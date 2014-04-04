@@ -76,11 +76,10 @@ public class EditorLayer {
         Point p = new Point(Mouse.getX(), Display.getHeight() - Mouse.getY());
         if (draggedModel != null && rollPlate.contains(p)
                 && Mouse.isButtonDown(0)) {
-            draggedModel.setAngle((float) Point.getAngle(
-                    new Point(draggedModel.getCenter().x + 100f, draggedModel.getCenter().y),
-                    draggedModel.getCenter(),
-                    Camera.untranslatePoint(p)
-            ));
+            Point d=Camera.getTranslatedPoint(draggedModel.getCenter().x, draggedModel.getCenter().y);
+            draggedModel.setAngle(
+                    (float) Math.atan2(p.y-d.y, p.x-d.x)
+            );
         }
 
         else

@@ -60,10 +60,9 @@ public class Client {
                 try {
                     while (isWorking.get()) {
 
-                        String fserver = in.readLine();
-                        lastInputString=fserver;
+                        lastInputString= in.readLine();
+                        if (lastInputString!=null)
                         onInput.run();
-                        if (fserver==null) break;
                     }
                 } catch (IOException e) {
                     System.err.println(e.getMessage());
@@ -76,7 +75,7 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        new Client("192.168.0.89", 1234);
+        new Client("127.0.0.1", 1234);
     }
 
 }

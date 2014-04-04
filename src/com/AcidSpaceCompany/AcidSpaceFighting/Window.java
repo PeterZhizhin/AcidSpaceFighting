@@ -19,13 +19,26 @@ public class Window extends BasicWindow {
     private static boolean isMenu = true;
     private static Menu menu;
 
-    public static void initWorld()
+    public static void initServer()
     {
-        OurWorld.init();
+        OurWorld.initServer();
         Camera.init();
         isMenu=false;
     }
 
+    public static void initClient()
+    {
+        OurWorld.initClient();
+        Camera.init();
+        isMenu=false;
+    }
+
+    public static void initLocal()
+    {
+        OurWorld.initLocal();
+        Camera.init();
+        isMenu=false;
+    }
 
     public Window() {
         super(1200, 700, 10000, "Window; ");

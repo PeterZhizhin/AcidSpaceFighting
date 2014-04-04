@@ -1,5 +1,8 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Network;
 
+import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD.HUD;
+import com.AcidSpaceCompany.AcidSpaceFighting.World;
+
 import java.io.IOException;
 import java.net.*;
 
@@ -28,13 +31,18 @@ public class Server {
                     cl.setOnInputEvent(() -> {
                         System.out.println("[Server] Incoming message: " + cl.getLastInputMessage());
                         for (ClientConnection c : clients)
-                            c.sendMessage("["+client.getInetAddress()+"] "+cl.getLastInputMessage());
+                            c.sendMessage("[" + client.getInetAddress() + "] " + cl.getLastInputMessage());
                     });
                     cl.setOnCloseEvent(() -> {
-                        System.out.println("[Server] Disconnected client: "+client.getLocalAddress());
+                        HUD.showMessage("Player disconnected!", client.getInetAddress().toString());
+                        System.out.println("[Server] Disconnected client: " + client.getLocalAddress());
                         clients.remove(cl);
                     });
+                    HUD.showMessage("New player!", client.getInetAddress().toString());
                     System.out.println("[Server] Got client: "+client.getInetAddress());
+
+
+
                 }     }
             catch (Exception e) {
                 System.err.println(e.getMessage());

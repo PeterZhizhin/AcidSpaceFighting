@@ -15,11 +15,11 @@ public class BulletPhysicModel extends PhysicModel {
     }
 
     public void useForce(Point posOfForce, Point force) {
-        if (force.length()>=500000)  {
+        if (force.length()>=5000000)  {
             firstTime=!firstTime;
             if (firstTime) {
                  health=0;
-                OurWorld.explode(getCentre(), body.getMaxLength());
+                OurWorld.explode(getCentre(), body.getMaxLength()*500, body.getMaxLength()*4);
             }
         }
         super.useForce(posOfForce, force);

@@ -45,6 +45,13 @@ public class ComplexModel extends Model {
         return s;
     }
 
+    public String toString() {
+        String s="";
+        for (Model m: models)
+            s+=m.toString()+",";
+        return s;
+    }
+
     public Model getModel(int num) {
         return models.get(num);
     }
@@ -78,7 +85,7 @@ public class ComplexModel extends Model {
             if (models.get(i).getIsNoNeedMore())
             {
                 models.get(i).destroy();
-                OurWorld.explode(models.get(i).getCenter(), models.get(i).getMaxWidth());
+                OurWorld.explode(models.get(i).getCenter(), models.get(i).getMaxWidth(), models.get(i).getMaxWidth());
                 models.remove(i);
                 wasDeleted = true;
             }
@@ -192,7 +199,7 @@ public class ComplexModel extends Model {
 
     private ComplexModel(BodiesList<Model> models)
     {
-        super(null,null);
+        super(null,null, 0);
         this.models = models;
         phyModel = new ComplexPhysicModel(this);
         graModel = new ComplexGraphicModel(this);
@@ -201,7 +208,7 @@ public class ComplexModel extends Model {
     }
 
     public ComplexModel(Model firstModel) {
-        super(null, null);
+        super(null, null, 0);
         models=new BodiesList<Model>(maxBodiesSize, firstModel);
         phyModel = new ComplexPhysicModel(this);
         graModel = new ComplexGraphicModel(this);

@@ -7,7 +7,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.PhysicModel
 
 public class EnginePhysicModel extends PhysicModel {
 
-    private static final float power = 160000f;
+    private static final float power = 16000000f;
     private static final float deltaActivity = 1f;
     private boolean isPressed = false;
 
