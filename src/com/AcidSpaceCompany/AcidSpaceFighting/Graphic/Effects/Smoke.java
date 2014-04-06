@@ -10,12 +10,14 @@ public class Smoke implements Effect {
     private float [] x, y;
     private int size;
     private boolean noMoreNeeded;
+    private float interval;
 
     public int getEfectType() {
         return 1;
     }
 
-    public Smoke(int size) {
+    public Smoke(int size, float interval) {
+        this.interval=interval;
         this.size=size;
         currentRadius=new float[size];
         radius=new float[size];
@@ -30,14 +32,18 @@ public class Smoke implements Effect {
     }
 
     private int last;
+    private float time=0f;
 
     public void addPoint(float x, float y, float width) {
-        radius[last]=width;
-        currentRadius[last]=radius[last]/1000f;
-        this.x[last]=x;
-        this.y[last]=y;
-        last++;
-        if (last>=size) last=0;
+        if (time>=interval) {
+            time-=interval;
+            radius[last] = width;
+            currentRadius[last] = radius[last] / 1000f;
+            this.x[last] = x;
+            this.y[last] = y;
+            last++;
+            if (last >= size) last = 0;
+        }
     }
 
     @Override
@@ -65,6 +71,7 @@ public class Smoke implements Effect {
                 currentRadius[i]=-1;
             }
         }
+        time+=deltaTime;
     }
 
     public void destroy() {

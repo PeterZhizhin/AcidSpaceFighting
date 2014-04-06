@@ -256,21 +256,15 @@ public class GeometricModel {
         return centre;
     }
 
+    private static Point[] clonePoints(Point[] p) {
+        Point[] cl=new Point[p.length];
+        for (int i=0; i<p.length; i++)
+            cl[i]=new Point(p[i]);
+        return cl;
+    }
+
     public GeometricModel(GeometricModel g) {
-        vertexes = new Point[g.getPointCount()];
-        for (int i = 0; i < vertexes.length; i++)
-            vertexes[i] = new Point(g.getPoint(i));
-        centre = new Point(g.getCentre());
-        maxLength = g.maxLength;
-
-        rawVertexes = new Point[g.rawVertexes.length];
-        for (int i = 0; i < rawVertexes.length; i++)
-            rawVertexes[i] = new Point(g.rawVertexes[i]);
-
-        Matrix3f.load(g.rotationMatrix, rotationMatrix);
-        Matrix3f.load(g.translateMatrix, translateMatrix);
-        Matrix3f.load(g.scaleMatrix, scaleMatrix);
-        Matrix3f.load(g.resultMatrix, resultMatrix);
+        this(clonePoints(g.vertexes));
     }
 
     public float getConnectionDistanceCoef() {

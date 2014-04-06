@@ -158,8 +158,7 @@ public abstract class World {
             l+=1;
             force=force.setLength(1);
             float power=explosionPowerBuffer.get(0);
-            force=force.multiply(power*power*power*power/l/l);
-            System.out.println(force.length());
+            force=force.multiply(power*power/l/l);
             m.useForce(m.getCenter(), force);
         }
         explosionBuffer.remove(0);

@@ -37,6 +37,9 @@ public class EditorLayer {
             }
         }
         }
+
+        pressPoint = new Point(Mouse.getX(), Display.getHeight() - Mouse.getY());
+        startPlate=new GeometricModel(rollPlate);
     }
 
     private static void mouseReleased() {
@@ -50,6 +53,7 @@ public class EditorLayer {
                 }
             isDragged=false;
         }
+        pressPoint=null;
     }
 
     private static void updateMouseButtons() {
@@ -71,11 +75,15 @@ public class EditorLayer {
         System.out.println("[EditorLayer] Exiting editor");
     }
 
+    private static Point pressPoint=null;
+    private static GeometricModel startPlate=null;
     public static void update() {
         updateMouseButtons();
+
         Point p = new Point(Mouse.getX(), Display.getHeight() - Mouse.getY());
-        if (draggedModel != null && rollPlate.contains(p)
-                && Mouse.isButtonDown(0)) {
+
+        if (pressPoint!=null)
+        if (draggedModel != null && startPlate.contains(pressPoint)) {
             Point d=Camera.getTranslatedPoint(draggedModel.getCenter().x, draggedModel.getCenter().y);
             draggedModel.setAngle(
                     (float) Math.atan2(p.y-d.y, p.x-d.x)

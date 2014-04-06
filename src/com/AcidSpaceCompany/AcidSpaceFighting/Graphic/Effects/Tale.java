@@ -104,9 +104,9 @@ public class Tale implements Effect {
     public Tale(float x, float y, float deltaPos, int size, float interv, int smokeCoef, boolean useSmoke) {
         interval=interv;
         this.size=size;
-        coordinates=new LinkedList<Point>();
-        widths=new LinkedList<Float>();
-        widths01=new LinkedList<Float>();
+        coordinates=new LinkedList<>();
+        widths=new LinkedList<>();
+        widths01=new LinkedList<>();
         for (int i=0; i<size; i++) {
             coordinates.add(new Point(x, y));
             widths.add(0f);
@@ -116,7 +116,7 @@ public class Tale implements Effect {
         deltaPosition=deltaPos;
         this.useSmoke=useSmoke;
         if (useSmoke) {
-            smoke =new Smoke(size);
+            smoke =new Smoke(size, interv);
             OurWorld.addEffect(smoke);
         }
         this.smokeCoef=smokeCoef;

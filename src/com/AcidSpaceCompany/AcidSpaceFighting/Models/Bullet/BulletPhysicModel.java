@@ -19,7 +19,7 @@ public class BulletPhysicModel extends PhysicModel {
             firstTime=!firstTime;
             if (firstTime) {
                  health=0;
-                OurWorld.explode(getCentre(), body.getMaxLength()*500, body.getMaxLength()*4);
+                OurWorld.explode(getCentre(), body.getMaxLength()*500000, body.getMaxLength()*4);
             }
         }
         super.useForce(posOfForce, force);
