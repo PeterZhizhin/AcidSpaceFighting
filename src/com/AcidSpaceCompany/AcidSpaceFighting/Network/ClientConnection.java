@@ -5,79 +5,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ClientConnection {
+public class ClientConnection extends Connection{
 
-    private ArrayList<String> messages=new ArrayList<>();
-    private String lastInput;
-    private Runnable event;
-    private Runnable close;
-    AtomicBoolean isWorking=new AtomicBoolean(true);
-
-    public boolean getIsWorking() {
-         return isWorking.get();
+    public ClientConnection(String ip, int port) {
+        try {
+            Socket clientSocket;
+            clientSocket = new Socket(ip, port);
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            startWorking(in, out);
+        } catch (IOException e) {
+            System.err.println("[Client] failed to init");
+        }
     }
 
-    public void setOnCloseEvent(Runnable r) {
-        close=r;
+    public static void main(String[] args) {
+        new ClientConnection("127.0.0.1", 1234);
     }
-
-    public void setOnInputEvent(Runnable r) {
-        event=r;
-    }
-
-    public String getLastInputMessage() {
-        return lastInput;
-    }
-
-    public void sendMessage(String s) {
-        messages.add(s);
-    }
-
-    public ClientConnection(Socket client) throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-        new Thread(() -> {
-            try {
-                String input;
-                while ((input = in.readLine()) != null) {
-
-                    lastInput=input;
-                    event.run();
-
-                }
-            } catch (Exception e) {
-                System.err.println("[ClientConnection] Error pt1 : "+e);
-            }
-            try {
-                in.close();
-            } catch (IOException e) {
-                System.err.println("[ClientConnection] Error pt 2: "+e);
-            }
-            out.close();
-            isWorking.set(false);
-            close.run();
-        }).start();
-
-
-        new Thread(() -> {
-            try {
-
-                while (isWorking.get()) {
-
-                    for (int i=0; i<messages.size(); i++)
-                    {
-                        out.println(messages.get(0));
-                        messages.remove(0);
-                    }
-
-                }
-            } catch (Exception e) {
-                System.err.println("[ClientConnection] Error pt3: "+e);}
-        }).start();
-    }
-
 
 }

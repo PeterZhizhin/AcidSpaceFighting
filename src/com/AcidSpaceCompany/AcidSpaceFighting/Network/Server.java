@@ -1,7 +1,6 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.Network;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD.HUD;
-import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 import java.io.IOException;
 import java.net.*;
@@ -11,10 +10,10 @@ import java.util.ArrayList;
 
 public class Server {
 
-    private ArrayList<ClientConnection> clients;
+    private ArrayList<ServerConnection> clients;
 
     public void sendMessage(String s) {
-       for (ClientConnection c: clients)
+       for (ServerConnection c: clients)
            c.sendMessage(s);
     }
 
@@ -26,11 +25,11 @@ public class Server {
                 server = new ServerSocket(port);
                 while (true) {
                     Socket client = server.accept();
-                    ClientConnection cl = new ClientConnection(client);
+                    ServerConnection cl = new ServerConnection(client);
                     clients.add(cl);
                     cl.setOnInputEvent(() -> {
                         System.out.println("[Server] Incoming message: " + cl.getLastInputMessage());
-                        for (ClientConnection c : clients)
+                        for (ServerConnection c : clients)
                             c.sendMessage("[" + client.getInetAddress() + "] " + cl.getLastInputMessage());
                     });
                     cl.setOnCloseEvent(() -> {

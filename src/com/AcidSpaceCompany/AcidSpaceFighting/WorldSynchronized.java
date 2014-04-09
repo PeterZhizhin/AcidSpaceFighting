@@ -3,11 +3,11 @@ package com.AcidSpaceCompany.AcidSpaceFighting;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.ComplexModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
-import com.AcidSpaceCompany.AcidSpaceFighting.Network.Client;
+import com.AcidSpaceCompany.AcidSpaceFighting.Network.ClientConnection;
 
 public class WorldSynchronized extends World{
 
-    Client s;
+    ClientConnection s;
 
     public void explode(Point center, float power) {
     }
@@ -139,8 +139,8 @@ public class WorldSynchronized extends World{
 
     public WorldSynchronized() {
         super();
-        s=new Client("127.0.0.1", 1234);
-        s.setOnInputEvent(() -> parseSyncMessage(s.getLastInput()));
+        s=new ClientConnection("127.0.0.1", 1234);
+        s.setOnInputEvent(() -> parseSyncMessage(s.getLastInputMessage()));
     }
 
 }
