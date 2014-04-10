@@ -2,9 +2,6 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
-import com.AcidSpaceCompany.AcidSpaceFighting.World;
-import org.omg.CORBA._PolicyStub;
-
 
 public class ComplexModel extends Model {
 

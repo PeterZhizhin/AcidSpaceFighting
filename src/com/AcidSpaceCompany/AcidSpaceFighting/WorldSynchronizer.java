@@ -5,9 +5,6 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.ComplexMode
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.Network.Server;
 
-import java.util.LinkedList;
-
-
 public class WorldSynchronizer extends World{
 
     private Server s;
