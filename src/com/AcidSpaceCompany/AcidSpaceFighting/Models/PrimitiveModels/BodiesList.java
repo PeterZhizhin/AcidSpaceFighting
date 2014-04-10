@@ -120,7 +120,9 @@ public class BodiesList<E> implements Iterable<E> {
         for (int i = 0; i< wasVisited.length; i++)
             wasVisited[i] = false;
         int componentNumber = 1;
-        fillMatrix(wasVisited, baseIndex, componentNumber);
+        if (isAlive_)
+            fillMatrix(wasVisited, baseIndex, componentNumber);
+        else fillMatrix(wasVisited, 0, componentNumber);
         for (int i = 0; i<wasVisited.length; i++)
             if (!wasVisited[i])
             {
