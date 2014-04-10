@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Connection {
@@ -41,12 +43,9 @@ public class Connection {
                 while ((input = in.readLine()) != null) {
                     lastInput = input;
                     event.run();
-                    Thread.sleep(5);
                 }
             } catch (IOException e) {
                 System.err.println("[Connection] Error pt1 : " + e);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
 
             try {
@@ -61,20 +60,20 @@ public class Connection {
 
 
         new Thread(() -> {
-            try {
 
-                while (isWorking.get()) {
-
-                    for (int i = 0; i < messages.size(); i++) {
-                        out.println(messages.get(0));
-                        messages.remove(0);
+                Timer t=new Timer();
+                t.schedule(
+                new TimerTask() {
+                    public void run() {
+                        for (int i = 0; i < messages.size(); i++) {
+                            out.println(messages.get(0));
+                            messages.remove(0);
+                        }
+                        if (!isWorking.get())
+                            this.cancel();
                     }
+                }, 0, 5);
 
-                    Thread.sleep(5);
-                }
-            } catch (InterruptedException e) {
-                System.err.println("[ClientConnection] Error pt4: " + e);
-            }
         }).start();
     }
 }
