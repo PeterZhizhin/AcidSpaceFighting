@@ -41,7 +41,7 @@ public class WorldSynchronizer extends World{
         super.update(deltaTime);
 
         if (timer<=0) {
-            timer+=0.015f;
+            timer+=0.05f;
             s.sendMessage("a"+getSpeeds());
             s.sendMessage("b"+getPositions());
             String activity=getActiveModels();
