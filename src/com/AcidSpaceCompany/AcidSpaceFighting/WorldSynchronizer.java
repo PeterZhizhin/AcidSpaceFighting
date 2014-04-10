@@ -39,11 +39,11 @@ public class WorldSynchronizer extends World{
     private float timer;
     public void update(float deltaTime) {
         super.update(deltaTime);
+        s.sendMessage("a"+getSpeeds());
 
         if (timer<=0) {
-            timer+=0.05f;
+            timer+=1f;
             s.sendMessage("b"+getPositions());
-            s.sendMessage("a"+getSpeeds());
         }
         else timer-=deltaTime;
     }

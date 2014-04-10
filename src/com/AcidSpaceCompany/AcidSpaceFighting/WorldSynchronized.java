@@ -1,6 +1,4 @@
 package com.AcidSpaceCompany.AcidSpaceFighting;
-
-import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.ComplexModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.Network.ClientConnection;
@@ -8,9 +6,6 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Network.ClientConnection;
 public class WorldSynchronized extends World{
 
     ClientConnection s;
-
-    public void explode(Point center, float power) {
-    }
 
     private void syncSpeeds(float[] speeds) {
         int modelNumber=0;
