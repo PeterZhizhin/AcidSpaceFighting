@@ -42,17 +42,17 @@ public class Connection {
                     lastInput=input;
                     event.run();
                 }
-            } catch (Exception e) {
-                System.err.println("[ClientConnection] Error pt1 : "+e);
+            } catch (IOException e) {
+                System.err.println("[Connection] Error pt1 : "+e);
             }
             try {
                 in.close();
             } catch (IOException e) {
-                System.err.println("[ClientConnection] Error pt 2: "+e);
+                System.err.println("[Connection] Error pt 2: "+e);
             }
             out.close();
             isWorking.set(false);
-            close.run();
+            if (close!=null) close.run();
         }).start();
 
 

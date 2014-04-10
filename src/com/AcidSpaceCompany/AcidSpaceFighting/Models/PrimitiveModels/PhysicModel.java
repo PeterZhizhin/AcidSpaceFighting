@@ -19,6 +19,19 @@ public class PhysicModel {
     protected Point acceleration;
     protected ComplexPhysicModel parent;
     protected int number;
+    private boolean active=false;
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void activate() {
+        active=true;
+    }
+
+    public void deactivate() {
+        active=false;
+    }
 
     public void setPositions(float x, float y, float w) {
         setAngle(w);

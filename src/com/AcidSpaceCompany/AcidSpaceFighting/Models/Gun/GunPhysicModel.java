@@ -14,6 +14,7 @@ public class GunPhysicModel extends PhysicModel {
 
     public void doSpecialAction() {
         if (activity<=0) {
+            activate();
 
             Point force=body.getPoint(1).add(body.getPoint(2)).add(getCentre()
                     .negate()).add(getCentre().negate()).setLength(body.getMaxLength());
@@ -33,8 +34,10 @@ public class GunPhysicModel extends PhysicModel {
     }
 
     public void update(float time) {
-        if (activity>0)
+        if (activity>0) {
             activity-=time;
+            deactivate();
+        }
     }
 
     public GunPhysicModel(GeometricModel body, Point[] conns, float mass) {

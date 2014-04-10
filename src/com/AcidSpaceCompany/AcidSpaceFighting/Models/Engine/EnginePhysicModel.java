@@ -13,9 +13,11 @@ public class EnginePhysicModel extends PhysicModel {
 
     public void update(float deltaTime) {
         if (isPressed) {
+            activate();
             if (activity < 1f)
                 activity += deltaActivity * deltaTime;
         } else {
+            deactivate();
             if (activity > 0)
                 activity -= deltaActivity * deltaTime;
         }

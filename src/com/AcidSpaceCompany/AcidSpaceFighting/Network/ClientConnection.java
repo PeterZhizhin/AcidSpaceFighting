@@ -16,7 +16,7 @@ public class ClientConnection extends Connection{
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             startWorking(in, out);
         } catch (IOException e) {
-            System.err.println("[Client] failed to init");
+            System.err.println("[ClientConnection] failed to init");
         }
     }
 

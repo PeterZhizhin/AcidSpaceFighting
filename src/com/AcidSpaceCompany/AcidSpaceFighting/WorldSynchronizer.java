@@ -44,14 +44,16 @@ public class WorldSynchronizer extends World{
         super.update(deltaTime);
 
         if (timer<=0) {
-            timer+=0.05f;
+            timer+=0.015f;
             s.sendMessage("a"+getSpeeds());
             s.sendMessage("b"+getPositions());
-            s.sendMessage("h"+getPositions());
+            String activity=getActiveModels();
+            if (activity!=null)
+            if (activity.length()>0) {
+                s.sendMessage("h" + activity);
+            }
         }
         else timer-=deltaTime;
-
-        System.out.println(getActiveModels());
     }
 
     private String getActiveModels() {
@@ -76,6 +78,8 @@ public class WorldSynchronizer extends World{
                 modelNumber++;
             }
         }
+        if (s.length()>0)
+            s=s.substring(0, s.length()-1);
         return s;
     }
 

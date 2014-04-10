@@ -166,7 +166,7 @@ public class Model{
     }
 
     public boolean getIsActive() {
-        return physic.getActivity()>0;
+        return physic.getActive();
     }
 
     public Model(GraphicModel g, PhysicModel p, float linearSize) {

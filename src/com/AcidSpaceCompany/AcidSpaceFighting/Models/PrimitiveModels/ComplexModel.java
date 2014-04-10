@@ -35,6 +35,7 @@ public class ComplexModel extends Model {
         String s="";
         for (Model m: models)
             s+=m.getPositions()+",";
+        s=s.substring(0, s.length()-1);
         return s;
     }
 
@@ -42,6 +43,7 @@ public class ComplexModel extends Model {
         String s="";
         for (Model m: models)
             s+=m.getSpeeds()+",";
+        s=s.substring(0, s.length()-1);
         return s;
     }
 
