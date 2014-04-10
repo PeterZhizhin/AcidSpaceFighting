@@ -51,6 +51,8 @@ public class WorldSynchronized extends World{
         }
     }
 
+
+
     public void parseSyncMessage(String s) {
         if (s.length()>0) {
             char action = s.charAt(0);
@@ -94,6 +96,7 @@ public class WorldSynchronized extends World{
 
 
     private void removeModelFromServer(int num) {
+        //todo: переделать, блджад, весь этот bullshit
         int modelNumber=0;
         while (modelNumber<models.size()) {
             if (models.get(modelNumber).getIsComplex()) {

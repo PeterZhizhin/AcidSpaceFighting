@@ -11,10 +11,20 @@ import java.util.ArrayList;
 public class Server {
 
     private ArrayList<ServerConnection> clients;
+    private Runnable event;
+    private String lastMessage=null;
+
+    public String getLastInputMessage() {
+        return lastMessage;
+    }
 
     public void sendMessage(String s) {
        for (ServerConnection c: clients)
            c.sendMessage(s);
+    }
+
+    public void setOnInputEvent(Runnable r) {
+        event=r;
     }
 
     public Server(int port){
@@ -28,13 +38,13 @@ public class Server {
                     ServerConnection cl = new ServerConnection(client);
                     clients.add(cl);
                     cl.setOnInputEvent(() -> {
-                        System.out.println("[Server] Incoming message: " + cl.getLastInputMessage());
-                        for (ServerConnection c : clients)
-                            c.sendMessage("[" + client.getInetAddress() + "] " + cl.getLastInputMessage());
+                        lastMessage=cl.getLastInputMessage();
+                        event.run();
+                        System.out.println("[Server] Incoming message: " + lastMessage);
                     });
                     cl.setOnCloseEvent(() -> {
                         HUD.showMessage("Player disconnected!", client.getInetAddress().toString());
-                        System.out.println("[Server] Disconnected client: " + client.getLocalAddress());
+                        System.out.println("[Server] Disconnected client: " + client.getInetAddress().toString());
                         clients.remove(cl);
                     });
                     HUD.showMessage("New player!", client.getInetAddress().toString());

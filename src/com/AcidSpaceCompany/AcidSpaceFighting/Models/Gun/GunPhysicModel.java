@@ -12,7 +12,7 @@ public class GunPhysicModel extends PhysicModel {
 
     private static final float timeLimit=1f;
 
-    public void doSpecialActionA() {
+    public void doSpecialAction() {
         if (activity<=0) {
 
             Point force=body.getPoint(1).add(body.getPoint(2)).add(getCentre()

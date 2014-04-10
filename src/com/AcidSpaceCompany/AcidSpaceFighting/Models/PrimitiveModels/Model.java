@@ -161,8 +161,12 @@ public class Model{
         graphic = g;
     }
 
-    public void doSpecialActionA() {
-        physic.doSpecialActionA();
+    public void doSpecialAction() {
+        physic.doSpecialAction();
+    }
+
+    public boolean getIsActive() {
+        return physic.getActivity()>0;
     }
 
     public Model(GraphicModel g, PhysicModel p, float linearSize) {

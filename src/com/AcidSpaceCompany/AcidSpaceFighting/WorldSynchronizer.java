@@ -1,8 +1,11 @@
 package com.AcidSpaceCompany.AcidSpaceFighting;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Effect;
+import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.ComplexModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.Network.Server;
+
+import java.util.LinkedList;
 
 
 public class WorldSynchronizer extends World{
@@ -39,18 +42,68 @@ public class WorldSynchronizer extends World{
     private float timer;
     public void update(float deltaTime) {
         super.update(deltaTime);
-        s.sendMessage("a"+getSpeeds());
 
         if (timer<=0) {
-            timer+=1f;
+            timer+=0.05f;
+            s.sendMessage("a"+getSpeeds());
             s.sendMessage("b"+getPositions());
+            s.sendMessage("h"+getPositions());
         }
         else timer-=deltaTime;
+
+        System.out.println(getActiveModels());
+    }
+
+    private String getActiveModels() {
+        String s="";
+        int modelNumber=0;
+        int num=0;
+        while (modelNumber<models.size()) {
+            if (models.get(modelNumber).getIsComplex()) {
+                ComplexModel c= (ComplexModel) models.get(modelNumber);
+                for (int i=0; i<c.getSize(); i++) {
+                    if (c.getModel(i).getIsActive())
+                        s+=num+",";
+                        num++;
+                }
+                modelNumber++;
+            }
+            else
+            {
+                if (models.get(modelNumber).getIsActive())
+                    s+=num+",";
+                num++;
+                modelNumber++;
+            }
+        }
+        return s;
+    }
+
+    private void parseSyncMessage(String s) {
+        if (s.length()>0) {
+            char action = s.charAt(0);
+            s = s.substring(1);
+            String[] args = s.split(",");
+            float[] argsFloat = new float[args.length];
+            for (int i = 0; i < args.length; i++) {
+                try {
+                    argsFloat[i] = Float.valueOf(args[i]);
+                }
+                catch (Exception e) {
+                    //System.err.println("[WorldSynchronized] Error in parsing "+e);
+                }
+            }
+            switch (action) {
+                case 'a': //syncActivity((int) argsFloat[0]);
+                    break;
+            }
+        }
     }
 
     public WorldSynchronizer() {
         super();
         s=new Server(1234);
+        s.setOnInputEvent(() -> parseSyncMessage(s.getLastInputMessage()));
     }
 
 }

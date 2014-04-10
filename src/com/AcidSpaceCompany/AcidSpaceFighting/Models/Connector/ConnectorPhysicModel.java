@@ -7,7 +7,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 public class ConnectorPhysicModel extends PhysicModel {
 
-    public void doSpecialActionA() {
+    public void doSpecialAction() {
         health=0;
     }
 

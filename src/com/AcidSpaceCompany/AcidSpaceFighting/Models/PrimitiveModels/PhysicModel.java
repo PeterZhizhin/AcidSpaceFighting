@@ -121,7 +121,7 @@ public class PhysicModel {
         speedVector.move(dV);
     }
 
-    public void doSpecialActionA() {
+    public void doSpecialAction() {
     }
 
     protected void setAngle(float angle) {

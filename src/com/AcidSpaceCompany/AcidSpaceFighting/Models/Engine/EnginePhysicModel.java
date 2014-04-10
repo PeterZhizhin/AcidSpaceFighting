@@ -28,7 +28,7 @@ public class EnginePhysicModel extends PhysicModel {
     }
 
     private int timer=0;
-    public void doSpecialActionA() {
+    public void doSpecialAction() {
         isPressed = true;
 
         if (timer<=0) {
