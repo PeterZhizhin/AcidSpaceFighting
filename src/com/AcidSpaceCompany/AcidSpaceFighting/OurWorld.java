@@ -46,15 +46,12 @@ public class OurWorld {
         return world.getShipIsAlive(shipNumber);
     }
 
-    private static boolean isControlled;
-
-    public static boolean getIsControlled() {
-         return isControlled;
+    public static void addActiveModel(int number) {
+        world.addActiveModel(number);
     }
 
     public static void initLocal() {
         Plot.init();
-        isControlled=false;
         world=new WorldLocal();
 
         SpaceShip player1 = new SpaceShip(0,0);
@@ -68,7 +65,6 @@ public class OurWorld {
 
     public static void initServer() {
         Plot.init();
-        isControlled=false;
         world=new WorldSynchronizer();
 
         SpaceShip player1 = new SpaceShip(0,0);
@@ -78,12 +74,12 @@ public class OurWorld {
 
     public static void initClient() {
         Plot.init();
-        isControlled=true;
         WorldSynchronized w=new WorldSynchronized();
         world=w;
 
         SpaceShip player1 = new SpaceShip(0,0);
         w.addModelFromServer(player1);
         world.setPlayerModel(player1);
+
     }
 }

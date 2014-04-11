@@ -4,6 +4,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Models.Base.BaseModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Connector.ConnectorModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Engine.EngineModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Gun.GunModel;
+import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Items.Bag;
 import org.lwjgl.input.Keyboard;
 
@@ -32,8 +33,9 @@ public class SpaceShip extends ComplexModel{
          for (int i=0; i<4; i++) {
              for (int j=0; j<9; j++) {
                  if (modelMap[i][j]!=null)
-                     if (Keyboard.isKeyDown(keyMap[i][j]))
-                         modelMap[i][j].doSpecialAction();
+                     if (Keyboard.isKeyDown(keyMap[i][j])) {
+                         OurWorld.addActiveModel(modelMap[i][j].getNumber());
+                     }
              }
          }
     }

@@ -45,39 +45,14 @@ public class WorldSynchronizer extends World{
             s.sendMessage("a"+getSpeeds());
             s.sendMessage("b"+getPositions());
             String activity=getActiveModels();
-            if (activity!=null)
             if (activity.length()>0) {
                 s.sendMessage("h" + activity);
             }
+            else s.sendMessage("h-1");
         }
         else timer-=deltaTime;
-    }
 
-    private String getActiveModels() {
-        String s="";
-        int modelNumber=0;
-        int num=0;
-        while (modelNumber<models.size()) {
-            if (models.get(modelNumber).getIsComplex()) {
-                ComplexModel c= (ComplexModel) models.get(modelNumber);
-                for (int i=0; i<c.getSize(); i++) {
-                    if (c.getModel(i).getIsActive())
-                        s+=num+",";
-                        num++;
-                }
-                modelNumber++;
-            }
-            else
-            {
-                if (models.get(modelNumber).getIsActive())
-                    s+=num+",";
-                num++;
-                modelNumber++;
-            }
-        }
-        if (s.length()>0)
-            s=s.substring(0, s.length()-1);
-        return s;
+        acceptActiveModels();
     }
 
     private void parseSyncMessage(String s) {
@@ -95,10 +70,35 @@ public class WorldSynchronizer extends World{
                 }
             }
             switch (action) {
-                case 'a': //syncActivity((int) argsFloat[0]);
-                    break;
+                case 'a':
+                    syncActivation(argsFloat);
             }
         }
+    }
+
+    private String getActiveModels() {
+        String s = "";
+        int modelNumber = 0;
+        int num = 0;
+        while (modelNumber < models.size()) {
+            if (models.get(modelNumber).getIsComplex()) {
+                ComplexModel c = (ComplexModel) models.get(modelNumber);
+                for (int i = 0; i < c.getSize(); i++) {
+                    if (c.getModel(i).getIsActive())
+                        s += num + ",";
+                    num++;
+                }
+                modelNumber++;
+            } else {
+                if (models.get(modelNumber).getIsActive())
+                    s += num + ",";
+                num++;
+                modelNumber++;
+            }
+        }
+        if (s.length() > 0)
+            s = s.substring(0, s.length() - 1);
+        return s;
     }
 
     public WorldSynchronizer() {

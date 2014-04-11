@@ -4,13 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Connection {
 
-    private ArrayList<String> messages = new ArrayList<>();
+    private LinkedList<String> messages = new LinkedList<>();
     private String lastInput;
     private Runnable event;
     private Runnable close;
@@ -34,6 +35,13 @@ public class Connection {
 
     public void sendMessage(String s) {
         messages.add(s);
+    }
+
+    private void sendMessages(PrintWriter out) {
+        while (!messages.isEmpty()) {
+            out.println(messages.get(0));
+            messages.remove(0);
+        }
     }
 
     public void startWorking(BufferedReader in, PrintWriter out) throws IOException {
@@ -65,10 +73,7 @@ public class Connection {
                 t.schedule(
                 new TimerTask() {
                     public void run() {
-                        for (int i = 0; i < messages.size(); i++) {
-                            out.println(messages.get(0));
-                            messages.remove(0);
-                        }
+                        sendMessages(out);
                         if (!isWorking.get())
                             this.cancel();
                     }

@@ -18,7 +18,6 @@ public class PhysicModel {
     protected Point speedVector;
     protected Point acceleration;
     protected ComplexPhysicModel parent;
-    protected int number;
     private boolean active=false;
 
     public boolean getActive() {
@@ -85,10 +84,6 @@ public class PhysicModel {
     public void setIsNoNeedMore()
     {
         health = 0;
-    }
-
-    public void setNumber(int num) {
-        number=num;
     }
 
     public float getActivity() {

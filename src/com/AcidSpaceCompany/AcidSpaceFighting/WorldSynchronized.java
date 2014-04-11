@@ -4,8 +4,6 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.ComplexMode
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.Network.ClientConnection;
 
-import java.util.LinkedList;
-
 
 public class WorldSynchronized extends World {
 
@@ -42,38 +40,6 @@ public class WorldSynchronized extends World {
                 model.setPositions(speeds[speed], speeds[speed + 1], speeds[speed + 2]);
                 speed += 3;
             }
-        }
-    }
-
-    private LinkedList<Model> activeModel = new LinkedList<>();
-
-    private void syncActivation(float[] speeds) {
-
-        activeModel.clear();
-        System.out.println(activeModel.size());
-        int speed = 0;
-        int ls = 0;
-        for (Model model : models) {
-            if (model.getIsComplex()) {
-                ComplexModel c = (ComplexModel) model;
-                for (int i = 0; i < c.getSize(); i++) {
-                    if (speed == (int) speeds[ls]) {
-                        ls++;
-                        activeModel.add(c.getModel(i));
-                        if(ls>=speeds.length) break;
-                    }
-                    speed++;
-                }
-            } else {
-                if (speed == (int) speeds[ls]) {
-                    ls++;
-                    activeModel.add(model);
-                    if(ls>=speeds.length) break;
-                }
-                speed++;
-            }
-
-            if(ls>=speeds.length) break;
         }
     }
 
@@ -152,19 +118,36 @@ public class WorldSynchronized extends World {
     public void addModel(Model m) {
     }
 
-    synchronized private void updateActivations() {
-        for (Model m: activeModel) {
-            m.doSpecialAction();
-        }
-    }
-
     protected void updateModels(float deltaTime) {
 
         for (Model model : models) {
             model.updateMotion(deltaTime);
             model.update(deltaTime);
         }
-        updateActivations();
+    }
+
+
+
+    private float timer;
+    public void update(float deltaTime) {
+        super.update(deltaTime);
+
+        if (timer<=0) {
+            timer+=0.05f;
+            String activity="";
+            for (Integer m: activeatedByUserModels) {
+                activity+=m+",";
+            }
+            activeatedByUserModels.clear();
+            if (activity.length()>0) {
+                activity=activity.substring(0, activity.length()-1);
+                s.sendMessage("a" + activity);
+            }
+            else s.sendMessage("a-1");
+        }
+        else timer-=deltaTime;
+
+        acceptActiveModels();
     }
 
     public WorldSynchronized() {

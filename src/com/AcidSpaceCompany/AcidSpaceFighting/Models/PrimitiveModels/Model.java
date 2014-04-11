@@ -12,7 +12,6 @@ public class Model{
 
     private GraphicModel graphic;
     private PhysicModel physic;
-    private static int lastNumber=0;
     private int number;
     private float linearSize;
 
@@ -153,7 +152,6 @@ public class Model{
     }
 
     public void setPhysicModel(PhysicModel p) {
-        p.setNumber(number);
         physic = p;
     }
 
@@ -169,12 +167,17 @@ public class Model{
         return physic.getActive();
     }
 
+    public void setNumber(int num) {
+        number=num;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
     public Model(GraphicModel g, PhysicModel p, float linearSize) {
         graphic = g;
-        number=lastNumber;
-        lastNumber++;
-        if (p!=null)
-            p.setNumber(number);
+        number=-1;
         physic = p;
         this.linearSize=linearSize;
     }
