@@ -42,8 +42,8 @@ public class WorldSynchronizer extends World{
 
         if (timer<=0) {
             timer+=0.05f;
-            s.sendMessage("a"+getSpeeds());
             s.sendMessage("b"+getPositions());
+            s.sendMessage("a"+getSpeeds());
             String activity=getActiveModels();
             if (activity.length()>0) {
                 s.sendMessage("h" + activity);
@@ -52,7 +52,7 @@ public class WorldSynchronizer extends World{
         }
         else timer-=deltaTime;
 
-        acceptActiveModels();
+        activateActiveModels();
     }
 
     private void parseSyncMessage(String s) {

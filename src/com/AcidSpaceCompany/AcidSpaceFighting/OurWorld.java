@@ -27,7 +27,7 @@ public class OurWorld {
     }
 
     public static void updatePhysic(float dt) {
-        world.updatePhysic(dt);
+        world.updateRealTimeOperations(dt);
     }
 
     public static void update(float dt) {
@@ -47,7 +47,7 @@ public class OurWorld {
     }
 
     public static void addActiveModel(int number) {
-        world.addActiveModel(number);
+        world.addActivatedByUserModel(number);
     }
 
     public static void initLocal() {

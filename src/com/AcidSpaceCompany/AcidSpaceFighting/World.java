@@ -25,10 +25,10 @@ public abstract class World {
 
     protected ArrayList<Model> models;
     private LinkedList<Effect> effects;
-    //activated by hands models
-    protected HashSet<Integer> activeatedByUserModels =new HashSet<>();
-    //Все активные модели
-    private HashSet<Model> activeModels = new HashSet<>();
+    protected HashSet<Integer>
+            activatedByUserModels=new HashSet<>(); //Активированные пользователем модели.
+    protected HashSet<Model>
+            activeModels = new HashSet<>();  //Все активные модели
 
     /**
      * Получает модель по точке.
@@ -43,6 +43,13 @@ public abstract class World {
         return null;
     }
 
+    /**
+     * Создаёт взрыв заданной силы и размера.
+     *
+     * @param center Центр взрыва.
+     * @param power Сила взрыва.
+     * @param size Радиус взрыва.
+     */
     public void explode(Point center, float power, float size) {
         Explosion e = new Explosion(center, size);
         addEffect(e);
@@ -50,40 +57,33 @@ public abstract class World {
         explosionPowerBuffer.add(power);
     }
 
-    private void sortEffects() {
-        for (int i = 0; i < effects.size() - 1; i++) {
-
-            int min = i;
-            for (int j = i + 1; j < effects.size(); j++)
-                if (effects.get(j).getEfectType() < effects.get(min).getEfectType()) min = j;
-            if (min != i) {
-                Effect e = effects.get(i);
-                effects.set(i, effects.get(min));
-                effects.set(min, e);
-            }
-        }
-    }
-
     private LinkedList<Model> addModelBuffer;
 
+    /**
+     * Добавляет модель.
+     *
+     * @param m Добавляемая модель.
+     */
     public void addModel(Model m) {
         addModelBuffer.add(m);
     }
 
-    private int unsorted = 0;
-
+    /**
+     * Добавляет эффект.
+     *
+     * @param p Добавляемый эффект.
+     */
     public void addEffect(Effect p) {
         effects.add(p);
-        if (unsorted == 0) {
-            sortEffects();
-            unsorted = 100;
-        } else unsorted--;
     }
 
+    /**
+     * Отрисовка.
+     */
     public void draw() {
         try {
 
-        Camera.setPosition(player1.getCenter());
+        Camera.setPosition(player.getCenter());
 
         Background.draw();
 
@@ -111,7 +111,13 @@ public abstract class World {
         }
     }
 
-    protected void updateModels(float deltaTime) {
+    /**
+     * Привладывает силы от моделей к моделям
+     * (силы реакции опоры и гравитацию).
+     *
+     * @param deltaTime Изменение времени с последнего вызова.
+     */
+    protected void updateModelForces(float deltaTime) {
         boolean wasIntersection = true;
         for (int n = 0; wasIntersection & n <= 5; n++) {
             n++;
@@ -129,17 +135,31 @@ public abstract class World {
             for (int j = i + 1; j < models.size(); j++) {
                 models.get(i).updateStaticForces(models.get(j), deltaTime);
             }
+    }
 
+    /**
+     * Перемещает и обновляет модели.
+     */
+    protected void updateMotion(float deltaTime) {
         for (Model model : models) {
             model.updateMotion(deltaTime);
             model.update(deltaTime);
         }
     }
 
+    /**
+     * Удаляет модель.
+     *
+     * @param i Номер модели.
+     */
     protected void removeModel(int i) {
         models.remove(i);
     }
 
+    /**
+     * Добавляет модели из списка добавления,
+     * удаляет неживые модели.
+     */
     private void addAndRemoveModels() {
 
         boolean changed=false;
@@ -166,6 +186,9 @@ public abstract class World {
     private ArrayList<Point> explosionBuffer;
     private ArrayList<Float> explosionPowerBuffer;
 
+    /**
+     * Прикладывает силы от взрыва.
+     */
     private void updateExplosions() {
         while (explosionBuffer.size() > 0) {
             for (Model m : models) {
@@ -182,7 +205,12 @@ public abstract class World {
         }
     }
 
-    private void updateEffects(float deltaTime) {
+    /**
+     * Обновляет эффекты.
+     *
+     * @param deltaTime Изменение времени с последнего вызова.
+     */
+    protected void updateEffects(float deltaTime) {
         for (int i = 0; i < effects.size(); i++) {
             Effect p = effects.get(i);
             p.update(deltaTime);
@@ -192,24 +220,47 @@ public abstract class World {
         }
     }
 
+    /**
+     * Обновляет мир:
+     * 1. Добавляет модели из списков добавления, удаляет неживые модели.
+     * 2. Обновляет HUD.
+     * 3. Обновляет камеру.
+     *
+     * @param deltaTime Изменение времени с последнего вызова.
+     */
     public void update(float deltaTime) {
         addAndRemoveModels();
         HUD.update(deltaTime);
         Camera.update(deltaTime);
     }
 
-    public void updatePhysic(float deltaTime) {
+    /**
+     * Обновляет перемещения, приложения сил и прочую физику.
+     * Не вызывается в редакторе и диалогах.
+     * Выполняет:
+     * 1. Обновление взрывов.
+     * 2. Обновление эффектов
+     * 3. Обновляет межмодельные силы.
+     * 4. Перемещает модели.
+     * 5. Активирует активные модели.
+     * 6. Перепроверяет сюжет на изменение состояния.
+     *
+     * @param deltaTime Изменение времени с последнего вызова.
+     */
+    public void updateRealTimeOperations(float deltaTime) {
         updateExplosions();
         updateEffects(deltaTime);
-        updateModels(deltaTime);
+        updateModelForces(deltaTime);
+        updateMotion(deltaTime);
+        activateActiveModels();
         PlotBase.reCheck();
     }
 
-    private SpaceShip player1;
+    private SpaceShip player;
     private ArrayList<SpaceShip> ships = new ArrayList<>();
 
     public SpaceShip getPlayerShip() {
-        return player1;
+        return player;
     }
 
     public boolean getShipIsAlive(int number) {
@@ -218,8 +269,12 @@ public abstract class World {
         return false;
     }
 
+    /**
+     * Обновляет абсолютную нумерацию моделей.
+     * Вызывается в случае изменения списка моделей
+     * (например, при удалении модели).
+     */
     private void renumerateModels() {
-
         int number = 0;
         for (Model model : models) {
             if (model.getIsComplex()) {
@@ -236,18 +291,28 @@ public abstract class World {
         }
     }
 
-    protected void acceptActiveModels() {
+    /**
+     * Выполняет особое действие у активных моделей.
+     */
+    protected void activateActiveModels() {
         try {
             for (Model m2 : activeModels) {
                 m2.doSpecialAction();
             }
         }
         catch (Exception e) {
-            System.err.println("[World] Fail in acceptActiveModels");
+            System.err.println("[World] Fail in activateActiveModels");
         }
     }
 
+    /**
+     * Обновляет активность моделей.
+     * Заменяет список активных моделей (activeModels) на новый.
+     *
+     * @param activeNumbers Абсолютные номера моделей в мире.
+     */
     protected void syncActivation(float[] activeNumbers) {
+        //todo: refactor (it can become faster and easier)
         HashSet<Model> activeModel2 = new HashSet<>();
         activeModels.clear();
         if (activeNumbers[0] >= 0) {
@@ -280,7 +345,17 @@ public abstract class World {
     }
 
     public void setPlayerModel(SpaceShip m) {
-        player1 = m;
+        player = m;
+    }
+
+    /**
+     * Добавляет модель, активированную пользователем,
+     * в список моделей, активированных пользователем.
+     *
+     * @param model Абсолютный номер модели в мире.
+     */
+    public void addActivatedByUserModel(int model) {
+        activatedByUserModels.add(model);
     }
 
     public World() {
@@ -294,7 +369,4 @@ public abstract class World {
         explosionPowerBuffer = new ArrayList<>();
     }
 
-    public void addActiveModel(int m) {
-        activeatedByUserModels.add(m);
-    }
 }

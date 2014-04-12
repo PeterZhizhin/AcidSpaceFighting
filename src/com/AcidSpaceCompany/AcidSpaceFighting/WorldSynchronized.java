@@ -3,6 +3,7 @@ package com.AcidSpaceCompany.AcidSpaceFighting;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.ComplexModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.Network.ClientConnection;
+import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.PlotBase;
 
 
 public class WorldSynchronized extends World {
@@ -86,7 +87,6 @@ public class WorldSynchronized extends World {
         }
     }
 
-
     private void removeModelFromServer(int num) {
         //todo: переделать, блджад, весь этот bullshit
         int modelNumber = 0;
@@ -118,16 +118,6 @@ public class WorldSynchronized extends World {
     public void addModel(Model m) {
     }
 
-    protected void updateModels(float deltaTime) {
-
-        for (Model model : models) {
-            model.updateMotion(deltaTime);
-            model.update(deltaTime);
-        }
-    }
-
-
-
     private float timer;
     public void update(float deltaTime) {
         super.update(deltaTime);
@@ -135,10 +125,10 @@ public class WorldSynchronized extends World {
         if (timer<=0) {
             timer+=0.05f;
             String activity="";
-            for (Integer m: activeatedByUserModels) {
+            for (Integer m: activatedByUserModels) {
                 activity+=m+",";
             }
-            activeatedByUserModels.clear();
+            activatedByUserModels.clear();
             if (activity.length()>0) {
                 activity=activity.substring(0, activity.length()-1);
                 s.sendMessage("a" + activity);
@@ -146,14 +136,16 @@ public class WorldSynchronized extends World {
             else s.sendMessage("a-1");
         }
         else timer-=deltaTime;
-
-        acceptActiveModels();
     }
 
     public WorldSynchronized() {
         super();
         s = new ClientConnection("127.0.0.1", 1234);
         s.setOnInputEvent(() -> parseSyncMessage(s.getLastInputMessage()));
+    }
+
+    public void addActivatedByUserModel(int m) {
+        activatedByUserModels.add(m);
     }
 
 }
