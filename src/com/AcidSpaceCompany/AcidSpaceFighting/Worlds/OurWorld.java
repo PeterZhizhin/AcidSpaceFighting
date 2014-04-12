@@ -1,4 +1,4 @@
-package com.AcidSpaceCompany.AcidSpaceFighting;
+package com.AcidSpaceCompany.AcidSpaceFighting.Worlds;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Effect;

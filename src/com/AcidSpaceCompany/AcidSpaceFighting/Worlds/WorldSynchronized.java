@@ -1,9 +1,8 @@
-package com.AcidSpaceCompany.AcidSpaceFighting;
+package com.AcidSpaceCompany.AcidSpaceFighting.Worlds;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.ComplexModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.Network.ClientConnection;
-import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.PlotBase;
 
 
 public class WorldSynchronized extends World {
@@ -119,9 +118,7 @@ public class WorldSynchronized extends World {
     }
 
     private float timer;
-    public void update(float deltaTime) {
-        super.update(deltaTime);
-
+    public void updateSyncros(float deltaTime) {
         if (timer<=0) {
             timer+=0.05f;
             String activity="";

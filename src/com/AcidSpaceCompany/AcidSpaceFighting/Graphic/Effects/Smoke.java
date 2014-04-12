@@ -3,6 +3,10 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.ShadersBase;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glEnd;
+
 public class Smoke implements Effect {
 
     private float [] radius;
@@ -49,12 +53,14 @@ public class Smoke implements Effect {
     @Override
     public void draw() {
         TextureDrawer.startDrawSmoke();
+        glBegin(GL_QUADS);
         for (int i=0; i<size; i++) {
             if (currentRadius[i]>=0) {
                 ShadersBase.setFloatValue(ShadersBase.smokeStateID, 1f-currentRadius[i]/radius[i]);
                 TextureDrawer.drawQuadWIdthoutBeginAndEnd(x[i], y[i], currentRadius[i]);
             }
         }
+        glEnd();
     }
 
     private boolean getElementIsUsed(int i) {

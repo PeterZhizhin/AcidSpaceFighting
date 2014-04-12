@@ -2,7 +2,6 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Graphic;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD.HUD;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
-import com.AcidSpaceCompany.AcidSpaceFighting.World;
 import org.lwjgl.opengl.Display;
 
 import static com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer.*;

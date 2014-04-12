@@ -1,11 +1,10 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.RPSystem;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD.HUD;
-import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
+import com.AcidSpaceCompany.AcidSpaceFighting.Worlds.OurWorld;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Achivements.Achive;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Items.Bag;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Items.Item;
-import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 public class DataWrapper {
 

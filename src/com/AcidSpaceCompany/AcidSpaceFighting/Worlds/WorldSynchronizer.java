@@ -1,4 +1,4 @@
-package com.AcidSpaceCompany.AcidSpaceFighting;
+package com.AcidSpaceCompany.AcidSpaceFighting.Worlds;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Effect;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.ComplexModel;
@@ -37,9 +37,7 @@ public class WorldSynchronizer extends World{
     }
 
     private float timer;
-    public void update(float deltaTime) {
-        super.update(deltaTime);
-
+    public void updateSyncros(float deltaTime) {
         if (timer<=0) {
             timer+=0.05f;
             s.sendMessage("b"+getPositions());

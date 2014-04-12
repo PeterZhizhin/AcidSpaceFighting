@@ -4,7 +4,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Models.Base.BaseModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Connector.ConnectorModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Engine.EngineModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Gun.GunModel;
-import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
+import com.AcidSpaceCompany.AcidSpaceFighting.Worlds.OurWorld;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Items.Bag;
 import org.lwjgl.input.Keyboard;
 

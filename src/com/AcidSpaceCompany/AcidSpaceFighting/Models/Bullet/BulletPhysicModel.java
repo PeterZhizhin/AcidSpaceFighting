@@ -3,8 +3,7 @@ package com.AcidSpaceCompany.AcidSpaceFighting.Models.Bullet;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GeometricModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.PhysicModel;
-import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
-import com.AcidSpaceCompany.AcidSpaceFighting.World;
+import com.AcidSpaceCompany.AcidSpaceFighting.Worlds.OurWorld;
 
 public class BulletPhysicModel extends PhysicModel {
 

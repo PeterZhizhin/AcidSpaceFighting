@@ -6,7 +6,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Camera;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GeometricModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
-import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
+import com.AcidSpaceCompany.AcidSpaceFighting.Worlds.OurWorld;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 

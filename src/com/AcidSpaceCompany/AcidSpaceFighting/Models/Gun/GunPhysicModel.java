@@ -6,7 +6,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.Model;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.Bullet.BulletModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.PhysicModel;
-import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
+import com.AcidSpaceCompany.AcidSpaceFighting.Worlds.OurWorld;
 
 public class GunPhysicModel extends PhysicModel {
 

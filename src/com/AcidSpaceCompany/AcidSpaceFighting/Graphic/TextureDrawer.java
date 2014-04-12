@@ -70,14 +70,12 @@ public class TextureDrawer {
     public static void startDrawSmoke() {
         if (ShadersBase.use(ShadersBase.smoke))      {
         ShadersBase.bindTexture(ShadersBase.smokeID, smoke) ;
-            glBegin(GL_QUADS);
         }
     }
 
     public static void startDrawFire() {
         if (ShadersBase.use(ShadersBase.fire)) {
         ShadersBase.bindTexture(ShadersBase.fireID, fire);
-            glBegin(GL_QUADS);
         }
     }
 

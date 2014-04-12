@@ -4,8 +4,7 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GeometricMo
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Camera;
 import com.AcidSpaceCompany.AcidSpaceFighting.Models.PrimitiveModels.GraphicModel;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Effects.Tale;
-import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
-import com.AcidSpaceCompany.AcidSpaceFighting.World;
+import com.AcidSpaceCompany.AcidSpaceFighting.Worlds.OurWorld;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.glEnd;

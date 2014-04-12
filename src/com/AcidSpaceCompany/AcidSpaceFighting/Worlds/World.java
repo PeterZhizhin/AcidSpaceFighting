@@ -1,4 +1,4 @@
-package com.AcidSpaceCompany.AcidSpaceFighting;
+package com.AcidSpaceCompany.AcidSpaceFighting.Worlds;
 
 import com.AcidSpaceCompany.AcidSpaceFighting.Geometry.Point;
 import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.Background;
@@ -232,6 +232,13 @@ public abstract class World {
         addAndRemoveModels();
         HUD.update(deltaTime);
         Camera.update(deltaTime);
+        updateSyncros(deltaTime);
+    }
+
+    /**
+     * Специальные для каждого мира обновления синхронизации.
+     */
+    public void updateSyncros(float deltaTime) {
     }
 
     /**

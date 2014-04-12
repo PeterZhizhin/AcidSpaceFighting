@@ -1,9 +1,8 @@
 package com.AcidSpaceCompany.AcidSpaceFighting.GUI.HUD;
 
-import com.AcidSpaceCompany.AcidSpaceFighting.OurWorld;
+import com.AcidSpaceCompany.AcidSpaceFighting.Worlds.OurWorld;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Achivements.Achive;
 import com.AcidSpaceCompany.AcidSpaceFighting.RPSystem.Message;
-import com.AcidSpaceCompany.AcidSpaceFighting.World;
 
 public class HUD {
 
