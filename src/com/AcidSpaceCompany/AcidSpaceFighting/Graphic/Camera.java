@@ -9,7 +9,7 @@ public class Camera {
 
     private static float xPos, yPos, scale;
     private static float xPosObject, yPosObject, scaleObject;
-    private static float cameraSpeed=250f;
+    private static float cameraSpeed=10000f;
     private static float scaleSpeed=50f;
 
     public static float getX(){

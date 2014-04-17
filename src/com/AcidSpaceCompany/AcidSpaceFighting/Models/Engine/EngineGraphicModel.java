@@ -14,8 +14,8 @@ public class EngineGraphicModel extends GraphicModel {
         float activity = body.getActivity();
         t.addPoint(shape.getCentre(),//.add(new Point(Math.cos(shape.getAngle()), Math.sin(shape.getAngle())).multiply(shape.getMaxLength()* activity *2).negate()),
                 shape.getMaxLength()* activity /2);
-        TextureDrawer.drawBlock(shape.getPoint(0), shape.getPoint(1),
-                shape.getPoint(2), shape.getPoint(3), 1, body.getHealth(), isSelected);
+        TextureDrawer.drawBlock(shape.getPoint(0).add(deltaPos), shape.getPoint(1).add(deltaPos),
+                shape.getPoint(2).add(deltaPos), shape.getPoint(3).add(deltaPos), 1, body.getHealth(), isSelected);
     }
 
     public EngineGraphicModel(GeometricModel body) {

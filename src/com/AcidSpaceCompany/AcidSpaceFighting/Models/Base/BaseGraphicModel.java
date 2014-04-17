@@ -7,7 +7,9 @@ import com.AcidSpaceCompany.AcidSpaceFighting.Graphic.TextureDrawer;
 public class BaseGraphicModel extends GraphicModel {
 
     public void drawTopLayer(boolean isSelected) {
-        TextureDrawer.drawBlock(shape.getPoint(0),  shape.getPoint(1), shape.getPoint(2), shape.getPoint(3), 3, body.getHealth(), isSelected);
+        TextureDrawer.drawBlock
+                (shape.getPoint(0).add(deltaPos),  shape.getPoint(1).add(deltaPos),
+                        shape.getPoint(2).add(deltaPos), shape.getPoint(3).add(deltaPos), 3, body.getHealth(), isSelected);
     }
 
     public BaseGraphicModel(GeometricModel body) {

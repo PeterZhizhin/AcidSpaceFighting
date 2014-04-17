@@ -82,9 +82,7 @@ public abstract class World {
      */
     public void draw() {
         try {
-
-        Camera.setPosition(player.getCenter());
-
+            Camera.setPosition(player.getCenter());
         Background.draw();
 
         TextureDrawer.startDrawConnections();

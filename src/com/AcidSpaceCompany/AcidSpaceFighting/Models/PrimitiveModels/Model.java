@@ -17,6 +17,7 @@ public class Model{
 
     //ONLY FOR NETWORK-SYNCING
     public void setPositions(float x, float y, float w) {
+        graphic.setDeltaPos(getCenter().x+graphic.deltaPos.x-x, getCenter().y+graphic.deltaPos.y-y);
         physic.setPositions(x, y, w);
     }
 
@@ -125,6 +126,7 @@ public class Model{
 
     public void update(float time) {
         physic.update(time);
+        graphic.update(time);
     }
 
     public void drawTopLayer() {
